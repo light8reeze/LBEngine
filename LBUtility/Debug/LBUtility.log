@@ -1,0 +1,19 @@
+﻿  main.cpp
+c:\users\main\desktop\dev\project\lbnet\lbutility\src\inl\lbchara.inl(10): error C2976: 'LBNet::CChar<TCharSet,TCharSize>': 템플릿 인수가 너무 적습니다.
+c:\users\main\desktop\dev\project\lbnet\lbutility\src\inl\lbchara.inl(20): error C2976: 'LBNet::CChar<TCharSet,TCharSize>': 템플릿 인수가 너무 적습니다.
+c:\users\main\desktop\dev\project\lbnet\lbutility\src\inl\lbchara.inl(35): error C2976: 'LBNet::CChar<TCharSet,TCharSize>': 템플릿 인수가 너무 적습니다.
+c:\users\main\desktop\dev\project\lbnet\lbutility\src\inl\lbchara.inl(53): error C2976: 'LBNet::CChar<TCharSet,TCharSize>': 템플릿 인수가 너무 적습니다.
+c:\users\main\desktop\dev\project\lbnet\lbutility\src\inl\lbchara.inl(63): error C2976: 'LBNet::CChar<TCharSet,TCharSize>': 템플릿 인수가 너무 적습니다.
+c:\users\main\desktop\dev\project\lbnet\lbutility\src\inl\lbchara.inl(76): error C2976: 'LBNet::CChar<TCharSet,TCharSize>': 템플릿 인수가 너무 적습니다.
+c:\users\main\desktop\dev\project\lbnet\lbutility\src\inl\lbchara.inl(83): error C2976: 'LBNet::CChar<TCharSet,TCharSize>': 템플릿 인수가 너무 적습니다.
+c:\users\main\desktop\dev\project\lbnet\lbutility\src\inl\lbchara.inl(90): error C2976: 'LBNet::CChar<TCharSet,TCharSize>': 템플릿 인수가 너무 적습니다.
+c:\users\main\desktop\dev\project\lbnet\lbutility\src\inl\lbchara.inl(96): error C2976: 'LBNet::CChar<TCharSet,TCharSize>': 템플릿 인수가 너무 적습니다.
+c:\users\main\desktop\dev\project\lbnet\lbutility\src\inl\lbcharw.inl(5): error C2447: '{': 함수 헤더가 없습니다. 이전 스타일의 형식 목록입니까?
+c:\users\main\desktop\dev\project\lbnet\lbutility\src\inl\lbcharw.inl(15): error C2447: '{': 함수 헤더가 없습니다. 이전 스타일의 형식 목록입니까?
+c:\users\main\desktop\dev\project\lbnet\lbutility\src\inl\lbcharw.inl(24): error C2447: '{': 함수 헤더가 없습니다. 이전 스타일의 형식 목록입니까?
+c:\users\main\desktop\dev\project\lbnet\lbutility\src\inl\lbcharw.inl(42): error C2447: '{': 함수 헤더가 없습니다. 이전 스타일의 형식 목록입니까?
+c:\users\main\desktop\dev\project\lbnet\lbutility\src\inl\lbcharw.inl(57): error C2447: '{': 함수 헤더가 없습니다. 이전 스타일의 형식 목록입니까?
+c:\users\main\desktop\dev\project\lbnet\lbutility\src\inl\lbcharw.inl(70): error C2447: '{': 함수 헤더가 없습니다. 이전 스타일의 형식 목록입니까?
+c:\users\main\desktop\dev\project\lbnet\lbutility\src\inl\lbcharw.inl(80): error C2447: '{': 함수 헤더가 없습니다. 이전 스타일의 형식 목록입니까?
+c:\users\main\desktop\dev\project\lbnet\lbutility\src\inl\lbcharw.inl(87): error C2447: '{': 함수 헤더가 없습니다. 이전 스타일의 형식 목록입니까?
+c:\users\main\desktop\dev\project\lbnet\lbutility\src\inl\lbcharw.inl(94): error C2447: '{': 함수 헤더가 없습니다. 이전 스타일의 형식 목록입니까?

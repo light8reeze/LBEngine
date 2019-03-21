@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Src\Cpp\main.cpp" />
+    <ClCompile Include="Src\Cpp\LBThread.cpp">
+      <Filter>Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Cpp\LBTime.cpp">
+      <Filter>Time</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CharSet">
+      <UniqueIdentifier>{426df0d8-42bd-49a5-b11d-c0d228cd392c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CharSet\String">
+      <UniqueIdentifier>{a3013509-da28-4471-9fc8-c3826a5e0eda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CharSet\Char">
+      <UniqueIdentifier>{8822c4c8-345c-4744-98bb-0c3a597c5390}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Thread">
+      <UniqueIdentifier>{849f0df5-a47b-4489-8845-c19b47af8b60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Time">
+      <UniqueIdentifier>{f58efba7-f9c9-43c2-acc7-9cdb5669d7ae}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Src\Inc\LBUtility.h" />
+    <ClInclude Include="Src\Inc\LBString.h">
+      <Filter>CharSet\String</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inl\LBString.Inl">
+      <Filter>CharSet\String</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inl\LBStringA.Inl">
+      <Filter>CharSet\String</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inl\LBStringW.Inl">
+      <Filter>CharSet\String</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inl\LBChar.Inl">
+      <Filter>CharSet\Char</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBChar.h">
+      <Filter>CharSet\Char</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBCharBase.h">
+      <Filter>CharSet</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inl\LBCharA.Inl">
+      <Filter>CharSet\Char</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inl\LBCharW.Inl">
+      <Filter>CharSet\Char</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBThread.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBTime.h">
+      <Filter>Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inl\LBThread.Inl">
+      <Filter>Thread</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Src\Inl\LBTime.Inl">
+      <Filter>Time</Filter>
+    </None>
+  </ItemGroup>
+</Project>
