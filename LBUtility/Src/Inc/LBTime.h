@@ -36,12 +36,11 @@ namespace LBNet
 
 	/**
 		@brief		LBUtillity의 시간 클래스
-		@details	특정 시간을 표현하는 클래스, std::chrono를 기반으로 구현
+		@details	특정 시간을 표현하는 클래스, std::chrono를 기반으로 구현 Get, Set은 struct tm을 증감은 TimePoint를 이용한다
 		@date		2019-03-16
 		@auther		Light8reeze(light8reeze@gmail.com)
-		@todo		CTime 완성
 	*/
-	class CTime
+	class LB_UTILL_EXPORT CTime
 	{
 	private:
 		using TimePoint = std::chrono::system_clock::time_point;
@@ -59,7 +58,7 @@ namespace LBNet
 
 	public:
 		void SetNow();
-		void SetYear(std);
+		void SetYear(int pYear);
 		void SetMonth(int pMonth);
 		void SetDay(int pDay);
 		void SetHour(int pHour);
@@ -69,6 +68,7 @@ namespace LBNet
 
 		TimePoint	GetTimePoint() const;
 		Tick		GetTick() const;
+		TickLep		GetTickCount() const;
 		int			GetYear() const;
 		int			GetMonth() const;
 		int			GetDay() const;

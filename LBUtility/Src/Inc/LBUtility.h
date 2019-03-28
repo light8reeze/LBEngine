@@ -8,6 +8,8 @@
 #include <crtdbg.h>
 #include <assert.h>
 
+#define DEVELOP_MODE
+
 /**
 	@brief		개발할 OS의 매크로, 추후 포팅을 위해 OS에 종속적인 코드는 다음 매크로로 전처리한다.
 	@warning	_WINDOWS, _LINUX 둘다 정의시 컴파일 에러가 발생한다
@@ -25,22 +27,25 @@
 
 #ifdef _WINDOWS
 //TODO : OS 독립적인 코드구현을 위해 개발단계에선 포함하지 않는다.
+#ifndef DEVELOP_MODE
 /////////////////////////////////////////////////////////////////////////
 // SDKDDKVer.h를 포함하면 최고 수준의 가용성을 가진 Windows 플랫폼이 정의됩니다.
 // 이전 Windows 플랫폼에 대해 응용 프로그램을 빌드하려는 경우에는 SDKDDKVer.h를 포함하기 전에
 // WinSDKVer.h를 포함하고 _WIN32_WINNT 매크로를 지원하려는 플랫폼으로 설정하십시오.
-//#include <SDKDDKVer.h>
+#include <SDKDDKVer.h>
 /////////////////////////////////////////////////////////////////////////
+#endif //DEVELOP_MODE
 #endif //_WINDOWS
 
 #include <stdexcept>
 #include <type_traits>
 
 /**
-	@brief std::rel_ops 사용 정의 <, == 연산자를 정의함으로 >, != 연산자가 자동 정의된다.
+	@brief		std::rel_ops 사용 정의 <, == 연산자를 정의함으로 >, != 연산자가 자동 정의된다.
+	@warning	std클래스에서 정의된 operator와 중복이 되기때문에 삭제(2019-03-27)
 */
 #include <utility>
-using namespace std::rel_ops;
+//using namespace std::rel_ops;
 
 /**
 	@brief std::chrono_literals 사용 정의
@@ -52,10 +57,15 @@ using namespace std::chrono_literals;
 	@brief		DllExport 관련 매크로
 	@details	dll을 받아 어플리케이션을 구현할 때에는 LBUtillity.h를 정의하기 전에 LOAD_LBUTILL매크로를 정의한다.
 */
-#ifdef LOAD_LBUTILL
-#define LB_UTILL_EXPORT	__declspec(dllimport)
+//개발단계에서는 제외
+#ifdef DEVELOP_MODE
+	#define LB_UTILL_EXPORT
 #else
-#define LB_UTILL_EXPORT	__declspec(dllexport)
+	#ifdef LOAD_LBUTILL
+		#define LB_UTILL_EXPORT	__declspec(dllimport)
+	#else
+		#define LB_UTILL_EXPORT	__declspec(dllexport)
+	#endif //DEVELOP_MODE
 #endif //LOAD_LBUTILL
 
 /**
@@ -67,6 +77,17 @@ using namespace std::chrono_literals;
 
 namespace LBNet
 {
+	/**
+		@brief	LBNet에서 사용하는 크기 타입 정의
+	*/
+	using Size = unsigned int;
+
+	/**
+		@brief	LBNet에서 사용하는 기본 시간 단위 정의
+	*/
+	using Tick		= std::chrono::milliseconds;
+	using TickLep	= std::chrono::milliseconds::rep;
+
 	/**
 		@brief			Enum을 타입의 값으로 변환해주는 함수
 		@param TEnum	변환할 Enum값
@@ -97,13 +118,9 @@ namespace LBNet
 		return (pT1 == reinterpret_cast<T1>(pT2));
 	}
 
-	/**
-		@brief	LBNet에서 사용하는 크기 타입 정의
-	*/
-	using Size = unsigned int;
+	constexpr unsigned int GetLBUVersion()
+	{
+		return 20190327u;
+	}
 
-	/**
-		@brief	LBNet에서 사용하는 기본 시간 단위 정의
-	*/
-	using Tick = std::chrono::milliseconds;
 }

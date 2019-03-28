@@ -1,13 +1,17 @@
 #include "LBThread.h"
+#ifdef _WINDOWS
+#include <Windows.h>
+#include <process.h>
+#elif _LINUX
+#endif //_WINDOWS
 
 namespace LBNet
 {
 	/**
 		@brief CThread의 생성자
 	*/
-	CThread::CThread() : __mThread(), __mResult(-1), __mSwitchingTime(0), __mLastSwitchingTime()
+	CThread::CThread() : __mThread(), __mResult(-1), __mSwitchingPeriod(-1), __mLastSwitchingTime()
 	{
-		__mLastSwitchingTime = std::chrono::system_clock::now();
 	}
 
 	/**
@@ -32,8 +36,8 @@ namespace LBNet
 	*/
 	int CThread::StartThread()
 	{
-		auto alpfnThread = std::bind(&CThread::ThreadRoutine, this);
-		__mThread			= std::thread(alpfnThread);
+		auto aLpfnThread	= std::bind(&CThread::ThreadRoutine, this);
+		__mThread			= std::thread(aLpfnThread);
 
 		return 0;
 	}
@@ -66,5 +70,55 @@ namespace LBNet
 	void CThread::ThreadRoutine()
 	{
 		__mResult = Main();
+	}
+
+	/**
+		@brief			쓰레드의 컨텍스트 스위칭 주기를 설정하는 함수
+		@praram Tick	설정할 컨텍스트 스위칭 주기(ms)
+	*/
+	void CThread::SetSwitchingTime(Tick& pTick)
+	{
+		__mSwitchingPeriod = pTick.count();
+	}
+
+	/**
+		@brief			쓰레드가 실행될 CPU를 지정한다.
+		@details		std쓰레드의 affinity는 각 OS에 맞게 직접 구현해야 한다 때문에 OS에 종속적이다.
+						윈도우의 경우 윈도우 쓰레드를 사용하여 지정하고, 리눅스의 경우 pthread를 이용하여 지정한다.<L1>
+		@warning		_WINDOWS매크로, _LINUX매크로가 둘다 미정의시 에러가 발생한다.
+		@todo			Linux모드 구현
+		@praram bool	쓰레드의 CPU지정 성공 여부
+	*/
+	bool CThread::SetAffinity(int pCpu)
+	{
+		LB_ASSERT(pCpu < std::thread::hardware_concurrency(), "Invalid Cpu Number!");
+		
+		#ifdef _WINDOWS
+		HANDLE aNativeHandle = static_cast<HANDLE>(__mThread.native_handle());
+		DWORD_PTR aResult = ::SetThreadAffinityMask(aNativeHandle, 1 << pCpu);
+		
+		if (ERROR_INVALID_PARAMETER == aResult)
+			return false;
+
+		#elif _LINUX
+		#else
+			#error define OS _WINDOWS or _LINUX only
+		#endif //_WINDOWS
+		return true;
+	}
+
+	/**
+		@brief		컨텍스트 스위칭을 실행하는 함수
+		@warning	1. 컨텍스트 스위칭을 하려면 하위 쓰레드 클래스에서 Main내에 직접 함수를 실행해야 한다.
+		@warning	2. 스레드를 1ms를 정지 시키나 정확히 1ms가 아닐수도 있다.
+	*/
+	inline void CThread::ContextSwitching()
+	{
+		CTime aNowTime = std::move(aNowTime - __mLastSwitchingTime);
+		if (__mSwitchingPeriod != -1 && __mSwitchingPeriod <= aNowTime.GetTickCount())
+		{
+			std::this_thread::sleep_for(1ms);
+			__mLastSwitchingTime.SetNow();
+		}
 	}
 }

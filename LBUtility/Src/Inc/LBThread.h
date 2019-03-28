@@ -6,6 +6,7 @@
 */
 #pragma once
 #include "LBUtility.h"
+#include "LBTime.h"
 #include <thread>
 
 namespace LBNet
@@ -18,7 +19,7 @@ namespace LBNet
 		@auther		Light8reeze(light8reeze@gmail.com)
 		@todo		추후 Thread관리 클래스 구현시 L1 ~ L3 참고, 컨텍스트 스위칭 구현
 	*/
-	class CThread
+	class LB_UTILL_EXPORT CThread
 	{
 	public:
 		using id = std::thread::id;
@@ -32,10 +33,10 @@ namespace LBNet
 		virtual int Initialize();
 		int		StartThread();
 		int		JoinThread();
-		template<class Rep, class Period>
-		void	Sleep(const std::chrono::duration<Rep, Period>& pDuration);
-		void	ContextSwitching();
-		void	SetSwitchingTime(Tick pTick);
+		template<typename TDuration>
+		void	Sleep(const TDuration& pDuration);
+		void	SetSwitchingTime(Tick& pTick);
+		bool	SetAffinity(int pCpu);
 		
 		id GetThreadId() const;
 
@@ -43,11 +44,14 @@ namespace LBNet
 		void ThreadRoutine();
 		virtual int Main() = 0;
 
+	protected:
+		void	ContextSwitching();
+
 	private:
-		std::thread								__mThread;
-		int										__mResult;
-		Tick									__mSwitchingTime;
-		std::chrono::system_clock::time_point	__mLastSwitchingTime;
+		std::thread		__mThread;
+		int				__mResult;
+		TickLep			__mSwitchingPeriod;
+		CTime			__mLastSwitchingTime;
 	};
 }
 

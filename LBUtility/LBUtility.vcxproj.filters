@@ -64,10 +64,8 @@
     <ClInclude Include="Src\Inl\LBThread.Inl">
       <Filter>Thread</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Src\Inl\LBTime.Inl">
+    <ClInclude Include="Src\Inl\LBTime.Inl">
       <Filter>Time</Filter>
-    </None>
+    </ClInclude>
   </ItemGroup>
 </Project>
