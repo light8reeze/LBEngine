@@ -112,7 +112,7 @@ namespace LBNet
 		@warning	1. 컨텍스트 스위칭을 하려면 하위 쓰레드 클래스에서 Main내에 직접 함수를 실행해야 한다.
 		@warning	2. 스레드를 1ms를 정지 시키나 정확히 1ms가 아닐수도 있다.
 	*/
-	inline void CThread::ContextSwitching()
+	void CThread::ContextSwitching()
 	{
 		CTime aNowTime = std::move(aNowTime - __mLastSwitchingTime);
 		if (__mSwitchingPeriod != -1 && __mSwitchingPeriod <= aNowTime.GetTickCount())

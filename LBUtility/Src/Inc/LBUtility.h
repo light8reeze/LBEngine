@@ -5,7 +5,7 @@
 	@auther Light8reeze(light8reeze@gmail.com)
 */
 #pragma once
-#include <crtdbg.h>
+//#include <crtdbg.h>
 #include <assert.h>
 
 #define DEVELOP_MODE
@@ -74,6 +74,16 @@ using namespace std::chrono_literals;
 	@param pMsg	assert발생시 출력할 메세지
 */
 #define LB_ASSERT(pExp, pMsg) assert((pExp) && (pMsg))
+
+/**
+	@brief		디버그 모드에만 넣을 코드 매크로 (Release모드에선 제외)
+	@param pExp 디버그에 사용할 코드
+*/
+#ifdef _DEBUG
+	#define ONLY_DEBUG(pExp) pExp
+#else
+	#define ONLY_DEBUG(pExp)
+#endif //_DEBUG
 
 namespace LBNet
 {
