@@ -8,6 +8,10 @@
     <ClCompile Include="Src\Cpp\LBTime.cpp">
       <Filter>Time</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Cpp\LBUtility.cpp" />
+    <ClCompile Include="Src\Cpp\LBLocker.cpp">
+      <Filter>Locker</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CharSet">
@@ -24,6 +28,12 @@
     </Filter>
     <Filter Include="Time">
       <UniqueIdentifier>{f58efba7-f9c9-43c2-acc7-9cdb5669d7ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Memory">
+      <UniqueIdentifier>{bb200860-9dae-45a6-b79b-631575835f8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Locker">
+      <UniqueIdentifier>{d41a3ab6-b6d8-4fa0-b1e7-bf505284da50}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -67,5 +77,19 @@
     <ClInclude Include="Src\Inl\LBTime.Inl">
       <Filter>Time</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Inc\LBMemory.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inl\LBMemory.Inl">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBLocker.h">
+      <Filter>Locker</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Src\Cpp\pause.masm">
+      <Filter>Locker</Filter>
+    </None>
   </ItemGroup>
 </Project>

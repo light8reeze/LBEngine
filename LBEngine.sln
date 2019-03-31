@@ -7,7 +7,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LBUtility", "LBUtility\LBUt
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{1C487B5D-4CED-4AAF-BB96-DBC9B52477FA}"
 	ProjectSection(SolutionItems) = preProject
-		Reference.txt = Reference.txt
+		Doc\Reference.txt = Doc\Reference.txt
 	EndProjectSection
 EndProject
 Global

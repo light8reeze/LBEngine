@@ -80,7 +80,7 @@ using namespace std::chrono_literals;
 	@param pExp 디버그에 사용할 코드
 */
 #ifdef _DEBUG
-	#define ONLY_DEBUG(pExp) pExp
+	#define DEBUG_CODE(pExp) pExp
 #else
 	#define ONLY_DEBUG(pExp)
 #endif //_DEBUG
@@ -128,9 +128,10 @@ namespace LBNet
 		return (pT1 == reinterpret_cast<T1>(pT2));
 	}
 
-	constexpr unsigned int GetLBUVersion()
-	{
-		return 20190327u;
-	}
-
+	/**
+		@brief			LBUtillity의 버전을 받는 함수
+		@return Version	LBUtillity의 버전
+	*/
+	using Version = unsigned int;
+	constexpr Version LB_UTILL_EXPORT GetLBUVersion();
 }

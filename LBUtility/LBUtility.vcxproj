@@ -19,8 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Cpp\LBLocker.cpp" />
     <ClCompile Include="Src\Cpp\LBThread.cpp" />
     <ClCompile Include="Src\Cpp\LBTime.cpp" />
+    <ClCompile Include="Src\Cpp\LBUtility.cpp" />
     <ClCompile Include="Src\Cpp\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -31,6 +33,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBCharBase.h" />
+    <ClInclude Include="Src\Inc\LBLocker.h" />
+    <ClInclude Include="Src\Inc\LBMemory.h" />
     <ClInclude Include="Src\Inc\LBString.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -95,6 +99,14 @@
       <FileType>Document</FileType>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Src\Inl\LBMemory.Inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="Src\Cpp\pause.masm">
+      <FileType>Document</FileType>
+    </MASM>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{30E01DDD-EAAB-48ED-9171-E451C1A2EE3A}</ProjectGuid>
@@ -131,6 +143,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
   </ImportGroup>
   <ImportGroup Label="Shared">
   </ImportGroup>
@@ -174,7 +187,7 @@
       <PreprocessorDefinitions>X86;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -189,6 +202,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>X64;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -205,6 +219,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>X86;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -223,6 +238,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>X64;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -233,5 +249,6 @@
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
   </ImportGroup>
 </Project>
