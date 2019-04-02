@@ -74,9 +74,6 @@
     <ClInclude Include="Src\Inl\LBThread.Inl">
       <Filter>Thread</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Inl\LBTime.Inl">
-      <Filter>Time</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Inc\LBMemory.h">
       <Filter>Memory</Filter>
     </ClInclude>
@@ -88,8 +85,8 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Src\Cpp\pause.masm">
+    <MASM Include="Src\Cpp\LBPause.masm">
       <Filter>Locker</Filter>
-    </None>
+    </MASM>
   </ItemGroup>
 </Project>

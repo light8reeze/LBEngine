@@ -1,0 +1,6 @@
+.code
+	LBPause proc
+		pause
+		ret
+	LBPause endp
+end

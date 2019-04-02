@@ -9,21 +9,21 @@
 #include "LBThread.h"
 #include <atomic>
 
+#ifdef _WINDOWS
 namespace LBNet
 {
 	/**
-		@brief		잠금 클래스
-		@details	스핀락 방식을 이용하여 구현한 잠금 클래스<L5>
-		@comments	윈도우에는 CriticalSection, SRWLock가 있지만 리눅스에는 유저모드 동기화가 없다. 그렇기 때문에 스핀락방식을 직접 구현한다.
+		@brief		잠금 클래스(Windows)
+		@details	크리티컬 섹션을 이용한 잠금 클래스(윈도우 전용)
+		@comments	os에 독립적인 std::mutex를 사용하려고 하나 수행시간이 
+					짧은 lock에는 mutex가 비효율적이다. 
+					그래서 윈도우에서는 CriticalSection를, 
+					리눅스에서는 추후에 스핀락을 이용하여 구현한다.
 		@date		2019-03-31
 		@auther		Light8reeze(light8reeze@gmail.com)
 	*/
 	class LB_UTILL_EXPORT CLocker
 	{
-	private:
-		using LockFlag		= std::atomic<char>;
-		using LockedThread	= std::atomic<CThread::id>;
-		
 	public:
 		CLocker();
 		~CLocker() = default;
@@ -33,9 +33,7 @@ namespace LBNet
 		bool try_lock();
 
 	private:
-		LockFlag		__mIsLock;
-		char aExp = 0;
-		//int				__mSpinCount;
-		//LockedThread	__mOwnerThread;
+		CRITICAL_SECTION __mCS;
 	};
 }
+#endif //_WINDOWS

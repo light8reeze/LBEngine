@@ -49,8 +49,6 @@ namespace LBNet
         template<typename TData>
         bool Enqueue(TData&& pData);
 		bool Enqueue(char* pData, int pSize);
-		template<Size TDataSize>
-		bool Enqueue(char* pData);
 
         char* Dequeue();
 

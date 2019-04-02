@@ -1,34 +1,30 @@
 #include "LBLocker.h"
 
-extern "C" void asm_pause();
+extern "C" void LBPause();
 
+#ifdef _WINDOWS
 namespace LBNet
 {
-	CLocker::CLocker() : __mIsLock(0)//, __mOwnerThread()
+	CLocker::CLocker() : __mCS()
 	{
+		if (FALSE == ::InitializeCriticalSectionAndSpinCount(&__mCS, 1024))
+			LB_ASSERT(0, "Critical Error!");
 	}
 
 	void CLocker::lock()
 	{
-		while (!__mIsLock.compare_exchange_strong(aExp, 1))
-		{
-			//aExp = false;
-
-			asm_pause();
-		}
-
-		__mIsLock.store(1);
-		//__mOwnerThread.store(std::this_thread::get_id());
+		::EnterCriticalSection(&__mCS);
 	}
 
 	void CLocker::unlock()
 	{
-		//LB_ASSERT(std::this_thread::get_id() == __mOwnerThread && __mIsLock == true, "Invalid Lock!");
-		__mIsLock.store(0);
+		::LeaveCriticalSection(&__mCS);
 	}
 
 	bool CLocker::try_lock()
 	{
-		return !__mIsLock.load();
+		return ::TryEnterCriticalSection(&__mCS);
 	}
 }
+
+#endif //_WINDOWS

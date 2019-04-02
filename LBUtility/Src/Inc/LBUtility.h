@@ -26,6 +26,7 @@
 #define NOMINMAX
 
 #ifdef _WINDOWS
+#include <Windows.h>
 //TODO : OS 독립적인 코드구현을 위해 개발단계에선 포함하지 않는다.
 #ifndef DEVELOP_MODE
 /////////////////////////////////////////////////////////////////////////

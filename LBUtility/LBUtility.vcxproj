@@ -95,15 +95,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Src\Inl\LBTime.Inl">
-      <FileType>Document</FileType>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Src\Inl\LBMemory.Inl" />
   </ItemGroup>
   <ItemGroup>
-    <MASM Include="Src\Cpp\pause.masm">
+    <MASM Include="Src\Cpp\LBPause.masm">
       <FileType>Document</FileType>
     </MASM>
   </ItemGroup>

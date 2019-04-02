@@ -1,6 +1,0 @@
-.code
-	asm_pause proc
-		pause
-		ret
-	asm_pause endp
-end

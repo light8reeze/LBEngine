@@ -7,12 +7,13 @@
 #include <mutex>
 #include <Windows.h>
 
-#define THREAD 8
-#define LOOP 100000
+#define THREAD 64
+#define LOOP 1000000
 
 std::mutex gMutex;
 LBNet::CLocker gLocker;
 CRITICAL_SECTION gCS;
+volatile LONG a = 0;
 
 long long gSum = 0;
 
@@ -26,12 +27,12 @@ void TestCustomSpinLock()
 	{
 		t = std::thread([]
 		{
+			gLocker.lock();
 			for (int i = 0; i < LOOP; ++i)
 			{
-				gLocker.lock();
 				gSum += i;
-				gLocker.unlock();
 			}
+			gLocker.unlock();
 		});
 	}
 
@@ -56,12 +57,12 @@ void TestMutex()
 	{
 		t = std::thread([]
 		{
+			gMutex.lock();
 			for (int i = 0; i < LOOP; ++i)
 			{
-				gMutex.lock();
 				gSum += i;
-				gMutex.unlock();
 			}
+			gMutex.unlock();
 		});
 	}
 
@@ -87,12 +88,12 @@ void TestCS()
 	{
 		t = std::thread([]
 		{
+			EnterCriticalSection(&gCS);
 			for (int i = 0; i < LOOP; ++i)
 			{
-				EnterCriticalSection(&gCS);
 				gSum += i;
-				LeaveCriticalSection(&gCS);
 			}
+			LeaveCriticalSection(&gCS);
 		});
 	}
 
