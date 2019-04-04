@@ -74,14 +74,14 @@
     <ClInclude Include="Src\Inl\LBThread.Inl">
       <Filter>Thread</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Inc\LBMemory.h">
-      <Filter>Memory</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Inl\LBMemory.Inl">
-      <Filter>Memory</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Inc\LBLocker.h">
       <Filter>Locker</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBBuffer.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inl\LBBuffer.Inl">
+      <Filter>Memory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

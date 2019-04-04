@@ -38,7 +38,6 @@ namespace LBNet
 		@brief		LBUtillity의 시간 클래스
 		@details	특정 시간을 표현하는 클래스, std::chrono를 기반으로 구현 Get, Set은 struct tm을 증감은 TimePoint를 이용한다
 		@date		2019-03-16
-		@todo		duraction litral을 이용한 연산자 구현할것.
 		@auther		Light8reeze(light8reeze@gmail.com)
 	*/
 	class LB_UTILL_EXPORT CTime
@@ -52,10 +51,22 @@ namespace LBNet
 		~CTime() = default;
 		
 		CTime&	operator=(const CTime&) = default;
+		
 		CTime&	operator+=(const CTime& pTime);
+		template< class Rep, class Period >
+		CTime&	operator+=(const std::chrono::duration<Rep, Period>& pTime);
+		
 		CTime&	operator-=(const CTime& pTime);
+		template< class Rep, class Period >
+		CTime&	operator-=(const std::chrono::duration<Rep, Period>& pTime);
+		
 		CTime	operator+(const CTime& pTime);
+		template< class Rep, class Period >
+		CTime	operator+(const std::chrono::duration<Rep, Period>& pTime);
+		
 		CTime	operator-(const CTime& pTime);
+		template< class Rep, class Period >
+		CTime	operator-(const std::chrono::duration<Rep, Period>& pTime);
 
 	public:
 		void SetNow();

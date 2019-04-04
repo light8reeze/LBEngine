@@ -1,6 +1,6 @@
 /**
-	@file	LBMemory.h
-	@brief	LBUtillity의 메모리관련 헤더
+	@file	LBBuffer.h
+	@brief	LBUtillity의 버퍼관련 헤더
 	@date	2019-03-29
 	@auther Light8reeze(light8reeze@gmail.com)
 */
@@ -78,4 +78,4 @@ namespace LBNet
 	};
 }
 
-#include "LBMemory.Inl"
+#include "LBBuffer.Inl"

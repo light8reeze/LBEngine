@@ -25,11 +25,35 @@ namespace LBNet
 	}
 
 	/**
+		@brief		CTime의 +=연산자
+	*/
+	template< class Rep, class Period >
+	CTime& CTime::operator+=(const std::chrono::duration<Rep, Period>& pTime)
+	{
+		__mTimePoint += pTime;
+		UpdateFromTimePoint();
+
+		return (*this);
+	}
+
+	/**
 		@brief		CTime의 -=연산자
 	*/
 	CTime& CTime::operator-=(const CTime& pTime)
 	{
 		__mTimePoint -= pTime.GetTimePoint().time_since_epoch();
+		UpdateFromTimePoint();
+
+		return (*this);
+	}
+
+	/**
+		@brief		CTime의 -=연산자
+	*/
+	template< class Rep, class Period >
+	CTime& CTime::operator-=(const std::chrono::duration<Rep, Period>& pTime)
+	{
+		__mTimePoint -= pTime;
 		UpdateFromTimePoint();
 
 		return (*this);
@@ -48,12 +72,38 @@ namespace LBNet
 	}
 
 	/**
+		@brief		CTime의 +연산자
+	*/
+	template< class Rep, class Period >
+	CTime CTime::operator+(const std::chrono::duration<Rep, Period>& pTime)
+	{
+		CTime aTime;
+		TimePoint point = __mTimePoint + pTime;
+		aTime.SetTimePoint(std::move(point));
+
+		return aTime;
+	}
+
+	/**
 		@brief		CTime의 -연산자
 	*/
 	CTime CTime::operator-(const CTime& pTime)
 	{
 		CTime time;
 		TimePoint point = __mTimePoint - pTime.GetTimePoint().time_since_epoch();
+		time.SetTimePoint(std::move(point));
+
+		return time;
+	}
+
+	/**
+		@brief		CTime의 -연산자
+	*/
+	template< class Rep, class Period >
+	CTime CTime::operator-(const std::chrono::duration<Rep, Period>& pTime)
+	{
+		CTime time;
+		TimePoint point = __mTimePoint - pTime;
 		time.SetTimePoint(std::move(point));
 
 		return time;

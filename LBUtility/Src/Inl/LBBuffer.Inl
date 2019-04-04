@@ -19,16 +19,16 @@ namespace LBNet
 		Size aCopyableSize = 0;
 		Size aRestSize = 0;
 
+		int aReadIndex	= __mReadIndex;
+		int aWriteIndex = __mWriteIndex;
+
 		//lock
 		Size aUsableSize = GetUsableSize();
 
 		if (aDataSize > aUsableSize)
 			return false;
 
-		int aReadIndex	= __mReadIndex;
-		int aWriteIndex = __mWriteIndex;
-
-		__mWriteIndex	= aDataSize;
+		__mWriteIndex	+= aDataSize;
 		__mUseSize		+= aDataSize;
 
 		if (__mWriteIndex > GetBufferSize())

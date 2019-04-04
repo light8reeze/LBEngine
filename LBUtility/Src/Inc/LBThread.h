@@ -33,8 +33,8 @@ namespace LBNet
 		virtual int Initialize();
 		int		StartThread();
 		int		JoinThread();
-		template<typename TDuration>
-		void	Sleep(const TDuration& pDuration);
+		template< class Rep, class Period >
+		void	Sleep(const std::chrono::duration<Rep, Period>& pDuration);
 		void	SetSwitchingTime(Tick& pTick);
 		bool	SetAffinity(int pCpu);
 		
