@@ -57,8 +57,8 @@ using namespace std::chrono_literals;
 /**
 	@brief		DllExport 관련 매크로
 	@details	dll을 받아 어플리케이션을 구현할 때에는 LBUtillity.h를 정의하기 전에 LOAD_LBUTILL매크로를 정의한다.
+	@warning	개발단계에서는 제외
 */
-//개발단계에서는 제외
 #ifdef DEVELOP_MODE
 	#define LB_UTILL_EXPORT
 #else
@@ -89,12 +89,12 @@ using namespace std::chrono_literals;
 namespace LBNet
 {
 	/**
-		@brief	LBNet에서 사용하는 크기 타입 정의
+		@brief	LBEngine에서 사용하는 크기 타입 정의
 	*/
-	using Size = unsigned int;
+	using Size = unsigned long;
 
 	/**
-		@brief	LBNet에서 사용하는 기본 시간 단위 정의
+		@brief	LBEngine에서 사용하는 기본 시간 단위 정의
 	*/
 	using Tick		= std::chrono::milliseconds;
 	using TickLep	= std::chrono::milliseconds::rep;

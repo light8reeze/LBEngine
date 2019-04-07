@@ -1,117 +1,46 @@
-#include "LBTime.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <tchar.h>
 #include <iostream>
-#include "LBLocker.h"
-#include <mutex>
 #include <Windows.h>
+#include "LBBuffer.h"
 
-#define THREAD 64
-#define LOOP 1000000
+LBNet::CBuffer<0xFFF, 200> gBuffer;
 
-std::mutex gMutex;
-LBNet::CLocker gLocker;
-CRITICAL_SECTION gCS;
-volatile LONG a = 0;
-
-long long gSum = 0;
-
-void TestCustomSpinLock()
+void Enqueue()
 {
-	gSum = 0;
-	std::thread aThread[THREAD];
-	DWORD aStart = GetTickCount();
-	//54456
-	for (std::thread& t : aThread)
+	while (1)
 	{
-		t = std::thread([]
-		{
-			gLocker.lock();
-			for (int i = 0; i < LOOP; ++i)
-			{
-				gSum += i;
-			}
-			gLocker.unlock();
-		});
+		DWORD dwRand = GetTickCount() % 199 + 1;
+		char* ptr = new char[dwRand];
+		::memset(ptr, 1, dwRand);
+		bool aResult = gBuffer.Enqueue(ptr, dwRand);
+
+		delete[] ptr;
 	}
-
-	for (std::thread& t : aThread)
-	{
-		t.join();
-	}
-
-	DWORD aEndTime = GetTickCount();
-
-	std::cout << "SpinTime : " << (aEndTime - aStart) << std::endl;
-	std::cout << "Spin : " << gSum << std::endl;
 }
 
-void TestMutex()
+void Dequeue()
 {
-	gSum = 0;
-	std::thread aThread[THREAD];
-	DWORD aStart = GetTickCount();
-	//54456
-	for (std::thread& t : aThread)
+	while (1)
 	{
-		t = std::thread([]
-		{
-			gMutex.lock();
-			for (int i = 0; i < LOOP; ++i)
-			{
-				gSum += i;
-			}
-			gMutex.unlock();
-		});
+		char* aData = gBuffer.Dequeue();
+
+		if(aData != nullptr)
+			LB_ASSERT(aData[0] == 1, "Wrong!");
+		else
+			LB_ASSERT(1 == 1, "Wrong!");
+
 	}
-
-	for (std::thread& t : aThread)
-	{
-		t.join();
-	}
-
-	DWORD aEndTime = GetTickCount();
-
-	std::cout << "MutexTime : " << (aEndTime - aStart) << std::endl;
-	std::cout << "Mutex : " << gSum << std::endl;
-}
-
-void TestCS()
-{
-	gSum = 0;
-	std::thread aThread[THREAD];
-	InitializeCriticalSection(&gCS);
-	DWORD aStart = GetTickCount();
-	//54456
-	for (std::thread& t : aThread)
-	{
-		t = std::thread([]
-		{
-			EnterCriticalSection(&gCS);
-			for (int i = 0; i < LOOP; ++i)
-			{
-				gSum += i;
-			}
-			LeaveCriticalSection(&gCS);
-		});
-	}
-
-	for (std::thread& t : aThread)
-	{
-		t.join();
-	}
-
-	DWORD aEndTime = GetTickCount();
-
-	std::cout << "CS Time : " << (aEndTime - aStart) << std::endl;
-	std::cout << "CS : " << gSum << std::endl;
 }
 
 int _tmain(int argc, TCHAR argv[])
 {
-	TestCustomSpinLock();
-	TestCS();
-	TestMutex();
+	std::thread t1(Enqueue);
+	std::thread t2(Dequeue);
+
+	t1.join();
+	t2.join();
+
 	return 0;
 }

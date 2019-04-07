@@ -87,15 +87,16 @@ namespace LBNet
 						윈도우의 경우 윈도우 쓰레드를 사용하여 지정하고, 리눅스의 경우 pthread를 이용하여 지정한다.<L1>
 		@warning		_WINDOWS매크로, _LINUX매크로가 둘다 미정의시 에러가 발생한다.
 		@todo			Linux모드 구현
-		@praram bool	쓰레드의 CPU지정 성공 여부
+		@param unsigned int	지정할 Cpu의 번호
+		@return bool	쓰레드의 CPU지정 성공 여부
 	*/
-	bool CThread::SetAffinity(int pCpu)
+	bool CThread::SetAffinity(unsigned int pCpu)
 	{
 		LB_ASSERT(pCpu < std::thread::hardware_concurrency(), "Invalid Cpu Number!");
 		
 		#ifdef _WINDOWS
 		HANDLE aNativeHandle = static_cast<HANDLE>(__mThread.native_handle());
-		DWORD_PTR aResult = ::SetThreadAffinityMask(aNativeHandle, 1 << pCpu);
+		DWORD_PTR aResult = ::SetThreadAffinityMask(aNativeHandle, 1i64 << pCpu);
 		
 		if (ERROR_INVALID_PARAMETER == aResult)
 			return false;

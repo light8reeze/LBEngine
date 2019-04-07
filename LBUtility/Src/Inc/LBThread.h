@@ -36,7 +36,7 @@ namespace LBNet
 		template< class Rep, class Period >
 		void	Sleep(const std::chrono::duration<Rep, Period>& pDuration);
 		void	SetSwitchingTime(Tick& pTick);
-		bool	SetAffinity(int pCpu);
+		bool	SetAffinity(unsigned int pCpu);
 		
 		id GetThreadId() const;
 

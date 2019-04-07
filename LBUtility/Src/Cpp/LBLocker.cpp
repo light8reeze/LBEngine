@@ -1,4 +1,5 @@
 #include "LBLocker.h"
+#include <iostream>
 
 extern "C" void LBPause();
 
