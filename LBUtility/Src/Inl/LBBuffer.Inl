@@ -1,9 +1,11 @@
 namespace LBNet
 {
-	//CBuffer
+	/**
+		@brief CBuffer의 생성자
+	*/
 	template<Size TSize, Size TMaxDataSize>
-	CBuffer<TSize, TMaxDataSize>::CBuffer() : __mUseSize(0), __mReadIndex(-1), __mWriteIndex(0), 
-		__mPassIndex(-1), __mBuffer(), __mRestBuffer()
+	CBuffer<TSize, TMaxDataSize>::CBuffer() : _mUseSize(0), _mReadIndex(-1), _mWriteIndex(0), 
+		_mPassIndex(-1), _mBuffer(), __mRestBuffer()
 	{
 		#pragma warning(disable : 4312)
 		DEBUG_CODE(__mCheckCode = reinterpret_cast<char*>(0xDEADBEEFDEADBEEF));
@@ -11,6 +13,11 @@ namespace LBNet
 		#pragma warning(default : 4312)
 	}
 
+	/**
+		@brief 버퍼에 데이터를 넣는 함수
+		@param const TData& 버퍼에 넣을 데이터
+		@return bool 버퍼에 데이터를 넣은 결과
+	*/
 	template<Size TSize, Size TMaxDataSize>
 	template<typename TData>
 	bool CBuffer<TSize, TMaxDataSize>::Enqueue(const TData& pData)
@@ -27,8 +34,8 @@ namespace LBNet
 		Size aCopyableSize = 0;
 		Size aRestSize = 0;
 
-		int aReadIndex = __mReadIndex;
-		int aWriteIndex = __mWriteIndex;
+		int aReadIndex = _mReadIndex;
+		int aWriteIndex = _mWriteIndex;
 
 		Size aUsableSize = GetUsableSize();
 
@@ -39,7 +46,7 @@ namespace LBNet
 
 		if (sizeof(CBufferHeader) > GetBufferSize() - aWriteIndex)
 		{
-			__mPassIndex = aWriteIndex;
+			_mPassIndex = aWriteIndex;
 			aWriteIndex = 0;
 			aCopyableSize = aDataSize;
 		}
@@ -48,7 +55,7 @@ namespace LBNet
 		else
 			aCopyableSize = aDataSize;
 
-		CBufferHeader* aHeader = reinterpret_cast<CBufferHeader*>(__mBuffer + aWriteIndex);
+		CBufferHeader* aHeader = reinterpret_cast<CBufferHeader*>(_mBuffer + aWriteIndex);
 		aHeader->mDataSize = pSize;
 
 		aCopyableSize	-= sizeof(CBufferHeader);
@@ -58,13 +65,13 @@ namespace LBNet
 			aWriteIndex = 0;
 
 		LB_ASSERT(aWriteIndex <= static_cast<int>(GetBufferSize()), "Invalid Write Index");
-		::memcpy_s(__mBuffer + aWriteIndex, aCopyableSize, pData, aCopyableSize);
+		::memcpy_s(_mBuffer + aWriteIndex, aCopyableSize, pData, aCopyableSize);
 		aWriteIndex += aCopyableSize;
 
 		if (aRestSize > 0)
 		{
 			LB_ASSERT(aRestSize + aCopyableSize + sizeof(CBufferHeader) == aDataSize, "Wrong Size!");
-			::memcpy_s(__mBuffer, GetUsableSize() - aCopyableSize, pData + aCopyableSize, aRestSize);
+			::memcpy_s(_mBuffer, GetUsableSize() - aCopyableSize, pData + aCopyableSize, aRestSize);
 			aWriteIndex = aRestSize;
 		}
 
@@ -73,15 +80,13 @@ namespace LBNet
 			aWriteIndex = 0;
 
 		{
-			std::unique_lock<CLocker> aLocker(__mLocker);
+			std::unique_lock<CLocker> aLocker(_mLocker);
 
-			__mWriteIndex	= aWriteIndex;
-			__mUseSize		+= aDataSize;
+			_mWriteIndex	= aWriteIndex;
+			_mUseSize		+= aDataSize;
 
-			if (__mReadIndex == -1)
-				__mReadIndex = 0;
-
-			std::cout << "Write : " << __mWriteIndex << " Size : " << aDataSize << std::endl;
+			if (_mReadIndex == -1)
+				_mReadIndex = 0;
 		}
 
 		CheckBufferValid();
@@ -96,13 +101,13 @@ namespace LBNet
 		int aWriteIndex = 0;
 		int aPassIndex	= 0;
 		
-		if (GetUsingSize() < sizeof(CBufferHeader) || __mReadIndex == -1)
+		if (GetUsingSize() < sizeof(CBufferHeader) || _mReadIndex == -1)
 			return nullptr;
 
-		LB_ASSERT(__mReadIndex != -1, "Wrong Index!");
-		aReadIndex	= __mReadIndex;
-		aWriteIndex = __mWriteIndex;
-		aPassIndex	= __mPassIndex.load();
+		LB_ASSERT(_mReadIndex != -1, "Wrong Index!");
+		aReadIndex	= _mReadIndex;
+		aWriteIndex = _mWriteIndex;
+		aPassIndex	= _mPassIndex.load();
 		int aLastIndex = (aPassIndex == -1) ? GetBufferSize() - 1 : aPassIndex - 1;
 
 		if (aReadIndex >= aLastIndex)
@@ -110,11 +115,11 @@ namespace LBNet
 			aReadIndex = 0;
 
 			if (aPassIndex != -1)
-				__mPassIndex = aPassIndex = -1;
+				_mPassIndex = aPassIndex = -1;
 		}
 
 		LB_ASSERT(aReadIndex + sizeof(CBufferHeader) <= aLastIndex + 1, "Invalid Buffer!");
-		aHeader		= reinterpret_cast<CBufferHeader*>(__mBuffer + aReadIndex);
+		aHeader		= reinterpret_cast<CBufferHeader*>(_mBuffer + aReadIndex);
 		aReadIndex += sizeof(CBufferHeader);
 		
 		LB_ASSERT(aHeader->mDataSize < TSize, "Invalid! Size");
@@ -131,18 +136,18 @@ namespace LBNet
 			int aRestSize = (static_cast<int>(aHeader->mDataSize) - aCopySize);
 			LB_ASSERT(aRestSize > 0, "Wrong Size!");
 
-			::memcpy_s(__mRestBuffer, TMaxDataSize + sizeof(CBufferHeader), reinterpret_cast<const void*>(__mBuffer + aReadIndex), aCopySize);
-			::memcpy_s(__mRestBuffer + aCopySize, TMaxDataSize + sizeof(CBufferHeader) - aCopySize, reinterpret_cast<const void*>(__mBuffer), aRestSize);
+			::memcpy_s(__mRestBuffer, TMaxDataSize + sizeof(CBufferHeader), reinterpret_cast<const void*>(_mBuffer + aReadIndex), aCopySize);
+			::memcpy_s(__mRestBuffer + aCopySize, TMaxDataSize + sizeof(CBufferHeader) - aCopySize, reinterpret_cast<const void*>(_mBuffer), aRestSize);
 
 			aData		= __mRestBuffer;
 			aReadIndex	= aRestSize;
 
 			if (aPassIndex != -1)
-				__mPassIndex = -1;
+				_mPassIndex = -1;
 		}
 		else
 		{
-			aData		= __mBuffer + aReadIndex;
+			aData		= _mBuffer + aReadIndex;
 			aReadIndex += aHeader->mDataSize;
 
 			if (aReadIndex == aLastIndex + 1)
@@ -150,34 +155,32 @@ namespace LBNet
 				aReadIndex = 0;
 
 				if (aPassIndex != -1)
-					__mPassIndex = -1;
+					_mPassIndex = -1;
 			}
 
 			LB_ASSERT(aReadIndex <= aLastIndex, "Wrong Index");
 		}
 
 		{
-			std::unique_lock<CLocker> aLocker(__mLocker);
-			__mReadIndex = aReadIndex;
-			__mUseSize	-= aHeader->mDataSize + sizeof(CBufferHeader);
-			std::cout << "Read : " << __mReadIndex << " Size : " << aHeader->mDataSize + sizeof(CBufferHeader) << " " << aPassIndex << std::endl;
+			std::unique_lock<CLocker> aLocker(_mLocker);
+			_mReadIndex = aReadIndex;
+			_mUseSize	-= aHeader->mDataSize + sizeof(CBufferHeader);
 		}
 
 		CheckBufferValid();
-		LB_ASSERT(aData[0] == 1, "Wrong!");
 		return aData;
 	}
 
 	template<Size TSize, Size TMaxDataSize>
 	Size CBuffer<TSize, TMaxDataSize>::GetUsingSize() const
 	{
-		return __mUseSize;
+		return _mUseSize;
 	}
 
 	template<Size TSize, Size TMaxDataSize>
 	Size CBuffer<TSize, TMaxDataSize>::GetUsableSize() const
 	{
-		return GetBufferSize() - __mUseSize;
+		return GetBufferSize() - _mUseSize;
 	}
 
 	template<Size TSize, Size TMaxDataSize>
@@ -192,5 +195,63 @@ namespace LBNet
 	{
 		static_assert(TMaxDataSize > 0);
 		return TMaxDataSize;
+	}
+
+	template<Size TSize, Size TMaxDataSize>
+	bool CAsyncBuffer<TSize, TMaxDataSize>::OnEnqueue(int pSize)
+	{
+		LB_ASSERT(pSize >= sizeof(CBufferHeader),	"Invalid Enqueue!");
+		LB_ASSERT(GetUsableSize() >= pSize,			"Invalid Size!");
+		
+		std::unique_lock<CLocker> aLocker(_mLocker);
+		_mWriteIndex	+= pSize;
+		_mUseSize		+= static_cast<Size>(pSize);
+
+		LB_ASSERT(_mWriteIndex < TSize, "Invalid Index!");
+
+		if (_mWriteIndex == TSize)
+			_mWriteIndex = 0;
+		else if (GetWritableSize() < sizeof(CBufferHeader))
+		{
+			_mPassIndex		= _mWriteIndex;
+			_mWriteIndex	= 0;
+		}
+
+		if (_mReadIndex == -1)
+			_mReadIndex = 0;
+
+		CheckBufferValid();
+		return true;
+	}
+
+	template<Size TSize, Size TMaxDataSize>
+	char* CAsyncBuffer<TSize, TMaxDataSize>::GetWriteAddress()
+	{
+		LB_ASSERT(_mWriteIndex < TSize, "Invalid Address!");
+		return &(_mBuffer[_mWriteIndex]);
+	}
+
+	template<Size TSize, Size TMaxDataSize>
+	Size CAsyncBuffer<TSize, TMaxDataSize>::GetWritableSize() const
+	{
+		LB_ASSERT(_mWriteIndex < TSize, "Invalid Index!");
+		
+		int aPassIndex	= _mPassIndex;
+		int aReadIndex	= _mReadIndex;
+		int aWriteIndex = _mWriteIndex;
+		Size aSize = 0;
+
+		if (aPassIndex != -1)
+		{
+			LB_ASSERT(aWriteIndex <= aPassIndex, "Invalid Index");
+			aSize = aPassIndex - aWriteIndex;
+		}
+		else if (aReadIndex > aWriteIndex)
+			aSize = aReadIndex - aWriteIndex;
+		else
+			aSize = GetUsableSize();
+
+		LB_ASSERT(aSize <= TSize, "Invalid Size!");
+		return aSize;
 	}
 }
