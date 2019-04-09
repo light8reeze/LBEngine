@@ -35,6 +35,7 @@
     <ClInclude Include="Src\Inc\LBCharBase.h" />
     <ClInclude Include="Src\Inc\LBLocker.h" />
     <ClInclude Include="Src\Inc\LBBuffer.h" />
+    <ClInclude Include="Src\Inc\LBPool.h" />
     <ClInclude Include="Src\Inc\LBString.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>

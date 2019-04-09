@@ -83,6 +83,9 @@
     <ClInclude Include="Src\Inl\LBBuffer.Inl">
       <Filter>Memory</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Inc\LBPool.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MASM Include="Src\Cpp\LBPause.masm">
