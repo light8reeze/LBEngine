@@ -33,6 +33,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBCharBase.h" />
+    <ClInclude Include="Src\Inc\LBEncyption.h" />
     <ClInclude Include="Src\Inc\LBLocker.h" />
     <ClInclude Include="Src\Inc\LBBuffer.h" />
     <ClInclude Include="Src\Inc\LBPool.h" />
@@ -103,6 +104,9 @@
       <FileType>Document</FileType>
     </MASM>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Src\Inl\LBPool.Inl" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{30E01DDD-EAAB-48ED-9171-E451C1A2EE3A}</ProjectGuid>
@@ -160,19 +164,23 @@
     <LinkIncremental>true</LinkIncremental>
     <TargetName>$(ProjectName)D_x86</TargetName>
     <IncludePath>$(ProjectDir)Src\Inc;$(ProjectDir)Src\Inl;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <ReferencePath>C:\boost_1_69_0\stage\lib;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <TargetName>$(ProjectName)D_x64</TargetName>
     <IncludePath>$(ProjectDir)Src\Inc;$(ProjectDir)Src\Inl;$(IncludePath)</IncludePath>
+    <ReferencePath>C:\boost_1_69_0\stage\lib;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(ProjectDir)Src\Inc;$(ProjectDir)Src\Inl;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <ReferencePath>C:\boost_1_69_0\stage\lib;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(ProjectDir)Src\Inc;$(ProjectDir)Src\Inl;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <ReferencePath>C:\boost_1_69_0\stage\lib;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -184,6 +192,7 @@
       <ConformanceMode>true</ConformanceMode>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\boost_1_69_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -199,6 +208,7 @@
       <PreprocessorDefinitions>X64;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\boost_1_69_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -216,6 +226,7 @@
       <PreprocessorDefinitions>X86;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\boost_1_69_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -235,6 +246,7 @@
       <PreprocessorDefinitions>X64;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\boost_1_69_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

@@ -89,6 +89,7 @@ namespace LBNet
 				_mReadIndex = 0;
 		}
 
+		//std::cout << "Write : " << aWriteIndex << std::endl;
 		CheckBufferValid();
 		return true;
 	}
@@ -123,6 +124,7 @@ namespace LBNet
 		aReadIndex += sizeof(CBufferHeader);
 		
 		LB_ASSERT(aHeader->mDataSize < TSize, "Invalid! Size");
+		LB_ASSERT(aHeader->mDataSize < TMaxDataSize, "Invalid! Size");
 		if (GetUsingSize() < sizeof(CBufferHeader) + aHeader->mDataSize)
 			return nullptr;
 
@@ -167,6 +169,7 @@ namespace LBNet
 			_mUseSize	-= aHeader->mDataSize + sizeof(CBufferHeader);
 		}
 
+		std::cout << "Read : " << aReadIndex << std::endl;
 		CheckBufferValid();
 		return aData;
 	}

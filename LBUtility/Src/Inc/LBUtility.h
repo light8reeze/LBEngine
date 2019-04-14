@@ -135,4 +135,34 @@ namespace LBNet
 	*/
 	using Version = unsigned int;
 	constexpr Version LB_UTILL_EXPORT GetLBUVersion();
+	
+	/**
+		@brief			특정 포인터를 할당 해제하는 함수
+		@param TType	삭제할 포인터 자료형
+		@param TType&	삭제할 포인터
+		@warning		TType는 반드시 포인터여야 한다.
+	*/
+	template<typename TType>
+	inline void SafeDelete(TType& pObject)
+	{
+		static_assert(std::is_pointer<TType>::value);
+
+		if (pObject)
+			delete pObject;
+	}
+	
+	/**
+		@brief			특정 포인터를 할당 해제하는 함수(배열)
+		@param TType	삭제할 포인터 자료형
+		@param TType&	삭제할 포인터
+		@warning		TType는 반드시 포인터여야 한다.
+	*/
+	template<typename TType>
+	inline void SafeArrayDelete(TType& pObject)
+	{
+		static_assert(std::is_pointer<TType>::value);
+
+		if (pObject)
+			delete [] pObject;
+	}
 }

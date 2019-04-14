@@ -35,6 +35,15 @@
     <Filter Include="Locker">
       <UniqueIdentifier>{d41a3ab6-b6d8-4fa0-b1e7-bf505284da50}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Socket">
+      <UniqueIdentifier>{8f6278bf-f9dd-4b5b-a32a-1c288c4557fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Random">
+      <UniqueIdentifier>{93faa777-6c30-460c-9437-60e397862136}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Encyption">
+      <UniqueIdentifier>{7ae75800-1014-40c3-8ec2-0518d3313c94}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Inc\LBUtility.h" />
@@ -86,10 +95,18 @@
     <ClInclude Include="Src\Inc\LBPool.h">
       <Filter>Memory</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Inc\LBEncyption.h">
+      <Filter>Encyption</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MASM Include="Src\Cpp\LBPause.masm">
       <Filter>Locker</Filter>
     </MASM>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Src\Inl\LBPool.Inl">
+      <Filter>Memory</Filter>
+    </None>
   </ItemGroup>
 </Project>
