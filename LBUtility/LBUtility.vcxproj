@@ -26,6 +26,7 @@
     <ClCompile Include="Src\Cpp\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Inc\LBQueue.h" />
     <ClInclude Include="Src\Inc\LBChar.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -106,6 +107,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Src\Inl\LBPool.Inl" />
+    <ClInclude Include="Src\Inl\LBQueue.Inl">
+      <FileType>Document</FileType>
+    </ClInclude>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

@@ -8,9 +8,11 @@
     <ClCompile Include="Src\Cpp\LBTime.cpp">
       <Filter>Time</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Cpp\LBUtility.cpp" />
     <ClCompile Include="Src\Cpp\LBLocker.cpp">
       <Filter>Locker</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Cpp\LBUtility.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -22,9 +24,6 @@
     </Filter>
     <Filter Include="CharSet\Char">
       <UniqueIdentifier>{8822c4c8-345c-4744-98bb-0c3a597c5390}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Thread">
-      <UniqueIdentifier>{849f0df5-a47b-4489-8845-c19b47af8b60}</UniqueIdentifier>
     </Filter>
     <Filter Include="Time">
       <UniqueIdentifier>{f58efba7-f9c9-43c2-acc7-9cdb5669d7ae}</UniqueIdentifier>
@@ -44,9 +43,14 @@
     <Filter Include="Encyption">
       <UniqueIdentifier>{7ae75800-1014-40c3-8ec2-0518d3313c94}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Thread">
+      <UniqueIdentifier>{849f0df5-a47b-4489-8845-c19b47af8b60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{6cc994ac-d803-4f81-9f5a-6f347635d36e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Src\Inc\LBUtility.h" />
     <ClInclude Include="Src\Inc\LBString.h">
       <Filter>CharSet\String</Filter>
     </ClInclude>
@@ -97,6 +101,15 @@
     </ClInclude>
     <ClInclude Include="Src\Inc\LBEncyption.h">
       <Filter>Encyption</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBQueue.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBUtility.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inl\LBQueue.Inl">
+      <Filter>Memory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

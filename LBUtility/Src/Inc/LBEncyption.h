@@ -13,6 +13,7 @@ namespace LBNet
         @brief	        암호화 인터페이스
 		@details		모든 암호화 관련 클래스는 다음 인터페이스를 상속받아 구현한다.
         @date	        2019-04-13
+		@todo			암호화 기능 추후 구현
         @auther         Light8reeze(light8reeze@gmail.com)
     */
 	class IEncyption
@@ -20,5 +21,12 @@ namespace LBNet
 	public:
 		IEncyption() = default;
 		virtual ~IEncyption() = 0;
+	};
+
+	class CCrc16 : public IEncyption
+	{
+	public:
+		CCrc16() = default;
+		virtual ~CCrc16() = default;
 	};
 }

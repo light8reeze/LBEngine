@@ -1,3 +1,5 @@
+#include "LBQueue.h"
+#include <sstream>
 namespace LBNet
 {
 	/**
@@ -20,13 +22,13 @@ namespace LBNet
 	*/
 	template<Size TSize, Size TMaxDataSize>
 	template<typename TData>
-	bool CBuffer<TSize, TMaxDataSize>::Enqueue(const TData& pData)
+	bool CBuffer<TSize, TMaxDataSize>::Push(const TData& pData)
 	{
-		return Enqueue(reinterpret_cast<const char*>(&pData), sizeof(TData));
+		return Push(reinterpret_cast<const char*>(&pData), sizeof(TData));
 	}
 
 	template<Size TSize, Size TMaxDataSize>
-	bool CBuffer<TSize, TMaxDataSize>::Enqueue(const char* pData, int pSize)
+	bool CBuffer<TSize, TMaxDataSize>::Push(const char* pData, int pSize)
 	{
 		Size aDataSize = sizeof(CBufferHeader) + pSize;
 		LB_ASSERT(pSize <= GetMaxDataSize(), "Data size is too big!!");
@@ -34,10 +36,20 @@ namespace LBNet
 		Size aCopyableSize = 0;
 		Size aRestSize = 0;
 
-		int aReadIndex = _mReadIndex;
-		int aWriteIndex = _mWriteIndex;
+		int aReadIndex		= 0;
+		int aWriteIndex		= 0;
+		Size aUsableSize	= 0;
+		Size aPassSize		= 0;
+		bool aCheckPass = false;
 
-		Size aUsableSize = GetUsableSize();
+		{
+			std::unique_lock<CLocker> aLocker(_mLocker);
+			
+			aReadIndex = _mReadIndex;
+			aWriteIndex = _mWriteIndex;
+			aUsableSize = GetUsableSize();
+			aPassSize = 0;
+		}
 
 		if (aDataSize > aUsableSize)
 			return false;
@@ -49,6 +61,8 @@ namespace LBNet
 			_mPassIndex = aWriteIndex;
 			aWriteIndex = 0;
 			aCopyableSize = aDataSize;
+			aPassSize = GetBufferSize() - _mPassIndex;
+			aCheckPass = true;
 		}
 		else if (aDataSize > aCopyableSize)
 			aRestSize = aDataSize - aCopyableSize;
@@ -81,34 +95,48 @@ namespace LBNet
 
 		{
 			std::unique_lock<CLocker> aLocker(_mLocker);
-
-			_mWriteIndex	= aWriteIndex;
-			_mUseSize		+= aDataSize;
+			
+			if (_mWriteIndex + aDataSize != aWriteIndex)
+			{
+				if (aWriteIndex + ((aCheckPass)? _mPassIndex.load() : GetBufferSize()) != _mWriteIndex + aDataSize)
+				{
+					LB_ASSERT(0, "s");
+				}
+			}
 
 			if (_mReadIndex == -1)
-				_mReadIndex = 0;
+				_mReadIndex = _mWriteIndex;
+
+			_mWriteIndex	= aWriteIndex;
+			_mUseSize		+= (aDataSize + aPassSize);
 		}
 
-		//std::cout << "Write : " << aWriteIndex << std::endl;
 		CheckBufferValid();
 		return true;
 	}
 
 	template<Size TSize, Size TMaxDataSize>
-	char* CBuffer<TSize, TMaxDataSize>::Dequeue()
+	char* CBuffer<TSize, TMaxDataSize>::Pop()
 	{
 		CBufferHeader* aHeader = nullptr;
 		int aReadIndex	= 0;
 		int aWriteIndex = 0;
 		int aPassIndex	= 0;
+		int aPassSize	= 0;
 		
 		if (GetUsingSize() < sizeof(CBufferHeader) || _mReadIndex == -1)
 			return nullptr;
 
 		LB_ASSERT(_mReadIndex != -1, "Wrong Index!");
-		aReadIndex	= _mReadIndex;
-		aWriteIndex = _mWriteIndex;
-		aPassIndex	= _mPassIndex.load();
+		
+		{
+			std::unique_lock<CLocker> aLocker(_mLocker);
+
+			aReadIndex = _mReadIndex;
+			aWriteIndex = _mWriteIndex;
+			aPassIndex = _mPassIndex.load();
+		}
+
 		int aLastIndex = (aPassIndex == -1) ? GetBufferSize() - 1 : aPassIndex - 1;
 
 		if (aReadIndex >= aLastIndex)
@@ -116,14 +144,17 @@ namespace LBNet
 			aReadIndex = 0;
 
 			if (aPassIndex != -1)
+			{
+				aPassSize	= GetBufferSize() - _mPassIndex;
 				_mPassIndex = aPassIndex = -1;
+			}
 		}
 
 		LB_ASSERT(aReadIndex + sizeof(CBufferHeader) <= aLastIndex + 1, "Invalid Buffer!");
 		aHeader		= reinterpret_cast<CBufferHeader*>(_mBuffer + aReadIndex);
 		aReadIndex += sizeof(CBufferHeader);
 		
-		LB_ASSERT(aHeader->mDataSize < TSize, "Invalid! Size");
+		LB_ASSERT(aHeader->mDataSize <= TSize, "Invalid! Size");
 		LB_ASSERT(aHeader->mDataSize < TMaxDataSize, "Invalid! Size");
 		if (GetUsingSize() < sizeof(CBufferHeader) + aHeader->mDataSize)
 			return nullptr;
@@ -166,10 +197,9 @@ namespace LBNet
 		{
 			std::unique_lock<CLocker> aLocker(_mLocker);
 			_mReadIndex = aReadIndex;
-			_mUseSize	-= aHeader->mDataSize + sizeof(CBufferHeader);
+			_mUseSize	-= (aHeader->mDataSize + sizeof(CBufferHeader) + aPassSize);
 		}
 
-		std::cout << "Read : " << aReadIndex << std::endl;
 		CheckBufferValid();
 		return aData;
 	}
@@ -201,7 +231,7 @@ namespace LBNet
 	}
 
 	template<Size TSize, Size TMaxDataSize>
-	bool CAsyncBuffer<TSize, TMaxDataSize>::OnEnqueue(int pSize)
+	bool CAsyncBuffer<TSize, TMaxDataSize>::OnPush(int pSize)
 	{
 		LB_ASSERT(pSize >= sizeof(CBufferHeader),	"Invalid Enqueue!");
 		LB_ASSERT(GetUsableSize() >= pSize,			"Invalid Size!");
