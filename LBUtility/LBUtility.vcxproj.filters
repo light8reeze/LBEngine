@@ -111,6 +111,12 @@
     <ClInclude Include="Src\Inl\LBQueue.Inl">
       <Filter>Memory</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Inl\LBTime.Inl">
+      <Filter>Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBIOContext.h">
+      <Filter>Socket</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MASM Include="Src\Cpp\LBPause.masm">

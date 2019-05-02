@@ -83,7 +83,7 @@ using namespace std::chrono_literals;
 #ifdef _DEBUG
 	#define DEBUG_CODE(pExp) pExp
 #else
-	#define ONLY_DEBUG(pExp)
+	#define DEBUG_CODE(pExp)
 #endif //_DEBUG
 
 namespace LBNet
@@ -91,13 +91,13 @@ namespace LBNet
 	/**
 		@brief	LBEngine에서 사용하는 크기 타입 정의
 	*/
-	using Size = unsigned long;
+	using Size = unsigned short;
 
 	/**
 		@brief	LBEngine에서 사용하는 기본 시간 단위 정의
 	*/
-	using Tick		= std::chrono::milliseconds;
-	using TickLep	= std::chrono::milliseconds::rep;
+	using Tick		= std::chrono::duration<unsigned long, std::milli>;
+	using RawTick	= Tick::rep;
 
 	/**
 		@brief			Enum을 타입의 값으로 변환해주는 함수
@@ -112,8 +112,8 @@ namespace LBNet
 
 	/**
 		@brief			두 포인터가 같은 주소인지 검사하는 함수
-		@param T1		비교할 포인터 값
-		@param T2		비교할 포인터 값
+		@param T1		비교할 포인터 타입
+		@param T2		비교할 포인터 타입
 		@warning		혼동을 피하기 위해 두 인자를 모두 포인터타입을 넣어준다.
 						포인터, 일반 변수를 섞어사용할 경우 버그가 발생할 가능성이 높다.
 						(ex1 : T1 = int*, T2 = void*) => 포인터비교가 맞게 실행됨
@@ -148,7 +148,10 @@ namespace LBNet
 		static_assert(std::is_pointer<TType>::value);
 
 		if (pObject)
+		{
 			delete pObject;
+			pObject = nullptr;
+		}
 	}
 	
 	/**
@@ -163,6 +166,9 @@ namespace LBNet
 		static_assert(std::is_pointer<TType>::value);
 
 		if (pObject)
-			delete [] pObject;
+		{
+			delete[] pObject;
+			pObject = nullptr;
+		}
 	}
 }

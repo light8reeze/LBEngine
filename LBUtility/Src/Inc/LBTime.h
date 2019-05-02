@@ -51,21 +51,18 @@ namespace LBNet
 		~CTime() = default;
 		
 		CTime&	operator=(const CTime&) = default;
-		
 		CTime&	operator+=(const CTime& pTime);
-		template< class Rep, class Period >
-		CTime&	operator+=(const std::chrono::duration<Rep, Period>& pTime);
-		
 		CTime&	operator-=(const CTime& pTime);
-		template< class Rep, class Period >
-		CTime&	operator-=(const std::chrono::duration<Rep, Period>& pTime);
-		
 		CTime	operator+(const CTime& pTime);
-		template< class Rep, class Period >
-		CTime	operator+(const std::chrono::duration<Rep, Period>& pTime);
-		
 		CTime	operator-(const CTime& pTime);
-		template< class Rep, class Period >
+		
+		template<class Rep, class Period>
+		CTime&	operator+=(const std::chrono::duration<Rep, Period>& pTime);
+		template<class Rep, class Period>
+		CTime&	operator-=(const std::chrono::duration<Rep, Period>& pTime);
+		template<class Rep, class Period>
+		CTime	operator+(const std::chrono::duration<Rep, Period>& pTime);
+		template<class Rep, class Period>
 		CTime	operator-(const std::chrono::duration<Rep, Period>& pTime);
 
 	public:
@@ -80,7 +77,7 @@ namespace LBNet
 
 		TimePoint	GetTimePoint() const;
 		Tick		GetTick() const;
-		TickLep		GetTickCount() const;
+		RawTick		GetTickCount() const;
 		int			GetYear() const;
 		int			GetMonth() const;
 		int			GetDay() const;
@@ -102,3 +99,5 @@ namespace LBNet
 		struct tm	__mLocalTime;
 	};
 }
+
+#include "LBTime.Inl"

@@ -25,35 +25,11 @@ namespace LBNet
 	}
 
 	/**
-		@brief		CTime의 +=연산자
-	*/
-	template< class Rep, class Period >
-	CTime& CTime::operator+=(const std::chrono::duration<Rep, Period>& pTime)
-	{
-		__mTimePoint += pTime;
-		UpdateFromTimePoint();
-
-		return (*this);
-	}
-
-	/**
 		@brief		CTime의 -=연산자
 	*/
 	CTime& CTime::operator-=(const CTime& pTime)
 	{
 		__mTimePoint -= pTime.GetTimePoint().time_since_epoch();
-		UpdateFromTimePoint();
-
-		return (*this);
-	}
-
-	/**
-		@brief		CTime의 -=연산자
-	*/
-	template< class Rep, class Period >
-	CTime& CTime::operator-=(const std::chrono::duration<Rep, Period>& pTime)
-	{
-		__mTimePoint -= pTime;
 		UpdateFromTimePoint();
 
 		return (*this);
@@ -72,38 +48,12 @@ namespace LBNet
 	}
 
 	/**
-		@brief		CTime의 +연산자
-	*/
-	template< class Rep, class Period >
-	CTime CTime::operator+(const std::chrono::duration<Rep, Period>& pTime)
-	{
-		CTime aTime;
-		TimePoint point = __mTimePoint + pTime;
-		aTime.SetTimePoint(std::move(point));
-
-		return aTime;
-	}
-
-	/**
 		@brief		CTime의 -연산자
 	*/
 	CTime CTime::operator-(const CTime& pTime)
 	{
 		CTime time;
 		TimePoint point = __mTimePoint - pTime.GetTimePoint().time_since_epoch();
-		time.SetTimePoint(std::move(point));
-
-		return time;
-	}
-
-	/**
-		@brief		CTime의 -연산자
-	*/
-	template< class Rep, class Period >
-	CTime CTime::operator-(const std::chrono::duration<Rep, Period>& pTime)
-	{
-		CTime time;
-		TimePoint point = __mTimePoint - pTime;
 		time.SetTimePoint(std::move(point));
 
 		return time;
@@ -223,9 +173,9 @@ namespace LBNet
 	/**
 		@brief			서버의 시간 틱을 구하는 함수
 		@details		서버의 틱은 경과한 시간을 ms단위로 반환한다.
-		@return	Tick	서버의 시간 틱TickLep(ms)
+		@return	Tick	서버의 시간 틱RawTick(ms)
 	*/
-	TickLep CTime::GetTickCount() const
+	RawTick CTime::GetTickCount() const
 	{
 		return std::chrono::duration_cast<Tick>(__mTimePoint.time_since_epoch()).count();
 	}

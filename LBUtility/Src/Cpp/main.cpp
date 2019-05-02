@@ -4,6 +4,7 @@
 #include <iostream>
 #include <Windows.h>
 #include "LBBuffer.h"
+#include "LBTime.h"
 
 LBNet::CBuffer<0xFFF, 200> gBuffer;
 
@@ -38,11 +39,11 @@ void Pop()
 
 int _tmain(int argc, TCHAR argv[])
 {
-	std::thread t1(Push);
-	std::thread t2(Pop);
+	//std::thread t1(Push);
+	//std::thread t2(Pop);
 
-	t1.join();
-	t2.join();
+	//t1.join();
+	//t2.join();
 
 	return 0;
 }

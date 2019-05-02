@@ -30,7 +30,7 @@ namespace LBNet
 	template<Size TSize, Size TMaxDataSize>
 	bool CBuffer<TSize, TMaxDataSize>::Push(const char* pData, int pSize)
 	{
-		Size aDataSize = sizeof(CBufferHeader) + pSize;
+		Size aDataSize = static_cast<Size>(sizeof(CBufferHeader) + pSize);
 		LB_ASSERT(pSize <= GetMaxDataSize(), "Data size is too big!!");
 
 		Size aCopyableSize = 0;
@@ -197,7 +197,7 @@ namespace LBNet
 		{
 			std::unique_lock<CLocker> aLocker(_mLocker);
 			_mReadIndex = aReadIndex;
-			_mUseSize	-= (aHeader->mDataSize + sizeof(CBufferHeader) + aPassSize);
+			_mUseSize	-= static_cast<Size>(aHeader->mDataSize + sizeof(CBufferHeader) + aPassSize);
 		}
 
 		CheckBufferValid();

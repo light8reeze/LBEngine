@@ -12,8 +12,7 @@
 namespace LBNet
 {
 	/**
-		@file		LBThread.h
-		@brief		LBUtillity의 쓰레드 클래스
+		@brief		쓰레드 클래스
 		@details	std쓰레드를 기반으로 구현한 쓰레드 하위 클래스에서 상속받아 Main을 구현하여 사용한다.
 		@date		2019-03-16
 		@auther		Light8reeze(light8reeze@gmail.com)
@@ -50,7 +49,7 @@ namespace LBNet
 	private:
 		std::thread		__mThread;
 		int				__mResult;
-		TickLep			__mSwitchingPeriod;
+		RawTick			__mSwitchingPeriod;
 		CTime			__mLastSwitchingTime;
 	};
 }

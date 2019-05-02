@@ -26,6 +26,7 @@
     <ClCompile Include="Src\Cpp\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Inc\LBIOContext.h" />
     <ClInclude Include="Src\Inc\LBQueue.h" />
     <ClInclude Include="Src\Inc\LBChar.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -108,6 +109,9 @@
   <ItemGroup>
     <None Include="Src\Inl\LBPool.Inl" />
     <ClInclude Include="Src\Inl\LBQueue.Inl">
+      <FileType>Document</FileType>
+    </ClInclude>
+    <ClInclude Include="Src\Inl\LBTime.Inl">
       <FileType>Document</FileType>
     </ClInclude>
   </ItemGroup>
