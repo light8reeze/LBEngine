@@ -12,6 +12,11 @@ namespace LBNet
 			LB_ASSERT(0, "Critical Error!");
 	}
 
+	CLocker::~CLocker()
+	{
+		::DeleteCriticalSection(&__mCS);
+	}
+
 	void CLocker::lock()
 	{
 		::EnterCriticalSection(&__mCS);

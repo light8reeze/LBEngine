@@ -26,7 +26,8 @@
     <ClCompile Include="Src\Cpp\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Src\Inc\LBIOContext.h" />
+    <ClInclude Include="Src\Inc\LBAddress.h" />
+    <ClInclude Include="Src\Inc\LBBoostConfig.h" />
     <ClInclude Include="Src\Inc\LBQueue.h" />
     <ClInclude Include="Src\Inc\LBChar.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -39,6 +40,7 @@
     <ClInclude Include="Src\Inc\LBLocker.h" />
     <ClInclude Include="Src\Inc\LBBuffer.h" />
     <ClInclude Include="Src\Inc\LBPool.h" />
+    <ClInclude Include="Src\Inc\LBSession.h" />
     <ClInclude Include="Src\Inc\LBString.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -107,6 +109,9 @@
     </MASM>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Inl\LBAddress.Inl">
+      <FileType>Document</FileType>
+    </ClInclude>
     <None Include="Src\Inl\LBPool.Inl" />
     <ClInclude Include="Src\Inl\LBQueue.Inl">
       <FileType>Document</FileType>

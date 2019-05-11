@@ -8,6 +8,10 @@
 //#include <crtdbg.h>
 #include <assert.h>
 
+#ifndef USE_CUSTOM_LB_BOOST_CONFIG
+#include "LBBoostConfig.h"
+#endif //USE_CUSTOM_LB_BOOST_CONFIG
+
 #define DEVELOP_MODE
 
 /**
@@ -23,30 +27,23 @@
 /**
 	@brief windows의 min, max를 사용하지 않고 std의 min, max를 사용한다.
 */
-#define NOMINMAX
+//#define NOMINMAX
 
 #ifdef _WINDOWS
-#include <Windows.h>
-//TODO : OS 독립적인 코드구현을 위해 개발단계에선 포함하지 않는다.
-#ifndef DEVELOP_MODE
+//@todo : OS 독립적인 코드구현을 위해 개발단계에선 포함하지 않는다.
 /////////////////////////////////////////////////////////////////////////
 // SDKDDKVer.h를 포함하면 최고 수준의 가용성을 가진 Windows 플랫폼이 정의됩니다.
 // 이전 Windows 플랫폼에 대해 응용 프로그램을 빌드하려는 경우에는 SDKDDKVer.h를 포함하기 전에
 // WinSDKVer.h를 포함하고 _WIN32_WINNT 매크로를 지원하려는 플랫폼으로 설정하십시오.
 #include <SDKDDKVer.h>
 /////////////////////////////////////////////////////////////////////////
-#endif //DEVELOP_MODE
+#include <boost/asio.hpp>
+#include <Windows.h>
+//#endif //DEVELOP_MODE
 #endif //_WINDOWS
 
 #include <stdexcept>
 #include <type_traits>
-
-/**
-	@brief		std::rel_ops 사용 정의 <, == 연산자를 정의함으로 >, != 연산자가 자동 정의된다.
-	@warning	std클래스에서 정의된 operator와 중복이 되기때문에 삭제(2019-03-27)
-*/
-#include <utility>
-//using namespace std::rel_ops;
 
 /**
 	@brief std::chrono_literals 사용 정의
@@ -66,8 +63,8 @@ using namespace std::chrono_literals;
 		#define LB_UTILL_EXPORT	__declspec(dllimport)
 	#else
 		#define LB_UTILL_EXPORT	__declspec(dllexport)
-	#endif //DEVELOP_MODE
-#endif //LOAD_LBUTILL
+	#endif //LOAD_LBUTILL
+#endif //DEVELOP_MODE
 
 /**
 	@brief		assert 관련 매크로
@@ -171,4 +168,9 @@ namespace LBNet
 			pObject = nullptr;
 		}
 	}
+	
+	/**
+		@brief 에러코드 타입
+	*/
+	using ErrCode = int;
 }

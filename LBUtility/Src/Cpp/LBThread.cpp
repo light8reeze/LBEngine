@@ -69,6 +69,7 @@ namespace LBNet
 	*/
 	void CThread::ThreadRoutine()
 	{
+		LB_ASSERT(GetThreadId() == std::this_thread::get_id(), "Invalid Thread!");
 		__mResult = Main();
 	}
 

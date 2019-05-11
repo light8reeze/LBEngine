@@ -26,7 +26,7 @@ namespace LBNet
 	{
 	public:
 		CLocker();
-		~CLocker() = default;
+		~CLocker();
 
 		void lock();
 		void unlock();

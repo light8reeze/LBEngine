@@ -46,8 +46,8 @@ namespace LBNet
 			std::unique_lock<CLocker> aLocker(__mLocker);
 			pObject = __mQueue.front();
 			__mQueue.pop();
-
-			return true;
 		}
+
+		return true;
 	}
 }
