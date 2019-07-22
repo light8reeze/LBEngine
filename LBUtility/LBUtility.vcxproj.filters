@@ -46,23 +46,8 @@
     <Filter Include="Core">
       <UniqueIdentifier>{6cc994ac-d803-4f81-9f5a-6f347635d36e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Network">
-      <UniqueIdentifier>{8f6278bf-f9dd-4b5b-a32a-1c288c4557fa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Network\Address">
-      <UniqueIdentifier>{269a12fe-f1f5-4a15-80f8-86edfb851b17}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Network\TCP">
-      <UniqueIdentifier>{d1c92e6c-2036-4a86-ba6c-8cf4ca69631c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Network\UDP">
-      <UniqueIdentifier>{3d102f5d-75a5-4057-8ef2-bb432f4c3342}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Network\HTTP">
-      <UniqueIdentifier>{f73c605f-c1d9-45b6-9627-ff4c05196864}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Network\Socket">
-      <UniqueIdentifier>{0a2dabac-0c5c-41fa-99e2-a8096f934a2f}</UniqueIdentifier>
+    <Filter Include="File">
+      <UniqueIdentifier>{205f3e3d-627f-4f09-b96b-4ac0471da3ed}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -129,17 +114,14 @@
     <ClInclude Include="Src\Inl\LBTime.Inl">
       <Filter>Time</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Inc\LBAddress.h">
-      <Filter>Network\Address</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Inl\LBAddress.Inl">
-      <Filter>Network\Address</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Inc\LBBoostConfig.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Inc\LBSession.h">
-      <Filter>Network</Filter>
+    <ClInclude Include="Src\Inc\LBFile.h">
+      <Filter>File</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inl\LBFile.Inl">
+      <Filter>File</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

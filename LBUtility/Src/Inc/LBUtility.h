@@ -9,7 +9,7 @@
 #include <assert.h>
 
 #ifndef USE_CUSTOM_LB_BOOST_CONFIG
-#include "LBBoostConfig.h"
+//#include "LBBoostConfig.h"
 #endif //USE_CUSTOM_LB_BOOST_CONFIG
 
 #define DEVELOP_MODE
@@ -37,7 +37,6 @@
 // WinSDKVer.h를 포함하고 _WIN32_WINNT 매크로를 지원하려는 플랫폼으로 설정하십시오.
 #include <SDKDDKVer.h>
 /////////////////////////////////////////////////////////////////////////
-#include <boost/asio.hpp>
 #include <Windows.h>
 //#endif //DEVELOP_MODE
 #endif //_WINDOWS
@@ -57,12 +56,12 @@ using namespace std::chrono_literals;
 	@warning	개발단계에서는 제외
 */
 #ifdef DEVELOP_MODE
-	#define LB_UTILL_EXPORT
+	#define LBU_EXPORT
 #else
 	#ifdef LOAD_LBUTILL
-		#define LB_UTILL_EXPORT	__declspec(dllimport)
+		#define LBU_EXPORT	__declspec(dllimport)
 	#else
-		#define LB_UTILL_EXPORT	__declspec(dllexport)
+		#define LBU_EXPORT	__declspec(dllexport)
 	#endif //LOAD_LBUTILL
 #endif //DEVELOP_MODE
 
@@ -131,7 +130,7 @@ namespace LBNet
 		@return Version	LBUtillity의 버전
 	*/
 	using Version = unsigned int;
-	constexpr Version LB_UTILL_EXPORT GetLBUVersion();
+	constexpr Version LBU_EXPORT GetLBUVersion();
 	
 	/**
 		@brief			특정 포인터를 할당 해제하는 함수

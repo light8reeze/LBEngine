@@ -18,7 +18,7 @@ namespace LBNet
 		@auther		Light8reeze(light8reeze@gmail.com)
 		@todo		추후 Thread관리 클래스 구현시 L1 ~ L3 참고, 컨텍스트 스위칭 구현
 	*/
-	class LB_UTILL_EXPORT CThread
+	class LBU_EXPORT CThread
 	{
 	public:
 		using id = std::thread::id;

@@ -40,7 +40,7 @@ namespace LBNet
 		@date		2019-03-16
 		@auther		Light8reeze(light8reeze@gmail.com)
 	*/
-	class LB_UTILL_EXPORT CTime
+	class LBU_EXPORT CTime
 	{
 	private:
 		using TimePoint = std::chrono::system_clock::time_point;
