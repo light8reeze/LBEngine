@@ -14,6 +14,10 @@
 
 #define DEVELOP_MODE
 
+#ifdef WIN32
+	#define X86
+#endif //WIN32
+
 /**
 	@brief		개발할 OS의 매크로, 추후 포팅을 위해 OS에 종속적인 코드는 다음 매크로로 전처리한다.
 	@warning	_WINDOWS, _LINUX 둘다 정의시 컴파일 에러가 발생한다
@@ -27,7 +31,7 @@
 /**
 	@brief windows의 min, max를 사용하지 않고 std의 min, max를 사용한다.
 */
-//#define NOMINMAX
+#define NOMINMAX
 
 #ifdef _WINDOWS
 //@todo : OS 독립적인 코드구현을 위해 개발단계에선 포함하지 않는다.

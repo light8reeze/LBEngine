@@ -20,7 +20,7 @@ namespace LBNet
 		@date		2019-07-20
 		@auther		Light8reeze(light8reeze@gmail.com)
 	*/
-	class LBU_EXPORT CFile
+	class CFile
 	{
 	private:
 		using __EndLine = CFile& (*)(CFile&);

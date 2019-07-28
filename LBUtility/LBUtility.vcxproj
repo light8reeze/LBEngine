@@ -40,6 +40,7 @@
     <ClInclude Include="Src\Inc\LBLocker.h" />
     <ClInclude Include="Src\Inc\LBBuffer.h" />
     <ClInclude Include="Src\Inc\LBPool.h" />
+    <ClInclude Include="Src\Inc\LBRandom.h" />
     <ClInclude Include="Src\Inc\LBString.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -51,6 +52,7 @@
     <ClInclude Include="Src\Inc\LBUtility.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Inc\LBProbability.h" />
     <ClInclude Include="Src\Inl\LBString.Inl">
       <FileType>Document</FileType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -118,6 +120,10 @@
     <ClInclude Include="Src\Inl\LBTime.Inl">
       <FileType>Document</FileType>
     </ClInclude>
+    <ClInclude Include="Src\Inl\LBRandom.Inl">
+      <FileType>Document</FileType>
+    </ClInclude>
+    <None Include="Src\Inl\LBProbability.Inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -200,7 +206,7 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>X86;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp17</LanguageStandard>
