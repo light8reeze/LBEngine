@@ -95,7 +95,9 @@ namespace LBNet
 	private:
 		static const CTime __mStartTime;
 
+		#pragma warning(disable : 4251)
 		TimePoint	__mTimePoint;
+		#pragma warning(default : 4251)
 		struct tm	__mLocalTime;
 	};
 }

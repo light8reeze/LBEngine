@@ -47,7 +47,9 @@ namespace LBNet
 		void	ContextSwitching();
 
 	private:
+		#pragma warning(disable : 4251)
 		std::thread		__mThread;
+		#pragma warning(default : 4251)
 		int				__mResult;
 		RawTick			__mSwitchingPeriod;
 		CTime			__mLastSwitchingTime;

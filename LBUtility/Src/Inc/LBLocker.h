@@ -60,8 +60,10 @@ namespace LBNet
 #endif //_DEBUG
 
 	private:
+		#pragma warning(disable : 4251)
 		std::shared_mutex __mMutex;
 		DEBUG_CODE(std::thread::id	__mOwner{});
+		#pragma warning(default : 4251)
 	};
 
 	using TReadLock		= std::shared_lock<CSharedMutex>;

@@ -4,6 +4,6 @@ namespace LBNet
 {
 	constexpr Version GetLBUVersion()
 	{
-		return 20190427u;
+		return 20190729u;
 	}
 }

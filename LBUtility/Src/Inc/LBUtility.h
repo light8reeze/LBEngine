@@ -8,10 +8,6 @@
 //#include <crtdbg.h>
 #include <assert.h>
 
-#ifndef USE_CUSTOM_LB_BOOST_CONFIG
-//#include "LBBoostConfig.h"
-#endif //USE_CUSTOM_LB_BOOST_CONFIG
-
 #define DEVELOP_MODE
 
 #ifdef WIN32
@@ -57,17 +53,12 @@ using namespace std::chrono_literals;
 /**
 	@brief		DllExport 관련 매크로
 	@details	dll을 받아 어플리케이션을 구현할 때에는 LBUtillity.h를 정의하기 전에 LOAD_LBUTILL매크로를 정의한다.
-	@warning	개발단계에서는 제외
 */
-#ifdef DEVELOP_MODE
-	#define LBU_EXPORT
+#ifdef LOAD_LBUTILL
+	#define LBU_EXPORT	__declspec(dllimport)
 #else
-	#ifdef LOAD_LBUTILL
-		#define LBU_EXPORT	__declspec(dllimport)
-	#else
-		#define LBU_EXPORT	__declspec(dllexport)
-	#endif //LOAD_LBUTILL
-#endif //DEVELOP_MODE
+	#define LBU_EXPORT	__declspec(dllexport)
+#endif //LOAD_LBUTILL
 
 /**
 	@brief		assert 관련 매크로
@@ -123,6 +114,8 @@ namespace LBNet
 	template<typename T1, typename T2>
 	inline bool IsSameAddress(T1 pT1, T2 pT2)
 	{
+		static_assert(std::is_pointer<T1>::value && std::is_pointer<T2>::value);
+
 		if(std::is_same<T1, T2>::value)
 			return (pT1 == pT2);
 

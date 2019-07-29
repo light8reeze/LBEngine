@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Src\Cpp\main.cpp" />
     <ClCompile Include="Src\Cpp\LBThread.cpp">
       <Filter>Thread</Filter>
     </ClCompile>
@@ -114,9 +113,6 @@
     <ClInclude Include="Src\Inl\LBTime.Inl">
       <Filter>Time</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Inc\LBBoostConfig.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Inc\LBFile.h">
       <Filter>File</Filter>
     </ClInclude>
@@ -129,6 +125,9 @@
     <ClInclude Include="Src\Inc\LBProbability.h">
       <Filter>Random</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Inl\LBRandom.Inl">
+      <Filter>Random</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MASM Include="Src\Cpp\LBPause.masm">
@@ -138,9 +137,6 @@
   <ItemGroup>
     <None Include="Src\Inl\LBPool.Inl">
       <Filter>Memory</Filter>
-    </None>
-    <None Include="Src\Inl\LBRandom.Inl">
-      <Filter>Random</Filter>
     </None>
     <None Include="Src\Inl\LBProbability.Inl">
       <Filter>Random</Filter>

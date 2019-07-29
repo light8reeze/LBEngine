@@ -10,7 +10,7 @@ namespace LBNet
 	/**
 		@brief CThread의 생성자
 	*/
-	CThread::CThread() : __mThread(), __mResult(-1), __mSwitchingPeriod(-1), __mLastSwitchingTime()
+	CThread::CThread() : __mThread(), __mResult(-1), __mSwitchingPeriod(0), __mLastSwitchingTime()
 	{
 	}
 
@@ -117,7 +117,7 @@ namespace LBNet
 	void CThread::ContextSwitching()
 	{
 		CTime aNowTime = std::move(aNowTime - __mLastSwitchingTime);
-		if (__mSwitchingPeriod != -1 && __mSwitchingPeriod <= aNowTime.GetTickCount())
+		if (__mSwitchingPeriod != 0 && __mSwitchingPeriod <= aNowTime.GetTickCount())
 		{
 			std::this_thread::sleep_for(1ms);
 			__mLastSwitchingTime.SetNow();
