@@ -2,7 +2,7 @@
 	@file	LBLogger.h
 	@brief	LBUtillity의 로그관련 헤더
 	@date	2019-07-20
-	@auther Light8reeze(light8reeze@gmail.com)
+	@auther light8reeze(light8reeze@gmail.com)
 */
 #pragma once
 #include "LBUtility.h"
@@ -18,7 +18,7 @@ namespace LBNet
 		@brief		파일IO 클래스
 		@warnning	멀티바이트 코드 
 		@date		2019-07-20
-		@auther		Light8reeze(light8reeze@gmail.com)
+		@auther		light8reeze(light8reeze@gmail.com)
 	*/
 	class CFile
 	{

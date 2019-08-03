@@ -2,7 +2,7 @@
 	@file	LBUtility.h
 	@brief	LBUtility를 사용하기 위해 필요한 설정 헤더파일
 	@date	2019-02-17
-	@auther Light8reeze(light8reeze@gmail.com)
+	@auther light8reeze(light8reeze@gmail.com)
 */
 #pragma once
 //#include <crtdbg.h>

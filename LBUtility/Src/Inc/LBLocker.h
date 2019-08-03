@@ -2,7 +2,7 @@
 	@file	LBLocker.h
 	@brief	LBUtillity의 잠금관련 헤더
 	@date	2019-03-31
-	@auther Light8reeze(light8reeze@gmail.com)
+	@auther light8reeze(light8reeze@gmail.com)
 */
 #pragma once
 #include "LBUtility.h"
@@ -21,7 +21,7 @@ namespace LBNet
 					리눅스에서는 추후에 스핀락을 이용하여 구현한다.
 					2. RAII는 std의 구현된 RAII를 사용한다.(ex : std::unique_lock)
 		@date		2019-03-31
-		@auther		Light8reeze(light8reeze@gmail.com)
+		@auther		light8reeze(light8reeze@gmail.com)
 	*/
 	class LBU_EXPORT CLocker
 	{
@@ -43,7 +43,7 @@ namespace LBNet
 		@details	std::shared_mutex을 이용한 잠금 클래스
 		@comments	shared_lock, unique_lock를 이용하여 Read, Write락 구현을 위해 개발
 		@date		2019-07-20
-		@auther		Light8reeze(light8reeze@gmail.com)
+		@auther		light8reeze(light8reeze@gmail.com)
 	*/
 	class LBU_EXPORT CSharedMutex
 	{

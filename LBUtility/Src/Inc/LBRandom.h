@@ -2,7 +2,7 @@
 	@file	LBRandom.h
 	@brief	LBUtillity의 난수 발생 관련 헤더
 	@date	2019-07-28
-	@auther Light8reeze(light8reeze@gmail.com)
+	@auther light8reeze(light8reeze@gmail.com)
 */
 #pragma once
 #include "LBUtility.h"
@@ -20,7 +20,7 @@ namespace LBNet
 		@brief		랜덤 클래스
 		@comment	C++11의 메르센 트위스터 엔진을 사용하여 구현
 		@date		2019-07-28
-		@auther		Light8reeze(light8reeze@gmail.com)
+		@auther		light8reeze(light8reeze@gmail.com)
 	*/
 	class CRandom
 	{

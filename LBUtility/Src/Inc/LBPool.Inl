@@ -1,30 +1,31 @@
 namespace LBNet
 {
-	template<class TObject, Size TCount>
-	CObjectPool<TObject, TCount>::CObjectPool() : __mIsAlloc(false), __mObjectArray(),
-		__mObjectQueue(), __mUseSize(0), __mLocker()
+	template<class TObject>
+	CObjectPool<TObject>::CObjectPool(Size pSize) : __mIsAlloc(false), __mObjectList(),
+		__mObjectQueue(), __mUseSize(0), __mPoolSize(pSize), __mLocker()
 	{
+		__mObjectList.reserve(pSize);
 	}
 
-	template<class TObject, Size TCount>
-	CObjectPool<TObject, TCount>::~CObjectPool()
+	template<class TObject>
+	CObjectPool<TObject>::~CObjectPool()
 	{
 		Close();
 	}
 
-	template<class TObject, Size TCount>
-	void CObjectPool<TObject, TCount>::Initialize()
+	template<class TObject>
+	void CObjectPool<TObject>::Initialize()
 	{
 		LB_ASSERT(__mIsAlloc == false, "Alloc Twice!!");
 
 		std::unique_lock<CLocker> aLocker(__mLocker);
 
-		for (int index = 0; index < TCount; ++index)
+		for (int index = 0; index < __mPoolSize; ++index)
 		{
 			try
 			{
 				TObject* aObject = new TObject;
-				__mObjectArray[index] = aObject;
+				__mObjectList[index] = aObject;
 				__mObjectQueue.push(aObject);
 			}
 			catch (std::exception& pException)
@@ -33,12 +34,12 @@ namespace LBNet
 			}
 		}
 
-		__mUseSize = TCount;
+		__mUseSize = 0;
 		__mIsAlloc = true;
 	}
 
-	template<class TObject, Size TCount>
-	void CObjectPool<TObject, TCount>::Close()
+	template<class TObject>
+	void CObjectPool<TObject>::Close()
 	{
 		LB_ASSERT(__mIsAlloc == false && __mUseSize > 0, "Invalid!");
 
@@ -52,15 +53,15 @@ namespace LBNet
 			__mObjectQueue.pop();
 		}
 
-		for (TObject*& aObject : __mObjectArray)
+		for (auto& aObject : __mObjectList)
 			SafeDelete(aObject);
 
 		__mIsAlloc = false;
 		__mUseSize = 0;
 	}
 
-	template<class TObject, Size TCount>
-	TObject* CObjectPool<TObject, TCount>::NewObject()
+	template<class TObject>
+	TObject* CObjectPool<TObject>::NewObject()
 	{
 		LB_ASSERT(__mIsAlloc == true, "Call Initialize First!");
 
@@ -82,8 +83,8 @@ namespace LBNet
 		return aObject;
 	}
 
-	template<class TObject, Size TCount>
-	bool CObjectPool<TObject, TCount>::DeleteObject(TObject*& pObject)
+	template<class TObject>
+	bool CObjectPool<TObject>::DeleteObject(TObject*& pObject)
 	{
 		LB_ASSERT(__mIsAlloc == true,	"Call Initialize First!");
 		LB_ASSERT(pObject != nullptr,	"Delete NullPtr!!");
@@ -92,7 +93,7 @@ namespace LBNet
 			return false;
 
 		bool aCheckFlag = false;
-		for (TObject*& aPtr : __mObjectArray)
+		for (auto& aPtr : __mObjectList)
 		{
 			if (aPtr == pObject)
 			{
@@ -114,14 +115,14 @@ namespace LBNet
 		return true;
 	}
 
-	template<class TObject, Size TCount>
-	constexpr Size CObjectPool<TObject, TCount>::GetMaxSize()
+	template<class TObject>
+	constexpr Size CObjectPool<TObject>::GetMaxSize()
 	{
-		return TCount;
+		return __mPoolSize;
 	}
 
-	template<class TObject, Size TCount>
-	Size CObjectPool<TObject, TCount>::GetUseSize()
+	template<class TObject>
+	Size CObjectPool<TObject>::GetUseSize()
 	{
 		return __mUseSize;
 	}

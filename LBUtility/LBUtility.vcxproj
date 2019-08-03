@@ -51,56 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Inc\LBProbability.h" />
-    <ClInclude Include="Src\Inl\LBString.Inl">
-      <FileType>Document</FileType>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Src\Inl\LBChar.Inl">
-      <FileType>Document</FileType>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Src\Inl\LBStringA.Inl">
-      <FileType>Document</FileType>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Src\Inl\LBStringW.Inl">
-      <FileType>Document</FileType>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Src\Inl\LBCharA.Inl">
-      <FileType>Document</FileType>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Src\Inl\LBCharW.Inl">
-      <FileType>Document</FileType>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Src\Inl\LBThread.Inl">
-      <FileType>Document</FileType>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Src\Inl\LBBuffer.Inl" />
   </ItemGroup>
   <ItemGroup>
     <MASM Include="Src\Cpp\LBPause.masm">
@@ -108,20 +58,38 @@
     </MASM>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Src\Inl\LBFile.Inl">
+    <ClInclude Include="Src\Inc\LBChar.Inl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
-    <None Include="Src\Inl\LBPool.Inl" />
-    <ClInclude Include="Src\Inl\LBQueue.Inl">
+    <ClInclude Include="Src\Inc\LBCharA.Inl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Src\Inl\LBTime.Inl">
+    <ClInclude Include="Src\Inc\LBCharW.Inl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Src\Inl\LBRandom.Inl">
-      <FileType>Document</FileType>
-    </ClInclude>
-    <None Include="Src\Inl\LBProbability.Inl" />
+    <None Include="Src\Inc\LBBuffer.Inl" />
+    <None Include="Src\Inc\LBFile.Inl" />
+    <None Include="Src\Inc\LBPool.Inl" />
+    <None Include="Src\Inc\LBProbability.Inl" />
+    <None Include="Src\Inc\LBQueue.Inl" />
+    <None Include="Src\Inc\LBRandom.Inl" />
+    <None Include="Src\Inc\LBString.Inl" />
+    <None Include="Src\Inc\LBStringA.Inl" />
+    <None Include="Src\Inc\LBStringW.Inl" />
+    <None Include="Src\Inc\LBThread.Inl" />
+    <None Include="Src\Inc\LBTime.Inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -179,7 +147,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <TargetName>$(ProjectName)D_$(PlatformTarget)</TargetName>
-    <IncludePath>$(ProjectDir)Src\Inc;$(ProjectDir)Src\Inl;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(ProjectDir)Src\Inc;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <ReferencePath>$(ReferencePath)</ReferencePath>
     <OutDir>$(SolutionDir)Bin\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\</IntDir>
@@ -187,14 +155,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <TargetName>$(ProjectName)D_$(PlatformTarget)</TargetName>
-    <IncludePath>$(ProjectDir)Src\Inc;$(ProjectDir)Src\Inl;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)Src\Inc;$(IncludePath)</IncludePath>
     <ReferencePath>$(ReferencePath)</ReferencePath>
     <OutDir>$(SolutionDir)Bin\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)Src\Inc;$(ProjectDir)Src\Inl;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(ProjectDir)Src\Inc;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <ReferencePath>$(ReferencePath)</ReferencePath>
     <TargetName>$(ProjectName)_$(PlatformTarget)</TargetName>
     <OutDir>$(SolutionDir)Bin\</OutDir>
@@ -202,7 +170,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)Src\Inc;$(ProjectDir)Src\Inl;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(ProjectDir)Src\Inc;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <ReferencePath>$(ReferencePath)</ReferencePath>
     <TargetName>$(ProjectName)_$(PlatformTarget)</TargetName>
     <OutDir>$(SolutionDir)Bin\</OutDir>

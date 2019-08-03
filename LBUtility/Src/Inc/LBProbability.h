@@ -2,7 +2,7 @@
 	@file	LBProbability.h
 	@brief	LBUtillity의 확률 계산 관련 헤더
 	@date	2019-07-28
-	@auther Light8reeze(light8reeze@gmail.com)
+	@auther light8reeze(light8reeze@gmail.com)
 */
 #pragma once
 #include "LBUtility.h"
@@ -14,7 +14,7 @@ namespace LBNet
 	/**
 		@brief		확률 계산 클래스
 		@date		2019-07-28
-		@auther		Light8reeze(light8reeze@gmail.com)
+		@auther		light8reeze(light8reeze@gmail.com)
 	*/
 	class CProbability
 	{

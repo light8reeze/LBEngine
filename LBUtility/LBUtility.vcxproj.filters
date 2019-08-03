@@ -53,29 +53,11 @@
     <ClInclude Include="Src\Inc\LBString.h">
       <Filter>CharSet\String</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Inl\LBString.Inl">
-      <Filter>CharSet\String</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Inl\LBStringA.Inl">
-      <Filter>CharSet\String</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Inl\LBStringW.Inl">
-      <Filter>CharSet\String</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Inl\LBChar.Inl">
-      <Filter>CharSet\Char</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Inc\LBChar.h">
       <Filter>CharSet\Char</Filter>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBCharBase.h">
       <Filter>CharSet</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Inl\LBCharA.Inl">
-      <Filter>CharSet\Char</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Inl\LBCharW.Inl">
-      <Filter>CharSet\Char</Filter>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBThread.h">
       <Filter>Thread</Filter>
@@ -83,16 +65,10 @@
     <ClInclude Include="Src\Inc\LBTime.h">
       <Filter>Time</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Inl\LBThread.Inl">
-      <Filter>Thread</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Inc\LBLocker.h">
       <Filter>Locker</Filter>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBBuffer.h">
-      <Filter>Memory</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Inl\LBBuffer.Inl">
       <Filter>Memory</Filter>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBPool.h">
@@ -107,25 +83,13 @@
     <ClInclude Include="Src\Inc\LBUtility.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Inl\LBQueue.Inl">
-      <Filter>Memory</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Inl\LBTime.Inl">
-      <Filter>Time</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Inc\LBFile.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Inl\LBFile.Inl">
       <Filter>File</Filter>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBRandom.h">
       <Filter>Random</Filter>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBProbability.h">
-      <Filter>Random</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Inl\LBRandom.Inl">
       <Filter>Random</Filter>
     </ClInclude>
   </ItemGroup>
@@ -135,11 +99,47 @@
     </MASM>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Src\Inl\LBPool.Inl">
+    <None Include="Src\Inc\LBChar.Inl">
+      <Filter>CharSet\Char</Filter>
+    </None>
+    <None Include="Src\Inc\LBCharA.Inl">
+      <Filter>CharSet\Char</Filter>
+    </None>
+    <None Include="Src\Inc\LBCharW.Inl">
+      <Filter>CharSet\Char</Filter>
+    </None>
+    <None Include="Src\Inc\LBString.Inl">
+      <Filter>CharSet\String</Filter>
+    </None>
+    <None Include="Src\Inc\LBStringA.Inl">
+      <Filter>CharSet\String</Filter>
+    </None>
+    <None Include="Src\Inc\LBStringW.Inl">
+      <Filter>CharSet\String</Filter>
+    </None>
+    <None Include="Src\Inc\LBFile.Inl">
+      <Filter>File</Filter>
+    </None>
+    <None Include="Src\Inc\LBPool.Inl">
       <Filter>Memory</Filter>
     </None>
-    <None Include="Src\Inl\LBProbability.Inl">
+    <None Include="Src\Inc\LBBuffer.Inl">
+      <Filter>Memory</Filter>
+    </None>
+    <None Include="Src\Inc\LBQueue.Inl">
+      <Filter>Memory</Filter>
+    </None>
+    <None Include="Src\Inc\LBProbability.Inl">
       <Filter>Random</Filter>
+    </None>
+    <None Include="Src\Inc\LBRandom.Inl">
+      <Filter>Random</Filter>
+    </None>
+    <None Include="Src\Inc\LBThread.Inl">
+      <Filter>Thread</Filter>
+    </None>
+    <None Include="Src\Inc\LBTime.Inl">
+      <Filter>Time</Filter>
     </None>
   </ItemGroup>
 </Project>

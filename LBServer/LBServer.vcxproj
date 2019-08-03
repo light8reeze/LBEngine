@@ -73,7 +73,7 @@
     <OutDir>$(SolutionDir)Bin\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\</IntDir>
     <TargetName>$(ProjectName)D_$(PlatformTarget)</TargetName>
-    <IncludePath>$(ProjectDir)Src\Inc;$(ProjectDir)Src\Inl;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)LBUtility\Src\Inc;$(SolutionDir)LBUtility\Src\Inl</IncludePath>
+    <IncludePath>$(ProjectDir)Src\Inc;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)LBUtility\Src\Inc</IncludePath>
     <ReferencePath>$(ReferencePath)</ReferencePath>
     <LibraryPath>$(SolutionDir)Bin\;C:\boost_1_70_0\stage\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -81,7 +81,7 @@
     <OutDir>$(SolutionDir)Bin\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\</IntDir>
     <TargetName>$(ProjectName)_$(PlatformTarget)</TargetName>
-    <IncludePath>$(ProjectDir)Src\Inc;$(ProjectDir)Src\Inl;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)LBUtility\Src\Inc;$(SolutionDir)LBUtility\Src\Inl</IncludePath>
+    <IncludePath>$(ProjectDir)Src\Inc;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)LBUtility\Src\Inc</IncludePath>
     <ReferencePath>$(ReferencePath)</ReferencePath>
     <LibraryPath>C:\boost_1_70_0\stage\lib;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
   </PropertyGroup>
@@ -89,7 +89,7 @@
     <OutDir>$(SolutionDir)Bin\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\</IntDir>
     <TargetName>$(ProjectName)D_$(PlatformTarget)</TargetName>
-    <IncludePath>$(ProjectDir)Src\Inc;$(ProjectDir)Src\Inl;$(SolutionDir)LBUtility\Src\Inc;$(SolutionDir)LBUtility\Src\Inl;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)Src\Inc;$(SolutionDir)LBUtility\Src\Inc;$(IncludePath)</IncludePath>
     <ReferencePath>$(ReferencePath)</ReferencePath>
     <LibraryPath>C:\boost_1_70_0\stage\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;$(SolutionDir)Bin\</LibraryPath>
   </PropertyGroup>
@@ -98,7 +98,7 @@
     <IntDir>$(SolutionDir)Intermediate\</IntDir>
     <TargetName>$(ProjectName)_$(PlatformTarget)</TargetName>
     <ReferencePath>$(ReferencePath)</ReferencePath>
-    <IncludePath>$(ProjectDir)Src\Inc;$(ProjectDir)Src\Inl;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)LBUtility\Src\Inc;$(SolutionDir)LBUtility\Src\Inl</IncludePath>
+    <IncludePath>$(ProjectDir)Src\Inc;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)LBUtility\Src\Inc</IncludePath>
     <LibraryPath>C:\boost_1_70_0\stage\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -154,12 +154,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Inc\LBBoostConfig.h" />
+    <ClInclude Include="Src\Inc\LBFactory.h" />
     <ClInclude Include="Src\Inc\LBServer.h" />
-    <ClInclude Include="Src\Inl\LBBoostConfig.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Cpp\LBServer.cpp" />
     <ClCompile Include="Src\Cpp\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Src\Inc\LBFactory.Inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

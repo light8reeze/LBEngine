@@ -2,7 +2,7 @@
 	@file	LBTime.h
 	@brief	LBUtillity의 시간관련 헤더
 	@date	2019-03-16
-	@auther Light8reeze(light8reeze@gmail.com)
+	@auther light8reeze(light8reeze@gmail.com)
 */
 #pragma once
 #include "LBUtility.h"
@@ -38,7 +38,7 @@ namespace LBNet
 		@brief		LBUtillity의 시간 클래스
 		@details	특정 시간을 표현하는 클래스, std::chrono를 기반으로 구현 Get, Set은 struct tm을 증감은 TimePoint를 이용한다
 		@date		2019-03-16
-		@auther		Light8reeze(light8reeze@gmail.com)
+		@auther		light8reeze(light8reeze@gmail.com)
 	*/
 	class LBU_EXPORT CTime
 	{

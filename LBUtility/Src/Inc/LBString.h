@@ -2,7 +2,7 @@
 	@file LBString.h
 	@bfief LBUtillity의 문자열 클래스 정의
 	@date	2019-02-27
-	@auther Light8reeze(light8reeze@gmail.com)
+	@auther light8reeze(light8reeze@gmail.com)
 */
 #pragma once
 #include "LBCharBase.h"
@@ -13,7 +13,7 @@ namespace LBNet
 		@bfief			LBUtility의 동적 String클래스
 		@param TCharSet	문자열 타입(char, wchar_t)
 		@date			2019-02-27
-		@auther			Light8reeze(light8reeze@gmail.com)
+		@auther			light8reeze(light8reeze@gmail.com)
 		@warning		1. 사용할 Char셋(TCharSet)과 다른 Char셋과 혼용하여사용 가능하지만 
 						이동, 대입, 복사, 반환 등에서 변환과정이 추가되어 
 						비 효율적이므로 되도록 혼용하여 사용하지 않는다.

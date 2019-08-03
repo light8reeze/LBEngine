@@ -2,7 +2,7 @@
 	@file	LBChar.h
 	@bfief	LBUtillity의 문자 관련 클래스 정의
 	@date	2019-02-25
-	@auther Light8reeze(light8reeze@gmail.com)
+	@auther light8reeze(light8reeze@gmail.com)
 	@todo	Char클래스 추후에 완성할것
 */
 #pragma once
@@ -22,7 +22,7 @@ namespace LBNet
 	//		 3. operator <<은 미구현으로 char*를 받아 출력한다.
 	//		 4. 이동 연산은 같은 Char셋, 크기의 타입끼리만 지원된다.(이동연산 추후 구현)
 	//TODO : 이동연산자 구현
-	//Auther : Light8reeze
+	//Auther : light8reeze
 	template<typename TCharSet = TChar, Size TCharSize = 1>
 	class CChar final
 	{

@@ -2,7 +2,7 @@
 	@file	LBServer.h
 	@brief	LBServer를 사용하기 위해 필요한 설정 헤더파일
 	@date	2019-07-29
-	@auther Light8reeze(light8reeze@gmail.com)
+	@auther light8reeze(light8reeze@gmail.com)
 */
 #pragma once
 

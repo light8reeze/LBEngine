@@ -2,7 +2,7 @@
 	@file	LBQueue.h
 	@brief	LBUtillity의 오브젝트 큐 관련 헤더
 	@date	2019-04-21
-	@auther Light8reeze(light8reeze@gmail.com)
+	@auther light8reeze(light8reeze@gmail.com)
 */
 #pragma once
 #include "LBUtility.h"
@@ -20,7 +20,7 @@ namespace LBNet
 		@details		세마포어를 이용한 큐 클래스.
         @param TObject	사용할 객체의 타입
         @date	        2019-04-21
-        @auther         Light8reeze(light8reeze@gmail.com)
+        @auther         light8reeze(light8reeze@gmail.com)
     */
 	template<typename TObject>
 	class CQueue

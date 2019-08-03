@@ -1,6 +1,6 @@
 //Desc : LBUtillity의 문자열에 필요한 상수, 함수등을 정의해놓은 파일
 //Date : 2019-02-25
-//Auther : Light8reeze(Light8reeze@gmail.com)
+//Auther : light8reeze(light8reeze@gmail.com)
 #pragma once
 #include "LBUtility.h"
 #include <string>
