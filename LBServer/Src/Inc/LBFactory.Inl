@@ -100,7 +100,7 @@ namespace LBNet
 	}
 
 	template<typename TObject>
-	bool CFactory::Delete(TObject*& pObject)
+	bool CFactory::__Delete(TObject*& pObject)
 	{
 		using ObjectPool = CObjectPoolEx<TObject>;
 
@@ -121,7 +121,11 @@ namespace LBNet
 	template<typename TObject>
 	CFactory::ObjectPtr<TObject> CFactory::MakePtr(TObject*& pObject)
 	{
-		return std::make_shared<TObject>(pObject);
+		return std::make_shared<TObject>(pObject
+			[this](TObject* pObjectPtr)
+		{
+			this->__Delete(pObjectPtr);
+		});
 	}
 #pragma endregion 
 }

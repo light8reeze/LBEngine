@@ -156,9 +156,12 @@
   <ItemGroup>
     <ClInclude Include="Src\Inc\LBBoostConfig.h" />
     <ClInclude Include="Src\Inc\LBFactory.h" />
+    <ClInclude Include="Src\Inc\LBIOContext.h" />
     <ClInclude Include="Src\Inc\LBServer.h" />
+    <ClInclude Include="Src\Inc\LBSocket.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Cpp\LBIOContext.cpp" />
     <ClCompile Include="Src\Cpp\LBServer.cpp" />
     <ClCompile Include="Src\Cpp\main.cpp" />
   </ItemGroup>

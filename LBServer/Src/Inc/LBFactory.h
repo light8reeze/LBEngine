@@ -75,10 +75,11 @@ namespace LBNet
 		ObjectPtr<TObject> New();
 		
 		template<typename TObject>
-		bool Delete(TObject*& pObject);
-		
-		template<typename TObject>
 		static ObjectPtr<TObject> MakePtr(TObject*& pObject);
+
+	private:
+		template<typename TObject>
+		bool __Delete(TObject*& pObject);
 
 	private:
 		static CFactory __mSingleton;

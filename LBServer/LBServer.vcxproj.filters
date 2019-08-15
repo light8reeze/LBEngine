@@ -7,6 +7,12 @@
     <Filter Include="Memory">
       <UniqueIdentifier>{8f29d26b-e3f9-4caf-baee-7f4a6974a903}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Network">
+      <UniqueIdentifier>{3cf98dac-7698-4420-8e0e-48d8e8abf1ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network\Socket">
+      <UniqueIdentifier>{9bb8621d-b467-4736-a795-3ffacf2affda}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Inc\LBServer.h">
@@ -18,11 +24,20 @@
     <ClInclude Include="Src\Inc\LBBoostConfig.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Inc\LBSocket.h">
+      <Filter>Network\Socket</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBIOContext.h">
+      <Filter>Network</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Cpp\main.cpp" />
     <ClCompile Include="Src\Cpp\LBServer.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Cpp\LBIOContext.cpp">
+      <Filter>Network</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

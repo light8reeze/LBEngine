@@ -21,6 +21,8 @@
 #include "LBBoostConfig.h"
 #endif //USE_CUSTOM_LB_BOOST_CONFIG
 
+#include "boost/asio.hpp"
+
 
 /**
 	@brief		DllExport 관련 매크로
@@ -60,4 +62,7 @@ namespace LBNet
 		@return Version	LBServer의 버전
 	*/
 	constexpr Version LBS_EXPORT GetLBSVersion();
+
+	constexpr unsigned int eSzPacketBuffer	= 0xFFFF;	// 패킷 버퍼 최대 사이즈
+	constexpr unsigned int eSzPacketMax		= 0x0FFF;	// 한 패킷당 최대 사이즈
 }

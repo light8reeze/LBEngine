@@ -38,7 +38,7 @@ namespace LBNet
 		TType	aSum	= static_cast<TType>(0);
 		int		aResult = 0;
 
-		for (const TType& aProb : pArray)
+		for (const auto& aProb : pArray)
 		{
 			if (aRandom < aProb + aSum)
 			{
