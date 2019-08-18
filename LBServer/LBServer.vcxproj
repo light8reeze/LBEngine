@@ -163,10 +163,12 @@
   <ItemGroup>
     <ClCompile Include="Src\Cpp\LBIOContext.cpp" />
     <ClCompile Include="Src\Cpp\LBServer.cpp" />
+    <ClCompile Include="Src\Cpp\LBSocket.cpp" />
     <ClCompile Include="Src\Cpp\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Src\Inc\LBFactory.Inl" />
+    <None Include="Src\Inc\LBSocket.Inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
