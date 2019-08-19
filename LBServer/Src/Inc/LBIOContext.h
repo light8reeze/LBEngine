@@ -30,7 +30,7 @@ namespace LBNet
 		static CIOContext&	Instance();
 
 	private:
-		static CIOContext&	__mSingleton;
+		static CIOContext	__mSingleton;
 		asio::io_context	__mIOContext;
 	};
 }

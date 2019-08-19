@@ -7,12 +7,6 @@
 #pragma once
 
 /**
-	@brief	LBUtility사용 설정
-*/
-#define LOAD_LBUTILL
-#include "LBUtility.h"
-
-/**
 	@brief		boost 라이브러리 설정 관련 매크로
 	@comment	서버를 사용할때 boost라이브러리를 직접 설정하려면
 				USE_CUSTOM_LB_BOOST_CONFIG 매크로를 먼저 정의한다.
@@ -22,6 +16,13 @@
 #endif //USE_CUSTOM_LB_BOOST_CONFIG
 
 #include "boost/asio.hpp"
+
+/**
+	@brief		LBUtility사용 설정
+	@warning	LBUtility에 Windows.h가 포함되어있기 때문에 asio보다 아래에 포함한다.
+*/
+#define LOAD_LBUTILL
+#include "LBUtility.h"
 
 
 /**

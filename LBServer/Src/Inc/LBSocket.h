@@ -6,7 +6,6 @@
 */
 #pragma once
 #include "LBServer.h"
-#include "LBBuffer.h"
 
 namespace LBNet
 {
@@ -23,12 +22,11 @@ namespace LBNet
 	public:
 		using SocketType	= asio::ip::tcp::socket;
 		using EndPointType	= asio::ip::tcp::endpoint;
-		using PacketBuffer	= CAsyncBuffer<eSzPacketBuffer, eSzPacketMax>;
 
 	public:
 		CTCPSocket();
 		~CTCPSocket();
-
+		
 		ErrCode Connect(const char* pIp, unsigned short pPort);
 		ErrCode Receive(void* pBuffer, int pSize, int& pReceivedSize);
 		ErrCode Send(void* pBuffer, int pSize, int& pSendSize);
@@ -42,7 +40,8 @@ namespace LBNet
 		void SendAsync(void* pBuffer, int pSize, THandler&& pHandler);
 
 		const SocketType&		GetSocket() const;
-		const EndPointType&		GetEndPoint() const;
+		SocketType&				GetSocket();
+		const EndPointType		GetEndPoint() const;
 
 	private:
 		SocketType		__mSocket;

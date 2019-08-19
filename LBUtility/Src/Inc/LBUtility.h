@@ -27,7 +27,9 @@
 /**
 	@brief windows의 min, max를 사용하지 않고 std의 min, max를 사용한다.
 */
-#define NOMINMAX
+#ifndef NOMINMAX
+	#define NOMINMAX
+#endif
 
 #ifdef _WINDOWS
 //@todo : OS 독립적인 코드구현을 위해 개발단계에선 포함하지 않는다.

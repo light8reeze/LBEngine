@@ -8,8 +8,8 @@ namespace LBNet
 
 		boost::system::error_code aError;
 		auto aAddress = asio::ip::make_address(pIp, aError);
-		if (aError.value != 0)
-			return aError.value;
+		if (aError.value() != 0)
+			return aError.value();
 
 		EndPointType aEndPoint(aAddress, pPort);
 		__mSocket.async_connect(aEndPoint, THandler);
@@ -36,15 +36,5 @@ namespace LBNet
 
 		__mSocket.async_write_some(asio::mutable_buffer(pBuffer, pSize), pHandler);
 		return 0;
-	}
-
-	const CTCPSocket::SocketType& CTCPSocket::GetSocket() const
-	{
-		return __mSocket;
-	}
-
-	const CTCPSocket::EndPointType& CTCPSocket::GetEndPoint() const
-	{
-		return __mSocket.local_endpoint();
 	}
 }

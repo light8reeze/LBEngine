@@ -2,6 +2,8 @@
 
 namespace LBNet
 {
+	CIOContext CIOContext::__mSingleton;
+
 	CIOContext::~CIOContext()
 	{
 		__mIOContext.stop();
@@ -10,6 +12,7 @@ namespace LBNet
 	ErrCode CIOContext::Run()
 	{
 		__mIOContext.run();
+		return 0;
 	}
 
 	void CIOContext::Stop()

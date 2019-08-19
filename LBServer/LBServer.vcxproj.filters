@@ -13,6 +13,12 @@
     <Filter Include="Network\Socket">
       <UniqueIdentifier>{9bb8621d-b467-4736-a795-3ffacf2affda}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Network\Session">
+      <UniqueIdentifier>{8d32bace-8bbf-4f37-820f-e274744a1c63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network\Acceptor">
+      <UniqueIdentifier>{10b36e78-5489-44b2-86a9-1f0f4dc605ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Inc\LBServer.h">
@@ -30,6 +36,12 @@
     <ClInclude Include="Src\Inc\LBIOContext.h">
       <Filter>Network</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Inc\LBSession.h">
+      <Filter>Network\Session</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBAcceptor.h">
+      <Filter>Network\Acceptor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Cpp\main.cpp" />
@@ -42,6 +54,9 @@
     <ClCompile Include="Src\Cpp\LBSocket.cpp">
       <Filter>Network\Socket</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Cpp\LBAcceptor.cpp">
+      <Filter>Network\Acceptor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Src\Inc\LBFactory.Inl">
@@ -49,6 +64,9 @@
     </None>
     <None Include="Src\Inc\LBSocket.Inl">
       <Filter>Network\Socket</Filter>
+    </None>
+    <None Include="Src\Inc\LBAcceptor.Inl">
+      <Filter>Network\Acceptor</Filter>
     </None>
   </ItemGroup>
 </Project>
