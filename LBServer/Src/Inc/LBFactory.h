@@ -41,7 +41,8 @@ namespace LBNet
     /**
         @brief	        오브젝트 팩토리
         @date	        2019-08-02
-		@warning		오브젝트를 받은 후 초기화는 caller가 직접 한다.
+		@warning		1. 오브젝트를 받은 후 초기화는 caller가 직접 한다.
+						2. 기본적으로 오브젝트 반납은 스마트 포인터에 의해 자동으로 반납한다.
         @auther         light8reeze(light8reeze@gmail.com)
     */
 	class LBS_EXPORT CFactory
@@ -49,6 +50,12 @@ namespace LBNet
 	public:
 		template<typename TObject>
 		using ObjectPtr = std::shared_ptr<TObject>;
+
+		template<typename TObject>
+		using DefaultDeleter = [this](TObject* pObjectPtr)
+		{
+			Delete(pObjectPtr);
+		};
 
 	private:
 		using __PoolPtr			= std::unique_ptr<IObjectPool>;
@@ -71,15 +78,14 @@ namespace LBNet
 		template<typename TObject>
 		bool AddObjectPool(int pSize);
 
-		template<typename TObject>
-		ObjectPtr<TObject> New();
-		
-		template<typename TObject>
-		static ObjectPtr<TObject> MakePtr(TObject*& pObject);
+		template<typename TObject, typename TDeleter = DefaultDeleter<TObject>>
+		ObjectPtr<TObject> New(TDeleter&& pDeleter = TDeleter());
 
-	private:
+		template<typename TObject, typename TDeleter = DefaultDeleter<TObject>>
+		static ObjectPtr<TObject> MakePtr(TObject*& pObject, TDeleter&& pDeleter = TDeleter());
+
 		template<typename TObject>
-		bool __Delete(TObject*& pObject);
+		bool Delete(TObject*& pObject);
 
 	private:
 		static CFactory __mSingleton;

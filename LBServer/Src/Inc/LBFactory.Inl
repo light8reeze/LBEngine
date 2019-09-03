@@ -48,6 +48,7 @@ namespace LBNet
 			aPair.second->Initialize();
 		}
 
+		__mIsInitial = true;
 		return 0;
 	}
 
@@ -55,10 +56,7 @@ namespace LBNet
 	{
 		LB_ASSERT(__mIsInitial == true, "Error");
 
-		for (auto& aPair : __mPools)
-		{
-			aPair.second->Close();
-		}
+		__mPools.clear();
 
 		return 0;
 	}
@@ -79,8 +77,8 @@ namespace LBNet
 		return true;
 	}
 
-	template<typename TObject>
-	CFactory::ObjectPtr<TObject> CFactory::New()
+	template<typename TObject, typename TDeleter>
+	CFactory::ObjectPtr<TObject> CFactory::New(TDeleter&& pDeleter)
 	{
 		using ObjectPool = CObjectPoolEx<TObject>;
 
@@ -96,11 +94,11 @@ namespace LBNet
 		LB_ASSERT(aObjPool != nullptr, "Exception!");
 
 		TObject* aObject = aObjPool->NewObject();
-		return MakePtr(aObject);
+		return MakePtr(aObject, pDeleter);
 	}
 
 	template<typename TObject>
-	bool CFactory::__Delete(TObject*& pObject)
+	bool CFactory::Delete(TObject*& pObject)
 	{
 		using ObjectPool = CObjectPoolEx<TObject>;
 
@@ -118,14 +116,10 @@ namespace LBNet
 		return aObjPool->DeleteObject(pObject);
 	}
 
-	template<typename TObject>
-	CFactory::ObjectPtr<TObject> CFactory::MakePtr(TObject*& pObject)
+	template<typename TObject, typename TDeleter>
+	CFactory::ObjectPtr<TObject> CFactory::MakePtr(TObject*& pObject, TDeleter&& pDeleter)
 	{
-		return std::make_shared<TObject>(pObject
-			[this](TObject* pObjectPtr)
-		{
-			this->__Delete(pObjectPtr);
-		});
+		return std::make_shared<TObject>(pObject, pDeleter);
 	}
 #pragma endregion 
 }

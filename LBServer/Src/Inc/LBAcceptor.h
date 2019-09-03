@@ -7,6 +7,7 @@
 #pragma once
 #include "LBServer.h"
 #include "LBSocket.h"
+#include "LBSession.h"
 
 namespace LBNet
 {
@@ -28,11 +29,11 @@ namespace LBNet
 		ErrCode Bind(const char* pIp, unsigned short pPort);
 		ErrCode Bind(unsigned short pPort);
 		ErrCode Listen(int pBackLog = AcceptorType::max_listen_connections);
-		ErrCode Accept(CTCPSocket& pSocket);
+		ErrCode Accept(CSession& pSession);
 		ErrCode Close();
 
 		template<typename THandler>
-		void AcceptAsync(CTCPSocket& pSocket, THandler&& pHandler);
+		void AcceptAsync(CSession& pSession, THandler&& pHandler);
 
 	private:
 		AcceptorType __mAcceptor;

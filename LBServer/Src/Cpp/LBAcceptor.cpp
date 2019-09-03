@@ -45,12 +45,12 @@ namespace LBNet
 		return aError.value();
 	}
 
-	ErrCode CAcceptor::Accept(CTCPSocket& pSocket)
+	ErrCode CAcceptor::Accept(CSession& pSession)
 	{
 		LB_ASSERT(__mAcceptor.is_open(), "Acceptor not Open");
 
 		boost::system::error_code aError;
-		__mAcceptor.accept(pSocket.GetSocket(), aError);
+		__mAcceptor.accept(pSession.__mSocket.GetSocket(), aError);
 		return aError.value();
 	}
 

@@ -15,6 +15,17 @@ namespace LBNet
 		#pragma warning(default : 4312)
 	}
 
+	template<Size TSize, Size TMaxDataSize>
+	void CBuffer<TSize, TMaxDataSize>::Clear()
+	{
+		std::unique_lock<CLocker> aLocker(_mLocker);
+
+		_mReadIndex		= 0;
+		_mUseSize		= 0;
+		_mWriteIndex	= 0;
+		_mPassIndex		= 0;
+	}
+
 	/**
 		@brief 버퍼에 데이터를 넣는 함수
 		@param const TData& 버퍼에 넣을 데이터

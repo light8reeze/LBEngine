@@ -19,6 +19,9 @@
     <Filter Include="Network\Acceptor">
       <UniqueIdentifier>{10b36e78-5489-44b2-86a9-1f0f4dc605ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Network\Handler">
+      <UniqueIdentifier>{73b17993-1fbe-4d21-a0c2-fa1861b83e0d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Inc\LBServer.h">
@@ -42,6 +45,12 @@
     <ClInclude Include="Src\Inc\LBAcceptor.h">
       <Filter>Network\Acceptor</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Inc\LBHandler.h">
+      <Filter>Network\Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBManagedObject.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Cpp\main.cpp" />
@@ -57,6 +66,15 @@
     <ClCompile Include="Src\Cpp\LBAcceptor.cpp">
       <Filter>Network\Acceptor</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Cpp\LBSession.cpp">
+      <Filter>Network\Session</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Cpp\LBHandler.cpp">
+      <Filter>Network\Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Cpp\LBManagedObject.cpp">
+      <Filter>Memory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Src\Inc\LBFactory.Inl">
@@ -67,6 +85,9 @@
     </None>
     <None Include="Src\Inc\LBAcceptor.Inl">
       <Filter>Network\Acceptor</Filter>
+    </None>
+    <None Include="Src\Inc\LBManagedObject.Inl">
+      <Filter>Memory</Filter>
     </None>
   </ItemGroup>
 </Project>

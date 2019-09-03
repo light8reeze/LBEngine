@@ -109,6 +109,8 @@
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>X64;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\boost_1_70_0;</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>LBServer.h</PrecompiledHeaderFile>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -156,22 +158,30 @@
   <ItemGroup>
     <ClInclude Include="Src\Inc\LBAcceptor.h" />
     <ClInclude Include="Src\Inc\LBBoostConfig.h" />
+    <ClInclude Include="Src\Inc\LBHandler.h" />
     <ClInclude Include="Src\Inc\LBFactory.h" />
     <ClInclude Include="Src\Inc\LBIOContext.h" />
+    <ClInclude Include="Src\Inc\LBManagedObject.h" />
     <ClInclude Include="Src\Inc\LBServer.h" />
     <ClInclude Include="Src\Inc\LBSession.h" />
     <ClInclude Include="Src\Inc\LBSocket.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Cpp\LBAcceptor.cpp" />
+    <ClCompile Include="Src\Cpp\LBHandler.cpp" />
     <ClCompile Include="Src\Cpp\LBIOContext.cpp" />
+    <ClCompile Include="Src\Cpp\LBManagedObject.cpp" />
     <ClCompile Include="Src\Cpp\LBServer.cpp" />
+    <ClCompile Include="Src\Cpp\LBSession.cpp" />
     <ClCompile Include="Src\Cpp\LBSocket.cpp" />
     <ClCompile Include="Src\Cpp\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Src\Inc\LBAcceptor.Inl" />
-    <None Include="Src\Inc\LBFactory.Inl" />
+    <ClInclude Include="Src\Inc\LBFactory.Inl">
+      <FileType>Document</FileType>
+    </ClInclude>
+    <None Include="Src\Inc\LBManagedObject.Inl" />
     <None Include="Src\Inc\LBSocket.Inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
