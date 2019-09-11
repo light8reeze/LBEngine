@@ -183,7 +183,7 @@ namespace LBNet
 			::memcpy_s(__mRestBuffer, TMaxDataSize + sizeof(CBufferHeader), reinterpret_cast<const void*>(_mBuffer + aReadIndex), aCopySize);
 			::memcpy_s(__mRestBuffer + aCopySize, TMaxDataSize + sizeof(CBufferHeader) - aCopySize, reinterpret_cast<const void*>(_mBuffer), aRestSize);
 
-			aData		= __mRestBuffer;
+			aData		= __mRestBuffer + sizeof(CBufferHeader);
 			aReadIndex	= aRestSize;
 
 			if (aPassIndex != -1)
@@ -191,7 +191,7 @@ namespace LBNet
 		}
 		else
 		{
-			aData		= _mBuffer + aReadIndex;
+			aData		= _mBuffer + aReadIndex + sizeof(CBufferHeader);
 			aReadIndex += aHeader->mDataSize;
 
 			if (aReadIndex == aLastIndex + 1)

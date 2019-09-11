@@ -158,6 +158,7 @@
   <ItemGroup>
     <ClInclude Include="Src\Inc\LBAcceptor.h" />
     <ClInclude Include="Src\Inc\LBBoostConfig.h" />
+    <ClInclude Include="Src\Inc\LBGameObject.h" />
     <ClInclude Include="Src\Inc\LBHandler.h" />
     <ClInclude Include="Src\Inc\LBFactory.h" />
     <ClInclude Include="Src\Inc\LBIOContext.h" />
@@ -168,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Cpp\LBAcceptor.cpp" />
+    <ClCompile Include="Src\Cpp\LBGameObject.cpp" />
     <ClCompile Include="Src\Cpp\LBHandler.cpp" />
     <ClCompile Include="Src\Cpp\LBIOContext.cpp" />
     <ClCompile Include="Src\Cpp\LBManagedObject.cpp" />
@@ -182,6 +184,9 @@
       <FileType>Document</FileType>
     </ClInclude>
     <None Include="Src\Inc\LBManagedObject.Inl" />
+    <ClInclude Include="Src\Inc\LBSession.Inl">
+      <FileType>Document</FileType>
+    </ClInclude>
     <None Include="Src\Inc\LBSocket.Inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

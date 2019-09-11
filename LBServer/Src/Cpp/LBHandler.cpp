@@ -11,13 +11,13 @@ namespace LBNet
 		return 0;
 	}
 
-	ErrCode CMessageHandler::Process(MessageNumber pNumber, CPacketHeader* pData, int pDataSize, CSession& pSession)
+	ErrCode CMessageHandler::Process(MessageNumber pNumber, CPacketHeader* pData, int pDataSize, CSession& pSession, CSession::ObjectPtr& pObject)
 	{
 		auto aIter = __mHandlerList.find(pNumber);
 		if (aIter == __mHandlerList.end())
 			return 1;
 
-		auto aResult = aIter->second(pData, pDataSize, pSession);
+		auto aResult = aIter->second(pData, pDataSize, pSession, pObject);
 		return aResult;
 	}
 }

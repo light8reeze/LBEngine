@@ -64,10 +64,13 @@ namespace LBNet
 		__mBuffer.OnPush(pSize);
 		char*	aData = __mBuffer.Pop();
 		ErrCode aResult = 0;
+		auto aManaged = CManagedObject::MakeManaged(*this);
+		auto aGameObject = aManaged->GetGameObject();
+
 		if (aData != nullptr)
 		{
 			CPacketHeader* aHeader = reinterpret_cast<CPacketHeader*>(aData);
-			aResult = CMessageHandler::Process(aHeader->mCommand, aHeader, aHeader->mDataSize, (*this));
+			aResult = CMessageHandler::Process(aHeader->mCommand, aHeader, aHeader->mDataSize, (*aManaged), aGameObject);
 		}
 
 		if (aResult != 0)
@@ -108,6 +111,16 @@ namespace LBNet
 	{
 		SetReturn();
 		return 0;
+	}
+
+	void CSession::RemoveObject()
+	{
+		__mGameObject = std::move(ObjectPtr());
+	}
+
+	CSession::ObjectPtr CSession::GetGameObject()
+	{
+		return __mGameObject;
 	}
 
 	ErrCode CSession::_OnDelete()

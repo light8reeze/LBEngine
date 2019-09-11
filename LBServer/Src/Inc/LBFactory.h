@@ -51,12 +51,6 @@ namespace LBNet
 		template<typename TObject>
 		using ObjectPtr = std::shared_ptr<TObject>;
 
-		template<typename TObject>
-		using DefaultDeleter = [this](TObject* pObjectPtr)
-		{
-			Delete(pObjectPtr);
-		};
-
 	private:
 		using __PoolPtr			= std::unique_ptr<IObjectPool>;
 		using __PoolContainer	= std::map<std::size_t, __PoolPtr>; //Key : typeid.hashcode(), value : ObjectPool Ptr
@@ -78,11 +72,11 @@ namespace LBNet
 		template<typename TObject>
 		bool AddObjectPool(int pSize);
 
-		template<typename TObject, typename TDeleter = DefaultDeleter<TObject>>
-		ObjectPtr<TObject> New(TDeleter&& pDeleter = TDeleter());
+		template<typename TObject, typename TDeleter>
+		ObjectPtr<TObject> New(TDeleter&& pDeleter = Delete);
 
-		template<typename TObject, typename TDeleter = DefaultDeleter<TObject>>
-		static ObjectPtr<TObject> MakePtr(TObject*& pObject, TDeleter&& pDeleter = TDeleter());
+		template<typename TObject, typename TDeleter>
+		static ObjectPtr<TObject> MakePtr(TObject*& pObject, TDeleter&& pDeleter = Delete);
 
 		template<typename TObject>
 		bool Delete(TObject*& pObject);

@@ -22,6 +22,9 @@
     <Filter Include="Network\Handler">
       <UniqueIdentifier>{73b17993-1fbe-4d21-a0c2-fa1861b83e0d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Network\Object">
+      <UniqueIdentifier>{dc3cd230-3bf8-4e37-81a7-e0129f28403d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Inc\LBServer.h">
@@ -51,6 +54,13 @@
     <ClInclude Include="Src\Inc\LBManagedObject.h">
       <Filter>Memory</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Inc\LBGameObject.h">
+      <Filter>Network\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBFactory.Inl">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBSession.Inl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Cpp\main.cpp" />
@@ -75,11 +85,11 @@
     <ClCompile Include="Src\Cpp\LBManagedObject.cpp">
       <Filter>Memory</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Cpp\LBGameObject.cpp">
+      <Filter>Network\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Src\Inc\LBFactory.Inl">
-      <Filter>Memory</Filter>
-    </None>
     <None Include="Src\Inc\LBSocket.Inl">
       <Filter>Network\Socket</Filter>
     </None>

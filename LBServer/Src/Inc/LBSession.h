@@ -9,9 +9,12 @@
 #include "LBSocket.h"
 #include "LBBuffer.h"
 #include "LBManagedObject.h"
+#include "LBFactory.h"
 
 namespace LBNet
 {
+	class CGameObject;
+
 	/**
 		@brief	TCP 세션 클래스
 		@date	2019-08-19
@@ -28,6 +31,9 @@ namespace LBNet
 			eDisconnect,
 		};
 
+	public:
+		using ObjectPtr = CFactory::ObjectPtr<CGameObject>;
+
 	private:
 		using __BufferType	= CAsyncBuffer<eSzPacketBuffer, eSzPacketMax>;
 
@@ -43,6 +49,11 @@ namespace LBNet
 		ErrCode Close();
 		ErrCode SetDisconnect();
 
+		template<typename TObject>
+		void SetObject(CFactory::ObjectPtr<TObject>& pObject);
+		void RemoveObject();
+		ObjectPtr GetGameObject();
+
 	protected:
 		ErrCode _OnDelete() override;
 
@@ -51,5 +62,8 @@ namespace LBNet
 		__BufferType	__mBuffer;
 		CLocker			__mLocker;
 		EState			__mState;
+		ObjectPtr		__mGameObject;
 	};
 }
+
+#include "LBSession.Inl"
