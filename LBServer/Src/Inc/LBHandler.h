@@ -19,7 +19,7 @@ namespace LBNet
 		@auther	light8reeze(light8reeze@gmail.com)
 	*/
 	#pragma pack(push, 1)
-	class CPacketHeader : public CBufferHeader
+	class CPacketHeader
 	{
 	public:
 		MessageNumber mCommand;
@@ -27,6 +27,7 @@ namespace LBNet
 	#pragma pack(pop)
 
 	using HandlerType = std::function<ErrCode(CPacketHeader*, int, CSession&, CSession::ObjectPtr& pObject)>;
+	
 	/**
 		@brief	패킷 처리 클래스
 		@date	2019-08-30
@@ -45,7 +46,7 @@ namespace LBNet
 		const CMessageHandler& operator=(const CMessageHandler&) = delete;
 
 		static ErrCode Register(MessageNumber pNumber, HandlerType&& pHandler);
-		static ErrCode Process(MessageNumber pNumber, CPacketHeader* pData, int pDataSize, CSession& pSession, CSession::ObjectPtr& pObject);
+		static ErrCode Process(MessageNumber pNumber, CPacketHeader* pData, int pDataSize, CSession& pSession, SharedObject<CGameObject>& pObject);
 
 	private:
 		static __HandlerList	__mHandlerList;

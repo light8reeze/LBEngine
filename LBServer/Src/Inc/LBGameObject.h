@@ -10,6 +10,8 @@
 
 namespace LBNet
 {
+
+
 	/**
 		@brief		세션과 연결되는 서버 기본 오브젝트 클래스
 		@details	서버의 기본 오브젝트로 세션과 1:1연결된다.
@@ -25,14 +27,11 @@ namespace LBNet
 		CGameObject();
 		virtual ~CGameObject() = 0;
 
-	protected:
-		using _SessionPtr = std::unique_ptr<CSession>;
-
 	public:
-		void LinkSession(CSession& pSession);
+		void LinkSession(SharedObject<CSession>& pSession);
 		void Unlink();
 
 	protected:
-		_SessionPtr _mSession;
+		WeakObject<CSession> _mSession;
 	};
 }

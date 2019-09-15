@@ -109,7 +109,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>X64;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\boost_1_70_0;</AdditionalIncludeDirectories>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>LBServer.h</PrecompiledHeaderFile>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -165,6 +165,7 @@
     <ClInclude Include="Src\Inc\LBManagedObject.h" />
     <ClInclude Include="Src\Inc\LBServer.h" />
     <ClInclude Include="Src\Inc\LBSession.h" />
+    <ClInclude Include="Src\Inc\LBSessionManager.h" />
     <ClInclude Include="Src\Inc\LBSocket.h" />
   </ItemGroup>
   <ItemGroup>

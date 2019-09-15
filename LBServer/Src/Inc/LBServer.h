@@ -67,4 +67,11 @@ namespace LBNet
 	constexpr unsigned int eSzPacketBuffer	= 0xFFFF;	// 패킷 버퍼 최대 사이즈
 	constexpr unsigned int eSzPacketMax		= 0x0FFF;	// 한 패킷당 최대 사이즈
 	constexpr unsigned int eSzPacketMin		= 4;		// 한 패킷당 최소 사이즈
+
+	template <typename TObject>
+	using SharedObject	= std::shared_ptr<TObject>;
+	template <typename TObject>
+	using WeakObject	= std::weak_ptr<TObject>;
+	template <typename TObject>
+	using UniqueObject	= std::unique_ptr<TObject>;
 }

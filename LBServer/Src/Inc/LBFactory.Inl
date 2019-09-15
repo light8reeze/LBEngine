@@ -78,7 +78,7 @@ namespace LBNet
 	}
 
 	template<typename TObject, typename TDeleter>
-	CFactory::ObjectPtr<TObject> CFactory::New(TDeleter&& pDeleter)
+	SharedObject<TObject> CFactory::New(TDeleter&& pDeleter)
 	{
 		using ObjectPool = CObjectPoolEx<TObject>;
 
@@ -117,7 +117,7 @@ namespace LBNet
 	}
 
 	template<typename TObject, typename TDeleter>
-	CFactory::ObjectPtr<TObject> CFactory::MakePtr(TObject*& pObject, TDeleter&& pDeleter)
+	SharedObject<TObject> CFactory::MakePtr(TObject*& pObject, TDeleter&& pDeleter)
 	{
 		return std::make_shared<TObject>(pObject, pDeleter);
 	}

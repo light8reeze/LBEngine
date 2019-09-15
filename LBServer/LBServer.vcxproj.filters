@@ -60,7 +60,12 @@
     <ClInclude Include="Src\Inc\LBFactory.Inl">
       <Filter>Memory</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Inc\LBSession.Inl" />
+    <ClInclude Include="Src\Inc\LBSession.Inl">
+      <Filter>Network\Session</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBSessionManager.h">
+      <Filter>Network\Session</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Cpp\main.cpp" />

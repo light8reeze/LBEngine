@@ -47,10 +47,6 @@ namespace LBNet
     */
 	class LBS_EXPORT CFactory
 	{
-	public:
-		template<typename TObject>
-		using ObjectPtr = std::shared_ptr<TObject>;
-
 	private:
 		using __PoolPtr			= std::unique_ptr<IObjectPool>;
 		using __PoolContainer	= std::map<std::size_t, __PoolPtr>; //Key : typeid.hashcode(), value : ObjectPool Ptr
@@ -73,10 +69,10 @@ namespace LBNet
 		bool AddObjectPool(int pSize);
 
 		template<typename TObject, typename TDeleter>
-		ObjectPtr<TObject> New(TDeleter&& pDeleter = Delete);
+		SharedObject<TObject> New(TDeleter&& pDeleter = Delete);
 
 		template<typename TObject, typename TDeleter>
-		static ObjectPtr<TObject> MakePtr(TObject*& pObject, TDeleter&& pDeleter = Delete);
+		static SharedObject<TObject> MakePtr(TObject*& pObject, TDeleter&& pDeleter = Delete);
 
 		template<typename TObject>
 		bool Delete(TObject*& pObject);

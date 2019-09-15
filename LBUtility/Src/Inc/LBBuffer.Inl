@@ -129,17 +129,24 @@ namespace LBNet
 	template<Size TSize, Size TMaxDataSize>
 	char* CBuffer<TSize, TMaxDataSize>::Pop()
 	{
+		Size aSize = 0;
+		return Pop(aSize);
+	}
+
+	template<Size TSize, Size TMaxDataSize>
+	char* CBuffer<TSize, TMaxDataSize>::Pop(Size& pSize)
+	{
 		CBufferHeader* aHeader = nullptr;
-		int aReadIndex	= 0;
+		int aReadIndex = 0;
 		int aWriteIndex = 0;
-		int aPassIndex	= 0;
-		int aPassSize	= 0;
-		
+		int aPassIndex = 0;
+		int aPassSize = 0;
+
 		if (GetUsingSize() < sizeof(CBufferHeader) || _mReadIndex == -1)
 			return nullptr;
 
 		LB_ASSERT(_mReadIndex != -1, "Wrong Index!");
-		
+
 		{
 			std::unique_lock<CLocker> aLocker(_mLocker);
 
@@ -156,15 +163,16 @@ namespace LBNet
 
 			if (aPassIndex != -1)
 			{
-				aPassSize	= GetBufferSize() - _mPassIndex;
+				aPassSize = GetBufferSize() - _mPassIndex;
 				_mPassIndex = aPassIndex = -1;
 			}
 		}
 
 		LB_ASSERT(aReadIndex + sizeof(CBufferHeader) <= aLastIndex + 1, "Invalid Buffer!");
-		aHeader		= reinterpret_cast<CBufferHeader*>(_mBuffer + aReadIndex);
+		aHeader = reinterpret_cast<CBufferHeader*>(_mBuffer + aReadIndex);
 		aReadIndex += sizeof(CBufferHeader);
-		
+		pSize = aHeader->mDataSize;
+
 		LB_ASSERT(aHeader->mDataSize <= TSize, "Invalid! Size");
 		LB_ASSERT(aHeader->mDataSize < TMaxDataSize, "Invalid! Size");
 		if (GetUsingSize() < sizeof(CBufferHeader) + aHeader->mDataSize)
@@ -183,15 +191,15 @@ namespace LBNet
 			::memcpy_s(__mRestBuffer, TMaxDataSize + sizeof(CBufferHeader), reinterpret_cast<const void*>(_mBuffer + aReadIndex), aCopySize);
 			::memcpy_s(__mRestBuffer + aCopySize, TMaxDataSize + sizeof(CBufferHeader) - aCopySize, reinterpret_cast<const void*>(_mBuffer), aRestSize);
 
-			aData		= __mRestBuffer + sizeof(CBufferHeader);
-			aReadIndex	= aRestSize;
+			aData = __mRestBuffer + sizeof(CBufferHeader);
+			aReadIndex = aRestSize;
 
 			if (aPassIndex != -1)
 				_mPassIndex = -1;
 		}
 		else
 		{
-			aData		= _mBuffer + aReadIndex + sizeof(CBufferHeader);
+			aData = _mBuffer + aReadIndex + sizeof(CBufferHeader);
 			aReadIndex += aHeader->mDataSize;
 
 			if (aReadIndex == aLastIndex + 1)
@@ -208,7 +216,7 @@ namespace LBNet
 		{
 			std::unique_lock<CLocker> aLocker(_mLocker);
 			_mReadIndex = aReadIndex;
-			_mUseSize	-= static_cast<Size>(aHeader->mDataSize + sizeof(CBufferHeader) + aPassSize);
+			_mUseSize -= static_cast<Size>(aHeader->mDataSize + sizeof(CBufferHeader) + aPassSize);
 		}
 
 		CheckBufferValid();
