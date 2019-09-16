@@ -31,6 +31,11 @@ namespace LBNet
 		Size	aSize = __mBuffer.GetWritableSize();
 		char*	aWritePtr = __mBuffer.GetWriteAddress();
 
+		if (!OnAccess())
+		{
+			return 3;
+		}
+
 		if (__mState == EState::eDisconnect)
 		{
 			return 2;
@@ -75,6 +80,8 @@ namespace LBNet
 			CPacketHeader* aHeader = reinterpret_cast<CPacketHeader*>(aData);
 			aResult = CMessageHandler::Process(aHeader->mCommand, aHeader, aSize, (*aManaged), aGameObject);
 		}
+
+		OnAccessEnd();
 
 		if (aResult != 0)
 		{
