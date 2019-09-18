@@ -5,6 +5,6 @@ namespace LBNet
 	{
 		LB_ASSERT(__mAcceptor.is_open(), "Acceptor not Open");
 
-		__mAcceptor.async_accept(pSession.__mSocket.GetSocket(), pHandler);
+		__mAcceptor.async_accept(pSession.__mSocket.GetSocket(), CIOContext::Instance().BindExecuter(pHandler));
 	}
 }

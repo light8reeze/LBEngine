@@ -94,14 +94,23 @@ namespace LBNet
 
 	ErrCode CSession::Send(void* pBuffer, int pSize)
 	{
-		LB_ASSERT(__mState == EState::eStable,	"Invalid!");\
+		LB_ASSERT(__mState == EState::eStable,	"Invalid!");
+
+		if (!OnAccess())
+		{
+			return 1;
+		}
 
 		__mSocket.SendAsync(pBuffer, pSize,
 			[this](const boost::system::error_code& pError, std::size_t pRecvSize)
 		{
 			if (pError.value() != 0)
 				Close();
+
+			OnAccessEnd();
 		});
+
+		return 0;
 	}
 
 	ErrCode CSession::Close()

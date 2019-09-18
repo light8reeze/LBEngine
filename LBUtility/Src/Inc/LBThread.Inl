@@ -11,4 +11,18 @@ namespace LBNet
 	{
 		std::this_thread::sleep_for(pDuration);
 	}
+
+
+	/**
+		@brief	쓰레드 시작하는 함수.
+		@param	쓰레드 실행 함수.
+		@return	쓰레드 시작 결과값
+	*/
+	template<typename TFunc>
+	int CThread::StartThread(TFunc&& pFunc)
+	{
+		__mThread = std::thread(pFunc);
+
+		return 0;
+	}
 }

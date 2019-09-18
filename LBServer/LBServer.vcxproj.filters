@@ -25,6 +25,9 @@
     <Filter Include="Network\Object">
       <UniqueIdentifier>{dc3cd230-3bf8-4e37-81a7-e0129f28403d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{f57c1fdc-92ef-46a4-8247-adc8ac138f5e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Inc\LBServer.h">
@@ -61,9 +64,6 @@
       <Filter>Memory</Filter>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBSession.Inl">
-      <Filter>Network\Session</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Inc\LBSessionManager.h">
       <Filter>Network\Session</Filter>
     </ClInclude>
   </ItemGroup>
@@ -103,6 +103,9 @@
     </None>
     <None Include="Src\Inc\LBManagedObject.Inl">
       <Filter>Memory</Filter>
+    </None>
+    <None Include="Src\Inc\LBIOContext.Inl">
+      <Filter>Network</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -26,7 +26,7 @@ namespace LBNet
 	};
 	#pragma pack(pop)
 
-	using HandlerType = std::function<ErrCode(CPacketHeader*, int, CSession&, CSession::ObjectPtr& pObject)>;
+	using HandlerType = std::function<ErrCode(CPacketHeader*, int, CSession&, SharedObject<CGameObject>&)>;
 	
 	/**
 		@brief	패킷 처리 클래스

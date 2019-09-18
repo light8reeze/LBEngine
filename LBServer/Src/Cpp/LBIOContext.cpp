@@ -4,6 +4,10 @@ namespace LBNet
 {
 	CIOContext CIOContext::__mSingleton;
 
+	CIOContext::CIOContext() : __mIOContext(), __mStrand(__mIOContext)
+	{
+	}
+
 	CIOContext::~CIOContext()
 	{
 		__mIOContext.stop();

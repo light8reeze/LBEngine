@@ -1,6 +1,5 @@
 #include "LBThread.h"
 #ifdef _WINDOWS
-#include <Windows.h>
 #include <process.h>
 #elif _LINUX
 #endif //_WINDOWS
@@ -19,27 +18,6 @@ namespace LBNet
 	*/
 	CThread::~CThread()
 	{
-	}
-
-	/**
-		@brief	쓰레드 클래스를 설정하는 함수.
-		@return	쓰레드 설정 결과값
-	*/
-	int CThread::Initialize()
-	{
-		return 0;
-	}
-
-	/**
-		@brief	쓰레드 시작하는 함수.
-		@return	쓰레드 시작 결과값
-	*/
-	int CThread::StartThread()
-	{
-		auto aLpfnThread	= std::bind(&CThread::ThreadRoutine, this);
-		__mThread			= std::thread(aLpfnThread);
-
-		return 0;
 	}
 
 	/**
@@ -62,15 +40,6 @@ namespace LBNet
 	CThread::id CThread::GetThreadId() const
 	{
 		return __mThread.get_id();
-	}
-
-	/**
-		@brief		쓰레드가 실행될때 실행하는 루틴함수
-	*/
-	void CThread::ThreadRoutine()
-	{
-		LB_ASSERT(GetThreadId() == std::this_thread::get_id(), "Invalid Thread!");
-		__mResult = Main();
 	}
 
 	/**

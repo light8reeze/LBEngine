@@ -17,6 +17,7 @@ namespace LBNet
 		@date		2019-03-16
 		@auther		light8reeze(light8reeze@gmail.com)
 		@todo		추후 Thread관리 클래스 구현시 L1 ~ L3 참고, 컨텍스트 스위칭 구현
+					해당 클래스 폐기하는 방향 고려중(Affinity기능 이외에 클래스 존재 의미가 없음)
 	*/
 	class LBU_EXPORT CThread
 	{
@@ -25,12 +26,13 @@ namespace LBNet
 
 	public:
 		CThread();
-		virtual ~CThread();
+		~CThread();
 		CThread(const CThread& pCopy) = delete;
 		CThread& operator=(const CThread& pRvalue) = delete;
 
 		virtual int Initialize();
-		int		StartThread();
+		template<typename TFunc>
+		int		StartThread(TFunc&& pFunc);
 		int		JoinThread();
 		template< class Rep, class Period >
 		void	Sleep(const std::chrono::duration<Rep, Period>& pDuration);
@@ -38,10 +40,6 @@ namespace LBNet
 		bool	SetAffinity(unsigned int pCpu);
 		
 		id GetThreadId() const;
-
-	private:
-		void ThreadRoutine();
-		virtual int Main() = 0;
 
 	protected:
 		void	ContextSwitching();

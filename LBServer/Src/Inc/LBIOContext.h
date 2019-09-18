@@ -19,18 +19,26 @@ namespace LBNet
 	class LBS_EXPORT CIOContext
 	{
 	public:
-		CIOContext() = default;
+		CIOContext();
 		~CIOContext();
 
 		ErrCode Run();
 		void	Stop();
 		void	Restart();
 
+		template<typename THandler>
+		auto BindExecuter(THandler&& pHandler);
+		template<typename THandler>
+		void Post(THandler&& pHandler);
+
 		asio::io_context&	GetIOContext();
 		static CIOContext&	Instance();
 
 	private:
-		static CIOContext	__mSingleton;
-		asio::io_context	__mIOContext;
+		static CIOContext			__mSingleton;
+		asio::io_context			__mIOContext;
+		asio::io_context::strand	__mStrand;
 	};
 }
+
+#include "LBIOContext.Inl"

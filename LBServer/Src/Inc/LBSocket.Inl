@@ -15,7 +15,7 @@ namespace LBNet
 		if (aError.value() != 0)
 			return aError.value();
 		
-		__mSocket.async_connect(aEndPoint, THandler);
+		__mSocket.async_connect(aEndPoint, CIOContext::Instance().Wrap(pHandler));
 		return 0;
 	}
 
@@ -26,7 +26,7 @@ namespace LBNet
 		LB_ASSERT(pBuffer != nullptr, "Error");
 		LB_ASSERT(pSize > 0, "Error");
 
-		__mSocket.async_read_some(asio::mutable_buffer(pBuffer, pSize), pHandler);
+		__mSocket.async_read_some(asio::mutable_buffer(pBuffer, pSize), CIOContext::Instance().BindExecuter(pHandler);
 		return 0;
 	}
 
@@ -37,7 +37,7 @@ namespace LBNet
 		LB_ASSERT(pBuffer != nullptr, "Error");
 		LB_ASSERT(pSize > 0, "Error");
 
-		__mSocket.async_write_some(asio::mutable_buffer(pBuffer, pSize), pHandler);
+		__mSocket.async_write_some(asio::mutable_buffer(pBuffer, pSize), CIOContext::Instance().BindExecuter(pHandler));
 		return 0;
 	}
 }
