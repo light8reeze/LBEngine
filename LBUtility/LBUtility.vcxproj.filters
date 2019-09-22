@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Src\Cpp\LBThread.cpp">
-      <Filter>Thread</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Cpp\LBTime.cpp">
       <Filter>Time</Filter>
     </ClCompile>
@@ -39,9 +36,6 @@
     <Filter Include="Encyption">
       <UniqueIdentifier>{7ae75800-1014-40c3-8ec2-0518d3313c94}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Thread">
-      <UniqueIdentifier>{849f0df5-a47b-4489-8845-c19b47af8b60}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Core">
       <UniqueIdentifier>{6cc994ac-d803-4f81-9f5a-6f347635d36e}</UniqueIdentifier>
     </Filter>
@@ -58,9 +52,6 @@
     </ClInclude>
     <ClInclude Include="Src\Inc\LBCharBase.h">
       <Filter>CharSet</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Inc\LBThread.h">
-      <Filter>Thread</Filter>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBTime.h">
       <Filter>Time</Filter>
@@ -92,6 +83,15 @@
     <ClInclude Include="Src\Inc\LBProbability.h">
       <Filter>Random</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Inc\LBChar.Inl">
+      <Filter>CharSet\Char</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBCharA.Inl">
+      <Filter>CharSet\Char</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBCharW.Inl">
+      <Filter>CharSet\Char</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MASM Include="Src\Cpp\LBPause.masm">
@@ -99,15 +99,6 @@
     </MASM>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Src\Inc\LBChar.Inl">
-      <Filter>CharSet\Char</Filter>
-    </None>
-    <None Include="Src\Inc\LBCharA.Inl">
-      <Filter>CharSet\Char</Filter>
-    </None>
-    <None Include="Src\Inc\LBCharW.Inl">
-      <Filter>CharSet\Char</Filter>
-    </None>
     <None Include="Src\Inc\LBString.Inl">
       <Filter>CharSet\String</Filter>
     </None>
@@ -134,9 +125,6 @@
     </None>
     <None Include="Src\Inc\LBRandom.Inl">
       <Filter>Random</Filter>
-    </None>
-    <None Include="Src\Inc\LBThread.Inl">
-      <Filter>Thread</Filter>
     </None>
     <None Include="Src\Inc\LBTime.Inl">
       <Filter>Time</Filter>

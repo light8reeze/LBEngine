@@ -116,7 +116,7 @@ namespace LBNet
 	}
 
 	template<class TObject>
-	constexpr Size CObjectPool<TObject>::GetMaxSize()
+	Size CObjectPool<TObject>::GetMaxSize()
 	{
 		return __mPoolSize;
 	}

@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Cpp\LBLocker.cpp" />
-    <ClCompile Include="Src\Cpp\LBThread.cpp" />
     <ClCompile Include="Src\Cpp\LBTime.cpp" />
     <ClCompile Include="Src\Cpp\LBUtility.cpp" />
   </ItemGroup>
@@ -45,7 +44,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Src\Inc\LBThread.h" />
     <ClInclude Include="Src\Inc\LBTime.h" />
     <ClInclude Include="Src\Inc\LBUtility.h" />
   </ItemGroup>
@@ -88,7 +86,6 @@
     <None Include="Src\Inc\LBString.Inl" />
     <None Include="Src\Inc\LBStringA.Inl" />
     <None Include="Src\Inc\LBStringW.Inl" />
-    <None Include="Src\Inc\LBThread.Inl" />
     <None Include="Src\Inc\LBTime.Inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -150,7 +147,7 @@
     <IncludePath>$(ProjectDir)Src\Inc;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <ReferencePath>$(ReferencePath)</ReferencePath>
     <OutDir>$(SolutionDir)Bin\</OutDir>
-    <IntDir>$(SolutionDir)Intermediate\</IntDir>
+    <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -158,7 +155,7 @@
     <IncludePath>$(ProjectDir)Src\Inc;$(IncludePath)</IncludePath>
     <ReferencePath>$(ReferencePath)</ReferencePath>
     <OutDir>$(SolutionDir)Bin\</OutDir>
-    <IntDir>$(SolutionDir)Intermediate\</IntDir>
+    <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -166,7 +163,7 @@
     <ReferencePath>$(ReferencePath)</ReferencePath>
     <TargetName>$(ProjectName)_$(PlatformTarget)</TargetName>
     <OutDir>$(SolutionDir)Bin\</OutDir>
-    <IntDir>$(SolutionDir)Intermediate\</IntDir>
+    <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -174,7 +171,7 @@
     <ReferencePath>$(ReferencePath)</ReferencePath>
     <TargetName>$(ProjectName)_$(PlatformTarget)</TargetName>
     <OutDir>$(SolutionDir)Bin\</OutDir>
-    <IntDir>$(SolutionDir)Intermediate\</IntDir>
+    <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

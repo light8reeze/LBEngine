@@ -6,12 +6,13 @@
 */
 #pragma once
 #include "LBServer.h"
-#include "LBSession.h"
 #include <functional>
 #include <map>
 
 namespace LBNet
 {
+	class CGameObject;
+
 	using MessageNumber = unsigned long;
 	/**
 		@brief	패킷 헤더 클래스
@@ -26,7 +27,7 @@ namespace LBNet
 	};
 	#pragma pack(pop)
 
-	using HandlerType = std::function<ErrCode(CPacketHeader*, int, CSession&, SharedObject<CGameObject>&)>;
+	using HandlerType = std::function<ErrCode(CPacketHeader*, Size, SharedObject<CGameObject>&)>;
 	
 	/**
 		@brief	패킷 처리 클래스
@@ -46,7 +47,7 @@ namespace LBNet
 		const CMessageHandler& operator=(const CMessageHandler&) = delete;
 
 		static ErrCode Register(MessageNumber pNumber, HandlerType&& pHandler);
-		static ErrCode Process(MessageNumber pNumber, CPacketHeader* pData, int pDataSize, CSession& pSession, SharedObject<CGameObject>& pObject);
+		static ErrCode Process(MessageNumber pNumber, CPacketHeader* pData, Size pDataSize, SharedObject<CGameObject>& pObject);
 
 	private:
 		static __HandlerList	__mHandlerList;

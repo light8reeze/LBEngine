@@ -50,7 +50,7 @@ namespace LBNet
 		LB_ASSERT(__mAcceptor.is_open(), "Acceptor not Open");
 
 		boost::system::error_code aError;
-		__mAcceptor.accept(pSession.__mSocket.GetSocket(), aError);
+		__mAcceptor.accept(pSession._mSocket.GetSocket(), aError);
 		return aError.value();
 	}
 

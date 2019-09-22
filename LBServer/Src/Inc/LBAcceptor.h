@@ -6,8 +6,7 @@
 */
 #pragma once
 #include "LBServer.h"
-#include "LBSocket.h"
-#include "LBSession.h"
+#include "LBGameObject.h"
 
 namespace LBNet
 {

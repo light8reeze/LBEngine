@@ -9,40 +9,39 @@
 #include "LBSocket.h"
 #include "LBBuffer.h"
 #include "LBManagedObject.h"
-#include "LBFactory.h"
 
 namespace LBNet
 {
 	/**
-		@brief		오브젝트 키 클래스
+		@brief		세션 키 클래스
 		@details	한 서버 내에서 관리되는 세션, 게임 오브젝트의 키 값이다.
 					이 키를 이용해서 세션, 게임 오브젝트를 찾을 수 있다.
-		@warning	1. CObjectKey값은 세션끼리 겹치게 하면 안된다.(한 서버 내에 유일해야 한다)
-					2. 연결된 세션, 게임 오브젝트 간에는 반드시 오브젝트 키가 같아야 한다.
+		@warning	1. CSessionKey값은 세션끼리 겹치게 하면 안된다.(한 서버 내에 유일해야 한다)
 		@date		2019-09-12
 		@auther		light8reeze(light8reeze@gmail.com)
 	*/
-	class CObjectKey
+	class CSessionKey
 	{
 	public:
-		CObjectKey() = default;
-		CObjectKey(const CObjectKey& pRValue) : mKey(pRValue.mKey) {}
-		CObjectKey(const CObjectKey&& pRValue) : mKey(std::move(pRValue.mKey)) {}
-		~CObjectKey() = default;
+		CSessionKey() = default;
+		CSessionKey(const CSessionKey& pRValue) : mKey(pRValue.mKey) {}
+		CSessionKey(const CSessionKey&& pRValue) : mKey(std::move(pRValue.mKey)) {}
+		~CSessionKey() = default;
 
-		CObjectKey& operator=(const CObjectKey& pRValue)
+		CSessionKey& operator=(const CSessionKey& pRValue)
 		{
 			mKey = pRValue.mKey;
+			return (*this);
 		}
-		bool operator==(const CObjectKey& pRValue)
+		bool operator==(const CSessionKey& pRValue)
 		{
 			return mKey == pRValue.mKey;
 		}
-		bool operator!=(const CObjectKey& pRValue)
+		bool operator!=(const CSessionKey& pRValue)
 		{
 			return !(this->operator==(pRValue));
 		}
-		bool operator>(const CObjectKey& pRValue)
+		bool operator>(const CSessionKey& pRValue)
 		{
 			return mKey > pRValue.mKey;
 		}
@@ -51,21 +50,24 @@ namespace LBNet
 		union
 		{
 			unsigned int mKey;
-			struct
+			struct CKeyBit
 			{
-				unsigned mIndex : 27;
-				unsigned mIsSet : 1;
-				unsigned mReuse : 4;
-			};
+				unsigned mIndex : 21;	// 세션 종류 인덱스
+				unsigned mType	: 2;	// 세션 타입(0: 일반 세션, 1: 샤드)
+				unsigned mIsSet : 1;	// 설정 되어있는 여부
+				unsigned mReuse : 4;	// 재사용 횟수(0 ~ 2^4)
+				unsigned mSvrNo : 4;	// 서버 번호(Acceptor, Shard에서 넣어주는 번호)
+			}mField;
 		};
 	};
 
 	class CGameObject;
 
 	/**
-		@brief	TCP 세션 클래스
-		@date	2019-08-19
-		@auther	light8reeze(light8reeze@gmail.com)
+		@brief		TCP 세션 클래스
+		@warning	1. 연결된 세션, 게임 오브젝트는 반드시 1:1연결을 해야한다.
+		@date		2019-08-19
+		@auther		light8reeze(light8reeze@gmail.com)
 	*/
 	class LBS_EXPORT CSession : public CManagedObject
 	{
@@ -79,37 +81,49 @@ namespace LBNet
 		};
 
 	private:
-		using __BufferType	= CAsyncBuffer<eSzPacketBuffer, eSzPacketMax>;
+		using __BufferType	= CBuffer<eSzPacketMax>;
 
 	public:
 		CSession();
-		~CSession();
+		virtual ~CSession() override;
 
 		ErrCode Initialize();
 		ErrCode OnAccept();
 		ErrCode Receive();
-		ErrCode OnReceive(int pSize);
+		ErrCode OnReceive(Size pSize);
 		ErrCode Send(void* pBuffer, int pSize);
 		ErrCode Close();
 		ErrCode SetDisconnect();
+
+		void SetSessionKey(CSessionKey& pObjKey);
+		const CSessionKey& GetSessionKey() const;
+		CSessionKey GetSessionKey();
 
 		template<typename TObject>
 		void SetObject(SharedObject<TObject>& pObject);
 		void RemoveObject();
 
-		template<typename TObject>
+		template<typename TObject = CGameObject>
 		SharedObject<TObject> GetGameObject();
 
+	private:
+		template<typename TObject>
+		SharedObject<TObject> __GetGameObjectImpl(std::true_type);
+		template<typename TObject>
+		SharedObject<TObject> __GetGameObjectImpl(std::false_type);
+
+	public:
+		virtual void OnDelete() override;
+
 	protected:
-		ErrCode _OnDelete() override;
+		CTCPSocket					_mSocket;
 
 	private:
-		CTCPSocket					__mSocket;
 		__BufferType				__mBuffer;
 		CLocker						__mLocker;
 		EState						__mState;
 		SharedObject<CGameObject>	__mGameObject;
-		CObjectKey					__mObjectKey;
+		CSessionKey					__mSessionKey;
 	};
 }
 

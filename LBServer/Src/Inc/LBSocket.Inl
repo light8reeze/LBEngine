@@ -11,33 +11,31 @@ namespace LBNet
 			return aError.value();
 
 		EndPointType aEndPoint(aAddress, pPort);
-		__mSocket.open(aEndPoint.protocol(), aError);
+		_mSocket.open(aEndPoint.protocol(), aError);
 		if (aError.value() != 0)
 			return aError.value();
 		
-		__mSocket.async_connect(aEndPoint, CIOContext::Instance().Wrap(pHandler));
+		_mSocket.async_connect(aEndPoint, CIOContext::Instance().Wrap(pHandler));
 		return 0;
 	}
 
 	template<typename THandler>
 	void CTCPSocket::ReceiveAsync(void* pBuffer, int pSize, THandler&& pHandler)
 	{
-		LB_ASSERT(__mSocket.is_open(), "Error");
+		LB_ASSERT(_mSocket.is_open(), "Error");
 		LB_ASSERT(pBuffer != nullptr, "Error");
 		LB_ASSERT(pSize > 0, "Error");
 
-		__mSocket.async_read_some(asio::mutable_buffer(pBuffer, pSize), CIOContext::Instance().BindExecuter(pHandler);
-		return 0;
+		_mSocket.async_read_some(asio::mutable_buffer(pBuffer, pSize), CIOContext::Instance().BindExecuter(pHandler));
 	}
 
 	template<typename THandler>
 	void CTCPSocket::SendAsync(void* pBuffer, int pSize, THandler&& pHandler)
 	{
-		LB_ASSERT(__mSocket.is_open(), "Error");
+		LB_ASSERT(_mSocket.is_open(), "Error");
 		LB_ASSERT(pBuffer != nullptr, "Error");
 		LB_ASSERT(pSize > 0, "Error");
 
-		__mSocket.async_write_some(asio::mutable_buffer(pBuffer, pSize), CIOContext::Instance().BindExecuter(pHandler));
-		return 0;
+		_mSocket.async_write_some(asio::mutable_buffer(pBuffer, pSize), CIOContext::Instance().BindExecuter(pHandler));
 	}
 }

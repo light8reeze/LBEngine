@@ -25,8 +25,11 @@
     <Filter Include="Network\Object">
       <UniqueIdentifier>{dc3cd230-3bf8-4e37-81a7-e0129f28403d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Main">
+    <Filter Include="Network\Server">
       <UniqueIdentifier>{f57c1fdc-92ef-46a4-8247-adc8ac138f5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network\Shard">
+      <UniqueIdentifier>{e9cf8082-2842-4958-98df-4ade2369275c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -54,9 +57,6 @@
     <ClInclude Include="Src\Inc\LBHandler.h">
       <Filter>Network\Handler</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Inc\LBManagedObject.h">
-      <Filter>Memory</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Inc\LBGameObject.h">
       <Filter>Network\Object</Filter>
     </ClInclude>
@@ -65,6 +65,19 @@
     </ClInclude>
     <ClInclude Include="Src\Inc\LBSession.Inl">
       <Filter>Network\Session</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBIOContext.Inl">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBShard.h">
+      <Filter>Network\Shard</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBShard.Inl" />
+    <ClInclude Include="Src\Inc\LBManagedObject.h">
+      <Filter>Network\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBGameServer.h">
+      <Filter>Network\Server</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -87,10 +100,13 @@
     <ClCompile Include="Src\Cpp\LBHandler.cpp">
       <Filter>Network\Handler</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Cpp\LBManagedObject.cpp">
+    <ClCompile Include="Src\Cpp\LBGameObject.cpp">
+      <Filter>Network\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Cpp\LBFactory.cpp">
       <Filter>Memory</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Cpp\LBGameObject.cpp">
+    <ClCompile Include="Src\Cpp\LBManagedObject.cpp">
       <Filter>Network\Object</Filter>
     </ClCompile>
   </ItemGroup>
@@ -101,11 +117,11 @@
     <None Include="Src\Inc\LBAcceptor.Inl">
       <Filter>Network\Acceptor</Filter>
     </None>
-    <None Include="Src\Inc\LBManagedObject.Inl">
-      <Filter>Memory</Filter>
+    <None Include="Src\Inc\LBShard.Inl">
+      <Filter>Network\Shard</Filter>
     </None>
-    <None Include="Src\Inc\LBIOContext.Inl">
-      <Filter>Network</Filter>
+    <None Include="Src\Inc\LBManagedObject.Inl">
+      <Filter>Network\Object</Filter>
     </None>
   </ItemGroup>
 </Project>

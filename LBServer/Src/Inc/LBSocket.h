@@ -6,6 +6,7 @@
 */
 #pragma once
 #include "LBServer.h"
+#include "LBIOContext.h"
 
 namespace LBNet
 {
@@ -44,7 +45,7 @@ namespace LBNet
 		const EndPointType		GetEndPoint() const;
 
 	private:
-		SocketType		__mSocket;
+		SocketType		_mSocket;
 	};
 }
 

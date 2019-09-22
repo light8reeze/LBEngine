@@ -3,7 +3,7 @@
 
 namespace LBNet
 {
-	CSession::CSession() : __mSocket(), __mBuffer(), 
+	CSession::CSession() : _mSocket(), __mBuffer(), 
 		__mState(EState::eDisconnect), __mLocker()
 	{
 	}
@@ -16,6 +16,7 @@ namespace LBNet
 	ErrCode CSession::Initialize()
 	{
 		__mBuffer.Clear();
+		return 0;
 	}
 
 	ErrCode CSession::OnAccept()
@@ -28,7 +29,9 @@ namespace LBNet
 
 	ErrCode CSession::Receive()
 	{
-		Size	aSize = __mBuffer.GetWritableSize();
+		LB_ASSERT(__mGameObject != nullptr, "Object Not Linked to Session");
+
+		Size	aSize = __mBuffer.GetUsableSize();
 		char*	aWritePtr = __mBuffer.GetWriteAddress();
 
 		if (!OnAccess())
@@ -48,15 +51,23 @@ namespace LBNet
 			return 1;
 		}
 
-		__mSocket.ReceiveAsync(aWritePtr, aSize,
+		_mSocket.ReceiveAsync(aWritePtr, aSize,
 			[this](const boost::system::error_code& pError, std::size_t pRecvSize)
 		{
-			OnReceive(pRecvSize);
+			if (pError.value() != 0)
+			{
+				SetDisconnect();
+				return;
+			}
+
+			OnReceive(static_cast<Size>(pRecvSize));
 			Receive();
 		});
+
+		return 0;
 	}
 
-	ErrCode CSession::OnReceive(int pSize)
+	ErrCode CSession::OnReceive(Size pSize)
 	{
 		LB_ASSERT(__mState == EState::eStable, "Invalid!");
 
@@ -68,8 +79,8 @@ namespace LBNet
 
 		__mBuffer.OnPush(pSize);
 		Size	aSize = 0;
-		char*	aData = __mBuffer.Pop(aSize);
 		ErrCode aResult = 0;
+		char*	aData = __mBuffer.Front(aSize, aResult);
 		auto aManaged = CManagedObject::MakeManaged(*this);
 		auto aGameObject = GetGameObject<CGameObject>();
 
@@ -78,14 +89,14 @@ namespace LBNet
 		if (aData != nullptr)
 		{
 			CPacketHeader* aHeader = reinterpret_cast<CPacketHeader*>(aData);
-			aResult = CMessageHandler::Process(aHeader->mCommand, aHeader, aSize, (*aManaged), aGameObject);
+			aResult = CMessageHandler::Process(aHeader->mCommand, aHeader, aSize, aGameObject);
 		}
 
 		OnAccessEnd();
 
 		if (aResult != 0)
 		{
-			Close();
+			SetDisconnect();
 			return aResult;
 		}
 
@@ -101,11 +112,11 @@ namespace LBNet
 			return 1;
 		}
 
-		__mSocket.SendAsync(pBuffer, pSize,
-			[this](const boost::system::error_code& pError, std::size_t pRecvSize)
+		_mSocket.SendAsync(pBuffer, pSize,
+			[this](const boost::system::error_code& pError, std::size_t pSendSize)
 		{
-			if (pError.value() != 0)
-				Close();
+			if (pError.value() != 0 || pSendSize == 0)
+				SetDisconnect();
 
 			OnAccessEnd();
 		});
@@ -120,10 +131,12 @@ namespace LBNet
 		{
 			CLocker::AutoLock aLocker(__mLocker);
 
-			__mSocket.Close();
+			_mSocket.Close();
 			__mBuffer.Clear();
 			__mState = EState::eDisconnect;
 		}
+
+		return 0;
 	}
 
 	ErrCode CSession::SetDisconnect()
@@ -132,12 +145,29 @@ namespace LBNet
 		return 0;
 	}
 
+	void CSession::SetSessionKey(CSessionKey& pObjKey)
+	{
+		LB_ASSERT(pObjKey.mField.mIsSet == 1, "Error!");
+
+		__mSessionKey = pObjKey;
+	}
+
+	const CSessionKey& CSession::GetSessionKey() const
+	{
+		return __mSessionKey;
+	}
+
+	CSessionKey CSession::GetSessionKey()
+	{
+		return __mSessionKey;
+	}
+
 	void CSession::RemoveObject()
 	{
 		__mGameObject = std::move(SharedObject<CGameObject>());
 	}
 
-	ErrCode CSession::_OnDelete()
+	void CSession::OnDelete()
 	{
 		Close();
 	}

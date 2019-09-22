@@ -31,11 +31,11 @@ namespace LBNet
 
 	public:
 		template<typename TObject>
-		using ManagedPtr = std::unique_ptr<TObject>;
+		using ManagedPtr = std::unique_ptr<TObject, std::function<void(TObject*)>>;
 
 	public:
 		CManagedObject();
-		virtual ~CManagedObject() = 0;
+		virtual ~CManagedObject() {}
 
 		bool				OnAccess();
 		void				OnAccessEnd();
@@ -46,8 +46,8 @@ namespace LBNet
 		template<typename TObject>
 		static ManagedPtr<TObject> MakeManaged(TObject& pObject);
 
-	protected:
-		virtual ErrCode _OnDelete();
+	public:
+		virtual void OnDelete() = 0;
 
 	private:
 		__RefCntType	__mRefCnt;

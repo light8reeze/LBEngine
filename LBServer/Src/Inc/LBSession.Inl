@@ -8,8 +8,7 @@ namespace LBNet
 		LB_ASSERT(__mGameObject.get()	== nullptr, "Error!");
 		LB_ASSERT(pObject.get()			!= nullptr, "Error!");
 
-		__mGameObject = std::static_pointer_cast<SharedObject<CGameObject>>(pObject);
-		__mGameObject->LinkSession(this);
+		__mGameObject = std::static_pointer_cast<CGameObject>(pObject);
 	}
 
 	template<typename TObject>
@@ -17,12 +16,19 @@ namespace LBNet
 	{
 		static_assert(std::is_base_of<CGameObject, TObject>::value == true);
 
-		return std::dynamic_pointer_cast<SharedObject<TObject>>(__mGameObject);
+		return __GetGameObjectImpl<TObject>(std::is_same<CGameObject, TObject>());
 	}
 
-	template<>
-	SharedObject<CGameObject> CSession::GetGameObject()
+	template<typename TObject>
+	SharedObject<TObject> CSession::__GetGameObjectImpl(std::true_type)
 	{
 		return __mGameObject;
+	}
+
+	template<typename TObject>
+	SharedObject<TObject> CSession::__GetGameObjectImpl(std::false_type)
+	{
+		SharedObject<TObject> aPtr = std::dynamic_pointer_cast<TObject>(__mGameObject);
+		return std::move(aPtr);
 	}
 }

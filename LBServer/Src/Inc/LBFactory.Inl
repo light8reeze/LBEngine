@@ -2,7 +2,7 @@ namespace LBNet
 {
 #pragma region CObjectPoolEx
 	template<typename TObject>
-	CObjectPoolEx<TObject>::CObjectPoolEx(int pSize) : IObjectPool(), CObjectPoolEx<TObject>(pSize)
+	CObjectPoolEx<TObject>::CObjectPoolEx(int pSize) : IObjectPool(), CObjectPool<TObject>(pSize)
 	{
 	}
 
@@ -54,8 +54,6 @@ namespace LBNet
 
 	ErrCode CFactory::Close()
 	{
-		LB_ASSERT(__mIsInitial == true, "Error");
-
 		__mPools.clear();
 
 		return 0;
@@ -98,7 +96,7 @@ namespace LBNet
 	}
 
 	template<typename TObject>
-	bool CFactory::Delete(TObject*& pObject)
+	bool CFactory::Delete(TObject* pObject)
 	{
 		using ObjectPool = CObjectPoolEx<TObject>;
 

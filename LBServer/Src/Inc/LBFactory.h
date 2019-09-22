@@ -31,7 +31,7 @@ namespace LBNet
 	class CObjectPoolEx : public IObjectPool, public CObjectPool<TObject>
 	{
 	public:
-		CObjectPoolEx(int pSize) = default;
+		CObjectPoolEx(int pSize);
 		virtual ~CObjectPoolEx() override;
 
 		virtual void Initialize() override;
@@ -75,7 +75,7 @@ namespace LBNet
 		static SharedObject<TObject> MakePtr(TObject*& pObject, TDeleter&& pDeleter = Delete);
 
 		template<typename TObject>
-		bool Delete(TObject*& pObject);
+		bool Delete(TObject* pObject);
 
 	private:
 		static CFactory __mSingleton;

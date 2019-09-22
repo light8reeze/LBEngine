@@ -30,7 +30,7 @@ namespace LBNet
 			if (__mObjState == EState::eReturnWait)
 			{
 				__mObjState = EState::eReturned;
-				_OnDelete();
+				OnDelete();
 			}
 		}
 	}
@@ -51,10 +51,5 @@ namespace LBNet
 	Size CManagedObject::GetRefCnt()
 	{
 		return __mRefCnt;
-	}
-
-	ErrCode CManagedObject::_OnDelete()
-	{
-		return 0;
 	}
 }
