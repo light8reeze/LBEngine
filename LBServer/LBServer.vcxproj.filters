@@ -72,12 +72,15 @@
     <ClInclude Include="Src\Inc\LBShard.h">
       <Filter>Network\Shard</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Inc\LBShard.Inl" />
     <ClInclude Include="Src\Inc\LBManagedObject.h">
       <Filter>Network\Object</Filter>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBGameServer.h">
       <Filter>Network\Server</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBGameServer.Inl" />
+    <ClInclude Include="Src\Inc\LBShard.Inl">
+      <Filter>Network\Shard</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -116,9 +119,6 @@
     </None>
     <None Include="Src\Inc\LBAcceptor.Inl">
       <Filter>Network\Acceptor</Filter>
-    </None>
-    <None Include="Src\Inc\LBShard.Inl">
-      <Filter>Network\Shard</Filter>
     </None>
     <None Include="Src\Inc\LBManagedObject.Inl">
       <Filter>Network\Object</Filter>

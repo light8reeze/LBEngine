@@ -6,6 +6,7 @@
 */
 #pragma once
 #include "LBServer.h"
+#include "LBAcceptor.h"
 #include <thread>
 
 namespace LBNet
@@ -13,7 +14,10 @@ namespace LBNet
 	/**
 		@brief				게임서버 클래스
 		@details			게임 서버 메인로직 클래스이다. 
-							Game Application구현시 다음 클래스를 상속받아 구현한다.
+							1. Game Application구현시 다음 클래스를 상속받아 구현한다.
+							2. 실행 순서는 다음 순서대로 실행한다.
+							(SetParameter -> Initialize -> LazyInitialize -> Run -> Close)
+							3. AddAcceptor은 반드시 SetParameter에서 실행한다.
 		@param TGameObject	게임 서버에서 세션에 사용할 게임 오브젝트 타입.
 		@date				2019-09-22
 		@auther				light8reeze(light8reeze@gmail.com)
@@ -21,6 +25,10 @@ namespace LBNet
 	template<typename TGameObject>
 	class CGameServer
 	{
+	private:
+		using __TThreadList		= std::vector<std::thread>;
+		using __TAcceptorList	= std::vector<CAcceptor>;
+
 	public:
 		using GameObject = TGameObject;
 
@@ -28,11 +36,34 @@ namespace LBNet
 		CGameServer();
 		virtual ~CGameServer();
 
-		ErrCode Initialize(int pWorkThread = 1);
-		ErrCode Run();
-		ErrCode Close();
+		void AddAcceptor(const char* pIp, unsigned short pPort);
+		void AddAcceptor(unsigned short pPort);
+		void SetThreadCount(unsigned int pThread = 0);
+		void SetSessionMax(unsigned int pSession);
+
+		unsigned int GetThreadCount();
+		unsigned int GetAcceptorCount();
+		unsigned int GetSessionMax();
+
+		virtual ErrCode SetParameter();
+		virtual ErrCode Initialize();
+		virtual ErrCode LazyInitialize();
+		virtual ErrCode Run();
+		virtual ErrCode Close();
 
 	private:
-		std::vector<std::thread> __mThreadList;
+		void		__Main();
+		ErrCode		__OnAccept();
+
+	private:
+		unsigned int	_mThreadCnt;
+		unsigned int	_mMaxSession;
+		unsigned int	_mSvrNo;
+
+	private:
+		__TThreadList	__mThreadList;
+		__TAcceptorList	__mAcceptorList;
 	};
 }
+
+#include "LBGameServer.Inl"
