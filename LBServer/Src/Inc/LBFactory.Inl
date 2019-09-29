@@ -25,39 +25,6 @@ namespace LBNet
 #pragma endregion 
 
 #pragma region CFactory
-	CFactory::CFactory() : __mPools(), __mIsInitial(false)
-	{
-	}
-
-	CFactory::~CFactory()
-	{
-		Close();
-	}
-
-	CFactory& CFactory::Instance()
-	{
-		return __mSingleton;
-	}
-
-	ErrCode CFactory::Initialize()
-	{
-		LB_ASSERT(__mIsInitial == false, "Error");
-
-		for (auto& aPair : __mPools)
-		{
-			aPair.second->Initialize();
-		}
-
-		__mIsInitial = true;
-		return 0;
-	}
-
-	ErrCode CFactory::Close()
-	{
-		__mPools.clear();
-
-		return 0;
-	}
 
 	template<typename TObject>
 	bool CFactory::AddObjectPool(int pSize)
@@ -75,6 +42,15 @@ namespace LBNet
 		return true;
 	}
 
+	template<typename TObject>
+	SharedObject<TObject> CFactory::New()
+	{
+		return New<TObject>([](TObject* pObject)
+		{
+			return CFactory::Instance().Delete(pObject);
+		});
+	}
+
 	template<typename TObject, typename TDeleter>
 	SharedObject<TObject> CFactory::New(TDeleter&& pDeleter)
 	{
@@ -87,7 +63,7 @@ namespace LBNet
 
 		auto		aIter		= __mPools.find(aKey);
 		__PoolPtr&	aPool		= aIter->second;
-		ObjectPool* aObjPool	= dynamic_cast<ObjectPool>(aPool.get());
+		ObjectPool* aObjPool	= dynamic_cast<ObjectPool*>(aPool.get());
 
 		LB_ASSERT(aObjPool != nullptr, "Exception!");
 
@@ -107,7 +83,7 @@ namespace LBNet
 
 		auto		aIter		= __mPools.find(aKey);
 		__PoolPtr&	aPool		= aIter->second;
-		ObjectPool* aObjPool	= dynamic_cast<ObjectPool>(aPool.get());
+		ObjectPool* aObjPool	= dynamic_cast<ObjectPool*>(aPool.get());
 
 		LB_ASSERT(aObjPool != nullptr, "Exception!");
 
@@ -117,7 +93,7 @@ namespace LBNet
 	template<typename TObject, typename TDeleter>
 	SharedObject<TObject> CFactory::MakePtr(TObject*& pObject, TDeleter&& pDeleter)
 	{
-		return std::make_shared<TObject>(pObject, pDeleter);
+		return SharedObject<TObject>(pObject, pDeleter);
 	}
 #pragma endregion 
 }

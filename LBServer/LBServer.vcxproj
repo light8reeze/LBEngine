@@ -251,6 +251,9 @@
     <ClInclude Include="Src\Inc\LBGameServer.Inl">
       <FileType>Document</FileType>
     </ClInclude>
+    <ClInclude Include="Src\Inc\LBGameObject.Inl">
+      <FileType>Document</FileType>
+    </ClInclude>
     <None Include="Src\Inc\LBManagedObject.Inl" />
     <ClInclude Include="Src\Inc\LBSession.Inl">
       <FileType>Document</FileType>

@@ -6,7 +6,6 @@
 */
 #pragma once
 #include "LBUtility.h"
-#include "LBThread.h"
 #include <mutex>
 #include <shared_mutex>
 

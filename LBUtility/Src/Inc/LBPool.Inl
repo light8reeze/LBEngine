@@ -30,6 +30,7 @@ namespace LBNet
 			}
 			catch (std::exception& pException)
 			{
+				UNREFERENCED_PARAMETER(pException);
 				LB_ASSERT(0, "Bad Alloc!!");
 			}
 		}

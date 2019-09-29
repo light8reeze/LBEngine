@@ -68,11 +68,13 @@ namespace LBNet
 		template<typename TObject>
 		bool AddObjectPool(int pSize);
 
+		template<typename TObject>
+		SharedObject<TObject> New();
 		template<typename TObject, typename TDeleter>
-		SharedObject<TObject> New(TDeleter&& pDeleter = Delete);
+		SharedObject<TObject> New(TDeleter&& pDeleter);
 
 		template<typename TObject, typename TDeleter>
-		static SharedObject<TObject> MakePtr(TObject*& pObject, TDeleter&& pDeleter = Delete);
+		static SharedObject<TObject> MakePtr(TObject*& pObject, TDeleter&& pDeleter);
 
 		template<typename TObject>
 		bool Delete(TObject* pObject);

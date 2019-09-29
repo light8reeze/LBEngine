@@ -7,6 +7,8 @@
 #pragma once
 #include "LBServer.h"
 #include "LBAcceptor.h"
+#include "LBGameObject.h"
+#include "LBFactory.h"
 #include <thread>
 
 namespace LBNet
@@ -45,24 +47,24 @@ namespace LBNet
 		unsigned int GetAcceptorCount();
 		unsigned int GetSessionMax();
 
-		virtual ErrCode SetParameter();
+		virtual ErrCode SetParameter() = 0;
 		virtual ErrCode Initialize();
 		virtual ErrCode LazyInitialize();
-		virtual ErrCode Run();
-		virtual ErrCode Close();
+		ErrCode Run();
 
 	private:
 		void		__Main();
-		ErrCode		__OnAccept();
-
-	private:
-		unsigned int	_mThreadCnt;
-		unsigned int	_mMaxSession;
-		unsigned int	_mSvrNo;
+		void		__SetAccept(CAcceptor& pAcceptor);
 
 	private:
 		__TThreadList	__mThreadList;
 		__TAcceptorList	__mAcceptorList;
+
+		unsigned int	__mThreadCnt;
+		unsigned int	__mMaxSession;
+
+	protected:
+		CSharedMutex	_mMutex;
 	};
 }
 

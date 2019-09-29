@@ -35,6 +35,15 @@ namespace LBNet
 		}
 	}
 
+	void CManagedObject::OnConstruct()
+	{
+		LB_ASSERT(__mRefCnt == 0,					"Error!");
+		LB_ASSERT(__mObjState == EState::eReturned, "Error!");
+
+		__mRefCnt = 0;
+		__mObjState = EState::eUsing;
+	}
+
 	ErrCode CManagedObject::SetReturn()
 	{
 		LB_ASSERT(__mObjState != EState::eReturned, "Error!");

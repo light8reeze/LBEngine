@@ -47,6 +47,7 @@ namespace LBNet
 		static ManagedPtr<TObject> MakeManaged(TObject& pObject);
 
 	public:
+		virtual void OnConstruct();
 		virtual void OnDelete() = 0;
 
 	private:

@@ -1,5 +1,6 @@
 #include "LBSession.h"
 #include "LBHandler.h"
+#include "LBGameObject.h"
 
 namespace LBNet
 {
@@ -47,7 +48,7 @@ namespace LBNet
 		// 버퍼가 가득 찼을때는 접속을 해제한다.
 		if (aSize < eSzPacketMin)
 		{
-			Close();
+			SetDisconnect();
 			return 1;
 		}
 
@@ -134,6 +135,8 @@ namespace LBNet
 			_mSocket.Close();
 			__mBuffer.Clear();
 			__mState = EState::eDisconnect;
+			++(__mSessionKey.mField.mReuse);
+			__mGameObject->Unlink();
 		}
 
 		return 0;
@@ -170,5 +173,6 @@ namespace LBNet
 	void CSession::OnDelete()
 	{
 		Close();
+		CSessionManager::Instance().ReturnKey(__mSessionKey);
 	}
 }

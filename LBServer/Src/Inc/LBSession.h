@@ -23,7 +23,7 @@ namespace LBNet
 	class CSessionKey
 	{
 	public:
-		CSessionKey() = default;
+		CSessionKey() : mKey(0) {}
 		CSessionKey(const CSessionKey& pRValue) : mKey(pRValue.mKey) {}
 		CSessionKey(const CSessionKey&& pRValue) : mKey(std::move(pRValue.mKey)) {}
 		~CSessionKey() = default;
@@ -52,11 +52,11 @@ namespace LBNet
 			unsigned int mKey;
 			struct CKeyBit
 			{
-				unsigned mIndex : 21;	// 세션 종류 인덱스
+				unsigned mIndex : eSzSessionIndexMax;	// 세션 종류 인덱스
 				unsigned mType	: 2;	// 세션 타입(0: 일반 세션, 1: 샤드)
 				unsigned mIsSet : 1;	// 설정 되어있는 여부
 				unsigned mReuse : 4;	// 재사용 횟수(0 ~ 2^4)
-				unsigned mSvrNo : 4;	// 서버 번호(Acceptor, Shard에서 넣어주는 번호)
+				unsigned mEtc	: 8;	// 기타 구분용 번호
 			}mField;
 		};
 	};

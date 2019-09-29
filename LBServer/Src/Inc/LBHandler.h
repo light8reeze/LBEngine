@@ -36,16 +36,10 @@ namespace LBNet
 	*/
 	class LBS_EXPORT CMessageHandler
 	{
-	public:
-
 	private:
 		using __HandlerList = std::map<MessageNumber, HandlerType>;
 
 	public:
-		CMessageHandler(const CMessageHandler&) = delete;
-		CMessageHandler(const CMessageHandler&&) = delete;
-		const CMessageHandler& operator=(const CMessageHandler&) = delete;
-
 		static ErrCode Register(MessageNumber pNumber, HandlerType&& pHandler);
 		static ErrCode Process(MessageNumber pNumber, CPacketHeader* pData, Size pDataSize, SharedObject<CGameObject>& pObject);
 

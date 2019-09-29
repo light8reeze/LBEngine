@@ -7,6 +7,8 @@
 #pragma once
 #include "LBServer.h"
 #include "LBSession.h"
+#include "LBLocker.h"
+#include <queue>
 
 namespace LBNet
 {
@@ -28,8 +30,37 @@ namespace LBNet
 	public:
 		void LinkSession(SharedObject<CSession>& pSession);
 		void Unlink();
+		ErrCode Send(void* pBuffer, int pSize);
+
+		const CSessionKey GetSessionKey() const;
 
 	protected:
 		WeakObject<CSession> _mSession;
 	};
+
+	class LBS_EXPORT CSessionManager
+	{
+	private:
+		using __SessionList		= std::vector<SharedObject<CSession>>;
+		using __SessionKeyQueue = std::queue<CSessionKey>;
+
+	public:
+		CSessionManager() = default;
+		void Initialize(int pMaxSession);
+		template<typename TObject>
+		SharedObject<TObject> GetGameObject(CSessionKey& pKey);
+		SharedObject<CSession> GetSession(CSessionKey& pKey);
+
+		CSessionKey GetKey();
+		void ReturnKey(CSessionKey& aKey);
+
+		static CSessionManager& Instance();
+	private:
+		static CSessionManager	__mSingleton;
+		__SessionList			__mSessionList;
+		__SessionKeyQueue		__mWaitQueue;
+		CSharedMutex			__mMutex;
+	};
 }
+
+#include "LBGameObject.Inl"
