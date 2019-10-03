@@ -21,7 +21,7 @@ namespace LBNet
 	class CShard : public CSession
 	{
 	public:
-		CShard() = default;
+		CShard();
 		~CShard() = default;
 
 		template<typename THandler>

@@ -10,7 +10,6 @@ namespace LBNet
 
 	CFactory::~CFactory()
 	{
-		Close();
 	}
 
 	CFactory& CFactory::Instance()

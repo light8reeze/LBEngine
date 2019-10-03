@@ -32,11 +32,11 @@ namespace LBNet
 		using ObjectPool = CObjectPoolEx<TObject>;
 		std::size_t aKey = typeid(TObject).hash_code();
 
-		if (__mPools.find(aKey) == __mPools.end())
+		if (__mPools.find(aKey) != __mPools.end())
 			return false;
 
 		__PoolPtr aPool = std::make_unique<ObjectPool>(pSize);
-		auto aResult = __mPools.insert(std::make_pair<std::size_t, __PoolPtr>(aKey, aPool));
+		auto aResult = __mPools.emplace(aKey, std::move(aPool));
 
 		LB_ASSERT(aResult.second == true, "Error!");
 		return true;

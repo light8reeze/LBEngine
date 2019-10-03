@@ -1,28 +1,40 @@
 namespace LBNet
 {
+	inline CShard::CShard() : CSession(), __mServerNo(0)
+	{
+	}
+
 	template<typename THandler>
 	ErrCode CShard::Connect(const char* pIp, unsigned short pPort, THandler&& pHandler)
 	{
-		static_assert(std::is_function<THandler>::value == true);
-
 		_mSocket.ConnectAsync(pIp, pPort,
-			[this](const boost::system::error_code& pError)
+			[this, &pHandler](const boost::system::error_code& pError)
 		{
 			if (pError.value() != 0)
 			{
 				Close();
 			}
 
+			ErrCode aErr = pHandler();
+
+			if (aErr != 0)
+			{
+				Close();
+			}
+
+			OnAccept();
 			Receive();
 		});
+
+		return 0;
 	}
 
-	void CShard::SetServerNo(int pServerNo)
+	inline void CShard::SetServerNo(int pServerNo)
 	{
 		__mServerNo = pServerNo;
 	}
 
-	int CShard::GetServerNo() const
+	inline int CShard::GetServerNo() const
 	{
 		return __mServerNo;
 	}

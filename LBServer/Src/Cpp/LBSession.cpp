@@ -5,7 +5,7 @@
 namespace LBNet
 {
 	CSession::CSession() : _mSocket(), __mBuffer(), 
-		__mState(EState::eDisconnect), __mLocker()
+		__mState(EState::eDisconnect), __mLocker(), CManagedObject(), __mGameObject()
 	{
 	}
 
@@ -22,9 +22,11 @@ namespace LBNet
 
 	ErrCode CSession::OnAccept()
 	{
-		LB_ASSERT(__mState == EState::eDisconnect, "Invalid!");
+		LB_ASSERT(__mState == EState::eDisconnect,	"Invalid!");
+		LB_ASSERT(__mGameObject != nullptr,			"Invalid!");
 
 		__mState = EState::eStable;
+		__mGameObject->OnAccept();
 		return Receive();
 	}
 
@@ -132,11 +134,15 @@ namespace LBNet
 		{
 			CLocker::AutoLock aLocker(__mLocker);
 
-			_mSocket.Close();
+			if (__mState == EState::eStable)
+				_mSocket.Close();
+
 			__mBuffer.Clear();
 			__mState = EState::eDisconnect;
 			++(__mSessionKey.mField.mReuse);
-			__mGameObject->Unlink();
+
+			if(__mGameObject != nullptr)
+				__mGameObject->Unlink();
 		}
 
 		return 0;
@@ -150,8 +156,6 @@ namespace LBNet
 
 	void CSession::SetSessionKey(CSessionKey& pObjKey)
 	{
-		LB_ASSERT(pObjKey.mField.mIsSet == 1, "Error!");
-
 		__mSessionKey = pObjKey;
 	}
 

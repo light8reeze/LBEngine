@@ -15,7 +15,7 @@ namespace LBNet
 	{
 	public:
 		IObjectPool() = default;
-		virtual ~IObjectPool() = 0;
+		virtual ~IObjectPool() {}
 
 		virtual void Initialize() = 0;
 		virtual void Close() = 0;
@@ -32,10 +32,10 @@ namespace LBNet
 	{
 	public:
 		CObjectPoolEx(int pSize);
-		virtual ~CObjectPoolEx() override;
+		~CObjectPoolEx() override;
 
-		virtual void Initialize() override;
-		virtual void Close() override;
+		void Initialize() override;
+		void Close() override;
 	};
 
     /**
