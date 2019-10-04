@@ -47,6 +47,9 @@ namespace LBNet
 	{
 		return New<TObject>([](TObject* pObject)
 		{
+			if (pObject == nullptr)
+				return false;
+
 			return CFactory::Instance().Delete(pObject);
 		});
 	}
@@ -75,6 +78,7 @@ namespace LBNet
 	bool CFactory::Delete(TObject* pObject)
 	{
 		using ObjectPool = CObjectPoolEx<TObject>;
+		LB_ASSERT(pObject != nullptr, "Exception!");
 
 		std::size_t aKey = typeid(TObject).hash_code();
 
