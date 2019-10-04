@@ -1,51 +1,28 @@
 namespace LBNet
 {
-	template<typename TShardObject>
-	inline CShard<TShardObject>::CShard() : CSession(), __mServerNo(0)
-	{
-		static_assert(std::is_base_of<CGameObject, TShardObject>::value == true);
-	}
-
-	template<typename TShardObject>
 	template<typename THandler>
-	ErrCode CShard<TShardObject>::Connect(const char* pIp, unsigned short pPort, THandler&& pHandler)
+	ErrCode CShard::Connect(const char* pIp, unsigned short pPort, THandler&& pHandler)
 	{
+		static_assert(std::is_function<THandler>::value == true);
+
 		_mSocket.ConnectAsync(pIp, pPort,
-			[this, pHandler](const boost::system::error_code& pError)
+			[this](const boost::system::error_code& pError)
 		{
 			if (pError.value() != 0)
 			{
 				Close();
-				return ;
-			}
-
-			auto aPtr(std::make_shared<TShardObject>());
-			SetObject(aPtr);
-
-			OnAccept();
-
-			ErrCode aErr = pHandler();
-
-			if (aErr != 0)
-			{
-				Close();
-				return;
 			}
 
 			Receive();
 		});
-
-		return 0;
 	}
 
-	template<typename TShardObject>
-	inline void CShard<TShardObject>::SetServerNo(int pServerNo)
+	void CShard::SetServerNo(int pServerNo)
 	{
 		__mServerNo = pServerNo;
 	}
 
-	template<typename TShardObject>
-	inline int CShard<TShardObject>::GetServerNo() const
+	int CShard::GetServerNo() const
 	{
 		return __mServerNo;
 	}

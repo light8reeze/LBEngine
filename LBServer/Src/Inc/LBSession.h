@@ -20,10 +20,12 @@ namespace LBNet
 		@date		2019-09-12
 		@auther		light8reeze(light8reeze@gmail.com)
 	*/
+	constexpr unsigned int eKeyNull = std::numeric_limits<unsigned int>::max();
+
 	class CSessionKey
 	{
 	public:
-		CSessionKey() : mKey(0) {}
+		CSessionKey() : mKey(eKeyNull) {}
 		CSessionKey(const CSessionKey& pRValue) : mKey(pRValue.mKey) {}
 		CSessionKey(const CSessionKey&& pRValue) : mKey(std::move(pRValue.mKey)) {}
 		~CSessionKey() = default;
@@ -100,7 +102,7 @@ namespace LBNet
 		CSessionKey GetSessionKey();
 
 		template<typename TObject>
-		void SetObject(SharedObject<TObject>& pObject);
+		void SetGameObject(SharedObject<TObject>& pObject);
 		void RemoveObject();
 
 		template<typename TObject = CGameObject>
@@ -115,15 +117,15 @@ namespace LBNet
 	public:
 		virtual void OnDelete() override;
 
+	protected:
+		CTCPSocket					_mSocket;
+
 	private:
 		__BufferType				__mBuffer;
 		CLocker						__mLocker;
 		EState						__mState;
 		SharedObject<CGameObject>	__mGameObject;
 		CSessionKey					__mSessionKey;
-
-	protected:
-		CTCPSocket					_mSocket;
 	};
 }
 

@@ -1,14 +1,14 @@
 namespace LBNet
 {
 	template<typename TObject>
-	void CSession::SetObject(SharedObject<TObject>& pObject)
+	void CSession::SetGameObject(SharedObject<TObject>& pObject)
 	{
 		static_assert(std::is_base_of<CGameObject, TObject>::value == true);
 
 		LB_ASSERT(__mGameObject.get()	== nullptr, "Error!");
 		LB_ASSERT(pObject.get()			!= nullptr, "Error!");
 
-		__mGameObject = reinterpret_pointer_cast<CGameObject>(pObject);
+		__mGameObject = std::static_pointer_cast<CGameObject>(pObject);
 	}
 
 	template<typename TObject>
