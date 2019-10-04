@@ -2,10 +2,43 @@
 # 이 .gitignore 파일은 Microsoft(R) Visual Studio에서 자동으로 만들어졌습니다.
 ################################################################################
 
-/.vs/LBEngine/v15
-/LBUtility/x64/Debug
-/x64/Debug
-/Intermediate
-/Bin
-/LBServer/Src/Inc/CTestServer.h
+#TestFile
 /LBServer/Src/Cpp/CTestServer.cpp
+/LBServer/Src/Inc/CTestServer.h
+
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+*.lik
+*.pdb
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+/.vs/LBEngine/v15

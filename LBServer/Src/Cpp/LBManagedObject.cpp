@@ -2,7 +2,7 @@
 
 namespace LBNet
 {
-	CManagedObject::CManagedObject() : __mRefCnt(0), __mObjState(EState::eUsing)
+	CManagedObject::CManagedObject() : __mRefCnt(0), __mObjState(EState::eReturned)
 	{
 	}
 

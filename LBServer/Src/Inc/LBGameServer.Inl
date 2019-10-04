@@ -139,7 +139,7 @@ namespace LBNet
 	ErrCode CGameServer<TGameObject>::__SetAccept(CAcceptor& pAcceptor)
 	{
 		auto aKey = CSessionManager::Instance().GetKey();
-		if (aKey.mKey == 0)
+		if (aKey.mKey == eKeyNull)
 		{
 			//세션 리소스 부족
 			return 1;
@@ -166,15 +166,20 @@ namespace LBNet
 			LB_ASSERT(aSession->GetState() == CManagedObject::EState::eReturned, "여기에서 반납이 되어야 한다.");
 			return 1;
 		}
+		aSession->SetGameObject(aGameObject);
+		aGameObject->LinkSession(aSession);
+
+		CAcceptor* aAcceptPtr = &pAcceptor;
 
 		pAcceptor.Listen();
 		pAcceptor.AcceptAsync(*aSession,
-			[this, &aSession](const boost::system::error_code& pErr)
+			[this, aSession, aAcceptPtr](const boost::system::error_code& pErr)
 		{
 			if (pErr.value() != 0)
 			{
 				aSession->SetDisconnect();
 				aSession->OnAccessEnd();
+				return;
 			}
 
 			ErrCode aErr = aSession->OnAccept();
@@ -183,7 +188,11 @@ namespace LBNet
 				aSession->SetDisconnect();
 				aSession->OnAccessEnd();
 				LB_ASSERT(aSession->GetState() == CManagedObject::EState::eReturned, "여기에서 반납이 되어야 한다.");
+				return;
 			}
+
+			aSession->OnAccessEnd();
+			__SetAccept(*aAcceptPtr);
 		});
 
 		return 0;

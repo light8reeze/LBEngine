@@ -57,13 +57,20 @@ namespace LBNet
 		_mSocket.ReceiveAsync(aWritePtr, aSize,
 			[this](const boost::system::error_code& pError, std::size_t pRecvSize)
 		{
-			if (pError.value() != 0)
+			if (pError.value() != 0 || pRecvSize == 0)
 			{
 				SetDisconnect();
+				OnAccessEnd();
 				return;
 			}
 
-			OnReceive(static_cast<Size>(pRecvSize));
+			ErrCode aErr = OnReceive(static_cast<Size>(pRecvSize));
+			if (aErr != 0)
+			{
+				SetDisconnect();
+				OnAccessEnd();
+			}
+
 			Receive();
 		});
 
@@ -84,7 +91,6 @@ namespace LBNet
 		Size	aSize = 0;
 		ErrCode aResult = 0;
 		char*	aData = __mBuffer.Front(aSize, aResult);
-		auto aManaged = CManagedObject::MakeManaged(*this);
 		auto aGameObject = GetGameObject<CGameObject>();
 
 		LB_ASSERT(aSize > 0, "Packet Error!");
@@ -94,8 +100,6 @@ namespace LBNet
 			CPacketHeader* aHeader = reinterpret_cast<CPacketHeader*>(aData);
 			aResult = CMessageHandler::Process(aHeader->mCommand, aHeader, aSize, aGameObject);
 		}
-
-		OnAccessEnd();
 
 		if (aResult != 0)
 		{
@@ -138,7 +142,6 @@ namespace LBNet
 				_mSocket.Close();
 
 			__mBuffer.Clear();
-			__mState = EState::eDisconnect;
 			++(__mSessionKey.mField.mReuse);
 
 			if(__mGameObject != nullptr)
@@ -150,6 +153,9 @@ namespace LBNet
 
 	ErrCode CSession::SetDisconnect()
 	{
+		CLocker::AutoLock aLock(__mLocker);
+
+		__mState = EState::eDisconnect;
 		SetReturn();
 		return 0;
 	}
