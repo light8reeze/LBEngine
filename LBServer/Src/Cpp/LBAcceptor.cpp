@@ -7,6 +7,10 @@ namespace LBNet
 	{
 	}
 
+	CAcceptor::CAcceptor(CAcceptor&& pAcceptor) : __mAcceptor(std::move(pAcceptor.__mAcceptor))
+	{
+	}
+
 	CAcceptor::~CAcceptor()
 	{
 		Close();

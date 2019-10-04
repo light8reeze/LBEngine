@@ -18,10 +18,11 @@ namespace LBNet
 		@date		2019-09-22
 		@auther		light8reeze(light8reeze@gmail.com)
 	*/
+	template<typename TShardObject>
 	class CShard : public CSession
 	{
 	public:
-		CShard() = default;
+		CShard();
 		~CShard() = default;
 
 		template<typename THandler>

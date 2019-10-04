@@ -39,7 +39,6 @@
 #include <SDKDDKVer.h>
 /////////////////////////////////////////////////////////////////////////
 #include <Windows.h>
-//#endif //DEVELOP_MODE
 #endif //_WINDOWS
 
 #include <stdexcept>

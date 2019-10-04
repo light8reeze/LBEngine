@@ -25,11 +25,12 @@ namespace LBNet
 	{
 	public:
 		CGameObject();
-		virtual ~CGameObject() = 0;
+		virtual ~CGameObject() {};
 
 	public:
 		void LinkSession(SharedObject<CSession>& pSession);
 		void Unlink();
+		virtual void OnAccept() = 0;
 		ErrCode Send(void* pBuffer, int pSize);
 
 		const CSessionKey GetSessionKey() const;
@@ -50,6 +51,7 @@ namespace LBNet
 		template<typename TObject>
 		SharedObject<TObject> GetGameObject(CSessionKey& pKey);
 		SharedObject<CSession> GetSession(CSessionKey& pKey);
+		void Close();
 
 		CSessionKey GetKey();
 		void ReturnKey(CSessionKey& aKey);

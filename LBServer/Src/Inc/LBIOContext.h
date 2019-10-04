@@ -38,6 +38,7 @@ namespace LBNet
 		static CIOContext			__mSingleton;
 		asio::io_context			__mIOContext;
 		asio::io_context::strand	__mStrand;
+		asio::io_context::work		__mWork;
 	};
 }
 
