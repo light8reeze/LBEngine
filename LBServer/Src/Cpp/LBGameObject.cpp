@@ -39,6 +39,16 @@ namespace LBNet
 
 		return CSessionKey();
 	}
+
+	void CGameObject::SetDisconnect()
+	{
+		if (!_mSession.expired())
+		{
+			auto aShared = _mSession.lock();
+			aShared->SetDisconnect();
+			aShared->Close();
+		}
+	}
 #pragma endregion CGameObject
 
 #pragma region CSessionManager

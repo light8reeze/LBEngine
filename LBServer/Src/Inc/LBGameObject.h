@@ -32,6 +32,7 @@ namespace LBNet
 		void Unlink();
 		virtual void OnAccept() {}
 		virtual void OnDisconnect() {}
+		void SetDisconnect();
 		ErrCode Send(void* pBuffer, int pSize);
 
 		const CSessionKey GetSessionKey() const;
