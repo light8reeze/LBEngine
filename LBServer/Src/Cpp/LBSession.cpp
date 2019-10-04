@@ -1,6 +1,7 @@
 #include "LBSession.h"
 #include "LBHandler.h"
 #include "LBGameObject.h"
+#include <iostream> //@test
 
 namespace LBNet
 {
@@ -143,8 +144,11 @@ namespace LBNet
 			__mBuffer.Clear();
 			++(__mSessionKey.mField.mReuse);
 
-			if(__mGameObject != nullptr)
+			if (__mGameObject != nullptr)
+			{
+				__mGameObject->OnDisconnect();
 				__mGameObject->Unlink();
+			}
 		}
 
 		return 0;
@@ -156,6 +160,7 @@ namespace LBNet
 
 		__mState = EState::eDisconnect;
 		SetReturn();
+		std::cout << __mSessionKey.mKey << "Set DisConnected!" << std::endl; //@test
 		return 0;
 	}
 

@@ -30,7 +30,8 @@ namespace LBNet
 	public:
 		void LinkSession(SharedObject<CSession>& pSession);
 		void Unlink();
-		virtual void OnAccept() = 0;
+		virtual void OnAccept() {}
+		virtual void OnDisconnect() {}
 		ErrCode Send(void* pBuffer, int pSize);
 
 		const CSessionKey GetSessionKey() const;
