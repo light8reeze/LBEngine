@@ -31,6 +31,9 @@
     <Filter Include="Network\Shard">
       <UniqueIdentifier>{e9cf8082-2842-4958-98df-4ade2369275c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Test">
+      <UniqueIdentifier>{82563865-00d3-45f7-98c7-583c2c7d7567}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Inc\LBServer.h">
@@ -84,6 +87,12 @@
     <ClInclude Include="Src\Inc\LBGameServer.Inl">
       <Filter>Network\Server</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Inc\CTestServer.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBGameObject.Inl">
+      <Filter>Network\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Cpp\main.cpp" />
@@ -114,6 +123,9 @@
     <ClCompile Include="Src\Cpp\LBManagedObject.cpp">
       <Filter>Network\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Cpp\CTestServer.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Src\Inc\LBSocket.Inl">
@@ -123,9 +135,6 @@
       <Filter>Network\Acceptor</Filter>
     </None>
     <None Include="Src\Inc\LBManagedObject.Inl">
-      <Filter>Network\Object</Filter>
-    </None>
-    <None Include="Src\Inc\LBGameObject.Inl">
       <Filter>Network\Object</Filter>
     </None>
   </ItemGroup>

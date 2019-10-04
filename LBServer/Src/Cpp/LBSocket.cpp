@@ -56,10 +56,11 @@ namespace LBNet
 
 	ErrCode CTCPSocket::Close()
 	{
-		LB_ASSERT(_mSocket.is_open(),	"Error");
-
 		boost::system::error_code aError;
-		_mSocket.close(aError);
+
+		if(_mSocket.is_open())
+			_mSocket.close(aError);
+		
 		return aError.value();
 	}
 

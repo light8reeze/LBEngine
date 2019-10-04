@@ -81,6 +81,19 @@ namespace LBNet
 		return nullptr;
 	}
 
+	void CSessionManager::Close()
+	{
+		LB_ASSERT(__mMutex.GetOwner() == std::thread::id(), "Must Exec SingleThread Only!");
+
+		TWriteLock aWriteLock(__mMutex);
+		for (auto& aSession : __mSessionList)
+		{
+			aSession->Close();
+		}
+
+		__mSessionList.clear();
+	}
+
 	CSessionKey CSessionManager::GetKey()
 	{
 		TWriteLock aLock(__mMutex);

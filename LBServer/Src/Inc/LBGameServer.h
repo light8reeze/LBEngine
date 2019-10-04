@@ -50,11 +50,12 @@ namespace LBNet
 		virtual ErrCode SetParameter() = 0;
 		virtual ErrCode Initialize();
 		virtual ErrCode LazyInitialize();
+		virtual ErrCode Close();
 		ErrCode Run();
 
 	private:
 		void		__Main();
-		void		__SetAccept(CAcceptor& pAcceptor);
+		ErrCode		__SetAccept(CAcceptor& pAcceptor);
 
 	private:
 		__TThreadList	__mThreadList;

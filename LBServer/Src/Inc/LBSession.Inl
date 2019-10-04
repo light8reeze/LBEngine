@@ -8,7 +8,7 @@ namespace LBNet
 		LB_ASSERT(__mGameObject.get()	== nullptr, "Error!");
 		LB_ASSERT(pObject.get()			!= nullptr, "Error!");
 
-		__mGameObject = std::static_pointer_cast<CGameObject>(pObject);
+		__mGameObject = reinterpret_pointer_cast<CGameObject>(pObject);
 	}
 
 	template<typename TObject>

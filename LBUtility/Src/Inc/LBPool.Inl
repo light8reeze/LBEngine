@@ -25,7 +25,7 @@ namespace LBNet
 			try
 			{
 				TObject* aObject = new TObject;
-				__mObjectList[index] = aObject;
+				__mObjectList.push_back(aObject);
 				__mObjectQueue.push(aObject);
 			}
 			catch (std::exception& pException)
@@ -42,8 +42,6 @@ namespace LBNet
 	template<class TObject>
 	void CObjectPool<TObject>::Close()
 	{
-		LB_ASSERT(__mIsAlloc == false && __mUseSize > 0, "Invalid!");
-
 		std::unique_lock<CLocker> aLocker(__mLocker);
 
 		if (__mIsAlloc == false)

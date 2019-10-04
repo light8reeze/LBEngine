@@ -115,15 +115,15 @@ namespace LBNet
 	public:
 		virtual void OnDelete() override;
 
-	protected:
-		CTCPSocket					_mSocket;
-
 	private:
 		__BufferType				__mBuffer;
 		CLocker						__mLocker;
 		EState						__mState;
 		SharedObject<CGameObject>	__mGameObject;
 		CSessionKey					__mSessionKey;
+
+	protected:
+		CTCPSocket					_mSocket;
 	};
 }
 
