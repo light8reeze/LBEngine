@@ -6,7 +6,7 @@ namespace LBNet
 		CManagedObject::ManagedPtr<TObject> aManaged(&pObject
 			,[](TObject* pObject)
 		{
-			pObject->OnDelete();
+			pObject->OnAccessEnd();
 		});
 		
 		return aManaged;

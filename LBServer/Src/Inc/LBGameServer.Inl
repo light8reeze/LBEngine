@@ -4,6 +4,7 @@ namespace LBNet
 	CGameServer<TGameObject>::CGameServer() : __mThreadCnt(0), __mMaxSession(100), 
 		__mThreadList(), __mAcceptorList()
 	{
+		static_assert(std::is_base_of<CGameObject, TGameObject>::value == true);
 	}
 
 	template<typename TGameObject>
@@ -16,7 +17,7 @@ namespace LBNet
 	{
 		CAcceptor aAcceptor;
 		aAcceptor.Bind(pIp, pPort);
-		__mAcceptorList.push_back(aAcceptor);
+		__mAcceptorList.emplace_back(std::move(aAcceptor));
 	}
 
 	template<typename TGameObject>
@@ -24,7 +25,7 @@ namespace LBNet
 	{
 		CAcceptor aAcceptor;
 		aAcceptor.Bind(pPort);
-		__mAcceptorList.push_back(aAcceptor);
+		__mAcceptorList.emplace_back(std::move(aAcceptor));
 	}
 
 	template<typename TGameObject>
@@ -62,13 +63,32 @@ namespace LBNet
 	template<typename TGameObject>
 	ErrCode CGameServer<TGameObject>::Initialize()
 	{
-		CSessionManager::Instance().Initialize(__mMaxSession);
+		CFactory::Instance().AddObjectPool<TGameObject>(__mMaxSession);
+		CFactory::Instance().AddObjectPool<CSession>(__mMaxSession);
+		
 		return 0;
 	}
 
 	template<typename TGameObject>
 	ErrCode CGameServer<TGameObject>::LazyInitialize()
 	{
+		CFactory::Instance().Initialize();
+		CSessionManager::Instance().Initialize(__mMaxSession);
+
+		return 0;
+	}
+
+	template<typename TGameObject>
+	ErrCode CGameServer<TGameObject>::Close()
+	{
+		for (auto& aAcceptor : __mAcceptorList)
+		{
+			aAcceptor.Close();
+		}
+
+		CSessionManager::Instance().Close();
+		// CFactory는 마지막에 삭제해야 한다.
+		CFactory::Instance().Close();
 		return 0;
 	}
 
@@ -88,9 +108,9 @@ namespace LBNet
 		if (__mThreadCnt < 1)
 			return 2;
 
-		for (int index = 0; index < __mThreadCnt; ++index)
+		for (unsigned int index = 0; index < __mThreadCnt; ++index)
 		{
-			__mThreadList.emplace_back(std::thread(__Main));
+			__mThreadList.emplace_back(std::thread{ std::bind(&CGameServer<TGameObject>::__Main, this) });
 		}
 
 		for (auto& aThread : __mThreadList)
@@ -110,15 +130,16 @@ namespace LBNet
 		}
 		catch (std::exception& aException)
 		{
+			UNREFERENCED_PARAMETER(aException);
 			// @todo 추후 예외시 덤프기능 구현하기
 		}
 	}
 
 	template<typename TGameObject>
-	void CGameServer<TGameObject>::__SetAccept(CAcceptor& pAcceptor)
+	ErrCode CGameServer<TGameObject>::__SetAccept(CAcceptor& pAcceptor)
 	{
 		auto aKey = CSessionManager::Instance().GetKey();
-		if (aKey.mKey == 0)
+		if (aKey.mKey == eKeyNull)
 		{
 			//세션 리소스 부족
 			return 1;
@@ -145,15 +166,20 @@ namespace LBNet
 			LB_ASSERT(aSession->GetState() == CManagedObject::EState::eReturned, "여기에서 반납이 되어야 한다.");
 			return 1;
 		}
+		aSession->SetGameObject(aGameObject);
+		aGameObject->LinkSession(aSession);
 
-		aAcceptor.Listen();
-		aAcceptor.AcceptAsync(aSession,
-			[this, &aSession](const boost::system::error_code& pErr)
+		CAcceptor* aAcceptPtr = &pAcceptor;
+
+		pAcceptor.Listen();
+		pAcceptor.AcceptAsync(*aSession,
+			[this, aSession, aAcceptPtr](const boost::system::error_code& pErr)
 		{
 			if (pErr.value() != 0)
 			{
 				aSession->SetDisconnect();
 				aSession->OnAccessEnd();
+				return;
 			}
 
 			ErrCode aErr = aSession->OnAccept();
@@ -162,7 +188,13 @@ namespace LBNet
 				aSession->SetDisconnect();
 				aSession->OnAccessEnd();
 				LB_ASSERT(aSession->GetState() == CManagedObject::EState::eReturned, "여기에서 반납이 되어야 한다.");
+				return;
 			}
+
+			aSession->OnAccessEnd();
+			__SetAccept(*aAcceptPtr);
 		});
+
+		return 0;
 	}
 }

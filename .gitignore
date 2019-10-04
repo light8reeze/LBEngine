@@ -7,3 +7,5 @@
 /x64/Debug
 /Intermediate
 /Bin
+/LBServer/Src/Cpp/CTestServer.cpp
+/LBServer/Src/Inc/CTestServer.h

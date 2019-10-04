@@ -23,7 +23,11 @@ namespace LBNet
 
 	public:
 		CAcceptor();
+		CAcceptor(CAcceptor&& pAcceptor);
+		CAcceptor(const CAcceptor&) = delete;
 		~CAcceptor();
+
+		CAcceptor& operator=(const CAcceptor&) = delete;
 
 		ErrCode Bind(const char* pIp, unsigned short pPort);
 		ErrCode Bind(unsigned short pPort);

@@ -1,7 +1,7 @@
 namespace LBNet
 {
 	template<typename TObject>
-	void CSession::SetObject(SharedObject<TObject>& pObject)
+	void CSession::SetGameObject(SharedObject<TObject>& pObject)
 	{
 		static_assert(std::is_base_of<CGameObject, TObject>::value == true);
 
