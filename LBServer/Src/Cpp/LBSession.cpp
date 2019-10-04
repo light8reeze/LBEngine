@@ -5,7 +5,7 @@
 namespace LBNet
 {
 	CSession::CSession() : _mSocket(), __mBuffer(), 
-		__mState(EState::eDisconnect), __mLocker()
+		__mState(EState::eDisconnect), __mLocker(), CManagedObject(), __mGameObject()
 	{
 	}
 
@@ -138,7 +138,8 @@ namespace LBNet
 		{
 			CLocker::AutoLock aLocker(__mLocker);
 
-			_mSocket.Close();
+			if (__mState == EState::eStable)
+				_mSocket.Close();
 
 			__mBuffer.Clear();
 			++(__mSessionKey.mField.mReuse);
