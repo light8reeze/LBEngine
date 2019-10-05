@@ -90,8 +90,14 @@
     <ClInclude Include="Src\Inc\CTestServer.h">
       <Filter>Test</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Inc\LBGameObject.Inl">
-      <Filter>Network\Object</Filter>
+    <ClInclude Include="Src\Inc\LBShardObject.h">
+      <Filter>Network\Shard</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBSessionManager.h">
+      <Filter>Network\Session</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBSessionManager.Inl">
+      <Filter>Network\Session</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -125,6 +131,9 @@
     </ClCompile>
     <ClCompile Include="Src\Cpp\CTestServer.cpp">
       <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Cpp\LBSessionManager.cpp">
+      <Filter>Network\Session</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

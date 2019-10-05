@@ -25,7 +25,7 @@ namespace LBNet
 	{
 	public:
 		CGameObject();
-		virtual ~CGameObject() {};
+		virtual ~CGameObject() {}
 
 	public:
 		void LinkSession(SharedObject<CSession>& pSession);
@@ -40,31 +40,4 @@ namespace LBNet
 	protected:
 		WeakObject<CSession> _mSession;
 	};
-
-	class LBS_EXPORT CSessionManager
-	{
-	private:
-		using __SessionList		= std::vector<SharedObject<CSession>>;
-		using __SessionKeyQueue = std::queue<CSessionKey>;
-
-	public:
-		CSessionManager() = default;
-		void Initialize(int pMaxSession);
-		template<typename TObject>
-		SharedObject<TObject> GetGameObject(CSessionKey& pKey);
-		SharedObject<CSession> GetSession(CSessionKey& pKey);
-		void Close();
-
-		CSessionKey GetKey();
-		void ReturnKey(CSessionKey& aKey);
-
-		static CSessionManager& Instance();
-	private:
-		static CSessionManager	__mSingleton;
-		__SessionList			__mSessionList;
-		__SessionKeyQueue		__mWaitQueue;
-		CSharedMutex			__mMutex;
-	};
 }
-
-#include "LBGameObject.Inl"

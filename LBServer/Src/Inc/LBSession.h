@@ -26,6 +26,7 @@ namespace LBNet
 	{
 	public:
 		CSessionKey() : mKey(eKeyNull) {}
+		CSessionKey(unsigned int pKey) : mKey(pKey) {}
 		CSessionKey(const CSessionKey& pRValue) : mKey(pRValue.mKey) {}
 		CSessionKey(const CSessionKey&& pRValue) : mKey(std::move(pRValue.mKey)) {}
 		~CSessionKey() = default;
@@ -89,12 +90,12 @@ namespace LBNet
 		CSession();
 		virtual ~CSession() override;
 
-		ErrCode Initialize();
+		virtual ErrCode Initialize();
 		ErrCode OnAccept();
 		ErrCode Receive();
 		ErrCode OnReceive(Size pSize);
 		ErrCode Send(void* pBuffer, int pSize);
-		ErrCode Close();
+		virtual ErrCode Close();
 		ErrCode SetDisconnect();
 
 		void SetSessionKey(CSessionKey& pObjKey);
@@ -119,13 +120,13 @@ namespace LBNet
 
 	protected:
 		CTCPSocket					_mSocket;
+		CLocker						_mLocker;
+		CSessionKey					_mSessionKey;
 
 	private:
 		__BufferType				__mBuffer;
-		CLocker						__mLocker;
 		EState						__mState;
 		SharedObject<CGameObject>	__mGameObject;
-		CSessionKey					__mSessionKey;
 	};
 }
 

@@ -68,6 +68,6 @@ namespace LBNet
 		#pragma warning(default : 4251)
 	};
 
-	using TReadLock		= std::shared_lock<CSharedMutex>;
-	using TWriteLock	= std::unique_lock<CSharedMutex>;
+	using ReadLock		= std::shared_lock<CSharedMutex>;
+	using WriteLock		= std::unique_lock<CSharedMutex>;
 }

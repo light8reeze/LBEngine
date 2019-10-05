@@ -15,7 +15,7 @@ namespace LBNet
 		if (aError.value() != 0)
 			return aError.value();
 		
-		_mSocket.async_connect(aEndPoint, CIOContext::Instance().Wrap(pHandler));
+		_mSocket.async_connect(aEndPoint, CIOContext::Instance().BindExecuter(pHandler));
 		return 0;
 	}
 

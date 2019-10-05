@@ -7,7 +7,7 @@
 #pragma once
 #include "LBServer.h"
 #include "LBAcceptor.h"
-#include "LBGameObject.h"
+#include "LBSessionManager.h"
 #include "LBFactory.h"
 #include <thread>
 
