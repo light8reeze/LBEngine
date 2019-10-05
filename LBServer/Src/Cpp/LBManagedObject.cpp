@@ -27,7 +27,7 @@ namespace LBNet
 		{
 			--__mRefCnt;
 
-			if (__mObjState == EState::eReturnWait)
+			if (__mObjState == EState::eReturnWait && __mRefCnt == 0)
 			{
 				__mObjState = EState::eReturned;
 				OnDelete();
