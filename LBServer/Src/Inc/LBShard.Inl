@@ -1,54 +1,99 @@
 namespace LBNet
 {
 	template<typename TShardObject>
-	inline CShard<TShardObject>::CShard() : CSession(), __mServerNo(0)
+	inline CShard<TShardObject>::CShard() : CSession(), __mServerNo(0), 
+		__mIp(), __mPort(0), __mNextConnect(true)
 	{
-		static_assert(std::is_base_of<CGameObject, TShardObject>::value == true);
+		static_assert(std::is_base_of<CShardObject, TShardObject>::value == true);
 	}
 
 	template<typename TShardObject>
-	template<typename THandler>
-	ErrCode CShard<TShardObject>::Connect(const char* pIp, unsigned short pPort, THandler&& pHandler)
+	ErrCode CShard<TShardObject>::Initialize()
 	{
-		_mSocket.ConnectAsync(pIp, pPort,
-			[this, pHandler](const boost::system::error_code& pError)
+		__super::Initialize();
+
+		return Connect();
+	}
+
+	template<typename TShardObject>
+	ErrCode CShard<TShardObject>::Connect()
+	{
+		OnConstruct();
+
+		_mSocket.ConnectAsync(__mIp.c_str(), __mPort,
+			[this](const boost::system::error_code& pError)
 		{
+			auto aShardObject = GetGameObject<TShardObject>();
 			if (pError.value() != 0)
 			{
-				SetDisconnect();
-				Close();
-				return ;
-			}
-
-			auto aPtr(std::make_shared<TShardObject>());
-			SetObject(aPtr);
-
-			OnConstruct();
-			OnAccept();
-
-			ErrCode aErr = pHandler();
-
-			if (aErr != 0)
-			{
-				SetDisconnect();
-				Close();
+				__OnConnectFail(pError.value());
 				return;
 			}
 
-			Receive();
+
+			ErrCode aErr = aShardObject->OnConnect();
+			if (aErr != 0)
+			{
+				__OnConnectFail(aErr);
+				return;
+			}
+
+			aErr = OnAccept();
+			if (aErr != 0)
+			{
+				__OnConnectFail(aErr);
+			}
 		});
 
 		return 0;
 	}
 
 	template<typename TShardObject>
-	inline void CShard<TShardObject>::SetServerNo(int pServerNo)
+	ErrCode CShard<TShardObject>::Close()
+	{
+		LB_ASSERT(GetGameObject() != nullptr, "Invalid!");
+
+		CLocker::AutoLock aLocker(_mLocker);
+
+		++(_mSessionKey.mField.mReuse);
+		GetGameObject()->OnDisconnect();
+		if (__mNextConnect)
+		{
+			Connect();
+		}
+
+		return 0;
+	}
+
+	template<typename TShardObject>
+	void CShard<TShardObject>::__OnConnectFail(ErrCode pErr)
+	{
+		auto aShardObject = GetGameObject<TShardObject>();
+
+		SetDisconnect();
+
+		CLocker::AutoLock aLock(_mLocker);
+
+		__mNextConnect = aShardObject->OnConnectFail(pErr);
+	}
+
+	template<typename TShardObject>
+	inline void CShard<TShardObject>::SetAddress(const char* pIp, unsigned short pPort)
+	{
+		LB_ASSERT(pIp != nullptr, "Error!");
+
+		__mIp = pIp;
+		__mPort = pPort;
+	}
+
+	template<typename TShardObject>
+	inline void CShard<TShardObject>::SetServerNo(unsigned short pServerNo)
 	{
 		__mServerNo = pServerNo;
 	}
 
 	template<typename TShardObject>
-	inline int CShard<TShardObject>::GetServerNo() const
+	inline unsigned short CShard<TShardObject>::GetServerNo() const
 	{
 		return __mServerNo;
 	}

@@ -1,18 +1,18 @@
 #include "LBSession.h"
 #include "LBHandler.h"
 #include "LBGameObject.h"
+#include "LBSessionManager.h"
 #include <iostream> //@test
 
 namespace LBNet
 {
 	CSession::CSession() : _mSocket(), __mBuffer(), 
-		__mState(EState::eDisconnect), __mLocker()
+		__mState(EState::eDisconnect), _mLocker()
 	{
 	}
 
 	CSession::~CSession()
 	{
-		Close();
 	}
 
 	ErrCode CSession::Initialize()
@@ -26,6 +26,7 @@ namespace LBNet
 		LB_ASSERT(__mState == EState::eDisconnect,	"Invalid!");
 		LB_ASSERT(__mGameObject != nullptr,			"Invalid!");
 
+		__mBuffer.Clear();
 		__mState = EState::eStable;
 		__mGameObject->OnAccept();
 		return Receive();
@@ -136,19 +137,15 @@ namespace LBNet
 	{
 		LB_ASSERT(__mState == EState::eDisconnect,	"Invalid!");
 
+		CLocker::AutoLock aLocker(_mLocker);
+
+		__mBuffer.Clear();
+		++(_mSessionKey.mField.mReuse);
+
+		if (__mGameObject != nullptr)
 		{
-			CLocker::AutoLock aLocker(__mLocker);
-
-			_mSocket.Close();
-
-			__mBuffer.Clear();
-			++(__mSessionKey.mField.mReuse);
-
-			if (__mGameObject != nullptr)
-			{
-				__mGameObject->OnDisconnect();
-				__mGameObject->Unlink();
-			}
+			__mGameObject->OnDisconnect();
+			__mGameObject->Unlink();
 		}
 
 		return 0;
@@ -156,27 +153,31 @@ namespace LBNet
 
 	ErrCode CSession::SetDisconnect()
 	{
-		CLocker::AutoLock aLock(__mLocker);
+		CLocker::AutoLock aLock(_mLocker);
 
-		__mState = EState::eDisconnect;
-		SetReturn();
-		std::cout << __mSessionKey.mKey << "Set DisConnected!" << std::endl; //@test
+		if (__mState != EState::eDisconnect)
+		{
+			_mSocket.Close();
+			__mState = EState::eDisconnect;
+			SetReturn();
+			std::cout << _mSessionKey.mKey << "Set DisConnected!" << std::endl; //@test
+		}
 		return 0;
 	}
 
 	void CSession::SetSessionKey(CSessionKey& pObjKey)
 	{
-		__mSessionKey = pObjKey;
+		_mSessionKey = pObjKey;
 	}
 
 	const CSessionKey& CSession::GetSessionKey() const
 	{
-		return __mSessionKey;
+		return _mSessionKey;
 	}
 
 	CSessionKey CSession::GetSessionKey()
 	{
-		return __mSessionKey;
+		return _mSessionKey;
 	}
 
 	void CSession::RemoveObject()
@@ -187,6 +188,8 @@ namespace LBNet
 	void CSession::OnDelete()
 	{
 		Close();
-		CSessionManager::Instance().ReturnKey(__mSessionKey);
+		CSessionManager::Instance().ReturnKey(_mSessionKey);
+
+		__super::OnDelete();
 	}
 }

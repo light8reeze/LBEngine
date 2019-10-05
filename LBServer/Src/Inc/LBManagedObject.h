@@ -48,7 +48,7 @@ namespace LBNet
 
 	public:
 		virtual void OnConstruct();
-		virtual void OnDelete() = 0;
+		virtual void OnDelete();
 
 	private:
 		__RefCntType	__mRefCnt;

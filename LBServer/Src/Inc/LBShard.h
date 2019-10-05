@@ -5,7 +5,7 @@
 	@auther light8reeze(light8reeze@gmail.com)
 */
 #pragma once
-#include "LBSession.h"
+#include "LBShardObject.h"
 
 namespace LBNet
 {
@@ -25,14 +25,22 @@ namespace LBNet
 		CShard();
 		~CShard() = default;
 
-		template<typename THandler>
-		ErrCode Connect(const char* pIp, unsigned short pPort, THandler&& pHandler);
+		virtual ErrCode Initialize() override;
+		ErrCode			Connect();
+		virtual ErrCode Close() override;
 
-		void	SetServerNo(int pServerNo);
-		int		GetServerNo() const;
+		void				SetAddress(const char* pIp, unsigned short pPort);
+		void				SetServerNo(unsigned short pServerNo);
+		unsigned short		GetServerNo() const;
 
 	private:
-		int	__mServerNo;
+		void __OnConnectFail(ErrCode pErr);
+
+	private:
+		unsigned short	__mServerNo;
+		std::string		__mIp;
+		unsigned short	__mPort;
+		bool			__mNextConnect;
 	};
 }
 

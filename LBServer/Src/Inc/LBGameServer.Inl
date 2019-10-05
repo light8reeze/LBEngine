@@ -105,6 +105,8 @@ namespace LBNet
 			__SetAccept(aAcceptor);
 		}
 
+		CSessionManager::Instance().InitShard();
+
 		if (__mThreadCnt < 1)
 			return 2;
 
@@ -138,10 +140,11 @@ namespace LBNet
 	template<typename TGameObject>
 	ErrCode CGameServer<TGameObject>::__SetAccept(CAcceptor& pAcceptor)
 	{
-		auto aKey = CSessionManager::Instance().GetKey();
+		auto aKey = std::move(CSessionManager::Instance().GetKey());
 		if (aKey.mKey == eKeyNull)
 		{
 			//세션 리소스 부족
+			//@todo : 타이머 구현시 특정시간 이후에 accept재시도
 			return 1;
 		}
 
@@ -149,6 +152,7 @@ namespace LBNet
 		if (aSession == nullptr)
 		{
 			//세션 리소스 부족
+			//@todo : 타이머 구현시 특정시간 이후에 accept재시도
 			return 1;
 		}
 

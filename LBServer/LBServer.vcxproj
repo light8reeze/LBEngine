@@ -169,6 +169,7 @@
     </ClInclude>
     <ClInclude Include="Src\Inc\LBBoostConfig.h" />
     <ClInclude Include="Src\Inc\LBGameServer.h" />
+    <ClInclude Include="Src\Inc\LBSessionManager.h" />
     <ClInclude Include="Src\Inc\LBShard.h" />
     <ClInclude Include="Src\Inc\LBGameObject.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -192,6 +193,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Src\Inc\LBShardObject.h" />
     <ClInclude Include="Src\Inc\LBSocket.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -229,6 +231,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Src\Cpp\LBSessionManager.cpp" />
     <ClCompile Include="Src\Cpp\LBSocket.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -253,7 +256,7 @@
     <ClInclude Include="Src\Inc\LBGameServer.Inl">
       <FileType>Document</FileType>
     </ClInclude>
-    <ClInclude Include="Src\Inc\LBGameObject.Inl">
+    <ClInclude Include="Src\Inc\LBSessionManager.Inl">
       <FileType>Document</FileType>
     </ClInclude>
     <None Include="Src\Inc\LBManagedObject.Inl" />
