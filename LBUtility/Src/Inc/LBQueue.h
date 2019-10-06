@@ -39,11 +39,11 @@ namespace LBNet
 		bool	Pop(TObject& pObject, bool pIsWait = false);
 
 	private:
-		HANDLE		__mSemaphore;
-		ObjectQueue __mQueue;
-		CLocker		__mLocker;
+		HANDLE			__mSemaphore;
+		ObjectQueue		__mQueue;
+		CSharedMutex	__mMutex;
 	};
-};
+}
 
 #include "LBQueue.Inl"
 

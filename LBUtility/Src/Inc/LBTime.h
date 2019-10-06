@@ -15,6 +15,8 @@
 	#define LOCALTIME(TM, time) localtime_s((TM), (time))
 #elif _LINUX
 	#define LOCALTIME(TM, time) localtime_r((time), (TM))
+#else
+	#error "Define _WINDOWS or _LINUX"
 #endif //_WINDOWS
 
 namespace LBNet
@@ -43,7 +45,8 @@ namespace LBNet
 	class LBU_EXPORT CTime
 	{
 	private:
-		using TimePoint = std::chrono::system_clock::time_point;
+		using Clock		= std::chrono::system_clock;
+		using TimePoint = Clock::time_point;
 
 	public:
 		CTime();
@@ -89,8 +92,8 @@ namespace LBNet
 		static const CTime& GetStartTime();
 
 	private:
-		void UpdateFromTimePoint();
-		void UpdateFromLocalTime();
+		void __UpdateFromTimePoint();
+		void __UpdateFromLocalTime();
 
 	private:
 		static const CTime __mStartTime;

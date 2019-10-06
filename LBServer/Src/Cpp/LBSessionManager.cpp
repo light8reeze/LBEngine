@@ -49,10 +49,18 @@ namespace LBNet
 		WriteLock aWriteLock(__mMutex);
 		for (auto& aSession : __mSessionList)
 		{
+			aSession->SetDisconnect();
 			aSession->Close();
 		}
 
 		__mSessionList.clear();
+
+
+		for (auto& aShard : __mShardList)
+		{
+			aShard->SetDisconnect();
+			aShard->Close();
+		}
 	}
 
 	SharedObject<CSession> CSessionManager::GetShard(CSessionKey& pKey)

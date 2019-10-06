@@ -7,7 +7,7 @@
 namespace LBNet
 {
 	CSession::CSession() : _mSocket(), __mBuffer(), 
-		__mState(EState::eDisconnect), _mLocker()
+		__mState(EState::eDisconnect), _mMutex()
 	{
 	}
 
@@ -137,7 +137,7 @@ namespace LBNet
 	{
 		LB_ASSERT(__mState == EState::eDisconnect,	"Invalid!");
 
-		CLocker::AutoLock aLocker(_mLocker);
+		WriteLock aLocker(_mMutex);
 
 		__mBuffer.Clear();
 		++(_mSessionKey.mField.mReuse);
@@ -153,7 +153,7 @@ namespace LBNet
 
 	ErrCode CSession::SetDisconnect()
 	{
-		CLocker::AutoLock aLock(_mLocker);
+		WriteLock aLock(_mMutex);
 
 		if (__mState != EState::eDisconnect)
 		{

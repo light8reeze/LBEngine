@@ -120,7 +120,7 @@ namespace LBNet
 
 	protected:
 		CTCPSocket					_mSocket;
-		CLocker						_mLocker;
+		CSharedMutex				_mMutex;
 		CSessionKey					_mSessionKey;
 
 	private:

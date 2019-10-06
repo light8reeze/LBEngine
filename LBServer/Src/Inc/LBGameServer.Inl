@@ -1,7 +1,7 @@
 namespace LBNet
 {
 	template<typename TGameObject>
-	CGameServer<TGameObject>::CGameServer() : __mThreadCnt(0), __mMaxSession(5050), 
+	CGameServer<TGameObject>::CGameServer() : __mThreadCnt(0), __mMaxSession(5000), 
 		__mThreadList(), __mAcceptorList()
 	{
 		static_assert(std::is_base_of<CGameObject, TGameObject>::value == true);

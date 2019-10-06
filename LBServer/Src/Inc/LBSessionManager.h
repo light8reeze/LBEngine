@@ -10,6 +10,12 @@
 
 namespace LBNet
 {
+	/**
+		@brief	        세션 매니져 클래스
+		@details		세션, 분산서버를 생성, 관리한다.
+		@date	        2019-09-29
+		@auther         light8reeze(light8reeze@gmail.com)
+	*/
 	class LBS_EXPORT CSessionManager
 	{
 	private:

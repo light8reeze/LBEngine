@@ -46,12 +46,12 @@ namespace LBNet
 		Size GetUseSize();
 
 	private:
-		bool		__mIsAlloc;
-		ObjectList	__mObjectList;
-		ObjectQueue	__mObjectQueue;
-		Size		__mUseSize;
-		Size		__mPoolSize;
-		CLocker		__mLocker;
+		bool			__mIsAlloc;
+		ObjectList		__mObjectList;
+		ObjectQueue		__mObjectQueue;
+		Size			__mUseSize;
+		Size			__mPoolSize;
+		CSharedMutex	__mMutex;
 	};
 }
 

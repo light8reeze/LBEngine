@@ -19,7 +19,7 @@ namespace LBNet
 	CTime& CTime::operator+=(const CTime& pTime)
 	{
 		__mTimePoint += pTime.GetTimePoint().time_since_epoch();
-		UpdateFromTimePoint();
+		__UpdateFromTimePoint();
 
 		return (*this);
 	}
@@ -30,7 +30,7 @@ namespace LBNet
 	CTime& CTime::operator-=(const CTime& pTime)
 	{
 		__mTimePoint -= pTime.GetTimePoint().time_since_epoch();
-		UpdateFromTimePoint();
+		__UpdateFromTimePoint();
 
 		return (*this);
 	}
@@ -79,7 +79,7 @@ namespace LBNet
 	void CTime::SetYear(int pYear)
 	{
 		__mLocalTime.tm_year = pYear;
-		UpdateFromLocalTime();
+		__UpdateFromLocalTime();
 	}
 
 	/**
@@ -91,7 +91,7 @@ namespace LBNet
 		LB_ASSERT(pMonth >= 0 && pMonth < 12, "Invalid Value!");
 
 		__mLocalTime.tm_mon = pMonth;
-		UpdateFromLocalTime();
+		__UpdateFromLocalTime();
 	}
 
 	/**
@@ -103,7 +103,7 @@ namespace LBNet
 		LB_ASSERT(pDay >= 0 && pDay <= 31, "Invalid Value!");
 
 		__mLocalTime.tm_mday = pDay;
-		UpdateFromLocalTime();
+		__UpdateFromLocalTime();
 	}
 
 	/**
@@ -115,7 +115,7 @@ namespace LBNet
 		LB_ASSERT(pHour >= 0 && pHour <= 24, "Invalid Value!");
 
 		__mLocalTime.tm_hour = pHour;
-		UpdateFromLocalTime();
+		__UpdateFromLocalTime();
 	}
 
 	/**
@@ -127,7 +127,7 @@ namespace LBNet
 		LB_ASSERT(pMinute >= 0 && pMinute <= 60, "Invalid Value!");
 
 		__mLocalTime.tm_min = pMinute;
-		UpdateFromLocalTime();
+		__UpdateFromLocalTime();
 	}
 
 	/**
@@ -139,7 +139,7 @@ namespace LBNet
 		LB_ASSERT(pSecond >= 0 && pSecond <= 60, "Invalid Value!");
 
 		__mLocalTime.tm_sec = pSecond;
-		UpdateFromLocalTime();
+		__UpdateFromLocalTime();
 	}
 
 	/**
@@ -149,7 +149,7 @@ namespace LBNet
 	void CTime::SetTimePoint(TimePoint pTimePoint)
 	{
 		__mTimePoint = pTimePoint;
-		UpdateFromTimePoint();
+		__UpdateFromTimePoint();
 	}
 
 	/**
@@ -257,7 +257,7 @@ namespace LBNet
 	/**
 		@brief TimePoint를 이용하여 현재 설정된 시간으로 업데이트하는 함수
 	*/
-	void CTime::UpdateFromTimePoint()
+	void CTime::__UpdateFromTimePoint()
 	{
 		using namespace std::chrono;
 		time_t aTime = std::move(system_clock::to_time_t(__mTimePoint));
@@ -269,7 +269,7 @@ namespace LBNet
 	/**
 		@brief LocalTime을 이용하여 현재 설정된 시간으로 업데이트하는 함수
 	*/
-	void CTime::UpdateFromLocalTime()
+	void CTime::__UpdateFromLocalTime()
 	{
 		using namespace std::chrono;
 		__mLocalTime.tm_year -= 1900;

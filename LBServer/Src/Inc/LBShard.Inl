@@ -52,8 +52,8 @@ namespace LBNet
 	ErrCode CShard<TShardObject>::Close()
 	{
 		LB_ASSERT(GetGameObject() != nullptr, "Invalid!");
-
-		CLocker::AutoLock aLocker(_mLocker);
+		
+		WriteLock aLocker(_mMutex);
 
 		++(_mSessionKey.mField.mReuse);
 		GetGameObject()->OnDisconnect();
@@ -72,7 +72,7 @@ namespace LBNet
 
 		SetDisconnect();
 
-		CLocker::AutoLock aLock(_mLocker);
+		WriteLock aLocker(_mMutex);
 
 		__mNextConnect = aShardObject->OnConnectFail(pErr);
 	}

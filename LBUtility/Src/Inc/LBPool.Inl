@@ -2,7 +2,7 @@ namespace LBNet
 {
 	template<class TObject>
 	CObjectPool<TObject>::CObjectPool(Size pSize) : __mIsAlloc(false), __mObjectList(),
-		__mObjectQueue(), __mUseSize(0), __mPoolSize(pSize), __mLocker()
+		__mObjectQueue(), __mUseSize(0), __mPoolSize(pSize), __mMutex()
 	{
 		__mObjectList.reserve(pSize);
 	}
@@ -18,7 +18,7 @@ namespace LBNet
 	{
 		LB_ASSERT(__mIsAlloc == false, "Alloc Twice!!");
 
-		std::unique_lock<CLocker> aLocker(__mLocker);
+		WriteLock aLocker(__mMutex);
 
 		for (int index = 0; index < __mPoolSize; ++index)
 		{
@@ -42,7 +42,7 @@ namespace LBNet
 	template<class TObject>
 	void CObjectPool<TObject>::Close()
 	{
-		std::unique_lock<CLocker> aLocker(__mLocker);
+		WriteLock aLocker(__mMutex);
 
 		if (__mIsAlloc == false)
 			return;
@@ -67,7 +67,7 @@ namespace LBNet
 		TObject* aObject	= nullptr;
 
 		{
-			std::unique_lock<CLocker> aLocker(__mLocker);
+			WriteLock aLocker(__mMutex);
 
 			if (__mUseSize >= GetMaxSize())
 				return aObject;
@@ -105,7 +105,7 @@ namespace LBNet
 			return false;
 
 		{
-			std::unique_lock<CLocker> aLocker(__mLocker);
+			WriteLock aLocker(__mMutex);
 
 			__mObjectQueue.push(pObject);
 			++__mUseSize;

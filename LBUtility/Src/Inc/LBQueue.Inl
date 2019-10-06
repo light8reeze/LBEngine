@@ -1,7 +1,7 @@
 namespace LBNet
 {
 	template<typename TObject>
-	CQueue<TObject>::CQueue() : __mSemaphore(NULL), __mQueue(), __mLocker()
+	CQueue<TObject>::CQueue() : __mSemaphore(NULL), __mQueue(), __mMutex()
 	{
 		__mSemaphore = ::CreateSemaphore(NULL, 0, 0xFFFFFF, NULL);
 		LB_ASSERT(__mSemaphore != NULL, "Create Semaphore Error!");
@@ -17,7 +17,7 @@ namespace LBNet
 	bool CQueue<TObject>::Push(TObject& pObject)
 	{
 		{
-			std::unique_lock<CLocker> aLocker(__mLocker);
+			WriteLock aLocker(__mMutex);
 			__mQueue.push(pObject);
 			BOOL bResult = ::ReleaseSemaphore(__mSemaphore, 1, NULL);
 
@@ -43,7 +43,7 @@ namespace LBNet
 		}
 
 		{
-			std::unique_lock<CLocker> aLocker(__mLocker);
+			WriteLock aLocker(__mMutex);
 			pObject = __mQueue.front();
 			__mQueue.pop();
 		}

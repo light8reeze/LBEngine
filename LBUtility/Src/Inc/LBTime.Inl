@@ -7,7 +7,7 @@ namespace LBNet
 	inline CTime& CTime::operator+=(const std::chrono::duration<Rep, Period>& pTime)
 	{
 		__mTimePoint += pTime;
-		UpdateFromTimePoint();
+		__UpdateFromTimePoint();
 
 		return (*this);
 	}
@@ -19,7 +19,7 @@ namespace LBNet
 	inline CTime& CTime::operator-=(const std::chrono::duration<Rep, Period>& pTime)
 	{
 		__mTimePoint -= pTime;
-		UpdateFromTimePoint();
+		__UpdateFromTimePoint();
 
 		return (*this);
 	}
