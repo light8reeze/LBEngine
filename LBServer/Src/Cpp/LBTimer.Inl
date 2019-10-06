@@ -15,11 +15,15 @@ namespace LBNet
 	template<typename THandler, typename... TArgs>
 	void CTimer::Start(THandler&& pHandler, TArgs... pArgs)
 	{
+		std::size_t aWorkKey = reinterpret_cast<std::size_t>(this);
+
 		__mTimer.async_wait(
-			[pHandler, pArgs...](const boost::system::error_code& pErr)
+			[aWorkKey, pHandler, pArgs...](const boost::system::error_code& pErr)
 		{
 			ErrCode aErr = pErr.value();
 			pHandler(aErr, pArgs...);
+
+			CTimerStorage::__Instance().__RemoveTimer(aWorkKey);
 		});
 	}
 }

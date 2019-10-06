@@ -6,11 +6,41 @@
 */
 #pragma once
 #include "LBServer.h"
+#include "LBLocker.h"
 #include <boost/asio/steady_timer.hpp>
 
 namespace LBNet
 {
 	class CTime;
+
+	/**
+		@brief	        타이머 보관 클래스
+		@details		boost::asio::system_timer를 처리까지 보관하기 위한 클래스
+		@date	        2019-10-07
+		@auther         light8reeze(light8reeze@gmail.com)
+	*/
+	class LBS_EXPORT CTimerStorage
+	{
+		friend class CTimer; // CTimer클래스에서만 접근 가능하게 설정한다.
+
+	private:
+		using __TimerWorkList = std::map<std::size_t, boost::asio::system_timer>;
+
+	public:
+		CTimerStorage() = default;
+		~CTimerStorage() = default;
+
+	private:
+		void __AddTimer(std::size_t pKey, boost::asio::system_timer&& pTimer);
+		void __RemoveTimer(std::size_t pKey);
+		static CTimerStorage& __Instance();
+
+	private:
+		static CTimerStorage	__mSingleton;
+
+		__TimerWorkList __mWorkList;
+		CSharedMutex	__mMutex;
+	};
 
 	/**
 		@brief	        타이머 클래스
@@ -23,7 +53,7 @@ namespace LBNet
 	public:
 		CTimer();
 		CTimer(CTimer&& pTimer);
-		CTimer(const CTimer&) = delete;
+		CTimer(const CTimer& pTimer) = delete;
 		CTimer(const CTime& pTime);
 
 		template<class Rep, class Period>

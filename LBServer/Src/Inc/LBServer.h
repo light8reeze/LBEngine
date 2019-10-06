@@ -65,6 +65,11 @@
 	#endif
 #endif //_DEBUG
 
+/**
+	@brief		Thread Local Storage 사용 선언
+*/
+#define USE_TLS __declspec(thread)
+
 namespace LBNet
 {
 	/**
