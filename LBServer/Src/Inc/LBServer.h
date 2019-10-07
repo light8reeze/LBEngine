@@ -82,6 +82,7 @@ namespace LBNet
 	constexpr unsigned int eSzPacketMax		= 0x0FFF;	// 한 패킷당 최대 사이즈
 	constexpr unsigned int eSzPacketMin		= 4;		// 한 패킷당 최소 사이즈
 	constexpr unsigned int eSzSessionIndexMax = 17;
+	constexpr auto eTimeRetryAccept = 1s;
 
 	template <typename TObject>
 	using SharedObject	= std::shared_ptr<TObject>;

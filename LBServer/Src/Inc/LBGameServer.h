@@ -9,6 +9,7 @@
 #include "LBAcceptor.h"
 #include "LBSessionManager.h"
 #include "LBFactory.h"
+#include "LBTimer.h"
 #include <thread>
 
 namespace LBNet

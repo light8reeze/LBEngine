@@ -67,10 +67,10 @@ namespace LBNet
 			}
 
 			ErrCode aErr = OnReceive(static_cast<Size>(pRecvSize));
+			OnAccessEnd();
 			if (aErr != 0)
 			{
 				SetDisconnect();
-				OnAccessEnd();
 			}
 
 			Receive();
@@ -159,9 +159,10 @@ namespace LBNet
 		{
 			_mSocket.Close();
 			__mState = EState::eDisconnect;
-			SetReturn();
 			std::cout << _mSessionKey.mKey << "Set DisConnected!" << std::endl; //@test
 		}
+
+		SetReturn();
 		return 0;
 	}
 

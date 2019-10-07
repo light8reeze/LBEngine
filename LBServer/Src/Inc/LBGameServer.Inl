@@ -144,7 +144,8 @@ namespace LBNet
 		if (aKey.mKey == eKeyNull)
 		{
 			//세션 리소스 부족
-			//@todo : 타이머 구현시 특정시간 이후에 accept재시도
+			CTimer aAcceptTimer(eTimeRetryAccept);
+			aAcceptTimer.Start([this, &pAcceptor](ErrCode pErr) { __SetAccept(pAcceptor); });
 			return 1;
 		}
 
@@ -152,7 +153,8 @@ namespace LBNet
 		if (aSession == nullptr)
 		{
 			//세션 리소스 부족
-			//@todo : 타이머 구현시 특정시간 이후에 accept재시도
+			CTimer aAcceptTimer(eTimeRetryAccept);
+			aAcceptTimer.Start([this, &pAcceptor](ErrCode pErr) { __SetAccept(pAcceptor); });
 			return 1;
 		}
 
@@ -166,6 +168,9 @@ namespace LBNet
 		{
 			aSession->SetDisconnect();
 			aSession->OnAccessEnd();
+
+			CTimer aAcceptTimer(eTimeRetryAccept);
+			aAcceptTimer.Start([this, &pAcceptor](ErrCode pErr) { __SetAccept(pAcceptor); });
 
 			LB_ASSERT(aSession->GetState() == CManagedObject::EState::eReturned, "여기에서 반납이 되어야 한다.");
 			return 1;
@@ -183,6 +188,7 @@ namespace LBNet
 			{
 				aSession->SetDisconnect();
 				aSession->OnAccessEnd();
+				__SetAccept(*aAcceptPtr);
 				return;
 			}
 
@@ -191,6 +197,8 @@ namespace LBNet
 			{
 				aSession->SetDisconnect();
 				aSession->OnAccessEnd();
+				__SetAccept(*aAcceptPtr);
+
 				LB_ASSERT(aSession->GetState() == CManagedObject::EState::eReturned, "여기에서 반납이 되어야 한다.");
 				return;
 			}

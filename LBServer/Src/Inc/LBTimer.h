@@ -21,8 +21,6 @@ namespace LBNet
 	*/
 	class LBS_EXPORT CTimerStorage
 	{
-		friend class CTimer; // CTimer클래스에서만 접근 가능하게 설정한다.
-
 	private:
 		using __TimerWorkList = std::map<std::size_t, boost::asio::system_timer>;
 
@@ -30,14 +28,10 @@ namespace LBNet
 		CTimerStorage() = default;
 		~CTimerStorage() = default;
 
+		void AddTimer(std::size_t pKey, boost::asio::system_timer&& pTimer);
+		void RemoveTimer(std::size_t pKey);
+		
 	private:
-		void __AddTimer(std::size_t pKey, boost::asio::system_timer&& pTimer);
-		void __RemoveTimer(std::size_t pKey);
-		static CTimerStorage& __Instance();
-
-	private:
-		static CTimerStorage	__mSingleton;
-
 		__TimerWorkList __mWorkList;
 		CSharedMutex	__mMutex;
 	};
@@ -78,6 +72,8 @@ namespace LBNet
 
 	private:
 		boost::asio::system_timer	__mTimer;
+
+		static CTimerStorage		__mStorage;
 	};
 }
 

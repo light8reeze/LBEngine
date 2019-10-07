@@ -1,8 +1,8 @@
 namespace LBNet
 {
 	template<typename TShardObject>
-	inline CShard<TShardObject>::CShard() : CSession(), __mServerNo(0), 
-		__mIp(), __mPort(0), __mNextConnect(true)
+	inline CShard<TShardObject>::CShard() : CSession(), __mServerNo(0),
+		__mIp(), __mPort(0), __mNextConnect(false)
 	{
 		static_assert(std::is_base_of<CShardObject, TShardObject>::value == true);
 	}
@@ -52,7 +52,7 @@ namespace LBNet
 	ErrCode CShard<TShardObject>::Close()
 	{
 		LB_ASSERT(GetGameObject() != nullptr, "Invalid!");
-		
+
 		WriteLock aLocker(_mMutex);
 
 		++(_mSessionKey.mField.mReuse);
@@ -96,5 +96,12 @@ namespace LBNet
 	inline unsigned short CShard<TShardObject>::GetServerNo() const
 	{
 		return __mServerNo;
+	}
+
+	template<typename TShardObject>
+	inline void CShard<TShardObject>::OnDelete()
+	{
+		CManagedObject::OnDelete();
+		Close();
 	}
 }

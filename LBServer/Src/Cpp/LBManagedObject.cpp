@@ -54,7 +54,9 @@ namespace LBNet
 	{
 		LB_ASSERT(__mObjState != EState::eReturned, "Error!");
 
-		__mObjState = EState::eReturnWait;
+		if(__mObjState == EState::eUsing)
+			__mObjState = EState::eReturnWait;
+
 		return 0;
 	}
 

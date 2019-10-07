@@ -16,14 +16,15 @@ namespace LBNet
 	void CTimer::Start(THandler&& pHandler, TArgs... pArgs)
 	{
 		std::size_t aWorkKey = reinterpret_cast<std::size_t>(this);
+		CTimerStorage& aStorage = __mStorage;
 
 		__mTimer.async_wait(
-			[aWorkKey, pHandler, pArgs...](const boost::system::error_code& pErr)
+			[&aStorage, aWorkKey, pHandler, pArgs...](const boost::system::error_code& pErr)
 		{
 			ErrCode aErr = pErr.value();
 			pHandler(aErr, pArgs...);
 
-			CTimerStorage::__Instance().__RemoveTimer(aWorkKey);
+			__mStorage.RemoveTimer(aWorkKey);
 		});
 	}
 }

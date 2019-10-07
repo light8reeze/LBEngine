@@ -32,6 +32,7 @@ namespace LBNet
 		void				SetAddress(const char* pIp, unsigned short pPort);
 		void				SetServerNo(unsigned short pServerNo);
 		unsigned short		GetServerNo() const;
+		virtual void		OnDelete() override;
 
 	private:
 		void __OnConnectFail(ErrCode pErr);
