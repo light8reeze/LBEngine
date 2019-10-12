@@ -54,6 +54,12 @@ namespace LBNet
 		return aError.value();
 	}
 
+	void CTCPSocket::SetReuse(bool pIsReuse)
+	{
+		boost::asio::socket_base::reuse_address aOption(pIsReuse);
+		_mSocket.set_option(aOption);
+	}
+
 	ErrCode CTCPSocket::Close()
 	{
 		boost::system::error_code aError;

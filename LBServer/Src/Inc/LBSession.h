@@ -96,7 +96,7 @@ namespace LBNet
 		ErrCode OnReceive(Size pSize);
 		ErrCode Send(void* pBuffer, int pSize);
 		virtual ErrCode Close();
-		ErrCode SetDisconnect();
+		virtual ErrCode SetDisconnect();
 
 		void SetSessionKey(CSessionKey& pObjKey);
 		const CSessionKey& GetSessionKey() const;
@@ -122,10 +122,10 @@ namespace LBNet
 		CTCPSocket					_mSocket;
 		CSharedMutex				_mMutex;
 		CSessionKey					_mSessionKey;
+		EState						_mState;
 
 	private:
 		__BufferType				__mBuffer;
-		EState						__mState;
 		SharedObject<CGameObject>	__mGameObject;
 	};
 }

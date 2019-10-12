@@ -16,9 +16,6 @@
     <Filter Include="Network\Session">
       <UniqueIdentifier>{8d32bace-8bbf-4f37-820f-e274744a1c63}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Network\Acceptor">
-      <UniqueIdentifier>{10b36e78-5489-44b2-86a9-1f0f4dc605ec}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Network\Handler">
       <UniqueIdentifier>{73b17993-1fbe-4d21-a0c2-fa1861b83e0d}</UniqueIdentifier>
     </Filter>
@@ -36,6 +33,9 @@
     </Filter>
     <Filter Include="Timer">
       <UniqueIdentifier>{ba3ef4ff-27f2-467c-87ae-94261900dcbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network\Socket\Acceptor">
+      <UniqueIdentifier>{10b36e78-5489-44b2-86a9-1f0f4dc605ec}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -58,7 +58,7 @@
       <Filter>Network\Session</Filter>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBAcceptor.h">
-      <Filter>Network\Acceptor</Filter>
+      <Filter>Network\Socket\Acceptor</Filter>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBHandler.h">
       <Filter>Network\Handler</Filter>
@@ -118,7 +118,7 @@
       <Filter>Network\Socket</Filter>
     </ClCompile>
     <ClCompile Include="Src\Cpp\LBAcceptor.cpp">
-      <Filter>Network\Acceptor</Filter>
+      <Filter>Network\Socket\Acceptor</Filter>
     </ClCompile>
     <ClCompile Include="Src\Cpp\LBSession.cpp">
       <Filter>Network\Session</Filter>
@@ -150,12 +150,12 @@
       <Filter>Network\Socket</Filter>
     </None>
     <None Include="Src\Inc\LBAcceptor.Inl">
-      <Filter>Network\Acceptor</Filter>
+      <Filter>Network\Socket\Acceptor</Filter>
     </None>
     <None Include="Src\Inc\LBManagedObject.Inl">
       <Filter>Network\Object</Filter>
     </None>
-    <None Include="Src\Cpp\LBTimer.Inl">
+    <None Include="Src\Inc\LBTimer.Inl">
       <Filter>Timer</Filter>
     </None>
   </ItemGroup>

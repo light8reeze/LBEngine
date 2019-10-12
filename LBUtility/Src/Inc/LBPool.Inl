@@ -64,7 +64,7 @@ namespace LBNet
 	{
 		LB_ASSERT(__mIsAlloc == true, "Call Initialize First!");
 
-		TObject* aObject	= nullptr;
+		TObject* aObject = nullptr;
 
 		{
 			WriteLock aLocker(__mMutex);
@@ -85,9 +85,9 @@ namespace LBNet
 	template<class TObject>
 	bool CObjectPool<TObject>::DeleteObject(TObject*& pObject)
 	{
-		LB_ASSERT(__mIsAlloc == true,	"Call Initialize First!");
-		LB_ASSERT(pObject != nullptr,	"Delete NullPtr!!");
-		
+		LB_ASSERT(__mIsAlloc == true, "Call Initialize First!");
+		LB_ASSERT(pObject != nullptr, "Delete NullPtr!!");
+
 		if (__mUseSize >= GetMaxSize())
 			return false;
 
@@ -108,7 +108,7 @@ namespace LBNet
 			WriteLock aLocker(__mMutex);
 
 			__mObjectQueue.push(pObject);
-			++__mUseSize;
+			--__mUseSize;
 		}
 
 		return true;

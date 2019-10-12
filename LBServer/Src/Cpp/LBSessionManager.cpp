@@ -50,6 +50,7 @@ namespace LBNet
 		for (auto& aSession : __mSessionList)
 		{
 			aSession->SetDisconnect();
+			aSession->OnAccessEnd();
 			aSession->Close();
 		}
 

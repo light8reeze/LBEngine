@@ -40,6 +40,8 @@ namespace LBNet
 		template<typename THandler>
 		void SendAsync(void* pBuffer, int pSize, THandler&& pHandler);
 
+		void SetReuse(bool pIsReuse);
+
 		const SocketType&		GetSocket() const;
 		SocketType&				GetSocket();
 		const EndPointType		GetEndPoint() const;

@@ -2,7 +2,7 @@ namespace LBNet
 {
 	template<typename TShardObject>
 	inline CShard<TShardObject>::CShard() : CSession(), __mServerNo(0),
-		__mIp(), __mPort(0), __mNextConnect(false)
+		__mIp(), __mPort(0), __mNextConnect(true)
 	{
 		static_assert(std::is_base_of<CShardObject, TShardObject>::value == true);
 	}
@@ -18,7 +18,8 @@ namespace LBNet
 	template<typename TShardObject>
 	ErrCode CShard<TShardObject>::Connect()
 	{
-		OnConstruct();
+		if (GetState() == CManagedObject::EState::eReturned)
+			OnConstruct();
 
 		_mSocket.ConnectAsync(__mIp.c_str(), __mPort,
 			[this](const boost::system::error_code& pError)
@@ -49,19 +50,20 @@ namespace LBNet
 	}
 
 	template<typename TShardObject>
-	ErrCode CShard<TShardObject>::Close()
+	ErrCode CShard<TShardObject>::SetDisconnect()
 	{
-		LB_ASSERT(GetGameObject() != nullptr, "Invalid!");
+		WriteLock aLock(_mMutex);
 
-		WriteLock aLocker(_mMutex);
-
-		++(_mSessionKey.mField.mReuse);
-		GetGameObject()->OnDisconnect();
-		if (__mNextConnect)
+		if (_mState != EState::eDisconnect)
 		{
-			Connect();
+			_mSocket.Close();
+			_mState = EState::eDisconnect;
+
+			LB_ASSERT(GetGameObject() != nullptr, "Error!");
+			GetGameObject()->OnDisconnect();
 		}
 
+		SetReturn();
 		return 0;
 	}
 
@@ -70,11 +72,14 @@ namespace LBNet
 	{
 		auto aShardObject = GetGameObject<TShardObject>();
 
-		SetDisconnect();
-
 		WriteLock aLocker(_mMutex);
 
 		__mNextConnect = aShardObject->OnConnectFail(pErr);
+
+		if (__mNextConnect)
+			Connect();
+		else
+			SetDisconnect();
 	}
 
 	template<typename TShardObject>

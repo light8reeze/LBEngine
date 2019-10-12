@@ -7,7 +7,7 @@
 namespace LBNet
 {
 	CSession::CSession() : _mSocket(), __mBuffer(), 
-		__mState(EState::eDisconnect), _mMutex()
+		_mState(EState::eDisconnect), _mMutex()
 	{
 	}
 
@@ -23,12 +23,13 @@ namespace LBNet
 
 	ErrCode CSession::OnAccept()
 	{
-		LB_ASSERT(__mState == EState::eDisconnect,	"Invalid!");
+		LB_ASSERT(_mState == EState::eDisconnect,	"Invalid!");
 		LB_ASSERT(__mGameObject != nullptr,			"Invalid!");
 
 		__mBuffer.Clear();
-		__mState = EState::eStable;
+		_mState = EState::eStable;
 		__mGameObject->OnAccept();
+		_mSocket.SetReuse(true);
 		return Receive();
 	}
 
@@ -44,7 +45,7 @@ namespace LBNet
 			return 3;
 		}
 
-		if (__mState == EState::eDisconnect)
+		if (_mState == EState::eDisconnect)
 		{
 			return 2;
 		}
@@ -73,7 +74,8 @@ namespace LBNet
 				SetDisconnect();
 			}
 
-			Receive();
+			if(GetState() == CManagedObject::EState::eUsing)
+				Receive();
 		});
 
 		return 0;
@@ -81,12 +83,12 @@ namespace LBNet
 
 	ErrCode CSession::OnReceive(Size pSize)
 	{
-		LB_ASSERT(__mState == EState::eStable, "Invalid!");
+		LB_ASSERT(_mState == EState::eStable, "Invalid!");
 
 		if (pSize == 0)
 			return 1;
 
-		if (__mState == EState::eDisconnect)
+		if (_mState == EState::eDisconnect)
 			return 2;
 
 		__mBuffer.OnPush(pSize);
@@ -97,7 +99,7 @@ namespace LBNet
 
 		LB_ASSERT(aSize > 0, "Packet Error!");
 
-		if (aData != nullptr)
+		if (aData != nullptr && aGameObject != nullptr)
 		{
 			CPacketHeader* aHeader = reinterpret_cast<CPacketHeader*>(aData);
 			aResult = CMessageHandler::Process(aHeader->mCommand, aHeader, aSize, aGameObject);
@@ -114,7 +116,7 @@ namespace LBNet
 
 	ErrCode CSession::Send(void* pBuffer, int pSize)
 	{
-		LB_ASSERT(__mState == EState::eStable,	"Invalid!");
+		LB_ASSERT(_mState == EState::eStable,	"Invalid!");
 
 		if (!OnAccess())
 		{
@@ -135,18 +137,14 @@ namespace LBNet
 
 	ErrCode CSession::Close()
 	{
-		LB_ASSERT(__mState == EState::eDisconnect,	"Invalid!");
+		LB_ASSERT(_mState == EState::eDisconnect,	"Invalid!");
 
 		WriteLock aLocker(_mMutex);
 
 		__mBuffer.Clear();
 		++(_mSessionKey.mField.mReuse);
 
-		if (__mGameObject != nullptr)
-		{
-			__mGameObject->OnDisconnect();
-			__mGameObject->Unlink();
-		}
+		std::cout << _mSessionKey.mKey << " Closed!" << std::endl; //@test
 
 		return 0;
 	}
@@ -155,11 +153,12 @@ namespace LBNet
 	{
 		WriteLock aLock(_mMutex);
 
-		if (__mState != EState::eDisconnect)
+		if (_mState != EState::eDisconnect)
 		{
 			_mSocket.Close();
-			__mState = EState::eDisconnect;
-			std::cout << _mSessionKey.mKey << "Set DisConnected!" << std::endl; //@test
+			_mState = EState::eDisconnect;
+
+			RemoveObject();
 		}
 
 		SetReturn();
@@ -183,7 +182,12 @@ namespace LBNet
 
 	void CSession::RemoveObject()
 	{
-		__mGameObject = std::move(SharedObject<CGameObject>());
+		if (__mGameObject != nullptr)
+		{
+			__mGameObject->OnDisconnect();
+			__mGameObject->Unlink();
+			__mGameObject = nullptr;
+		}
 	}
 
 	void CSession::OnDelete()

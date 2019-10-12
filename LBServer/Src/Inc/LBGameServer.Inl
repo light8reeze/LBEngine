@@ -145,7 +145,11 @@ namespace LBNet
 		{
 			//세션 리소스 부족
 			CTimer aAcceptTimer(eTimeRetryAccept);
-			aAcceptTimer.Start([this, &pAcceptor](ErrCode pErr) { __SetAccept(pAcceptor); });
+			aAcceptTimer.Start([this, &pAcceptor](ErrCode pErr) 
+			{ 
+				__SetAccept(pAcceptor); 
+				return false;
+			});
 			return 1;
 		}
 
@@ -154,7 +158,11 @@ namespace LBNet
 		{
 			//세션 리소스 부족
 			CTimer aAcceptTimer(eTimeRetryAccept);
-			aAcceptTimer.Start([this, &pAcceptor](ErrCode pErr) { __SetAccept(pAcceptor); });
+			aAcceptTimer.Start([this, &pAcceptor](ErrCode pErr)
+			{
+				__SetAccept(pAcceptor);
+				return false;
+			});
 			return 1;
 		}
 
@@ -170,7 +178,11 @@ namespace LBNet
 			aSession->OnAccessEnd();
 
 			CTimer aAcceptTimer(eTimeRetryAccept);
-			aAcceptTimer.Start([this, &pAcceptor](ErrCode pErr) { __SetAccept(pAcceptor); });
+			aAcceptTimer.Start([this, &pAcceptor](ErrCode pErr)
+			{
+				__SetAccept(pAcceptor);
+				return false;
+			});
 
 			LB_ASSERT(aSession->GetState() == CManagedObject::EState::eReturned, "여기에서 반납이 되어야 한다.");
 			return 1;

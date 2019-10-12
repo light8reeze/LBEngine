@@ -88,7 +88,7 @@ namespace LBNet
 		@brief	LBEngine에서 사용하는 기본 시간 단위 정의
 	*/
 	using Tick		= std::chrono::duration<unsigned long, std::milli>;
-	using RawTick	= Tick::rep;
+	using TickCount	= Tick::rep;
 
 	/**
 		@brief			Enum을 타입의 값으로 변환해주는 함수

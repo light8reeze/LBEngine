@@ -79,8 +79,8 @@ namespace LBNet
 		void SetTimePoint(TimePoint pTimePoint);
 
 		TimePoint	GetTimePoint() const;
-		Tick		GetTick() const;
-		RawTick		GetTickCount() const;
+		Tick		ToTick() const;
+		TickCount	ToTickCount() const;
 		int			GetYear() const;
 		int			GetMonth() const;
 		int			GetDay() const;
@@ -90,6 +90,10 @@ namespace LBNet
 		EWeekday	GetWeekday() const;
 
 		static const CTime& GetStartTime();
+		static Tick			GetSteadyTick();
+		static TickCount	GetSteadyTickCount();
+		static Tick			GetSystemTick();
+		static TickCount	GetSystemTickCount();
 
 	private:
 		void __UpdateFromTimePoint();

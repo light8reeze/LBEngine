@@ -1,11 +1,10 @@
 #include "LBTimer.h"
-#include "LBTime.h"
 #include "LBIOContext.h"
 
 namespace LBNet
 {
 #pragma region CTimerStorage
-	void CTimerStorage::AddTimer(std::size_t pKey, boost::asio::system_timer&& pTimer)
+	void CTimerStorage::AddTimer(const CTimerKey& pKey, SystemTimer&& pTimer)
 	{
 		WriteLock aLock(__mMutex);
 
@@ -13,7 +12,7 @@ namespace LBNet
 		LB_ASSERT(aResult.second == true, "Error!");
 	}
 
-	void CTimerStorage::RemoveTimer(std::size_t pKey)
+	void CTimerStorage::RemoveTimer(const CTimerKey& pKey)
 	{
 		WriteLock aLock(__mMutex);
 
@@ -24,11 +23,12 @@ namespace LBNet
 #pragma region CTimer
 	CTimerStorage CTimer::__mStorage;
 
-	CTimer::CTimer() : __mTimer(CIOContext::Instance().GetIOContext())
+	CTimer::CTimer() : __mTimer(CIOContext::Instance().GetIOContext()), __mTimerKey(), __mPeriod()
 	{
 	}
 
-	CTimer::CTimer(CTimer&& pTimer) : __mTimer(std::move(pTimer.__mTimer))
+	CTimer::CTimer(CTimer&& pTimer) : __mTimer(std::move(pTimer.__mTimer)),
+		__mPeriod(std::move(pTimer.__mPeriod))
 	{
 	}
 
@@ -38,8 +38,7 @@ namespace LBNet
 
 	CTimer::~CTimer()
 	{
-		std::size_t aKey = reinterpret_cast<std::size_t>(this);
-		__mStorage.AddTimer(aKey, std::move(__mTimer));
+		__mStorage.AddTimer(__mTimerKey, std::move(__mTimer));
 	}
 
 	void CTimer::SetTime(const CTime& pTime)

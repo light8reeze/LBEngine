@@ -165,7 +165,7 @@ namespace LBNet
 		@details		서버의 틱은 시간을 ms단위로 반환한다.
 		@return	Tick	서버의 시간 틱duration(ms)
 	*/
-	Tick CTime::GetTick() const
+	Tick CTime::ToTick() const
 	{
 		return std::chrono::duration_cast<Tick>(__mTimePoint.time_since_epoch());
 	}
@@ -173,9 +173,9 @@ namespace LBNet
 	/**
 		@brief			서버의 시간 틱을 구하는 함수
 		@details		서버의 틱은 경과한 시간을 ms단위로 반환한다.
-		@return	Tick	서버의 시간 틱RawTick(ms)
+		@return	Tick	서버의 시간 틱TickCount(ms)
 	*/
-	RawTick CTime::GetTickCount() const
+	TickCount CTime::ToTickCount() const
 	{
 		return std::chrono::duration_cast<Tick>(__mTimePoint.time_since_epoch()).count();
 	}
@@ -252,6 +252,26 @@ namespace LBNet
 	const CTime& CTime::GetStartTime()
 	{
 		return __mStartTime;
+	}
+
+	Tick CTime::GetSteadyTick()
+	{
+		return std::chrono::duration_cast<Tick>(std::chrono::steady_clock::now().time_since_epoch());
+	}
+
+	TickCount CTime::GetSteadyTickCount()
+	{
+		return GetSteadyTick().count();
+	}
+
+	Tick CTime::GetSystemTick()
+	{
+		return std::chrono::duration_cast<Tick>(std::chrono::system_clock::now().time_since_epoch());
+	}
+
+	TickCount CTime::GetSystemTickCount()
+	{
+		return GetSystemTick().count();
 	}
 
 	/**
