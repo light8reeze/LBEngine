@@ -1,8 +1,6 @@
 ﻿# LBEngine
   
-LBEngine is easy game server engine using C++ with boost.asio.  
-It's implemented by using C++17, asynchronous IO, and multithread base.  
-It can be work in windows(Visual Studio 2017 or later) and support TCP  
+LBEngine is easy game server engine using C++ with boost.asio. It's implemented by using C++17, asynchronous IO, and multithread base. It can be work in windows(Visual Studio 2017 or later) and support TCP  
   
 # Feature
 
