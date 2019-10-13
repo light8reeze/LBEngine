@@ -16,6 +16,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LBServer", "LBServer\LBServ
 		{30E01DDD-EAAB-48ED-9171-E451C1A2EE3A} = {30E01DDD-EAAB-48ED-9171-E451C1A2EE3A}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{283913BF-34C2-4A13-965C-78A023E57A23}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
