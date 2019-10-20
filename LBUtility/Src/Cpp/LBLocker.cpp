@@ -1,10 +1,8 @@
 #include "LBLocker.h"
-#include <iostream>
-
-extern "C" void LBPause();
 
 namespace LBNet
 {
+#ifdef _DEBUG
 	CSharedMutex::CSharedMutex() : __mMutex()
 	{
 	}
@@ -25,13 +23,36 @@ namespace LBNet
 	{
 		auto aResult = __mMutex.try_lock();
 
-		#ifdef _DEBUG
 		if (aResult)
 		{
 			__mOwner = std::this_thread::get_id();
 		}
-		#endif //_DEBUG
 
 		return aResult;
 	}
+
+	void CSharedMutex::lock_shared()
+	{
+		__mMutex.lock_shared();
+		DEBUG_CODE(__mOwner = std::this_thread::get_id());
+	}
+
+	void CSharedMutex::unlock_shared()
+	{
+		__mMutex.unlock_shared();
+		DEBUG_CODE(__mOwner = std::thread::id());
+	}
+
+	bool CSharedMutex::try_lock_shared()
+	{
+		auto aResult = __mMutex.try_lock_shared();
+
+		if (aResult)
+		{
+			__mOwner = std::this_thread::get_id();
+		}
+
+		return aResult;
+	}
+#endif //_DEBUG
 }

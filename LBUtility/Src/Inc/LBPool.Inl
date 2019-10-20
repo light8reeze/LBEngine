@@ -88,9 +88,6 @@ namespace LBNet
 		LB_ASSERT(__mIsAlloc == true, "Call Initialize First!");
 		LB_ASSERT(pObject != nullptr, "Delete NullPtr!!");
 
-		if (__mUseSize >= GetMaxSize())
-			return false;
-
 		bool aCheckFlag = false;
 		for (auto& aPtr : __mObjectList)
 		{

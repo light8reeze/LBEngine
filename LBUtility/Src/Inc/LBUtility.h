@@ -87,7 +87,7 @@ namespace LBNet
 	/**
 		@brief	LBEngine에서 사용하는 기본 시간 단위 정의
 	*/
-	using Tick		= std::chrono::duration<unsigned long, std::milli>;
+	using Tick		= std::chrono::duration<unsigned long long, std::milli>;
 	using TickCount	= Tick::rep;
 
 	/**

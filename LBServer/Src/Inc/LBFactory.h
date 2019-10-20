@@ -72,6 +72,8 @@ namespace LBNet
 		SharedObject<TObject> New();
 		template<typename TObject, typename TDeleter>
 		SharedObject<TObject> New(TDeleter&& pDeleter);
+		template<typename TObject>
+		TObject* Allocate();
 
 		template<typename TObject, typename TDeleter>
 		static SharedObject<TObject> MakePtr(TObject*& pObject, TDeleter&& pDeleter);

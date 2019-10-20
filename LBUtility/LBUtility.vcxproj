@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Cpp\LBBuffer.cpp" />
     <ClCompile Include="Src\Cpp\LBLocker.cpp" />
     <ClCompile Include="Src\Cpp\LBTime.cpp" />
     <ClCompile Include="Src\Cpp\LBUtility.cpp" />
@@ -51,11 +52,6 @@
     <ClInclude Include="Src\Inc\LBProbability.h" />
   </ItemGroup>
   <ItemGroup>
-    <MASM Include="Src\Cpp\LBPause.masm">
-      <FileType>Document</FileType>
-    </MASM>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Src\Inc\LBChar.Inl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <FileType>Document</FileType>
@@ -77,7 +73,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
-    <None Include="Src\Inc\LBBuffer.Inl" />
     <None Include="Src\Inc\LBFile.Inl" />
     <None Include="Src\Inc\LBPool.Inl" />
     <None Include="Src\Inc\LBProbability.Inl" />

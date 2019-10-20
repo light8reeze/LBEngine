@@ -1,4 +1,6 @@
 #include "LBSessionManager.h"
+#include "LBSender.h"
+#include "LBBuffer.h"
 #include "LBFactory.h"
 
 namespace LBNet
@@ -12,8 +14,6 @@ namespace LBNet
 
 	void CSessionManager::Initialize(int pMaxSession)
 	{
-		LB_ASSERT(__mMutex.GetOwner() == std::thread::id(), "Must Exec SingleThread Only!");
-
 		__mSessionList.reserve(pMaxSession);
 
 		for (int index = 0; index < pMaxSession; ++index)
@@ -44,8 +44,6 @@ namespace LBNet
 
 	void CSessionManager::Close()
 	{
-		LB_ASSERT(__mMutex.GetOwner() == std::thread::id(), "Must Exec SingleThread Only!");
-
 		WriteLock aWriteLock(__mMutex);
 		for (auto& aSession : __mSessionList)
 		{

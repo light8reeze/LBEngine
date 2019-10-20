@@ -31,18 +31,17 @@ namespace LBNet
 				return;
 			}
 
+			ErrCode aErr = OnAccept();
+			if (aErr != 0)
+			{
+				__OnConnectFail(aErr);
+			}
 
-			ErrCode aErr = aShardObject->OnConnect();
+			aErr = aShardObject->OnConnect();
 			if (aErr != 0)
 			{
 				__OnConnectFail(aErr);
 				return;
-			}
-
-			aErr = OnAccept();
-			if (aErr != 0)
-			{
-				__OnConnectFail(aErr);
 			}
 		});
 

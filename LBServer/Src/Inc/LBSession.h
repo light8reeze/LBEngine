@@ -5,13 +5,18 @@
 	@auther light8reeze(light8reeze@gmail.com)
 */
 #pragma once
-#include "LBServer.h"
 #include "LBSocket.h"
 #include "LBBuffer.h"
+#include "LBLocker.h"
 #include "LBManagedObject.h"
+#include "LBSender.h"
 
 namespace LBNet
 {
+	class CGameObject;
+
+	constexpr unsigned int eKeyNull = std::numeric_limits<unsigned int>::max();
+	
 	/**
 		@brief		세션 키 클래스
 		@details	한 서버 내에서 관리되는 세션, 게임 오브젝트의 키 값이다.
@@ -20,8 +25,6 @@ namespace LBNet
 		@date		2019-09-12
 		@auther		light8reeze(light8reeze@gmail.com)
 	*/
-	constexpr unsigned int eKeyNull = std::numeric_limits<unsigned int>::max();
-
 	class CSessionKey
 	{
 	public:
@@ -64,8 +67,6 @@ namespace LBNet
 		};
 	};
 
-	class CGameObject;
-
 	/**
 		@brief		TCP 세션 클래스
 		@warning	1. 연결된 세션, 게임 오브젝트는 반드시 1:1연결을 해야한다.
@@ -83,9 +84,6 @@ namespace LBNet
 			eDisconnect,
 		};
 
-	private:
-		using __BufferType	= CBuffer<eSzPacketMax>;
-
 	public:
 		CSession();
 		virtual ~CSession() override;
@@ -95,6 +93,7 @@ namespace LBNet
 		ErrCode Receive();
 		ErrCode OnReceive(Size pSize);
 		ErrCode Send(void* pBuffer, int pSize);
+		ErrCode Send(SharedObject<CSender> pSender);
 		virtual ErrCode Close();
 		virtual ErrCode SetDisconnect();
 
@@ -125,7 +124,7 @@ namespace LBNet
 		EState						_mState;
 
 	private:
-		__BufferType				__mBuffer;
+		CBuffer						__mBuffer;
 		SharedObject<CGameObject>	__mGameObject;
 	};
 }

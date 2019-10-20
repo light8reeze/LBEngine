@@ -1,8 +1,8 @@
 #include "LBGameObject.h"
+#include "LBSender.h"
 
 namespace LBNet
 {
-#pragma region CGameObject
 	CGameObject::CGameObject() : _mSession()
 	{
 	}
@@ -28,6 +28,17 @@ namespace LBNet
 		return 0;
 	}
 
+	ErrCode CGameObject::Send(SharedObject<CSender>& pSender)
+	{
+		if (!_mSession.expired())
+		{
+			auto aShared = _mSession.lock();
+			return aShared->Send(pSender);
+		}
+
+		return 0;
+	}
+
 	const CSessionKey CGameObject::GetSessionKey() const
 	{
 		if (!_mSession.expired())
@@ -47,5 +58,4 @@ namespace LBNet
 			aShared->SetDisconnect();
 		}
 	}
-#pragma endregion CGameObject
 }

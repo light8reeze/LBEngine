@@ -37,6 +37,9 @@
     <Filter Include="Network\Socket\Acceptor">
       <UniqueIdentifier>{10b36e78-5489-44b2-86a9-1f0f4dc605ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Memory\Send">
+      <UniqueIdentifier>{378cae39-555f-4a80-8364-1b71bf9bdd05}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Inc\LBServer.h">
@@ -105,6 +108,15 @@
     <ClInclude Include="Src\Inc\LBTimer.h">
       <Filter>Timer</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Inc\LBSender.h">
+      <Filter>Memory\Send</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBSender.Inl">
+      <Filter>Memory\Send</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBSendPool.h">
+      <Filter>Memory\Send</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Cpp\main.cpp" />
@@ -143,6 +155,12 @@
     </ClCompile>
     <ClCompile Include="Src\Cpp\LBTimer.cpp">
       <Filter>Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Cpp\LBSender.cpp">
+      <Filter>Memory\Send</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Cpp\LBSendPool.cpp">
+      <Filter>Memory\Send</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

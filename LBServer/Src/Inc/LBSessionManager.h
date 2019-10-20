@@ -7,6 +7,8 @@
 #pragma once
 #include "LBShardObject.h"
 #include "LBShard.h"
+#include "LBLocker.h"
+#include <queue>
 
 namespace LBNet
 {

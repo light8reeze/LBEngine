@@ -5,10 +5,7 @@
 	@auther light8reeze(light8reeze@gmail.com)
 */
 #pragma once
-#include "LBServer.h"
 #include "LBSession.h"
-#include "LBLocker.h"
-#include <queue>
 
 namespace LBNet
 {
@@ -34,6 +31,7 @@ namespace LBNet
 		virtual void OnDisconnect() {}
 		void SetDisconnect();
 		ErrCode Send(void* pBuffer, int pSize);
+		ErrCode Send(SharedObject<CSender>& pSender);
 
 		const CSessionKey GetSessionKey() const;
 

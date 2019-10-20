@@ -21,13 +21,14 @@ namespace LBNet
 	template<typename THandler, typename... TArgs>
 	void CTimer::Start(THandler&& pHandler, TArgs... pArgs)
 	{
-		__mTimerKey = std::move(CTimerKey());
-		CTimerKey& aKey = __mTimerKey;
-		Tick aPeriod	= __mPeriod;
-		CTimerStorage& aStorage = __mStorage;
+		__mTimerKey.mID = std::this_thread::get_id();
+		__mTimerKey.mTick = CTime::GetSystemTickCount();
+
+		CTimerKey aKey = __mTimerKey;
+		Tick aPeriod = __mPeriod;
 
 		__mTimer.async_wait(
-			[&aStorage, aKey, aPeriod, pHandler, pArgs...](const boost::system::error_code& pErr)
+			[aKey, aPeriod, pHandler, pArgs...](const boost::system::error_code& pErr)
 		{
 			ErrCode aErr = pErr.value();
 			bool aNextExe = pHandler(aErr, pArgs...);

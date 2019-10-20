@@ -1,3 +1,4 @@
+#include <iostream>
 namespace LBNet
 {
 #pragma region CObjectPoolEx
@@ -57,6 +58,13 @@ namespace LBNet
 	template<typename TObject, typename TDeleter>
 	SharedObject<TObject> CFactory::New(TDeleter&& pDeleter)
 	{
+		TObject* aObject = Allocate<TObject>();
+		return MakePtr(aObject, pDeleter);
+	}
+
+	template<typename TObject>
+	TObject* CFactory::Allocate()
+	{
 		using ObjectPool = CObjectPoolEx<TObject>;
 
 		std::size_t aKey = typeid(TObject).hash_code();
@@ -64,14 +72,14 @@ namespace LBNet
 		if (__mPools.find(aKey) == __mPools.end())
 			return nullptr;
 
-		auto		aIter		= __mPools.find(aKey);
-		__PoolPtr&	aPool		= aIter->second;
-		ObjectPool* aObjPool	= dynamic_cast<ObjectPool*>(aPool.get());
+		auto		aIter = __mPools.find(aKey);
+		__PoolPtr&	aPool = aIter->second;
+		ObjectPool* aObjPool = dynamic_cast<ObjectPool*>(aPool.get());
 
 		LB_ASSERT(aObjPool != nullptr, "Exception!");
 
 		TObject* aObject = aObjPool->NewObject();
-		return MakePtr(aObject, pDeleter);
+		return aObject;
 	}
 
 	template<typename TObject>

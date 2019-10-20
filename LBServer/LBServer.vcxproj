@@ -170,6 +170,8 @@
     </ClInclude>
     <ClInclude Include="Src\Inc\LBBoostConfig.h" />
     <ClInclude Include="Src\Inc\LBGameServer.h" />
+    <ClInclude Include="Src\Inc\LBSender.h" />
+    <ClInclude Include="Src\Inc\LBSendPool.h" />
     <ClInclude Include="Src\Inc\LBSessionManager.h" />
     <ClInclude Include="Src\Inc\LBShard.h" />
     <ClInclude Include="Src\Inc\LBGameObject.h">
@@ -226,6 +228,8 @@
     </ClCompile>
     <ClCompile Include="Src\Cpp\LBIOContext.cpp" />
     <ClCompile Include="Src\Cpp\LBManagedObject.cpp" />
+    <ClCompile Include="Src\Cpp\LBSender.cpp" />
+    <ClCompile Include="Src\Cpp\LBSendPool.cpp" />
     <ClCompile Include="Src\Cpp\LBServer.cpp" />
     <ClCompile Include="Src\Cpp\LBSession.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -273,6 +277,9 @@
     <ClInclude Include="Src\Inc\LBShard.Inl">
       <FileType>Document</FileType>
     </ClInclude>
+    <ClInclude Include="Src\Inc\LBSender.Inl">
+      <FileType>Document</FileType>
+    </ClInclude>
     <None Include="Src\Inc\LBSocket.Inl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -280,6 +287,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </None>
     <None Include="Src\Inc\LBTimer.Inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LBUtility\LBUtility.vcxproj">
+      <Project>{30e01ddd-eaab-48ed-9171-e451c1a2ee3a}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

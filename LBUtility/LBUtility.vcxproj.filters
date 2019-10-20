@@ -10,6 +10,9 @@
     <ClCompile Include="Src\Cpp\LBUtility.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Cpp\LBBuffer.cpp">
+      <Filter>Memory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CharSet">
@@ -94,11 +97,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <MASM Include="Src\Cpp\LBPause.masm">
-      <Filter>Locker</Filter>
-    </MASM>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Src\Inc\LBString.Inl">
       <Filter>CharSet\String</Filter>
     </None>
@@ -112,9 +110,6 @@
       <Filter>File</Filter>
     </None>
     <None Include="Src\Inc\LBPool.Inl">
-      <Filter>Memory</Filter>
-    </None>
-    <None Include="Src\Inc\LBBuffer.Inl">
       <Filter>Memory</Filter>
     </None>
     <None Include="Src\Inc\LBQueue.Inl">

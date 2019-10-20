@@ -65,11 +65,6 @@
 	#endif
 #endif //_DEBUG
 
-/**
-	@brief		Thread Local Storage 사용 선언
-*/
-#define USE_TLS __declspec(thread)
-
 namespace LBNet
 {
 	/**
@@ -78,11 +73,11 @@ namespace LBNet
 	*/
 	constexpr Version LBS_EXPORT GetLBSVersion();
 
-	constexpr unsigned int eSzPacketBuffer	= 0xFFFF;	// 패킷 버퍼 최대 사이즈
-	constexpr unsigned int eSzPacketMax		= 0x0FFF;	// 한 패킷당 최대 사이즈
-	constexpr unsigned int eSzPacketMin		= 4;		// 한 패킷당 최소 사이즈
+	constexpr Size eSzPacketMax		= 0x7FFF;	// 한 패킷당 최대 사이즈
+	constexpr Size eSzPacketMin		= 4;		// 한 패킷당 최소 사이즈
 	constexpr unsigned int eSzSessionIndexMax = 17;
-	constexpr auto eTimeRetryAccept = 1s;
+	constexpr auto eTimeRetryAccept = 1s;		// Accept실패시 재시도 시간
+	constexpr Size eSzSendChunk		= 1 << 10;	// Send블록의 단위
 
 	template <typename TObject>
 	using SharedObject	= std::shared_ptr<TObject>;

@@ -6,14 +6,14 @@
 */
 #pragma once
 #include "LBUtility.h"
-#include <mutex>
 #include <shared_mutex>
 
 namespace LBNet
 {
+#ifdef _DEBUG
 	/**
 		@brief		뮤텍스 클래스
-		@details	std::shared_mutex을 이용한 잠금 클래스
+		@details	std::shared_mutex을 이용한 잠금 클래스(디버그 모드에서만 사용)
 		@comments	shared_lock, unique_lock를 이용하여 Read, Write락 구현을 위해 개발
 		@date		2019-07-20
 		@auther		light8reeze(light8reeze@gmail.com)
@@ -27,10 +27,11 @@ namespace LBNet
 		void lock();
 		void unlock();
 		bool try_lock();
+		void lock_shared();
+		void unlock_shared();
+		bool try_lock_shared();
 
-#ifdef _DEBUG
 		std::thread::id GetOwner() { return __mOwner; }
-#endif //_DEBUG
 
 	private:
 		#pragma warning(disable : 4251)
@@ -38,6 +39,9 @@ namespace LBNet
 		DEBUG_CODE(std::thread::id	__mOwner{});
 		#pragma warning(default : 4251)
 	};
+#else
+	using CSharedMutex	= std::shared_mutex;
+#endif //_DEBUG
 
 	using ReadLock		= std::shared_lock<CSharedMutex>;
 	using WriteLock		= std::unique_lock<CSharedMutex>;

@@ -2,11 +2,10 @@
 #include "LBHandler.h"
 #include "LBGameObject.h"
 #include "LBSessionManager.h"
-#include <iostream> //@test
 
 namespace LBNet
 {
-	CSession::CSession() : _mSocket(), __mBuffer(), 
+	CSession::CSession() : _mSocket(), __mBuffer(eSzPacketMax),
 		_mState(EState::eDisconnect), _mMutex()
 	{
 	}
@@ -38,7 +37,7 @@ namespace LBNet
 		LB_ASSERT(__mGameObject != nullptr, "Object Not Linked to Session");
 
 		Size	aSize = __mBuffer.GetUsableSize();
-		char*	aWritePtr = __mBuffer.GetWriteAddress();
+		char*	aWritePtr = __mBuffer.GetWritePointer();
 
 		if (!OnAccess())
 		{
@@ -54,6 +53,7 @@ namespace LBNet
 		if (aSize < eSzPacketMin)
 		{
 			SetDisconnect();
+			OnAccessEnd();
 			return 1;
 		}
 
@@ -68,12 +68,14 @@ namespace LBNet
 			}
 
 			ErrCode aErr = OnReceive(static_cast<Size>(pRecvSize));
-			OnAccessEnd();
 			if (aErr != 0)
 			{
 				SetDisconnect();
+				OnAccessEnd();
+				return;
 			}
 
+			OnAccessEnd();
 			if(GetState() == CManagedObject::EState::eUsing)
 				Receive();
 		});
@@ -91,13 +93,18 @@ namespace LBNet
 		if (_mState == EState::eDisconnect)
 			return 2;
 
-		__mBuffer.OnPush(pSize);
+		if (!__mBuffer.OnPush(pSize))
+		{
+			SetDisconnect();
+			return 2;
+		}
+
 		Size	aSize = 0;
 		ErrCode aResult = 0;
 		char*	aData = __mBuffer.Front(aSize, aResult);
 		auto aGameObject = GetGameObject<CGameObject>();
 
-		LB_ASSERT(aSize > 0, "Packet Error!");
+		LB_ASSERT(aSize >= sizeof(CPacketHeader), "Packet Error!");
 
 		if (aData != nullptr && aGameObject != nullptr)
 		{
@@ -135,6 +142,34 @@ namespace LBNet
 		return 0;
 	}
 
+	ErrCode CSession::Send(SharedObject<CSender> pSender)
+	{
+		if (pSender == nullptr)
+			return 1;
+
+		LB_ASSERT(_mState == EState::eStable, "Invalid!");
+
+		auto aSendPtr = pSender->GetSendPointer();
+		auto aSendSize = pSender->GetSendSize();
+
+		if (aSendPtr == nullptr)
+			return 1;
+
+		if (!OnAccess())
+			return 1;
+
+		_mSocket.SendAsync(aSendPtr, aSendSize,
+			[this, pSender](const boost::system::error_code& pError, std::size_t pSendSize)
+		{
+			if (pError.value() != 0 || pSendSize == 0)
+				SetDisconnect();
+
+			OnAccessEnd();
+		});
+
+		return 0;
+	}
+
 	ErrCode CSession::Close()
 	{
 		LB_ASSERT(_mState == EState::eDisconnect,	"Invalid!");
@@ -143,8 +178,6 @@ namespace LBNet
 
 		__mBuffer.Clear();
 		++(_mSessionKey.mField.mReuse);
-
-		std::cout << _mSessionKey.mKey << " Closed!" << std::endl; //@test
 
 		return 0;
 	}
