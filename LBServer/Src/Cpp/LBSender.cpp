@@ -59,7 +59,7 @@ namespace LBNet
 		if (__mChunk == nullptr)
 			return 0;
 
-		LB_ASSERT(__mChunkIndex > 0, "Error!");
+		LB_ASSERT(__mChunkIndex >= 0, "Error!");
 		LB_ASSERT(__mChunkCount > 0, "Error!");
 
 		for (int index = __mChunkIndex; index < (__mChunkIndex + __mChunkCount); ++index)

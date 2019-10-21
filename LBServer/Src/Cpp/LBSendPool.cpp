@@ -30,6 +30,7 @@ namespace LBNet
 
 		__mUseFlag.reserve(pChunkCnt);
 		__mSenderList.reserve(pChunkCnt);
+		__mChunkCnt = pChunkCnt;
 
 		for (Size index = 0; index < pChunkCnt; ++index)
 		{
