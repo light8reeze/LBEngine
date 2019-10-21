@@ -1,6 +1,5 @@
 #include "LBSessionManager.h"
 #include "LBSender.h"
-#include "LBBuffer.h"
 #include "LBFactory.h"
 
 namespace LBNet

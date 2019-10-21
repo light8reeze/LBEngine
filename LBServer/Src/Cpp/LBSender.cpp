@@ -64,7 +64,8 @@ namespace LBNet
 
 		for (int index = __mChunkIndex; index < (__mChunkIndex + __mChunkCount); ++index)
 		{
-			bool aResult = __mSendPool.DeAllocate(index);
+			DEBUG_CODE(bool aResult = )
+			__mSendPool.DeAllocate(index);
 
 			LB_ASSERT(aResult, "Send가 반납되지 못했다.");
 		}

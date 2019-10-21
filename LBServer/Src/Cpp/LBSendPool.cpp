@@ -33,7 +33,8 @@ namespace LBNet
 
 		for (Size index = 0; index < pChunkCnt; ++index)
 		{
-			__mUseFlag[index] = false;
+			__mUseFlag.emplace_back(std::move(false));
+			__mSenderList.emplace_back(std::move(CSender()));
 		}
 
 		return 0;

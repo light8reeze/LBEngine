@@ -1,11 +1,10 @@
 /**
 	@file	LBSessionManager.h
-	@brief	LBServer狼 技记 包府 包访 庆歹(2019-10-05 盒府)
+	@brief	LBServer狼 技记 包府 包访 庆歹
 	@date	2019-10-05
 	@auther light8reeze(light8reeze@gmail.com)
 */
 #pragma once
-#include "LBShardObject.h"
 #include "LBShard.h"
 #include "LBLocker.h"
 #include <queue>
@@ -21,8 +20,8 @@ namespace LBNet
 	class LBS_EXPORT CSessionManager
 	{
 	private:
-		using __SessionList = std::vector<SharedObject<CSession>>;
-		using __ShardList = std::vector<SharedObject<CSession>>;
+		using __SessionList		= std::vector<SharedObject<CSession>>;
+		using __ShardList		= std::vector<SharedObject<CSession>>;
 		using __SessionKeyQueue = std::queue<CSessionKey>;
 
 	public:

@@ -5,6 +5,7 @@
 	@auther light8reeze(light8reeze@gmail.com)
 */
 #pragma once
+#include "LBServer.h"
 #include "LBSocket.h"
 #include "LBBuffer.h"
 #include "LBLocker.h"

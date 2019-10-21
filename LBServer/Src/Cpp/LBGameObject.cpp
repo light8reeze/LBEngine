@@ -1,5 +1,4 @@
 #include "LBGameObject.h"
-#include "LBSender.h"
 
 namespace LBNet
 {

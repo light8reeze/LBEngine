@@ -5,7 +5,8 @@ namespace LBNet
 	/**
 		@brief CBuffer의 생성자
 	*/
-	CBuffer::CBuffer(Size pSize) : _mMAX_SIZE(pSize), _mUseSize(0), _mReadIndex(0), _mWriteIndex(0), _mBuffer()
+	CBuffer::CBuffer(Size pSize) : _mMAX_SIZE(pSize), _mUseSize(0), 
+		_mReadIndex(0), _mWriteIndex(0), _mBuffer(nullptr)
 	{
 		_mBuffer = new char[_mMAX_SIZE];
 		::memset(_mBuffer, 0, _mMAX_SIZE);
@@ -14,13 +15,6 @@ namespace LBNet
 	CBuffer::~CBuffer()
 	{
 		delete[] _mBuffer;
-	}
-
-	void CBuffer::Clear()
-	{
-		_mReadIndex		= 0;
-		_mUseSize		= 0;
-		_mWriteIndex	= 0;
 	}
 
 	bool CBuffer::Push(const char* pData, Size pSize)
@@ -52,9 +46,6 @@ namespace LBNet
 		if (pSize > _mMAX_SIZE - sizeof(CBufferHeader))
 			return nullptr;
 
-		if (pSize == 1)
-			LB_ASSERT(0, "");
-
 		_mReadIndex += static_cast<int>(pSize) + sizeof(CBufferHeader);
 		return aData;
 	}
@@ -66,20 +57,12 @@ namespace LBNet
 		_mUseSize		-= static_cast<Size>(_mReadIndex);
 		_mReadIndex		= 0;
 	}
-	
-	Size CBuffer::GetUsingSize() const
-	{
-		return _mUseSize;
-	}
 
-	Size CBuffer::GetUsableSize() const
+	void CBuffer::Clear()
 	{
-		return _mMAX_SIZE - _mUseSize;
-	}
-
-	Size CBuffer::GetBufferSize()
-	{
-		return _mMAX_SIZE;
+		_mReadIndex = 0;
+		_mUseSize = 0;
+		_mWriteIndex = 0;
 	}
 
 	bool CBuffer::OnPush(Size pSize)
@@ -101,4 +84,20 @@ namespace LBNet
 		LB_ASSERT(_mWriteIndex < _mMAX_SIZE, "Invalid Address!");
 		return &(_mBuffer[_mWriteIndex]);
 	}
+
+	Size CBuffer::GetUsingSize() const
+	{
+		return _mUseSize;
+	}
+
+	Size CBuffer::GetUsableSize() const
+	{
+		return _mMAX_SIZE - _mUseSize;
+	}
+
+	Size CBuffer::GetBufferSize()
+	{
+		return _mMAX_SIZE;
+	}
+
 }
