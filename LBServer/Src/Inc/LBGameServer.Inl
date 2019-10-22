@@ -150,7 +150,7 @@ namespace LBNet
 				__SetAccept(pAcceptor); 
 				return false;
 			});
-			return 1;
+			return eErrCodeNotEnoughRsc;
 		}
 
 		auto aSession = CSessionManager::Instance().GetSession(aKey);
@@ -163,7 +163,7 @@ namespace LBNet
 				__SetAccept(pAcceptor);
 				return false;
 			});
-			return 1;
+			return eErrCodeNotEnoughRsc;
 		}
 
 		// 게임 오브젝트는 accept후에는 부족할 수 있기 때문에 
@@ -185,7 +185,7 @@ namespace LBNet
 			});
 
 			LB_ASSERT(aSession->GetState() == CManagedObject::EState::eReturned, "여기에서 반납이 되어야 한다.");
-			return 1;
+			return eErrCodeNotEnoughRsc;
 		}
 		aSession->SetGameObject(aGameObject);
 		aGameObject->LinkSession(aSession);

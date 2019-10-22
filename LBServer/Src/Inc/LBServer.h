@@ -86,3 +86,5 @@ namespace LBNet
 	template <typename TObject>
 	using UniqueObject	= std::unique_ptr<TObject>;
 }
+
+#include "LBError.h"

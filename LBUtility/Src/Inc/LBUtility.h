@@ -168,5 +168,11 @@ namespace LBNet
 	/**
 		@brief 에러코드 타입
 	*/
-	using ErrCode = int;
+	using ErrCode = std::size_t;
 }
+
+/**
+	@brief		에러코드 등록 매크로
+	@comment	pErr에 사용할 변수명을 넣는다.
+*/
+#define LB_ERRCODE(pErr) const LBNet::ErrCode pErr = std::hash<std::string>{}(#pErr)

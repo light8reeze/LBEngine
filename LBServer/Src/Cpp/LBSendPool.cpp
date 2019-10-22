@@ -25,7 +25,7 @@ namespace LBNet
 		catch (...)
 		{
 			LB_ASSERT(0, "bad Alloc!");
-			return 1;
+			return eErrCodeBadAlloc;
 		}
 
 		__mUseFlag.reserve(pChunkCnt);

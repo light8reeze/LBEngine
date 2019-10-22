@@ -9,7 +9,7 @@ namespace LBNet
 	{
 		auto aResult = __mHandlerList.emplace(pNumber, pHandler);
 		if (aResult.second == false)
-			return 1;
+			return eErrCodeAlreadyRegistered;
 
 		return 0;
 	}
@@ -18,7 +18,7 @@ namespace LBNet
 	{
 		auto aIter = __mHandlerList.find(pNumber);
 		if (aIter == __mHandlerList.end())
-			return 1;
+			return eErrCodeInvalidMessage;
 
 		auto aResult = aIter->second(pData, pDataSize, pObject);
 		return aResult;

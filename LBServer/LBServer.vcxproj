@@ -177,6 +177,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBBoostConfig.h" />
+    <ClInclude Include="Src\Inc\LBError.h" />
     <ClInclude Include="Src\Inc\LBGameServer.h" />
     <ClInclude Include="Src\Inc\LBSender.h" />
     <ClInclude Include="Src\Inc\LBSendPool.h" />

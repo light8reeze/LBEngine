@@ -41,12 +41,12 @@ namespace LBNet
 
 		if (!OnAccess())
 		{
-			return 3;
+			return 0;
 		}
 
 		if (_mState == EState::eDisconnect)
 		{
-			return 2;
+			return eErrCodeSesDisconnected;
 		}
 
 		// 버퍼가 가득 찼을때는 접속을 해제한다.
@@ -54,7 +54,7 @@ namespace LBNet
 		{
 			SetDisconnect();
 			OnAccessEnd();
-			return 1;
+			return eErrCodeSesBufferFull;
 		}
 
 		_mSocket.ReceiveAsync(aWritePtr, aSize,
@@ -88,15 +88,15 @@ namespace LBNet
 		LB_ASSERT(_mState == EState::eStable, "Invalid!");
 
 		if (pSize == 0)
-			return 1;
+			return eErrCodeInvalidSize;
 
 		if (_mState == EState::eDisconnect)
-			return 2;
+			return eErrCodeSesDisconnected;
 
 		if (!__mBuffer.OnPush(pSize))
 		{
 			SetDisconnect();
-			return 2;
+			return eErrCodeSesBufferFull;
 		}
 
 		Size	aSize = 0;
@@ -127,7 +127,7 @@ namespace LBNet
 
 		if (!OnAccess())
 		{
-			return 1;
+			return 0;
 		}
 
 		_mSocket.SendAsync(pBuffer, pSize,
@@ -145,7 +145,7 @@ namespace LBNet
 	ErrCode CSession::Send(SharedObject<CSender> pSender)
 	{
 		if (pSender == nullptr)
-			return 1;
+			return eErrCodeNullSender;
 
 		LB_ASSERT(_mState == EState::eStable, "Invalid!");
 
@@ -153,10 +153,10 @@ namespace LBNet
 		auto aSendSize = pSender->GetSendSize();
 
 		if (aSendPtr == nullptr)
-			return 1;
+			return eErrCodeNullSender;
 
 		if (!OnAccess())
-			return 1;
+			return 0;
 
 		_mSocket.SendAsync(aSendPtr, aSendSize,
 			[this, pSender](const boost::system::error_code& pError, std::size_t pSendSize)
