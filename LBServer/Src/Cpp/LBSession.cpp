@@ -2,6 +2,7 @@
 #include "LBHandler.h"
 #include "LBGameObject.h"
 #include "LBSessionManager.h"
+#include "LBEncyption.h"
 
 namespace LBNet
 {
@@ -108,7 +109,21 @@ namespace LBNet
 
 		if (aData != nullptr && aGameObject != nullptr)
 		{
-			CPacketHeader* aHeader = reinterpret_cast<CPacketHeader*>(aData);
+			Size aEncryptHdSize = 0;
+			if (CEncryptor::Instance() != nullptr)
+			{
+				aEncryptHdSize = CEncryptor::Instance()->GetHeaderSize();
+				aSize -= aEncryptHdSize;
+				aResult = CEncryptor::Instance()->Decypt(aData, aSize);
+
+				if (aResult != 0)
+				{
+					SetDisconnect();
+					return aResult;
+				}
+			}
+
+			CPacketHeader* aHeader = reinterpret_cast<CPacketHeader*>(aData + aEncryptHdSize);
 			aResult = CMessageHandler::Process(aHeader->mCommand, aHeader, aSize, aGameObject);
 		}
 

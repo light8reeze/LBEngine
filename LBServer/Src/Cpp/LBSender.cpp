@@ -1,4 +1,5 @@
 #include "LBSender.h"
+#include "LBEncyption.h"
 
 namespace LBNet
 {
@@ -19,7 +20,7 @@ namespace LBNet
 
 	SharedObject<CSender> CSender::Allocate(Size pSendSize)
 	{
-		auto aShared = __mSendPool.Allocate(pSendSize);
+		auto aShared = __mSendPool.Allocate(pSendSize + GetEncryptHdSize() + sizeof(SendHeader));
 
 		if (aShared == nullptr)
 			return nullptr;
@@ -29,6 +30,19 @@ namespace LBNet
 		(reinterpret_cast<SendHeader*>(aShared->__mChunk))->mDataSize = pSendSize;
 
 		return std::move(aShared);
+	}
+
+	ErrCode CSender::Encrypt()
+	{
+		if (CEncryptor::Instance() != nullptr)
+		{
+			auto aPtr = reinterpret_cast<char*>(__mChunk);
+			aPtr += sizeof(SendHeader);
+
+			return CEncryptor::Instance()->Encypt(aPtr, GetSendSize() - sizeof(SendHeader));
+		}
+
+		return 0;
 	}
 
 	void* CSender::GetSendPointer()
@@ -43,7 +57,7 @@ namespace LBNet
 		if (aDataSize == 0)
 			return 0;
 
-		return aDataSize + sizeof(SendHeader);
+		return aDataSize + sizeof(SendHeader) + GetEncryptHdSize();
 	}
 
 	Size CSender::GetDataSize()
@@ -52,6 +66,16 @@ namespace LBNet
 			return 0;
 
 		return (reinterpret_cast<SendHeader*>(__mChunk))->mDataSize;
+	}
+
+	Size CSender::GetEncryptHdSize()
+	{
+		Size aEncryptHdSize = 0;
+
+		if (CEncryptor::Instance() != nullptr)
+			aEncryptHdSize = CEncryptor::Instance()->GetHeaderSize();
+
+		return aEncryptHdSize;
 	}
 
 	ErrCode CSender::__DeAllocate()

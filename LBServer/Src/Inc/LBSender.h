@@ -45,12 +45,14 @@ namespace LBNet
 		static SharedObject<CSender> Allocate();
 		// pSendSize : 순수 패킷의 크기(헤더 제외)
 		static SharedObject<CSender> Allocate(Size pSendSize);
+		ErrCode		Encrypt();
 
 		template<typename TObject>
 		TObject*	GetWritePointer();
 		void*		GetSendPointer();
 		Size		GetSendSize();
 		Size		GetDataSize();
+		static Size	GetEncryptHdSize();
 
 	private:
 		ErrCode __DeAllocate();

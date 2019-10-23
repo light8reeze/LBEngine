@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Cpp\LBBuffer.cpp" />
+    <ClCompile Include="Src\Cpp\LBEncyption.cpp" />
     <ClCompile Include="Src\Cpp\LBLocker.cpp" />
     <ClCompile Include="Src\Cpp\LBTime.cpp" />
     <ClCompile Include="Src\Cpp\LBUtility.cpp" />

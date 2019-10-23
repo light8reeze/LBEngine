@@ -59,7 +59,7 @@ namespace LBNet
 		CTimerStorage() = default;
 		~CTimerStorage() = default;
 
-		void			AddTimer(const CTimerKey& pKey, SystemTimer&& pTimer);
+		void			AddTimer(const CTimerKey pKey, SystemTimer&& pTimer);
 		void			RemoveTimer(const CTimerKey& pKey);
 
 	private:

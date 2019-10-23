@@ -4,7 +4,7 @@
 namespace LBNet
 {
 #pragma region CTimerStorage
-	void CTimerStorage::AddTimer(const CTimerKey& pKey, SystemTimer&& pTimer)
+	void CTimerStorage::AddTimer(const CTimerKey pKey, SystemTimer&& pTimer)
 	{
 		WriteLock aLock(__mMutex);
 

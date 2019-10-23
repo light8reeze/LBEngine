@@ -16,4 +16,5 @@ namespace LBNet
 	LB_ERRCODE(eErrCodeAlreadyRegistered);
 	LB_ERRCODE(eErrCodeInvalidMessage);
 	LB_ERRCODE(eErrCodeBadAlloc);
+	LB_ERRCODE(eErrCodeNullPtr);
 }

@@ -10,6 +10,6 @@ namespace LBNet
 	TObject* CSender::GetWritePointer()
 	{
 		auto aPtr = reinterpret_cast<char*>(__mChunk);
-		return reinterpret_cast<TObject*>(aPtr + sizeof(SendHeader));
+		return reinterpret_cast<TObject*>(aPtr + sizeof(SendHeader) + GetEncryptHdSize());
 	}
 }

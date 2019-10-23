@@ -13,6 +13,9 @@
     <ClCompile Include="Src\Cpp\LBBuffer.cpp">
       <Filter>Memory</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Cpp\LBEncyption.cpp">
+      <Filter>Encyption</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CharSet">
