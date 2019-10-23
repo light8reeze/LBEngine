@@ -26,8 +26,8 @@ namespace LBNet
 		CEncryptor();
 		virtual ~CEncryptor();
 
-		virtual ErrCode Encypt(char* pData, Size pSize) = 0;
-		virtual ErrCode Decypt(char* pData, Size pSize) = 0;
+		virtual ErrCode Encrypt(char* pData, Size pSize) = 0;
+		virtual ErrCode Decrypt(char* pData, Size pSize) = 0;
 		Size GetHeaderSize();
 
 		static CEncryptor* Instance();
