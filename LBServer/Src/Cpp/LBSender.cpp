@@ -39,7 +39,7 @@ namespace LBNet
 			auto aPtr = reinterpret_cast<char*>(__mChunk);
 			aPtr += sizeof(SendHeader);
 
-			return CEncryptor::Instance()->Encypt(aPtr, GetSendSize() - sizeof(SendHeader));
+			return CEncryptor::Instance()->Encrypt(aPtr, GetSendSize() - sizeof(SendHeader));
 		}
 
 		return 0;

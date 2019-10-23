@@ -114,7 +114,7 @@ namespace LBNet
 			{
 				aEncryptHdSize = CEncryptor::Instance()->GetHeaderSize();
 				aSize -= aEncryptHdSize;
-				aResult = CEncryptor::Instance()->Decypt(aData, aSize);
+				aResult = CEncryptor::Instance()->Decrypt(aData, aSize);
 
 				if (aResult != 0)
 				{
