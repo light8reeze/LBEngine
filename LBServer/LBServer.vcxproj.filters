@@ -40,6 +40,9 @@
     <Filter Include="Memory\Send">
       <UniqueIdentifier>{378cae39-555f-4a80-8364-1b71bf9bdd05}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Network\NetworkIO">
+      <UniqueIdentifier>{a23ccf37-cd04-4ab0-b7c3-a3534549e7b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Inc\LBServer.h">
@@ -50,12 +53,6 @@
     </ClInclude>
     <ClInclude Include="Src\Inc\LBBoostConfig.h">
       <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Inc\LBSocket.h">
-      <Filter>Network\Socket</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Inc\LBIOContext.h">
-      <Filter>Network</Filter>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBSession.h">
       <Filter>Network\Session</Filter>
@@ -74,9 +71,6 @@
     </ClInclude>
     <ClInclude Include="Src\Inc\LBSession.Inl">
       <Filter>Network\Session</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Inc\LBIOContext.Inl">
-      <Filter>Network</Filter>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBShard.h">
       <Filter>Network\Shard</Filter>
@@ -120,17 +114,27 @@
     <ClInclude Include="Src\Inc\LBError.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Inc\LBIOContext.h">
+      <Filter>Network\NetworkIO</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBIOContext.Inl">
+      <Filter>Network\NetworkIO</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBSocket.h">
+      <Filter>Network\Socket</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBUdpObject.h">
+      <Filter>Network\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBUdpSession.h">
+      <Filter>Network\Session</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBUdpObject.Inl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Cpp\main.cpp" />
     <ClCompile Include="Src\Cpp\LBServer.cpp">
       <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Cpp\LBIOContext.cpp">
-      <Filter>Network</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Cpp\LBSocket.cpp">
-      <Filter>Network\Socket</Filter>
     </ClCompile>
     <ClCompile Include="Src\Cpp\LBAcceptor.cpp">
       <Filter>Network\Socket\Acceptor</Filter>
@@ -165,11 +169,20 @@
     <ClCompile Include="Src\Cpp\LBSendPool.cpp">
       <Filter>Memory\Send</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Cpp\LBIOContext.cpp">
+      <Filter>Network\NetworkIO</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Cpp\LBSocket.cpp">
+      <Filter>Network\Socket</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Cpp\LBUdpSession.cpp">
+      <Filter>Network\Session</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Cpp\LBUdpObject.cpp">
+      <Filter>Network\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Src\Inc\LBSocket.Inl">
-      <Filter>Network\Socket</Filter>
-    </None>
     <None Include="Src\Inc\LBAcceptor.Inl">
       <Filter>Network\Socket\Acceptor</Filter>
     </None>
@@ -178,6 +191,9 @@
     </None>
     <None Include="Src\Inc\LBTimer.Inl">
       <Filter>Timer</Filter>
+    </None>
+    <None Include="Src\Inc\LBSocket.Inl">
+      <Filter>Network\Socket</Filter>
     </None>
   </ItemGroup>
 </Project>

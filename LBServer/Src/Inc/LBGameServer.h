@@ -10,6 +10,7 @@
 #include "LBSessionManager.h"
 #include "LBFactory.h"
 #include "LBTimer.h"
+#include "LBUdpObject.h"
 #include <thread>
 
 namespace LBNet

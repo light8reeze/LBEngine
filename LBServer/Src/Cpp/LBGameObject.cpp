@@ -57,4 +57,26 @@ namespace LBNet
 			aShared->SetDisconnect();
 		}
 	}
+
+	std::string&& CGameObject::GetIPAddress() const
+	{
+		if (!_mSession.expired())
+		{
+			auto aShared = _mSession.lock();
+			return std::move(aShared->GetEndPoint().address().to_string());
+		}
+
+		return "";
+	}
+
+	unsigned short CGameObject::GetPort() const
+	{
+		if (!_mSession.expired())
+		{
+			auto aShared = _mSession.lock();
+			return aShared->GetEndPoint().port();
+		}
+
+		return 0;
+	}
 }

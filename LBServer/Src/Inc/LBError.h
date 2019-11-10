@@ -17,4 +17,5 @@ namespace LBNet
 	LB_ERRCODE(eErrCodeInvalidMessage);
 	LB_ERRCODE(eErrCodeBadAlloc);
 	LB_ERRCODE(eErrCodeNullPtr);
+	LB_ERRCODE(eErrCodeInvalidThreadCnt);
 }

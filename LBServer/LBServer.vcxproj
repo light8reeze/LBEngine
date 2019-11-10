@@ -213,6 +213,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBTimer.h" />
+    <ClInclude Include="Src\Inc\LBUdpObject.h" />
+    <ClInclude Include="Src\Inc\LBUdpSession.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Cpp\CTestServer.cpp" />
@@ -254,6 +256,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Src\Cpp\LBTimer.cpp" />
+    <ClCompile Include="Src\Cpp\LBUdpObject.cpp" />
+    <ClCompile Include="Src\Cpp\LBUdpSession.cpp" />
     <ClCompile Include="Src\Cpp\main.cpp" />
   </ItemGroup>
   <ItemGroup>

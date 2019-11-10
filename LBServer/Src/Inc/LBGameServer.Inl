@@ -106,9 +106,10 @@ namespace LBNet
 		}
 
 		CSessionManager::Instance().InitShard();
+		CUdpSession::Instance().ReceiveFrom();
 
 		if (__mThreadCnt < 1)
-			return 2;
+			return eErrCodeInvalidThreadCnt;
 
 		for (unsigned int index = 0; index < __mThreadCnt; ++index)
 		{
@@ -145,7 +146,7 @@ namespace LBNet
 		{
 			//技记 府家胶 何练
 			CTimer aAcceptTimer(eTimeRetryAccept);
-			aAcceptTimer.Start([this, &pAcceptor](ErrCode pErr) 
+			aAcceptTimer.Start([this, &pAcceptor](ErrCode /*pErr*/) 
 			{ 
 				__SetAccept(pAcceptor); 
 				return false;
@@ -158,7 +159,7 @@ namespace LBNet
 		{
 			//技记 府家胶 何练
 			CTimer aAcceptTimer(eTimeRetryAccept);
-			aAcceptTimer.Start([this, &pAcceptor](ErrCode pErr)
+			aAcceptTimer.Start([this, &pAcceptor](ErrCode /*pErr*/)
 			{
 				__SetAccept(pAcceptor);
 				return false;
@@ -178,7 +179,7 @@ namespace LBNet
 			aSession->OnAccessEnd();
 
 			CTimer aAcceptTimer(eTimeRetryAccept);
-			aAcceptTimer.Start([this, &pAcceptor](ErrCode pErr)
+			aAcceptTimer.Start([this, &pAcceptor](ErrCode /*pErr*/)
 			{
 				__SetAccept(pAcceptor);
 				return false;

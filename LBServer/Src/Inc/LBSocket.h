@@ -10,23 +10,21 @@
 
 namespace LBNet
 {
-	using namespace boost;
-
 	/**
 		@brief		TCP 소켓 클래스
 		@warnning	accept는 acceptor을 이용한다.
 		@date		2019-08-15
 		@auther		light8reeze(light8reeze@gmail.com)
 	*/
-	class LBS_EXPORT CTCPSocket
+	class LBS_EXPORT CTcpSocket
 	{
 	public:
-		using SocketType	= asio::ip::tcp::socket;
-		using EndPointType	= asio::ip::tcp::endpoint;
+		using SocketType	= boost::asio::ip::tcp::socket;
+		using EndPointType	= boost::asio::ip::tcp::endpoint;
 
 	public:
-		CTCPSocket();
-		~CTCPSocket();
+		CTcpSocket();
+		~CTcpSocket();
 		
 		ErrCode Connect(const char* pIp, unsigned short pPort);
 		ErrCode Receive(void* pBuffer, int pSize, int& pReceivedSize);
@@ -44,10 +42,44 @@ namespace LBNet
 
 		const SocketType&		GetSocket() const;
 		SocketType&				GetSocket();
-		const EndPointType		GetEndPoint() const;
+		const EndPointType&&	GetEndPoint() const;
 
 	private:
 		SocketType		_mSocket;
+	};
+
+	/**
+		@brief		UDP 소켓 클래스
+		@date		2019-11-10
+		@auther		light8reeze(light8reeze@gmail.com)
+	*/
+	class LBS_EXPORT CUdpSocket
+	{
+	public:
+		using SocketType	= boost::asio::ip::udp::socket;
+		using EndPointType	= boost::asio::ip::udp::endpoint;
+
+	public:
+		CUdpSocket();
+		~CUdpSocket();
+
+		ErrCode ReceiveFrom(void* pBuffer, int pSize, int& pReceivedSize, EndPointType& pEndPoint);
+		ErrCode SendTo(void* pBuffer, int pSize, int& pSendSize, EndPointType& pEndPoint);
+		ErrCode Close();
+
+		template<typename THandler>
+		void ReceiveFromAsync(void* pBuffer, int pSize, EndPointType& pEndPoint, THandler&& pHandler);
+		template<typename THandler>
+		void SendToAsync(void* pBuffer, int pSize, EndPointType& pEndPoint, THandler&& pHandler);
+
+		void SetReuse(bool pIsReuse);
+
+		const SocketType&		GetSocket() const;
+		SocketType&				GetSocket();
+		const EndPointType&&	GetEndPoint() const;
+
+	private:
+		SocketType		__mSocket;
 	};
 }
 

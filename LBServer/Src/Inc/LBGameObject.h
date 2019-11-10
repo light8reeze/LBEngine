@@ -34,6 +34,8 @@ namespace LBNet
 		ErrCode Send(SharedObject<CSender>& pSender);
 
 		const CSessionKey GetSessionKey() const;
+		std::string&& GetIPAddress() const;
+		unsigned short GetPort() const;
 
 	protected:
 		WeakObject<CSession> _mSession;

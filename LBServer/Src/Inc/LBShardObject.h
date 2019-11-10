@@ -28,9 +28,8 @@ namespace LBNet
 	public:
 		virtual ErrCode OnConnect() { return 0; }
 		virtual void	OnDisconnect() {}
-		virtual bool	OnConnectFail(ErrCode pErr) 
-		{ 
-			UNREFERENCED_PARAMETER(pErr);
+		virtual bool	OnConnectFail(ErrCode /*pErr*/) 
+		{
 			return true;
 		}
 	};

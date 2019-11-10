@@ -1,7 +1,8 @@
 namespace LBNet
 {
+#pragma region CTcpSocket
 	template<typename THandler>
-	ErrCode CTCPSocket::ConnectAsync(const char* pIp, unsigned short pPort, THandler&& pHandler)
+	ErrCode CTcpSocket::ConnectAsync(const char* pIp, unsigned short pPort, THandler&& pHandler)
 	{
 		LB_ASSERT(pIp != nullptr,		"Error");
 
@@ -20,7 +21,7 @@ namespace LBNet
 	}
 
 	template<typename THandler>
-	void CTCPSocket::ReceiveAsync(void* pBuffer, int pSize, THandler&& pHandler)
+	void CTcpSocket::ReceiveAsync(void* pBuffer, int pSize, THandler&& pHandler)
 	{
 		LB_ASSERT(_mSocket.is_open(), "Error");
 		LB_ASSERT(pBuffer != nullptr, "Error");
@@ -30,7 +31,7 @@ namespace LBNet
 	}
 
 	template<typename THandler>
-	void CTCPSocket::SendAsync(void* pBuffer, int pSize, THandler&& pHandler)
+	void CTcpSocket::SendAsync(void* pBuffer, int pSize, THandler&& pHandler)
 	{
 		LB_ASSERT(_mSocket.is_open(), "Error");
 		LB_ASSERT(pBuffer != nullptr, "Error");
@@ -38,4 +39,27 @@ namespace LBNet
 
 		_mSocket.async_write_some(asio::mutable_buffer(pBuffer, pSize), CIOContext::Instance().BindExecuter(pHandler));
 	}
+#pragma endregion CTcpSocket
+
+#pragma region CUdpSocket
+	template<typename THandler>
+	void CUdpSocket::ReceiveFromAsync(void* pBuffer, int pSize, EndPointType& pEndPoint, THandler&& pHandler)
+	{
+		LB_ASSERT(__mSocket.is_open(), "Error");
+		LB_ASSERT(pBuffer != nullptr, "Error");
+		LB_ASSERT(pSize > 0, "Error");
+
+		__mSocket.async_receive_from(asio::mutable_buffer(pBuffer, pSize), pEndPoint, CIOContext::Instance().BindExecuter(pHandler));
+	}
+
+	template<typename THandler>
+	void CUdpSocket::SendToAsync(void* pBuffer, int pSize, EndPointType& pEndPoint, THandler&& pHandler)
+	{
+		LB_ASSERT(__mSocket.is_open(), "Error");
+		LB_ASSERT(pBuffer != nullptr, "Error");
+		LB_ASSERT(pSize > 0, "Error");
+
+		__mSocket.async_send_to(asio::mutable_buffer(pBuffer, pSize), pEndPoint, CIOContext::Instance().BindExecuter(pHandler));
+	}
+#pragma endregion CUdpSocket
 }

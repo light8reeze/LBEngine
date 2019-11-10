@@ -37,8 +37,8 @@ namespace LBNet
 	{
 		LB_ASSERT(__mGameObject != nullptr, "Object Not Linked to Session");
 
-		Size	aSize = __mBuffer.GetUsableSize();
-		char*	aWritePtr = __mBuffer.GetWritePointer();
+		Size	aSize		= __mBuffer.GetUsableSize();
+		char*	aWritePtr	= __mBuffer.GetWritePointer();
 
 		if (!OnAccess())
 		{
@@ -226,6 +226,11 @@ namespace LBNet
 	CSessionKey CSession::GetSessionKey()
 	{
 		return _mSessionKey;
+	}
+
+	const CTcpSocket::EndPointType& CSession::GetEndPoint() const
+	{
+		return _mSocket.GetEndPoint();
 	}
 
 	void CSession::RemoveObject()

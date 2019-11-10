@@ -1,4 +1,3 @@
-#include <iostream>
 namespace LBNet
 {
 #pragma region CObjectPoolEx

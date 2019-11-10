@@ -101,6 +101,7 @@ namespace LBNet
 		void SetSessionKey(CSessionKey& pObjKey);
 		const CSessionKey& GetSessionKey() const;
 		CSessionKey GetSessionKey();
+		const CTcpSocket::EndPointType& GetEndPoint() const;
 
 		template<typename TObject>
 		void SetGameObject(SharedObject<TObject>& pObject);
@@ -119,7 +120,7 @@ namespace LBNet
 		virtual void OnDelete() override;
 
 	protected:
-		CTCPSocket					_mSocket;
+		CTcpSocket					_mSocket;
 		CSharedMutex				_mMutex;
 		CSessionKey					_mSessionKey;
 		EState						_mState;
