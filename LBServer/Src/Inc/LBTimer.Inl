@@ -2,7 +2,7 @@ namespace LBNet
 {
 	template<class Rep, class Period>
 	CTimer::CTimer(const std::chrono::duration<Rep, Period>& pTime)
-		: __mTimer(CIOContext::Instance().GetIOContext(), pTime)
+		: __mTimer(CIOContext::Instance().GetIOContext(), pTime), __mTimerKey(), __mPeriod(0ms)
 	{
 	}
 
@@ -21,23 +21,18 @@ namespace LBNet
 	template<typename THandler, typename... TArgs>
 	void CTimer::Start(THandler&& pHandler, TArgs... pArgs)
 	{
-		__mTimerKey.mID = std::this_thread::get_id();
-		__mTimerKey.mTick = CTime::GetSystemTickCount();
-
-		CTimerKey aKey = __mTimerKey;
-		Tick aPeriod = __mPeriod;
-
 		__mTimer.async_wait(
-			[aKey, aPeriod, pHandler, pArgs...](const boost::system::error_code& pErr)
+			[=](const boost::system::error_code& pErr)
 		{
 			ErrCode aErr = pErr.value();
 			bool aNextExe = pHandler(aErr, pArgs...);
 
-			__mStorage.RemoveTimer(aKey);
+			__mStorage.RemoveTimer(__mTimerKey);
 
-			if (aPeriod > 0ms && aNextExe == true)
+			if (__mPeriod > 0ms && aNextExe == true)
 			{
-				CTimer aNextTimer(aPeriod);
+				CTimer aNextTimer(__mPeriod);
+				aNextTimer.SetPeriod(__mPeriod);
 				aNextTimer.Start(pHandler, pArgs...);
 			}
 		});

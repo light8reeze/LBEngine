@@ -5,10 +5,9 @@
 	@auther light8reeze(light8reeze@gmail.com)
 */
 #pragma once
-//#include <crtdbg.h>
 #include <assert.h>
 
-#define DEVELOP_MODE
+//#define DEVELOP_MODE
 
 #ifdef WIN32
 	#define X86
@@ -54,9 +53,11 @@ using namespace std::chrono_literals;
 	@details	dll을 받아 어플리케이션을 구현할 때에는 LBUtillity.h를 정의하기 전에 LOAD_LBUTILL매크로를 정의한다.
 */
 #ifdef LOAD_LBUTILL
-	#define LBU_EXPORT	__declspec(dllimport)
+	#define LBU_EXPORT						__declspec(dllimport)
+	#define LBU_EXPORT_TEMPLATE(pClass)		extern template class LBU_EXPORT pClass
 #else
-	#define LBU_EXPORT	__declspec(dllexport)
+	#define LBU_EXPORT						__declspec(dllexport)
+	#define LBU_EXPORT_TEMPLATE(pClass)		template class LBU_EXPORT pClass
 #endif //LOAD_LBUTILL
 
 /**

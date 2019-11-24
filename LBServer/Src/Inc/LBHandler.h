@@ -11,10 +11,8 @@
 
 namespace LBNet
 {
-	class CGameObject;
-	class CUdpObject;
-
 	using MessageNumber = unsigned long;
+
 	/**
 		@brief	패킷 헤더 클래스
 		@date	2019-08-30
@@ -27,30 +25,29 @@ namespace LBNet
 		MessageNumber mCommand;
 	};
 	#pragma pack(pop)
-
-	using TCPHandleType = std::function<ErrCode(CPacketHeader*, Size, SharedObject<CGameObject>&)>;
-	using UDPHandleType = std::function<ErrCode(CPacketHeader*, Size, CUdpObject&)>;
 	
 	/**
 		@brief	패킷 처리 클래스
+		@param THandler	패킷 이번트처리 함수타입
 		@date	2019-08-30
 		@auther	light8reeze(light8reeze@gmail.com)
 	*/
-	class LBS_EXPORT CMessageHandler
+	template<typename THandler>
+	class CMessageHandler
 	{
-	private:
-		using __TCPHandlerList = std::map<MessageNumber, TCPHandleType>;
-		using __UDPHandlerList = std::map<MessageNumber, UDPHandleType>;
+	public:
+		using HandlerType	= THandler;
+		using HandlerList	= std::map<MessageNumber, HandlerType>;
 
 	public:
-		static ErrCode Register(MessageNumber pNumber, TCPHandleType&& pHandler);
-		static ErrCode Register(MessageNumber pNumber, UDPHandleType&& pHandler);
+		static ErrCode Register(MessageNumber pNumber, THandler&& pHandler);
 
-		static ErrCode Process(MessageNumber pNumber, CPacketHeader* pData, Size pDataSize, SharedObject<CGameObject>& pObject);
-		static ErrCode Process(MessageNumber pNumber, CPacketHeader* pData, Size pDataSize, CUdpObject& pObject);
+		template<typename... TArgs>
+		static ErrCode Process(MessageNumber pNumber, TArgs... pArgs);
 
 	private:
-		static __TCPHandlerList	__mHandlerList;
-		static __UDPHandlerList	__mUDPHandlerList;
+		static HandlerList	__mHandlerList;
 	};
 }
+
+#include "LBHandler.Inl"

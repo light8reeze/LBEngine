@@ -1,5 +1,5 @@
 #include "LBSender.h"
-#include "LBEncyption.h"
+#include "LBEncryption.h"
 
 namespace LBNet
 {

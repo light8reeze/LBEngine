@@ -10,11 +10,12 @@
 #include "LBTime.h"
 #include <thread>
 #include <boost/asio/steady_timer.hpp>
+#include <iostream>
+#include <set>
 
 namespace LBNet
 {
 	class CTime;
-
 
 	/**
 		@brief	        타이머 키 클래스
@@ -38,7 +39,7 @@ namespace LBNet
 		}
 
 	public:
-		std::thread::id mID;
+		std::thread::id		mID;
 		TickCount			mTick;
 	};
 
@@ -59,7 +60,7 @@ namespace LBNet
 		CTimerStorage() = default;
 		~CTimerStorage() = default;
 
-		void			AddTimer(const CTimerKey pKey, SystemTimer&& pTimer);
+		void			AddTimer(const CTimerKey&& pKey, SystemTimer&& pTimer);
 		void			RemoveTimer(const CTimerKey& pKey);
 
 	private:

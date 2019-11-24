@@ -20,7 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Cpp\LBBuffer.cpp" />
-    <ClCompile Include="Src\Cpp\LBEncyption.cpp" />
+    <ClCompile Include="Src\Cpp\LBEncryption.cpp" />
     <ClCompile Include="Src\Cpp\LBLocker.cpp" />
     <ClCompile Include="Src\Cpp\LBTime.cpp" />
     <ClCompile Include="Src\Cpp\LBUtility.cpp" />
@@ -35,7 +35,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBCharBase.h" />
-    <ClInclude Include="Src\Inc\LBEncyption.h" />
+    <ClInclude Include="Src\Inc\LBEncryption.h" />
     <ClInclude Include="Src\Inc\LBLocker.h" />
     <ClInclude Include="Src\Inc\LBBuffer.h" />
     <ClInclude Include="Src\Inc\LBPool.h" />

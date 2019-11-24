@@ -17,7 +17,7 @@
 
 /**
 	@brief		LBUtility사용 설정
-	@warning	LBUtility에 Windows.h가 포함되어있기 때문에 asio보다 아래에 포함한다.
+	@warning	LBUtility에 Windows.h가 포함되어있기 때문에 asio보다 먼저 포함한다.
 */
 #define LOAD_LBUTILL
 #include "LBUtility.h"
@@ -32,9 +32,11 @@
 	#define LBS_EXPORT
 #else
 	#ifdef LOAD_LBSERVER
-		#define LBS_EXPORT	__declspec(dllimport)
+		#define LBS_EXPORT						__declspec(dllimport)
+		#define LBS_EXPORT_TEMPLATE(pClass)		extern template class LBS_EXPORT pClass
 	#else
-		#define LBS_EXPORT	__declspec(dllexport)
+		#define LBS_EXPORT						__declspec(dllexport)
+		#define LBS_EXPORT_TEMPLATE(pClass)		template class LBS_EXPORT pClass
 	#endif //LOAD_LBSERVER
 #endif //DEVELOP_MODE
 
@@ -63,7 +65,7 @@ namespace LBNet
 	*/
 	constexpr Version LBS_EXPORT GetLBSVersion();
 
-	constexpr Size eSzPacketMax		= 0x7FFF;	// 한 패킷당 최대 사이즈
+	constexpr Size eSzPacketMax		= 0x3FFF;	// 한 패킷당 최대 사이즈
 	constexpr Size eSzPacketMin		= 4;		// 한 패킷당 최소 사이즈
 	constexpr unsigned int eSzSessionIndexMax = 17;
 	constexpr auto eTimeRetryAccept = 1s;		// Accept실패시 재시도 시간

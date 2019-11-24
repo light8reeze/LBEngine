@@ -13,7 +13,7 @@
     <ClCompile Include="Src\Cpp\LBBuffer.cpp">
       <Filter>Memory</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Cpp\LBEncyption.cpp">
+    <ClCompile Include="Src\Cpp\LBEncryption.cpp">
       <Filter>Encyption</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,9 +71,6 @@
     <ClInclude Include="Src\Inc\LBPool.h">
       <Filter>Memory</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Inc\LBEncyption.h">
-      <Filter>Encyption</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Inc\LBQueue.h">
       <Filter>Memory</Filter>
     </ClInclude>
@@ -97,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="Src\Inc\LBCharW.Inl">
       <Filter>CharSet\Char</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBEncryption.h">
+      <Filter>Encyption</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

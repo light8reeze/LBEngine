@@ -3,10 +3,17 @@
 #include "LBSocket.h"
 #include "LBManagedObject.h"
 #include "LBSender.h"
+#include "LBHandler.h"
 
 namespace LBNet
 {
 	class CUdpObject;
+
+	/**
+		@brief		UDP 패킷 이벤트 타입 정의
+	*/
+	using UDPHandleType = std::function<ErrCode(CPacketHeader*, Size, CUdpObject&)>;
+	using UDPHandler	= CMessageHandler<UDPHandleType>;
 
 	/**
 		@brief		UDP 세션 클래스

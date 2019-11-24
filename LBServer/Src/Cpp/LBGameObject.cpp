@@ -66,7 +66,7 @@ namespace LBNet
 			return std::move(aShared->GetEndPoint().address().to_string());
 		}
 
-		return "";
+		return std::move(std::string(""));
 	}
 
 	unsigned short CGameObject::GetPort() const

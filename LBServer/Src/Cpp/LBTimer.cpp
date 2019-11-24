@@ -1,10 +1,11 @@
 #include "LBTimer.h"
 #include "LBIOContext.h"
+#include <iostream>
 
 namespace LBNet
 {
 #pragma region CTimerStorage
-	void CTimerStorage::AddTimer(const CTimerKey pKey, SystemTimer&& pTimer)
+	void CTimerStorage::AddTimer(const CTimerKey&& pKey, SystemTimer&& pTimer)
 	{
 		WriteLock aLock(__mMutex);
 
@@ -38,7 +39,7 @@ namespace LBNet
 
 	CTimer::~CTimer()
 	{
-		__mStorage.AddTimer(__mTimerKey, std::move(__mTimer));
+		__mStorage.AddTimer(std::move(__mTimerKey), std::move(__mTimer));
 	}
 
 	void CTimer::SetTime(const CTime& pTime)

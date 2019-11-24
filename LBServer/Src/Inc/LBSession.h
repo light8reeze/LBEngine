@@ -11,13 +11,23 @@
 #include "LBLocker.h"
 #include "LBManagedObject.h"
 #include "LBSender.h"
+#include "LBHandler.h"
 
 namespace LBNet
 {
 	class CGameObject;
 
+	/**
+		@brief		TCP 패킷 이벤트 타입 정의
+	*/
+	using TCPHandleType = std::function<ErrCode(CPacketHeader*, Size, SharedObject<CGameObject>&)>;
+	using TCPHandler	= CMessageHandler<TCPHandleType>;
+
+	/**
+		@brief		세션 키의 null값 정의
+	*/
 	constexpr unsigned int eKeyNull = std::numeric_limits<unsigned int>::max();
-	
+
 	/**
 		@brief		세션 키 클래스
 		@details	한 서버 내에서 관리되는 세션, 게임 오브젝트의 키 값이다.

@@ -28,9 +28,6 @@
     <Filter Include="Network\Shard">
       <UniqueIdentifier>{e9cf8082-2842-4958-98df-4ade2369275c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Test">
-      <UniqueIdentifier>{82563865-00d3-45f7-98c7-583c2c7d7567}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Timer">
       <UniqueIdentifier>{ba3ef4ff-27f2-467c-87ae-94261900dcbc}</UniqueIdentifier>
     </Filter>
@@ -87,9 +84,6 @@
     <ClInclude Include="Src\Inc\LBGameServer.Inl">
       <Filter>Network\Server</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Inc\CTestServer.h">
-      <Filter>Test</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Inc\LBShardObject.h">
       <Filter>Network\Shard</Filter>
     </ClInclude>
@@ -129,10 +123,8 @@
     <ClInclude Include="Src\Inc\LBUdpSession.h">
       <Filter>Network\Session</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Inc\LBUdpObject.Inl" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Src\Cpp\main.cpp" />
     <ClCompile Include="Src\Cpp\LBServer.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -142,9 +134,6 @@
     <ClCompile Include="Src\Cpp\LBSession.cpp">
       <Filter>Network\Session</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Cpp\LBHandler.cpp">
-      <Filter>Network\Handler</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Cpp\LBGameObject.cpp">
       <Filter>Network\Object</Filter>
     </ClCompile>
@@ -153,9 +142,6 @@
     </ClCompile>
     <ClCompile Include="Src\Cpp\LBManagedObject.cpp">
       <Filter>Network\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Cpp\CTestServer.cpp">
-      <Filter>Test</Filter>
     </ClCompile>
     <ClCompile Include="Src\Cpp\LBSessionManager.cpp">
       <Filter>Network\Session</Filter>
@@ -194,6 +180,9 @@
     </None>
     <None Include="Src\Inc\LBSocket.Inl">
       <Filter>Network\Socket</Filter>
+    </None>
+    <None Include="Src\Inc\LBHandler.Inl">
+      <Filter>Network\Handler</Filter>
     </None>
   </ItemGroup>
 </Project>

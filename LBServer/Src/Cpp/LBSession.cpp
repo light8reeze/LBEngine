@@ -1,8 +1,7 @@
 #include "LBSession.h"
-#include "LBHandler.h"
 #include "LBGameObject.h"
 #include "LBSessionManager.h"
-#include "LBEncyption.h"
+#include "LBEncryption.h"
 
 namespace LBNet
 {
@@ -51,7 +50,7 @@ namespace LBNet
 		}
 
 		// 버퍼가 가득 찼을때는 접속을 해제한다.
-		if (aSize < eSzPacketMin)
+		if (aSize < eSzPacketMin || __mBuffer.GetBufferSize() < aSize)
 		{
 			SetDisconnect();
 			OnAccessEnd();
@@ -124,7 +123,7 @@ namespace LBNet
 			}
 
 			CPacketHeader* aHeader = reinterpret_cast<CPacketHeader*>(aData + aEncryptHdSize);
-			aResult = CMessageHandler::Process(aHeader->mCommand, aHeader, aSize, aGameObject);
+			aResult = TCPHandler::Process(aHeader->mCommand, aHeader, aSize, aGameObject);
 		}
 
 		if (aResult != 0)

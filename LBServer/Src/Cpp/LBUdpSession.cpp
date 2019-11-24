@@ -1,7 +1,6 @@
 #include "LBUdpSession.h"
-#include "LBHandler.h"
 #include "LBUdpObject.h"
-#include "LBEncyption.h"
+#include "LBEncryption.h"
 
 namespace LBNet
 {
@@ -71,7 +70,7 @@ namespace LBNet
 			}
 
 			CPacketHeader* aHeader = reinterpret_cast<CPacketHeader*>(aData + aEncryptHdSize);
-			aResult = CMessageHandler::Process(aHeader->mCommand, aHeader, aSize, aUdpObject);
+			aResult = UDPHandler::Process(aHeader->mCommand, aHeader, aSize, aUdpObject);
 		}
 
 		if (aResult != 0)
