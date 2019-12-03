@@ -21,7 +21,19 @@ namespace LBNet
 		@brief		TCP 패킷 이벤트 타입 정의
 	*/
 	using TCPHandleType = std::function<ErrCode(CPacketHeader*, Size, SharedObject<CGameObject>&)>;
-	using TCPHandler	= CMessageHandler<TCPHandleType>;
+	
+	#pragma warning(disable : 4251)
+	class LBS_EXPORT CTcpHandler : public CMessageHandler<TCPHandleType>
+	{
+	private:
+		CTcpHandler() = default;
+
+		static CTcpHandler __mSingleton;
+
+	public:
+		static CTcpHandler& Instance();
+	};
+	#pragma warning(default : 4251)
 
 	/**
 		@brief		세션 키의 null값 정의
@@ -132,12 +144,16 @@ namespace LBNet
 	protected:
 		CTcpSocket					_mSocket;
 		CSharedMutex				_mMutex;
+		#pragma warning(disable : 4251)
 		CSessionKey					_mSessionKey;
+		#pragma warning(default : 4251)
 		EState						_mState;
 
 	private:
 		CBuffer						__mBuffer;
+		#pragma warning(disable : 4251)
 		SharedObject<CGameObject>	__mGameObject;
+		#pragma warning(default : 4251)
 	};
 }
 

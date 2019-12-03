@@ -39,7 +39,9 @@ namespace LBNet
 		void AcceptAsync(CSession& pSession, THandler&& pHandler);
 
 	private:
+		#pragma warning(disable : 4251)
 		AcceptorType __mAcceptor;
+		#pragma warning(default : 4251)
 	};
 }
 

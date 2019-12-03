@@ -38,6 +38,8 @@ namespace LBNet
 		unsigned short GetPort() const;
 
 	protected:
+		#pragma warning(disable : 4251)
 		WeakObject<CSession> _mSession;
+		#pragma warning(default : 4251)
 	};
 }

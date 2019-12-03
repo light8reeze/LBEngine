@@ -5,6 +5,7 @@
 	@auther light8reeze(light8reeze@gmail.com)
 */
 #pragma once
+#pragma warning(disable : 4251)
 #include "LBServer.h"
 #include "LBLocker.h"
 
@@ -12,6 +13,11 @@ namespace LBNet
 {
 	class CSender;
 	class CSendChunk;
+
+	// warning C4251 처리
+	// vector의 경우 인스턴스화 시킨다.<L7>
+	LBS_EXPORT_TEMPLATE(std::vector<bool>);
+	LBS_EXPORT_TEMPLATE(std::vector<CSender>);
 
 	/**
 		@brief	        Send Buffer 풀 클래스
@@ -38,9 +44,10 @@ namespace LBNet
 	private:
 		CSendChunk*				__mChunkBuffer;
 		__SenderList			__mSenderList;
-		Size					__mChunkCnt;
 		__UseFlag				__mUseFlag;
+		Size					__mChunkCnt;
 		Size					__mUseSize;
 		CSharedMutex			__mMutex;
 	};
 }
+#pragma warning(default : 4251)

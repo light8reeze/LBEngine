@@ -4,6 +4,13 @@
 
 namespace LBNet
 {
+	CUdpHandler CUdpHandler::__mSingleton;
+
+	CUdpHandler& CUdpHandler::Instance()
+	{
+		return __mSingleton;
+	}
+
 	CUdpSession CUdpSession::__mSingleton;
 
 	CUdpSession::CUdpSession() : __mSocket(), __mBuffer(eSzPacketMax)
@@ -70,7 +77,7 @@ namespace LBNet
 			}
 
 			CPacketHeader* aHeader = reinterpret_cast<CPacketHeader*>(aData + aEncryptHdSize);
-			aResult = UDPHandler::Process(aHeader->mCommand, aHeader, aSize, aUdpObject);
+			aResult = CUdpHandler::Instance().Process(aHeader->mMessage, aHeader, aSize, aUdpObject);
 		}
 
 		if (aResult != 0)

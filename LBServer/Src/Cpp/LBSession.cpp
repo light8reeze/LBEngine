@@ -5,6 +5,13 @@
 
 namespace LBNet
 {
+	CTcpHandler CTcpHandler::__mSingleton;
+
+	CTcpHandler& CTcpHandler::Instance()
+	{
+		return __mSingleton;
+	}
+
 	CSession::CSession() : _mSocket(), __mBuffer(eSzPacketMax),
 		_mState(EState::eDisconnect), _mMutex()
 	{
@@ -123,7 +130,7 @@ namespace LBNet
 			}
 
 			CPacketHeader* aHeader = reinterpret_cast<CPacketHeader*>(aData + aEncryptHdSize);
-			aResult = TCPHandler::Process(aHeader->mCommand, aHeader, aSize, aGameObject);
+			aResult = CTcpHandler::Instance().Process(aHeader->mMessage, aHeader, aSize, aGameObject);
 		}
 
 		if (aResult != 0)

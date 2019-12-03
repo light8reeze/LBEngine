@@ -64,7 +64,9 @@ namespace LBNet
 		void			RemoveTimer(const CTimerKey& pKey);
 
 	private:
+		#pragma warning(disable : 4251)
 		__TimerWorkList __mWorkList;
+		#pragma warning(default : 4251)
 		CSharedMutex	__mMutex;
 	};
 
@@ -105,9 +107,11 @@ namespace LBNet
 		void Cancel();
 
 	private:
+		#pragma warning(disable : 4251)
 		SystemTimer		__mTimer;
 		CTimerKey		__mTimerKey;
 		Tick			__mPeriod;
+		#pragma warning(default : 4251)
 
 		static CTimerStorage		__mStorage;
 	};

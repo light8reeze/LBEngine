@@ -11,6 +11,7 @@
 #include "LBFactory.h"
 #include "LBTimer.h"
 #include "LBUdpObject.h"
+#include <iostream>
 #include <thread>
 
 namespace LBNet
@@ -31,7 +32,7 @@ namespace LBNet
 	{
 	private:
 		using __TThreadList		= std::vector<std::thread>;
-		using __TAcceptorList	= std::vector<CAcceptor>;
+		using __TAcceptorList	= std::vector<UniqueObject<CAcceptor>>;
 
 	public:
 		using GameObject = TGameObject;
@@ -57,7 +58,7 @@ namespace LBNet
 
 	private:
 		void		__Main();
-		ErrCode		__SetAccept(CAcceptor& pAcceptor);
+		ErrCode		__SetAccept(CAcceptor* pAcceptor);
 
 	private:
 		__TThreadList	__mThreadList;

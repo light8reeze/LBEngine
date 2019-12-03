@@ -90,7 +90,7 @@ namespace LBNet
 			}
 
 			CPacketHeader* aHeader = reinterpret_cast<CPacketHeader*>(aData + aEncryptHdSize);
-			aResult = ClientHandler::Process(aHeader->mCommand, aHeader, aSize);
+			aResult = CClientHandler::Instance().Process(aHeader->mMessage, aHeader, aSize);
 		}
 
 		if (aResult != 0)

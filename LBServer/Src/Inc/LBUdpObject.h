@@ -26,6 +26,8 @@ namespace LBNet
 		CUdpSocket::EndPointType& GetEndPoint();
 
 	private:
+		#pragma warning(disable : 4251)
 		CUdpSocket::EndPointType __mEndPoint;
+		#pragma warning(default : 4251)
 	};
 }

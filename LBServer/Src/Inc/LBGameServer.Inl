@@ -15,16 +15,16 @@ namespace LBNet
 	template<typename TGameObject>
 	void CGameServer<TGameObject>::AddAcceptor(const char* pIp, unsigned short pPort)
 	{
-		CAcceptor aAcceptor;
-		aAcceptor.Bind(pIp, pPort);
+		UniqueObject<CAcceptor> aAcceptor = std::make_unique<CAcceptor>();
+		aAcceptor->Bind(pIp, pPort);
 		__mAcceptorList.emplace_back(std::move(aAcceptor));
 	}
 
 	template<typename TGameObject>
 	void CGameServer<TGameObject>::AddAcceptor(unsigned short pPort)
 	{
-		CAcceptor aAcceptor;
-		aAcceptor.Bind(pPort);
+		UniqueObject<CAcceptor> aAcceptor = std::make_unique<CAcceptor>();
+		aAcceptor->Bind(pPort);
 		__mAcceptorList.emplace_back(std::move(aAcceptor));
 	}
 
@@ -83,7 +83,7 @@ namespace LBNet
 	{
 		for (auto& aAcceptor : __mAcceptorList)
 		{
-			aAcceptor.Close();
+			aAcceptor->Close();
 		}
 
 		CSessionManager::Instance().Close();
@@ -102,7 +102,7 @@ namespace LBNet
 
 		for (auto& aAcceptor : __mAcceptorList)
 		{
-			__SetAccept(aAcceptor);
+			__SetAccept(aAcceptor.get());
 		}
 
 		CSessionManager::Instance().InitShard();
@@ -139,14 +139,14 @@ namespace LBNet
 	}
 
 	template<typename TGameObject>
-	ErrCode CGameServer<TGameObject>::__SetAccept(CAcceptor& pAcceptor)
+	ErrCode CGameServer<TGameObject>::__SetAccept(CAcceptor* pAcceptor)
 	{
 		auto aKey = std::move(CSessionManager::Instance().GetKey());
 		if (aKey.mKey == eKeyNull)
 		{
 			//세션 리소스 부족
 			CTimer aAcceptTimer(eTimeRetryAccept);
-			aAcceptTimer.Start([this, &pAcceptor](ErrCode /*pErr*/) 
+			aAcceptTimer.Start([this, pAcceptor](ErrCode /*pErr*/) 
 			{ 
 				__SetAccept(pAcceptor); 
 				return false;
@@ -159,7 +159,7 @@ namespace LBNet
 		{
 			//세션 리소스 부족
 			CTimer aAcceptTimer(eTimeRetryAccept);
-			aAcceptTimer.Start([this, &pAcceptor](ErrCode /*pErr*/)
+			aAcceptTimer.Start([this, pAcceptor](ErrCode /*pErr*/)
 			{
 				__SetAccept(pAcceptor);
 				return false;
@@ -179,7 +179,7 @@ namespace LBNet
 			aSession->OnAccessEnd();
 
 			CTimer aAcceptTimer(eTimeRetryAccept);
-			aAcceptTimer.Start([this, &pAcceptor](ErrCode /*pErr*/)
+			aAcceptTimer.Start([this, pAcceptor](ErrCode /*pErr*/)
 			{
 				__SetAccept(pAcceptor);
 				return false;
@@ -191,17 +191,16 @@ namespace LBNet
 		aSession->SetGameObject(aGameObject);
 		aGameObject->LinkSession(aSession);
 
-		CAcceptor* aAcceptPtr = &pAcceptor;
-
-		pAcceptor.Listen();
-		pAcceptor.AcceptAsync(*aSession,
-			[this, aSession, aAcceptPtr](const boost::system::error_code& pErr)
+		pAcceptor->Listen();
+		pAcceptor->AcceptAsync(*aSession,
+			[this, aSession, pAcceptor](const boost::system::error_code& pErr)
 		{
+			std::cout << "On Accept" << std::endl;
 			if (pErr.value() != 0)
 			{
 				aSession->SetDisconnect();
 				aSession->OnAccessEnd();
-				__SetAccept(*aAcceptPtr);
+				__SetAccept(pAcceptor);
 				return;
 			}
 
@@ -210,14 +209,14 @@ namespace LBNet
 			{
 				aSession->SetDisconnect();
 				aSession->OnAccessEnd();
-				__SetAccept(*aAcceptPtr);
+				__SetAccept(pAcceptor);
 
 				LB_ASSERT(aSession->GetState() == CManagedObject::EState::eReturned, "여기에서 반납이 되어야 한다.");
 				return;
 			}
 
 			aSession->OnAccessEnd();
-			__SetAccept(*aAcceptPtr);
+			__SetAccept(pAcceptor);
 		});
 
 		return 0;

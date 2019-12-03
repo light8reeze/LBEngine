@@ -1,13 +1,8 @@
 namespace LBNet
 {
 	template<typename THandler>
-	typename CMessageHandler<THandler>::HandlerList CMessageHandler<THandler>::__mHandlerList;
-
-	template<typename THandler>
-	ErrCode CMessageHandler<THandler>::Register(MessageNumber pNumber, THandler&& pHandler)
+	ErrCode CMessageHandler<THandler>::Register(MessageNo pNumber, THandler&& pHandler)
 	{
-		static_assert(std::is_function(THandler));
-
 		auto aResult = __mHandlerList.emplace(pNumber, pHandler);
 		if (aResult.second == false)
 			return eErrCodeAlreadyRegistered;
@@ -17,7 +12,7 @@ namespace LBNet
 
 	template<typename THandler>
 	template<typename... TArgs>
-	ErrCode CMessageHandler<THandler>::Process(MessageNumber pNumber, TArgs... pArgs)
+	ErrCode CMessageHandler<THandler>::Process(MessageNo pNumber, TArgs... pArgs)
 	{
 		auto aIter = __mHandlerList.find(pNumber);
 		if (aIter == __mHandlerList.end())

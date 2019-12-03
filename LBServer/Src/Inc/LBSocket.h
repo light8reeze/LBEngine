@@ -45,7 +45,9 @@ namespace LBNet
 		const EndPointType&&	GetEndPoint() const;
 
 	private:
+		#pragma warning(disable : 4251)
 		SocketType		_mSocket;
+		#pragma warning(default : 4251)
 	};
 
 	/**
@@ -79,7 +81,9 @@ namespace LBNet
 		const EndPointType&&	GetEndPoint() const;
 
 	private:
+		#pragma warning(disable : 4251)
 		SocketType		__mSocket;
+		#pragma warning(default : 4251)
 	};
 }
 

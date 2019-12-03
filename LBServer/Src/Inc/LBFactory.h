@@ -83,7 +83,9 @@ namespace LBNet
 
 	private:
 		static CFactory __mSingleton;
+		#pragma warning(disable : 4251)
 		__PoolContainer __mPools;
+		#pragma warning(default : 4251)
 		bool			__mIsInitial;
 	};
 }

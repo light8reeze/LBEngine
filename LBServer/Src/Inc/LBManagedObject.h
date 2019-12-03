@@ -51,8 +51,10 @@ namespace LBNet
 		virtual void OnDelete();
 
 	private:
+		#pragma warning(disable : 4251)
 		__RefCntType	__mRefCnt;
 		__AtomicState	__mObjState;
+		#pragma warning(default : 4251)
 	};
 }
 

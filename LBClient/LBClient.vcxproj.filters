@@ -26,5 +26,8 @@
     <ClCompile Include="Src\Cpp\LBTcpClient.cpp">
       <Filter>Client</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Cpp\LBClientHandler.cpp">
+      <Filter>Client</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

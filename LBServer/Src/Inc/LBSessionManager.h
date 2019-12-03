@@ -11,6 +11,11 @@
 
 namespace LBNet
 {
+	// warning C4251 처리
+	// vector의 경우 인스턴스화 시킨다.<L7>
+	LBS_EXPORT_TEMPLATE(std::vector<SharedObject<CSession>>);
+	LBS_EXPORT_TEMPLATE(std::vector<SharedObject<CSession>>);
+
 	/**
 		@brief	        세션 매니져 클래스
 		@details		세션, 분산서버를 생성, 관리한다.
@@ -43,9 +48,12 @@ namespace LBNet
 		static CSessionManager& Instance();
 	private:
 		static CSessionManager	__mSingleton;
+
 		__SessionList			__mSessionList;
 		__ShardList				__mShardList;
+		#pragma warning(disable : 4251)
 		__SessionKeyQueue		__mWaitQueue;
+		#pragma warning(default : 4251)
 		CSharedMutex			__mMutex;
 	};
 }

@@ -13,7 +13,19 @@ namespace LBNet
 		@brief		UDP 패킷 이벤트 타입 정의
 	*/
 	using UDPHandleType = std::function<ErrCode(CPacketHeader*, Size, CUdpObject&)>;
-	using UDPHandler	= CMessageHandler<UDPHandleType>;
+	
+	#pragma warning(disable : 4251)
+	class LBS_EXPORT CUdpHandler : public CMessageHandler<UDPHandleType>
+	{
+	private:
+		CUdpHandler() = default;
+
+		static CUdpHandler __mSingleton;
+
+	public:
+		static CUdpHandler& Instance();
+	};
+	#pragma warning(default : 4251)
 
 	/**
 		@brief		UDP 세션 클래스
@@ -39,8 +51,10 @@ namespace LBNet
 
 	private:
 		static CUdpSession __mSingleton;
-
+		
+		#pragma warning(disable : 4251)
 		CUdpSocket::EndPointType	__mEndPoint;
+		#pragma warning(default : 4251)
 		CUdpSocket					__mSocket;
 		CBuffer						__mBuffer;
 	};

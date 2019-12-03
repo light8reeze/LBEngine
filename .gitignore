@@ -3,8 +3,7 @@
 ################################################################################
 
 #TestFile
-/LBServer/Src/Cpp/CTestServer.cpp
-/LBServer/Src/Inc/CTestServer.h
+/TestServer
 
 # Prerequisites
 *.d

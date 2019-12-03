@@ -11,7 +11,7 @@
 
 namespace LBNet
 {
-	using MessageNumber = unsigned long;
+	using MessageNo = unsigned long;
 
 	/**
 		@brief	패킷 헤더 클래스
@@ -22,7 +22,7 @@ namespace LBNet
 	class CPacketHeader
 	{
 	public:
-		MessageNumber mCommand;
+		MessageNo mMessage;
 	};
 	#pragma pack(pop)
 	
@@ -37,16 +37,17 @@ namespace LBNet
 	{
 	public:
 		using HandlerType	= THandler;
-		using HandlerList	= std::map<MessageNumber, HandlerType>;
+		using HandlerList	= std::map<MessageNo, HandlerType>;
 
 	public:
-		static ErrCode Register(MessageNumber pNumber, THandler&& pHandler);
-
+		CMessageHandler() = default;
+		~CMessageHandler() = default;
+		ErrCode Register(MessageNo pNumber, THandler&& pHandler);
 		template<typename... TArgs>
-		static ErrCode Process(MessageNumber pNumber, TArgs... pArgs);
+		ErrCode Process(MessageNo pNumber, TArgs... pArgs);
 
 	private:
-		static HandlerList	__mHandlerList;
+		HandlerList	__mHandlerList;
 	};
 }
 
