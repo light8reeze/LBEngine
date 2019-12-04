@@ -49,5 +49,5 @@ namespace LBNet
 		@brief			LBClient의 버전을 받는 함수
 		@return Version	LBClient의 버전
 	*/
-	constexpr Version LBS_EXPORT GetLBCVersion();
+	constexpr Version LBC_EXPORT GetLBCVersion();
 }

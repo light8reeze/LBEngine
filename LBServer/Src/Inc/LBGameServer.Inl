@@ -73,7 +73,6 @@ namespace LBNet
 	ErrCode CGameServer<TGameObject>::LazyInitialize()
 	{
 		CFactory::Instance().Initialize();
-		CSessionManager::Instance().Initialize(__mMaxSession);
 
 		return 0;
 	}
@@ -86,7 +85,6 @@ namespace LBNet
 			aAcceptor->Close();
 		}
 
-		CSessionManager::Instance().Close();
 		// CFactory绰 付瘤阜俊 昏力秦具 茄促.
 		CFactory::Instance().Close();
 		return 0;
@@ -105,7 +103,6 @@ namespace LBNet
 			__SetAccept(aAcceptor.get());
 		}
 
-		CSessionManager::Instance().InitShard();
 		CUdpSession::Instance().ReceiveFrom();
 
 		if (__mThreadCnt < 1)
@@ -141,20 +138,7 @@ namespace LBNet
 	template<typename TGameObject>
 	ErrCode CGameServer<TGameObject>::__SetAccept(CAcceptor* pAcceptor)
 	{
-		auto aKey = std::move(CSessionManager::Instance().GetKey());
-		if (aKey.mKey == eKeyNull)
-		{
-			//技记 府家胶 何练
-			CTimer aAcceptTimer(eTimeRetryAccept);
-			aAcceptTimer.Start([this, pAcceptor](ErrCode /*pErr*/) 
-			{ 
-				__SetAccept(pAcceptor); 
-				return false;
-			});
-			return eErrCodeNotEnoughRsc;
-		}
-
-		auto aSession = CSessionManager::Instance().GetSession(aKey);
+		auto aSession = CFactory::Instance().New<CSession>();
 		if (aSession == nullptr)
 		{
 			//技记 府家胶 何练

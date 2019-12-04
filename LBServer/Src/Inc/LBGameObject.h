@@ -33,7 +33,6 @@ namespace LBNet
 		ErrCode Send(void* pBuffer, int pSize);
 		ErrCode Send(SharedObject<CSender>& pSender);
 
-		const CSessionKey GetSessionKey() const;
 		std::string&& GetIPAddress() const;
 		unsigned short GetPort() const;
 

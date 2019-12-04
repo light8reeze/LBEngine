@@ -7,11 +7,9 @@
 #pragma once
 #include "LBServer.h"
 #include "LBAcceptor.h"
-#include "LBSessionManager.h"
 #include "LBFactory.h"
 #include "LBTimer.h"
 #include "LBUdpObject.h"
-#include <iostream>
 #include <thread>
 
 namespace LBNet

@@ -38,17 +38,6 @@ namespace LBNet
 		return 0;
 	}
 
-	const CSessionKey CGameObject::GetSessionKey() const
-	{
-		if (!_mSession.expired())
-		{
-			auto aShared = _mSession.lock();
-			return aShared->GetSessionKey();
-		}
-
-		return CSessionKey();
-	}
-
 	void CGameObject::SetDisconnect()
 	{
 		if (!_mSession.expired())

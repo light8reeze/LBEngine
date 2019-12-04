@@ -1,6 +1,5 @@
 #include "LBSession.h"
 #include "LBGameObject.h"
-#include "LBSessionManager.h"
 #include "LBEncryption.h"
 
 namespace LBNet
@@ -198,7 +197,6 @@ namespace LBNet
 		WriteLock aLocker(_mMutex);
 
 		__mBuffer.Clear();
-		++(_mSessionKey.mField.mReuse);
 
 		return 0;
 	}
@@ -219,21 +217,6 @@ namespace LBNet
 		return 0;
 	}
 
-	void CSession::SetSessionKey(CSessionKey& pObjKey)
-	{
-		_mSessionKey = pObjKey;
-	}
-
-	const CSessionKey& CSession::GetSessionKey() const
-	{
-		return _mSessionKey;
-	}
-
-	CSessionKey CSession::GetSessionKey()
-	{
-		return _mSessionKey;
-	}
-
 	const CTcpSocket::EndPointType& CSession::GetEndPoint() const
 	{
 		return _mSocket.GetEndPoint();
@@ -252,7 +235,6 @@ namespace LBNet
 	void CSession::OnDelete()
 	{
 		Close();
-		CSessionManager::Instance().ReturnKey(_mSessionKey);
 
 		__super::OnDelete();
 	}
