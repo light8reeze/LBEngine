@@ -18,9 +18,9 @@ namespace LBNet
 
 	ErrCode CGameObject::Send(void* pBuffer, int pSize)
 	{
-		if (!_mSession.expired())
+		auto aShared = _mSession.lock();
+		if (aShared != nullptr)
 		{
-			auto aShared = _mSession.lock();
 			return aShared->Send(pBuffer, pSize);
 		}
 
@@ -29,9 +29,9 @@ namespace LBNet
 
 	ErrCode CGameObject::Send(SharedObject<CSender>& pSender)
 	{
-		if (!_mSession.expired())
+		auto aShared = _mSession.lock();
+		if (aShared != nullptr)
 		{
-			auto aShared = _mSession.lock();
 			return aShared->Send(pSender);
 		}
 
@@ -40,18 +40,18 @@ namespace LBNet
 
 	void CGameObject::SetDisconnect()
 	{
-		if (!_mSession.expired())
+		auto aShared = _mSession.lock();
+		if (aShared != nullptr)
 		{
-			auto aShared = _mSession.lock();
 			aShared->SetDisconnect();
 		}
 	}
 
 	std::string&& CGameObject::GetIPAddress() const
 	{
-		if (!_mSession.expired())
+		auto aShared = _mSession.lock();
+		if (aShared != nullptr)
 		{
-			auto aShared = _mSession.lock();
 			return std::move(aShared->GetEndPoint().address().to_string());
 		}
 

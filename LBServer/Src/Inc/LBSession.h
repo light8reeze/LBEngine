@@ -9,7 +9,6 @@
 #include "LBSocket.h"
 #include "LBBuffer.h"
 #include "LBLocker.h"
-#include "LBManagedObject.h"
 #include "LBSender.h"
 #include "LBHandler.h"
 
@@ -41,7 +40,7 @@ namespace LBNet
 		@date		2019-08-19
 		@auther		light8reeze(light8reeze@gmail.com)
 	*/
-	class LBS_EXPORT CSession : public CManagedObject
+	class LBS_EXPORT CSession
 	{
 		friend class CAcceptor; // Acceptor에서 소켓 접근이 필요하다.
 
@@ -54,7 +53,7 @@ namespace LBNet
 
 	public:
 		CSession();
-		virtual ~CSession() override;
+		virtual ~CSession();
 
 		virtual ErrCode Initialize();
 		ErrCode OnAccept();
@@ -69,19 +68,20 @@ namespace LBNet
 
 		template<typename TObject>
 		void SetGameObject(SharedObject<TObject>& pObject);
+		void SetShared(SharedObject<CSession> pShared);
 		void RemoveObject();
 
 		template<typename TObject = CGameObject>
-		SharedObject<TObject> GetGameObject();
+		SharedObject<TObject>	GetGameObject();
+		SharedObject<CSession>	GetShared();
+
+		static bool Delete(CSession* pObject);
 
 	private:
 		template<typename TObject>
 		SharedObject<TObject> __GetGameObjectImpl(std::true_type);
 		template<typename TObject>
 		SharedObject<TObject> __GetGameObjectImpl(std::false_type);
-
-	public:
-		virtual void OnDelete() override;
 
 	protected:
 		CTcpSocket					_mSocket;
@@ -91,6 +91,7 @@ namespace LBNet
 	private:
 		CBuffer						__mBuffer;
 		#pragma warning(disable : 4251)
+		SharedObject<CSession>		__mInstance;
 		SharedObject<CGameObject>	__mGameObject;
 		#pragma warning(default : 4251)
 	};

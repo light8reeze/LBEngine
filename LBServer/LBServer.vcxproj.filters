@@ -72,9 +72,6 @@
     <ClInclude Include="Src\Inc\LBShard.h">
       <Filter>Network\Shard</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Inc\LBManagedObject.h">
-      <Filter>Network\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Inc\LBGameServer.h">
       <Filter>Network\Server</Filter>
     </ClInclude>
@@ -117,7 +114,9 @@
     <ClInclude Include="Src\Inc\LBUdpSession.h">
       <Filter>Network\Session</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Inc\LBHandler.Inl" />
+    <ClInclude Include="Src\Inc\LBHandler.Inl">
+      <Filter>Network\Handler</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Cpp\LBServer.cpp">
@@ -134,9 +133,6 @@
     </ClCompile>
     <ClCompile Include="Src\Cpp\LBFactory.cpp">
       <Filter>Memory</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Cpp\LBManagedObject.cpp">
-      <Filter>Network\Object</Filter>
     </ClCompile>
     <ClCompile Include="Src\Cpp\LBTimer.cpp">
       <Filter>Timer</Filter>
@@ -163,9 +159,6 @@
   <ItemGroup>
     <None Include="Src\Inc\LBAcceptor.Inl">
       <Filter>Network\Socket\Acceptor</Filter>
-    </None>
-    <None Include="Src\Inc\LBManagedObject.Inl">
-      <Filter>Network\Object</Filter>
     </None>
     <None Include="Src\Inc\LBTimer.Inl">
       <Filter>Timer</Filter>

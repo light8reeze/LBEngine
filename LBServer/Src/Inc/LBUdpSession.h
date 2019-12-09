@@ -1,7 +1,6 @@
 #pragma once
 #include "LBServer.h"
 #include "LBSocket.h"
-#include "LBManagedObject.h"
 #include "LBSender.h"
 #include "LBHandler.h"
 

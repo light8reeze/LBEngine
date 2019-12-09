@@ -1,6 +1,8 @@
 #include "LBSession.h"
 #include "LBGameObject.h"
+#include "LBFactory.h"
 #include "LBEncryption.h"
+#include <iostream>
 
 namespace LBNet
 {
@@ -45,11 +47,6 @@ namespace LBNet
 		Size	aSize		= __mBuffer.GetUsableSize();
 		char*	aWritePtr	= __mBuffer.GetWritePointer();
 
-		if (!OnAccess())
-		{
-			return 0;
-		}
-
 		if (_mState == EState::eDisconnect)
 		{
 			return eErrCodeSesDisconnected;
@@ -59,17 +56,16 @@ namespace LBNet
 		if (aSize < eSzPacketMin || __mBuffer.GetBufferSize() < aSize)
 		{
 			SetDisconnect();
-			OnAccessEnd();
 			return eErrCodeSesBufferFull;
 		}
 
+		auto aSharedSession = GetShared();
 		_mSocket.ReceiveAsync(aWritePtr, aSize,
-			[this](const boost::system::error_code& pError, std::size_t pRecvSize)
+			[this, aSharedSession](const boost::system::error_code& pError, std::size_t pRecvSize)
 		{
 			if (pError.value() != 0 || pRecvSize == 0)
 			{
 				SetDisconnect();
-				OnAccessEnd();
 				return;
 			}
 
@@ -77,12 +73,10 @@ namespace LBNet
 			if (aErr != 0)
 			{
 				SetDisconnect();
-				OnAccessEnd();
 				return;
 			}
 
-			OnAccessEnd();
-			if(GetState() == CManagedObject::EState::eUsing)
+			if(_mState != EState::eDisconnect)
 				Receive();
 		});
 
@@ -108,11 +102,11 @@ namespace LBNet
 		Size	aSize = 0;
 		ErrCode aResult = 0;
 		char*	aData = __mBuffer.Front(aSize, aResult);
-		auto aGameObject = GetGameObject<CGameObject>();
+		auto	aGameObject = GetGameObject<CGameObject>();
 
 		LB_ASSERT(aSize >= sizeof(CPacketHeader), "Packet Error!");
 
-		if (aData != nullptr && aGameObject != nullptr)
+		while(aData != nullptr && aGameObject != nullptr && aResult == 0)
 		{
 			Size aEncryptHdSize = 0;
 			if (CEncryptor::Instance() != nullptr)
@@ -130,6 +124,9 @@ namespace LBNet
 
 			CPacketHeader* aHeader = reinterpret_cast<CPacketHeader*>(aData + aEncryptHdSize);
 			aResult = CTcpHandler::Instance().Process(aHeader->mMessage, aHeader, aSize, aGameObject);
+
+			aData		= __mBuffer.Front(aSize, aResult);
+			aGameObject = GetGameObject<CGameObject>();
 		}
 
 		if (aResult != 0)
@@ -138,25 +135,26 @@ namespace LBNet
 			return aResult;
 		}
 
+		__mBuffer.Pop();
 		return 0;
 	}
 
 	ErrCode CSession::Send(void* pBuffer, int pSize)
 	{
-		LB_ASSERT(_mState == EState::eStable,	"Invalid!");
-
-		if (!OnAccess())
 		{
-			return 0;
+			ReadLock aLocker(_mMutex);
+			if (_mState == EState::eDisconnect)
+			{
+				return 0;
+			}
 		}
 
+		auto aSharedSession = GetShared();
 		_mSocket.SendAsync(pBuffer, pSize,
-			[this](const boost::system::error_code& pError, std::size_t pSendSize)
+			[this, aSharedSession](const boost::system::error_code& pError, std::size_t pSendSize)
 		{
 			if (pError.value() != 0 || pSendSize == 0)
 				SetDisconnect();
-
-			OnAccessEnd();
 		});
 
 		return 0;
@@ -167,24 +165,27 @@ namespace LBNet
 		if (pSender == nullptr)
 			return eErrCodeNullSender;
 
-		LB_ASSERT(_mState == EState::eStable, "Invalid!");
-
 		auto aSendPtr = pSender->GetSendPointer();
 		auto aSendSize = pSender->GetSendSize();
 
 		if (aSendPtr == nullptr)
 			return eErrCodeNullSender;
 
-		if (!OnAccess())
-			return 0;
+		{
+			ReadLock aLocker(_mMutex);
+			if (_mState == EState::eDisconnect)
+			{
+				return 0;
+			}
+		}
+
+		auto aSharedSession = GetShared();
 
 		_mSocket.SendAsync(aSendPtr, aSendSize,
-			[this, pSender](const boost::system::error_code& pError, std::size_t pSendSize)
+			[this, pSender, aSharedSession](const boost::system::error_code& pError, std::size_t pSendSize)
 		{
 			if (pError.value() != 0 || pSendSize == 0)
 				SetDisconnect();
-
-			OnAccessEnd();
 		});
 
 		return 0;
@@ -197,6 +198,7 @@ namespace LBNet
 		WriteLock aLocker(_mMutex);
 
 		__mBuffer.Clear();
+		__mInstance = nullptr;
 
 		return 0;
 	}
@@ -213,13 +215,17 @@ namespace LBNet
 			RemoveObject();
 		}
 
-		SetReturn();
 		return 0;
 	}
 
 	const CTcpSocket::EndPointType& CSession::GetEndPoint() const
 	{
 		return _mSocket.GetEndPoint();
+	}
+
+	void CSession::SetShared(SharedObject<CSession> pShared)
+	{
+		__mInstance = pShared;
 	}
 
 	void CSession::RemoveObject()
@@ -232,10 +238,18 @@ namespace LBNet
 		}
 	}
 
-	void CSession::OnDelete()
+	SharedObject<CSession> CSession::GetShared()
 	{
-		Close();
+		return __mInstance;
+	}
 
-		__super::OnDelete();
+	bool CSession::Delete(CSession* pObject)
+	{
+		if (pObject == nullptr)
+			return false;
+
+		pObject->Close();
+
+		return CFactory::Instance().Delete(pObject);
 	}
 }

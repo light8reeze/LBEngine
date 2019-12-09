@@ -100,6 +100,7 @@ namespace LBNet
 
 		for (auto& aAcceptor : __mAcceptorList)
 		{
+			aAcceptor->Listen();
 			__SetAccept(aAcceptor.get());
 		}
 
@@ -138,7 +139,7 @@ namespace LBNet
 	template<typename TGameObject>
 	ErrCode CGameServer<TGameObject>::__SetAccept(CAcceptor* pAcceptor)
 	{
-		auto aSession = CFactory::Instance().New<CSession>();
+		auto aSession = CFactory::Instance().New<CSession>(&CSession::Delete);
 		if (aSession == nullptr)
 		{
 			//세션 리소스 부족
@@ -153,14 +154,10 @@ namespace LBNet
 
 		// 게임 오브젝트는 accept후에는 부족할 수 있기 때문에 
 		// accept전에 미리 연결시킨다. 연결 실패시 게임 오브젝트를 해제한다.
-		aSession->OnConstruct();
-		aSession->OnAccess();
-
 		auto aGameObject = CFactory::Instance().New<TGameObject>();
 		if (aGameObject == nullptr)
 		{
 			aSession->SetDisconnect();
-			aSession->OnAccessEnd();
 
 			CTimer aAcceptTimer(eTimeRetryAccept);
 			aAcceptTimer.Start([this, pAcceptor](ErrCode /*pErr*/)
@@ -169,21 +166,17 @@ namespace LBNet
 				return false;
 			});
 
-			LB_ASSERT(aSession->GetState() == CManagedObject::EState::eReturned, "여기에서 반납이 되어야 한다.");
 			return eErrCodeNotEnoughRsc;
 		}
 		aSession->SetGameObject(aGameObject);
 		aGameObject->LinkSession(aSession);
 
-		pAcceptor->Listen();
 		pAcceptor->AcceptAsync(*aSession,
 			[this, aSession, pAcceptor](const boost::system::error_code& pErr)
 		{
-			std::cout << "On Accept" << std::endl;
 			if (pErr.value() != 0)
 			{
 				aSession->SetDisconnect();
-				aSession->OnAccessEnd();
 				__SetAccept(pAcceptor);
 				return;
 			}
@@ -192,14 +185,12 @@ namespace LBNet
 			if (aErr != 0)
 			{
 				aSession->SetDisconnect();
-				aSession->OnAccessEnd();
 				__SetAccept(pAcceptor);
 
-				LB_ASSERT(aSession->GetState() == CManagedObject::EState::eReturned, "여기에서 반납이 되어야 한다.");
 				return;
 			}
 
-			aSession->OnAccessEnd();
+			aSession->SetShared(aSession);
 			__SetAccept(pAcceptor);
 		});
 

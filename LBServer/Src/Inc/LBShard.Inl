@@ -62,7 +62,6 @@ namespace LBNet
 			GetGameObject()->OnDisconnect();
 		}
 
-		SetReturn();
 		return 0;
 	}
 
@@ -100,12 +99,5 @@ namespace LBNet
 	inline unsigned short CShard<TShardObject>::GetServerNo() const
 	{
 		return __mServerNo;
-	}
-
-	template<typename TShardObject>
-	inline void CShard<TShardObject>::OnDelete()
-	{
-		CManagedObject::OnDelete();
-		Close();
 	}
 }

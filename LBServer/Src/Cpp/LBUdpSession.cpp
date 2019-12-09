@@ -61,7 +61,7 @@ namespace LBNet
 
 		LB_ASSERT(aSize >= sizeof(CPacketHeader), "Packet Error!");
 
-		if (aData != nullptr)
+		while(aData != nullptr && aResult == 0)
 		{
 			Size aEncryptHdSize = 0;
 			if (CEncryptor::Instance() != nullptr)
@@ -78,6 +78,7 @@ namespace LBNet
 
 			CPacketHeader* aHeader = reinterpret_cast<CPacketHeader*>(aData + aEncryptHdSize);
 			aResult = CUdpHandler::Instance().Process(aHeader->mMessage, aHeader, aSize, aUdpObject);
+			aData = __mBuffer.Front(aSize, aResult);
 		}
 
 		if (aResult != 0)
@@ -85,6 +86,7 @@ namespace LBNet
 			return aResult;
 		}
 
+		__mBuffer.Pop();
 		return 0;
 	}
 

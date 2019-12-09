@@ -35,7 +35,7 @@ namespace LBNet
 
 	char* CBuffer::Front(Size& pSize, ErrCode& pErr)
 	{
-		if (GetUsingSize() < sizeof(CBufferHeader))
+		if (GetUsingSize() - static_cast<Size>(_mReadIndex) < sizeof(CBufferHeader))
 			return nullptr;
 
 		pErr = 0;
