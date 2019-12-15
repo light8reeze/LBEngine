@@ -49,6 +49,7 @@ namespace LBNet
 		{
 			eStable,
 			eDisconnect,
+			eClosed,
 		};
 
 	public:
@@ -94,6 +95,7 @@ namespace LBNet
 		SharedObject<CSession>		__mInstance;
 		SharedObject<CGameObject>	__mGameObject;
 		#pragma warning(default : 4251)
+		static int _mSesCnt;
 	};
 }
 

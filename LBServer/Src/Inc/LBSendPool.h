@@ -43,8 +43,10 @@ namespace LBNet
 
 	private:
 		CSendChunk*				__mChunkBuffer;
+		#pragma warning(disable : 4251)
 		__SenderList			__mSenderList;
 		__UseFlag				__mUseFlag;
+		#pragma warning(default : 4251)
 		Size					__mChunkCnt;
 		Size					__mUseSize;
 		CSharedMutex			__mMutex;

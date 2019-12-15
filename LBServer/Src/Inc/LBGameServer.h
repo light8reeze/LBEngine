@@ -11,6 +11,7 @@
 #include "LBTimer.h"
 #include "LBUdpObject.h"
 #include <thread>
+#include <iostream>
 
 namespace LBNet
 {
@@ -43,10 +44,12 @@ namespace LBNet
 		void AddAcceptor(unsigned short pPort);
 		void SetThreadCount(unsigned int pThread = 0);
 		void SetSessionMax(unsigned int pSession);
+		void SetTimerTaskCnt(unsigned int pCnt);
 
 		unsigned int GetThreadCount();
 		unsigned int GetAcceptorCount();
 		unsigned int GetSessionMax();
+		unsigned int GetTimerTaskCnt();
 
 		virtual ErrCode SetParameter() = 0;
 		virtual ErrCode Initialize();
@@ -64,6 +67,7 @@ namespace LBNet
 
 		unsigned int	__mThreadCnt;
 		unsigned int	__mMaxSession;
+		unsigned int	__mTimerTask;
 
 	protected:
 		CSharedMutex	_mMutex;

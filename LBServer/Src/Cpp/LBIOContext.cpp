@@ -10,13 +10,11 @@ namespace LBNet
 
 	CIOContext::~CIOContext()
 	{
-		__mIOContext.stop();
 	}
 
 	ErrCode CIOContext::Run()
 	{
-		__mIOContext.run();
-		return 0;
+		return __mIOContext.run();
 	}
 
 	void CIOContext::Stop()

@@ -2,10 +2,13 @@
 #include "LBGameObject.h"
 #include "LBFactory.h"
 #include "LBEncryption.h"
+#include "LBTimer.h"
 #include <iostream>
 
 namespace LBNet
 {
+	int CSession::_mSesCnt = 0;
+
 	CTcpHandler CTcpHandler::__mSingleton;
 
 	CTcpHandler& CTcpHandler::Instance()
@@ -14,7 +17,7 @@ namespace LBNet
 	}
 
 	CSession::CSession() : _mSocket(), __mBuffer(eSzPacketMax),
-		_mState(EState::eDisconnect), _mMutex()
+		_mState(EState::eClosed), _mMutex()
 	{
 	}
 
@@ -30,13 +33,20 @@ namespace LBNet
 
 	ErrCode CSession::OnAccept()
 	{
-		LB_ASSERT(_mState == EState::eDisconnect,	"Invalid!");
+		LB_ASSERT(_mState == EState::eClosed,	"Invalid!");
 		LB_ASSERT(__mGameObject != nullptr,			"Invalid!");
 
 		__mBuffer.Clear();
 		_mState = EState::eStable;
 		__mGameObject->OnAccept();
 		_mSocket.SetReuse(true);
+		
+		{
+			WriteLock aLocker(_mMutex);
+			++_mSesCnt;
+		}
+
+		std::cout << "On Accept Ses Cnt : " << _mSesCnt << std::endl;
 		return Receive();
 	}
 
@@ -47,7 +57,7 @@ namespace LBNet
 		Size	aSize		= __mBuffer.GetUsableSize();
 		char*	aWritePtr	= __mBuffer.GetWritePointer();
 
-		if (_mState == EState::eDisconnect)
+		if (_mState != EState::eStable)
 		{
 			return eErrCodeSesDisconnected;
 		}
@@ -76,7 +86,7 @@ namespace LBNet
 				return;
 			}
 
-			if(_mState != EState::eDisconnect)
+			if(_mState == EState::eStable)
 				Receive();
 		});
 
@@ -90,7 +100,7 @@ namespace LBNet
 		if (pSize == 0)
 			return eErrCodeInvalidSize;
 
-		if (_mState == EState::eDisconnect)
+		if (_mState != EState::eStable)
 			return eErrCodeSesDisconnected;
 
 		if (!__mBuffer.OnPush(pSize))
@@ -143,7 +153,7 @@ namespace LBNet
 	{
 		{
 			ReadLock aLocker(_mMutex);
-			if (_mState == EState::eDisconnect)
+			if (_mState != EState::eStable)
 			{
 				return 0;
 			}
@@ -193,27 +203,52 @@ namespace LBNet
 
 	ErrCode CSession::Close()
 	{
-		LB_ASSERT(_mState == EState::eDisconnect,	"Invalid!");
+		{
+			ReadLock aLocker(_mMutex);
 
-		WriteLock aLocker(_mMutex);
+			if (_mState == EState::eClosed)
+				return 0;
+		}
 
-		__mBuffer.Clear();
-		__mInstance = nullptr;
+		{
+			WriteLock aLocker(_mMutex);
+			
+			_mState = EState::eClosed;
+			__mBuffer.Clear();
+			--_mSesCnt;
+		}
+		std::cout << "On Close Ses Cnt : " << _mSesCnt << std::endl;
 
 		return 0;
 	}
 
 	ErrCode CSession::SetDisconnect()
 	{
-		WriteLock aLock(_mMutex);
-
-		if (_mState != EState::eDisconnect)
 		{
-			_mSocket.Close();
-			_mState = EState::eDisconnect;
+			WriteLock aLock(_mMutex);
 
-			RemoveObject();
+			if (_mState == EState::eStable)
+			{
+				_mSocket.Close();
+				_mState = EState::eDisconnect;
+				__mInstance = nullptr;
+
+				RemoveObject();
+			}
 		}
+
+		auto aDanglingCheck = [this](ErrCode, auto pFnCheck)
+		{
+			ReadLock aLock(_mMutex);
+			if (_mState != EState::eClosed)
+			{
+				std::cout << "Danglang On : " << _mSesCnt << std::endl;
+
+				CTimer::Start(1s, pFnCheck, pFnCheck);
+			}
+		};
+
+		CTimer::Start(1s, aDanglingCheck, aDanglingCheck);
 
 		return 0;
 	}

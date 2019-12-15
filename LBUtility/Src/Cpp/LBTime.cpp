@@ -256,7 +256,7 @@ namespace LBNet
 
 	Tick CTime::GetSteadyTick()
 	{
-		return std::chrono::duration_cast<Tick>(std::chrono::steady_clock::now().time_since_epoch());
+		return std::chrono::time_point_cast<Tick>(std::chrono::steady_clock::now()).time_since_epoch();
 	}
 
 	TickCount CTime::GetSteadyTickCount()
@@ -266,7 +266,7 @@ namespace LBNet
 
 	Tick CTime::GetSystemTick()
 	{
-		return std::chrono::duration_cast<Tick>(std::chrono::system_clock::now().time_since_epoch());
+		return std::chrono::time_point_cast<Tick>(std::chrono::system_clock::now()).time_since_epoch();
 	}
 
 	TickCount CTime::GetSystemTickCount()

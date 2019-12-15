@@ -70,6 +70,7 @@ namespace LBNet
 	constexpr unsigned int eSzSessionIndexMax = 17;
 	constexpr auto eTimeRetryAccept = 1s;		// Accept실패시 재시도 시간
 	constexpr Size eSzSendChunk		= 1 << 10;	// Send블록의 단위
+	constexpr Size eSzTimerTask		= 2000;		// Send블록의 단위
 
 	template <typename TObject>
 	using SharedObject	= std::shared_ptr<TObject>;

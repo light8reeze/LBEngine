@@ -1,4 +1,4 @@
-LBEngine Project Convention
+LBEngine Project Reference
 ================================
 
 1.etc
@@ -17,7 +17,7 @@ LBEngine Project Convention
 -템플릿 이외에는 inline는 이용하지 않는다. 컴파일러의 최적화를 이용한다.  
 (단 디버그모드에선 최적화를 사용하지 않는다.)  
 -std::shared_ptr은 소유권 개념으로 사용한다. 같은 쓰레드 내에서는 복사를 하지 않는다.(이동, 레퍼런스로 전달)  
--DLL 라이브러리 사용시 static변수 사용에 유의한다.(DLL, App 레이어 사이에서 한쪽에서만 생성하고 한쪽을 포인터, 레퍼런스로 사용한다.)  
+-DLL 라이브러리 사용시 static변수 사용에 유의한다.(상위, 하위 레이어 사이에서 한쪽에서만 생성하고 한쪽을 포인터, 레퍼런스로 사용한다.)  
 
 Reference
 -------------------------
@@ -29,3 +29,4 @@ L4: [doxygen 매뉴얼](https://rinovation.tistory.com/77)
 L5: [SRWLock 구현](https://megayuchi.com/2017/06/25/srwlock-%EB%B9%A0%EB%A5%B8-%EC%84%B1%EB%8A%A5%EC%9D%98-%EB%B9%84%EA%B2%B0)  
 L6: [std::allocator<void> is deprecated in C++17](https://github.com/boostorg/beast/issues/1272)  
 L7: [Warning C4251](https://mgun.tistory.com/508)  
+L8: [[boost.asio] strand는 어떻게 동작하고 왜 사용해야 하는가?](http://blog.naver.com/PostView.nhn?blogId=njh0602&logNo=220715956896&parentCategoryNo=&categoryNo=&viewDate=&isShowPopularPosts=false&from=postView)  

@@ -2,7 +2,7 @@ namespace LBNet
 {
 	template<typename TGameObject>
 	CGameServer<TGameObject>::CGameServer() : __mThreadCnt(0), __mMaxSession(5000), 
-		__mThreadList(), __mAcceptorList()
+		__mThreadList(), __mAcceptorList(), __mTimerTask(eSzTimerTask)
 	{
 		static_assert(std::is_base_of<CGameObject, TGameObject>::value == true);
 	}
@@ -37,15 +37,21 @@ namespace LBNet
 	}
 
 	template<typename TGameObject>
+	unsigned int CGameServer<TGameObject>::GetThreadCount()
+	{
+		return __mThreadCnt;
+	}
+
+	template<typename TGameObject>
 	void CGameServer<TGameObject>::SetSessionMax(unsigned int pSession)
 	{
 		__mMaxSession = pSession;
 	}
 
 	template<typename TGameObject>
-	unsigned int CGameServer<TGameObject>::GetThreadCount()
+	void CGameServer<TGameObject>::SetTimerTaskCnt(unsigned int pCnt)
 	{
-		return __mThreadCnt;
+		__mTimerTask = pCnt;
 	}
 
 	template<typename TGameObject>
@@ -61,10 +67,17 @@ namespace LBNet
 	}
 
 	template<typename TGameObject>
+	unsigned int CGameServer<TGameObject>::GetTimerTaskCnt()
+	{
+		return __mTimerTask;
+	}
+
+	template<typename TGameObject>
 	ErrCode CGameServer<TGameObject>::Initialize()
 	{
 		CFactory::Instance().AddObjectPool<TGameObject>(__mMaxSession);
 		CFactory::Instance().AddObjectPool<CSession>(__mMaxSession);
+		CFactory::Instance().AddObjectPool<CTimerTask>(__mTimerTask);
 		
 		return 0;
 	}
@@ -85,6 +98,7 @@ namespace LBNet
 			aAcceptor->Close();
 		}
 
+		CIOContext::Instance().Stop();
 		// CFactory는 마지막에 삭제해야 한다.
 		CFactory::Instance().Close();
 		return 0;
@@ -143,8 +157,7 @@ namespace LBNet
 		if (aSession == nullptr)
 		{
 			//세션 리소스 부족
-			CTimer aAcceptTimer(eTimeRetryAccept);
-			aAcceptTimer.Start([this, pAcceptor](ErrCode /*pErr*/)
+			CTimer::Start(eTimeRetryAccept, [this, pAcceptor](ErrCode /*pErr*/)
 			{
 				__SetAccept(pAcceptor);
 				return false;
@@ -158,9 +171,7 @@ namespace LBNet
 		if (aGameObject == nullptr)
 		{
 			aSession->SetDisconnect();
-
-			CTimer aAcceptTimer(eTimeRetryAccept);
-			aAcceptTimer.Start([this, pAcceptor](ErrCode /*pErr*/)
+			CTimer::Start(eTimeRetryAccept, [this, pAcceptor](ErrCode /*pErr*/)
 			{
 				__SetAccept(pAcceptor);
 				return false;
@@ -176,6 +187,7 @@ namespace LBNet
 		{
 			if (pErr.value() != 0)
 			{
+				std::cout << "Accept Fail : " << pErr.value() << std::endl;
 				aSession->SetDisconnect();
 				__SetAccept(pAcceptor);
 				return;
@@ -184,6 +196,7 @@ namespace LBNet
 			ErrCode aErr = aSession->OnAccept();
 			if (aErr != 0)
 			{
+				std::cout << "On Accept Fail : " << aErr << std::endl;
 				aSession->SetDisconnect();
 				__SetAccept(pAcceptor);
 
