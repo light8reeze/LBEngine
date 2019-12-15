@@ -40,6 +40,9 @@
     <Filter Include="Network\NetworkIO">
       <UniqueIdentifier>{a23ccf37-cd04-4ab0-b7c3-a3534549e7b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Config">
+      <UniqueIdentifier>{8f405ff4-47a3-4da4-8ab9-1e34636aaf16}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Inc\LBServer.h">
@@ -47,9 +50,6 @@
     </ClInclude>
     <ClInclude Include="Src\Inc\LBFactory.h">
       <Filter>Memory</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Inc\LBBoostConfig.h">
-      <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBSession.h">
       <Filter>Network\Session</Filter>
@@ -117,6 +117,13 @@
     <ClInclude Include="Src\Inc\LBHandler.Inl">
       <Filter>Network\Handler</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Inc\LBConfig.h">
+      <Filter>Core\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBConfig.Inl" />
+    <ClInclude Include="Src\Inc\LBBoostConfig.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Cpp\LBServer.cpp">
@@ -165,6 +172,9 @@
     </None>
     <None Include="Src\Inc\LBSocket.Inl">
       <Filter>Network\Socket</Filter>
+    </None>
+    <None Include="Src\Inc\LBConfig.Inl">
+      <Filter>Core\Config</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -10,6 +10,7 @@
 #include "LBFactory.h"
 #include "LBTimer.h"
 #include "LBUdpObject.h"
+#include "LBConfig.h"
 #include <thread>
 #include <iostream>
 
@@ -42,20 +43,14 @@ namespace LBNet
 
 		void AddAcceptor(const char* pIp, unsigned short pPort);
 		void AddAcceptor(unsigned short pPort);
-		void SetThreadCount(unsigned int pThread = 0);
-		void SetSessionMax(unsigned int pSession);
-		void SetTimerTaskCnt(unsigned int pCnt);
 
-		unsigned int GetThreadCount();
-		unsigned int GetAcceptorCount();
-		unsigned int GetSessionMax();
-		unsigned int GetTimerTaskCnt();
-
-		virtual ErrCode SetParameter() = 0;
+		void SetConfig(CConfig* pConfig);
 		virtual ErrCode Initialize();
 		virtual ErrCode LazyInitialize();
 		virtual ErrCode Close();
 		ErrCode Run();
+
+		unsigned int GetAcceptorCount();
 
 	private:
 		void		__Main();
@@ -65,12 +60,8 @@ namespace LBNet
 		__TThreadList	__mThreadList;
 		__TAcceptorList	__mAcceptorList;
 
-		unsigned int	__mThreadCnt;
-		unsigned int	__mMaxSession;
-		unsigned int	__mTimerTask;
-
 	protected:
-		CSharedMutex	_mMutex;
+		CConfig* _mConfig;
 	};
 }
 

@@ -180,6 +180,7 @@
     <ClInclude Include="Src\Inc\LBGameServer.h" />
     <ClInclude Include="Src\Inc\LBSender.h" />
     <ClInclude Include="Src\Inc\LBSendPool.h" />
+    <ClInclude Include="Src\Inc\LBConfig.h" />
     <ClInclude Include="Src\Inc\LBShard.h" />
     <ClInclude Include="Src\Inc\LBGameObject.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -277,6 +278,9 @@
       <FileType>Document</FileType>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBSender.Inl">
+      <FileType>Document</FileType>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBConfig.Inl">
       <FileType>Document</FileType>
     </ClInclude>
     <None Include="Src\Inc\LBSocket.Inl">

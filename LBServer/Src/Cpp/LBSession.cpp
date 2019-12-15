@@ -237,19 +237,6 @@ namespace LBNet
 			}
 		}
 
-		auto aDanglingCheck = [this](ErrCode, auto pFnCheck)
-		{
-			ReadLock aLock(_mMutex);
-			if (_mState != EState::eClosed)
-			{
-				std::cout << "Danglang On : " << _mSesCnt << std::endl;
-
-				CTimer::Start(1s, pFnCheck, pFnCheck);
-			}
-		};
-
-		CTimer::Start(1s, aDanglingCheck, aDanglingCheck);
-
 		return 0;
 	}
 

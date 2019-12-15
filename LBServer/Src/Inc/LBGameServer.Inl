@@ -1,8 +1,7 @@
 namespace LBNet
 {
 	template<typename TGameObject>
-	CGameServer<TGameObject>::CGameServer() : __mThreadCnt(0), __mMaxSession(5000), 
-		__mThreadList(), __mAcceptorList(), __mTimerTask(eSzTimerTask)
+	CGameServer<TGameObject>::CGameServer() : _mConfig(nullptr)
 	{
 		static_assert(std::is_base_of<CGameObject, TGameObject>::value == true);
 	}
@@ -29,55 +28,37 @@ namespace LBNet
 	}
 
 	template<typename TGameObject>
-	void CGameServer<TGameObject>::SetThreadCount(unsigned int pThread)
-	{
-		__mThreadCnt = (pThread == 0)? 
-			std::thread::hardware_concurrency() * 2 : 
-			pThread;
-	}
-
-	template<typename TGameObject>
-	unsigned int CGameServer<TGameObject>::GetThreadCount()
-	{
-		return __mThreadCnt;
-	}
-
-	template<typename TGameObject>
-	void CGameServer<TGameObject>::SetSessionMax(unsigned int pSession)
-	{
-		__mMaxSession = pSession;
-	}
-
-	template<typename TGameObject>
-	void CGameServer<TGameObject>::SetTimerTaskCnt(unsigned int pCnt)
-	{
-		__mTimerTask = pCnt;
-	}
-
-	template<typename TGameObject>
 	unsigned int CGameServer<TGameObject>::GetAcceptorCount()
 	{
 		return static_cast<unsigned int>(__mAcceptorList.size());
 	}
 
 	template<typename TGameObject>
-	unsigned int CGameServer<TGameObject>::GetSessionMax()
+	void CGameServer<TGameObject>::SetConfig(CConfig* pConfig)
 	{
-		return __mMaxSession;
-	}
-
-	template<typename TGameObject>
-	unsigned int CGameServer<TGameObject>::GetTimerTaskCnt()
-	{
-		return __mTimerTask;
+		_mConfig = pConfig;
 	}
 
 	template<typename TGameObject>
 	ErrCode CGameServer<TGameObject>::Initialize()
 	{
-		CFactory::Instance().AddObjectPool<TGameObject>(__mMaxSession);
-		CFactory::Instance().AddObjectPool<CSession>(__mMaxSession);
-		CFactory::Instance().AddObjectPool<CTimerTask>(__mTimerTask);
+		if (_mConfig == nullptr)
+			return eErrCodeInvalidConfig;
+
+		Size aAddrCnt = _mConfig->GetAddressCnt();
+		for (Size aIndex = 0; aIndex < aAddrCnt; ++aIndex)
+		{
+			auto aAddrInfo = _mConfig->GetAddress(static_cast<int>(aIndex));
+			
+			if (aAddrInfo.mIp == "")
+				AddAcceptor(aAddrInfo.mPort);
+			else
+				AddAcceptor(aAddrInfo.mIp.c_str(), aAddrInfo.mPort);
+		}
+
+		CFactory::Instance().AddObjectPool<TGameObject>(_mConfig->GetSessionCnt());
+		CFactory::Instance().AddObjectPool<CSession>(_mConfig->GetSessionCnt());
+		CFactory::Instance().AddObjectPool<CTimerTask>(_mConfig->GetTimerTaskCnt());
 		
 		return 0;
 	}
@@ -85,6 +66,9 @@ namespace LBNet
 	template<typename TGameObject>
 	ErrCode CGameServer<TGameObject>::LazyInitialize()
 	{
+		if (_mConfig == nullptr)
+			return eErrCodeInvalidConfig;
+
 		CFactory::Instance().Initialize();
 
 		return 0;
@@ -107,6 +91,9 @@ namespace LBNet
 	template<typename TGameObject>
 	ErrCode CGameServer<TGameObject>::Run()
 	{
+		if (_mConfig == nullptr)
+			return eErrCodeInvalidConfig;
+
 		if (__mAcceptorList.size() == 0)
 		{
 			return 0;
@@ -120,10 +107,10 @@ namespace LBNet
 
 		CUdpSession::Instance().ReceiveFrom();
 
-		if (__mThreadCnt < 1)
+		if (_mConfig->GetThreadCnt() < 1)
 			return eErrCodeInvalidThreadCnt;
 
-		for (unsigned int index = 0; index < __mThreadCnt; ++index)
+		for (unsigned int index = 0; index < _mConfig->GetThreadCnt(); ++index)
 		{
 			__mThreadList.emplace_back(std::thread{ std::bind(&CGameServer<TGameObject>::__Main, this) });
 		}

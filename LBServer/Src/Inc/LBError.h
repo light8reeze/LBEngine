@@ -16,3 +16,4 @@ LB_ERRCODE(eErrCodeInvalidMessage);
 LB_ERRCODE(eErrCodeBadAlloc);
 LB_ERRCODE(eErrCodeNullPtr);
 LB_ERRCODE(eErrCodeInvalidThreadCnt);
+LB_ERRCODE(eErrCodeInvalidConfig);

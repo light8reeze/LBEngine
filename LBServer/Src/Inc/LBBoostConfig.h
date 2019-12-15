@@ -3,7 +3,7 @@
 	@brief	LBUtility의 boost 라이브러리를 사용하기 위해 필요한 설정 헤더파일 
 			직접 boost설정 사용시 LBUtility.h를 포함하기 전에 LB_USE_CUSTOM_BOOST_CONFIG매크로를 정의한다.
 	@date	2019-05-04
-	@auther light8reeze(light8reeze@gmail.com)
+	@auther Light8reeze(light8reeze@gmail.com)
 */
 #pragma once
 
