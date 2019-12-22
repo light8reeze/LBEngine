@@ -45,6 +45,18 @@ namespace LBNet
 		return 0;
 	}
 
+	void CSender::SetSenderChunk(CSendChunk* pChunk, int pChunkIndex, Size pChunkCnt)
+	{
+		LB_ASSERT(pChunk != nullptr,	"Error");
+		LB_ASSERT(pChunkIndex >= 0,		"Error");
+		LB_ASSERT(pChunkCnt > 0,		"Error");
+		LB_ASSERT(__mChunk == nullptr,	"Error");
+
+		__mChunk		= pChunk;
+		__mChunkIndex	= pChunkIndex;
+		__mChunkCount	= pChunkCnt;
+	}
+
 	void* CSender::GetSendPointer()
 	{
 		return (reinterpret_cast<void*>(__mChunk));
@@ -78,7 +90,7 @@ namespace LBNet
 		return aEncryptHdSize;
 	}
 
-	ErrCode CSender::__DeAllocate()
+	ErrCode CSender::DeAllocate()
 	{
 		if (__mChunk == nullptr)
 			return 0;

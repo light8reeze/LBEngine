@@ -9,12 +9,12 @@
 #include "LBLocker.h"
 
 #ifdef _WINDOWS
-#include <Windows.h>
 #include <process.h>
-#include <queue>
+#endif //_WINDOWS
 
 namespace LBNet
 {
+#ifdef _WINDOWS
     /**
         @brief	        오브젝트 큐 클래스
 		@details		세마포어를 이용한 큐 클래스.
@@ -23,28 +23,27 @@ namespace LBNet
         @auther         light8reeze(light8reeze@gmail.com)
     */
 	template<typename TObject>
-	class CQueue
+	class CWaitableQueue
 	{
 	private:
-		using ObjectQueue = std::queue<TObject>;
+		using __ObjectQueue = std::queue<TObject>;
 
 	public:
-		CQueue();
-		~CQueue();
+		CWaitableQueue();
+		~CWaitableQueue();
 
-		CQueue(const CQueue&) = delete;
-		CQueue& operator=(const CQueue&) = delete;
+		CWaitableQueue(const CWaitableQueue&) = delete;
+		CWaitableQueue& operator=(const CWaitableQueue&) = delete;
 	
 		bool	Push(TObject& pObject);
 		bool	Pop(TObject& pObject, bool pIsWait = false);
 
 	private:
 		HANDLE			__mSemaphore;
-		ObjectQueue		__mQueue;
+		__ObjectQueue	__mQueue;
 		CSharedMutex	__mMutex;
 	};
+#endif //_WINDOWS
 }
 
 #include "LBQueue.Inl"
-
-#endif //_WINDOWS

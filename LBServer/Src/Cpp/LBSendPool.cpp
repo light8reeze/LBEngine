@@ -66,13 +66,11 @@ namespace LBNet
 			__mUseSize += (aCnt * sizeof(CSendChunk));
 		}
 
-		aSender->__mChunk = aSendChunk;
-		aSender->__mChunkIndex = aIndex;
-		aSender->__mChunkCount = aCnt;
+		aSender->SetSenderChunk(aSendChunk, aIndex, aCnt);
 
 		auto aShared = SharedObject<CSender>(aSender, [this](CSender* pSender)
 		{
-			pSender->__DeAllocate();
+			pSender->DeAllocate();
 		});
 
 		return aShared;

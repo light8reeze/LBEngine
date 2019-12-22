@@ -43,6 +43,9 @@
     <Filter Include="Core\Config">
       <UniqueIdentifier>{8f405ff4-47a3-4da4-8ab9-1e34636aaf16}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Log">
+      <UniqueIdentifier>{fa40986c-b673-47bc-a9ed-fbf59b4e6274}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Inc\LBServer.h">
@@ -120,10 +123,19 @@
     <ClInclude Include="Src\Inc\LBConfig.h">
       <Filter>Core\Config</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Inc\LBConfig.Inl" />
     <ClInclude Include="Src\Inc\LBBoostConfig.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Inc\LBConfig.Inl">
+      <Filter>Core\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBLogger.h">
+      <Filter>Log</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBLogProcessor.h">
+      <Filter>Log</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBLogProcessor.Inl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Cpp\LBServer.cpp">
@@ -162,6 +174,12 @@
     <ClCompile Include="Src\Cpp\LBUdpObject.cpp">
       <Filter>Network\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Cpp\LBLogger.cpp">
+      <Filter>Log</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Cpp\LBLogProcessor.cpp">
+      <Filter>Log</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Src\Inc\LBAcceptor.Inl">
@@ -173,8 +191,8 @@
     <None Include="Src\Inc\LBSocket.Inl">
       <Filter>Network\Socket</Filter>
     </None>
-    <None Include="Src\Inc\LBConfig.Inl">
-      <Filter>Core\Config</Filter>
+    <None Include="Src\Inc\LBLogger.Inl">
+      <Filter>Log</Filter>
     </None>
   </ItemGroup>
 </Project>

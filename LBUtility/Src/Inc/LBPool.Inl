@@ -122,4 +122,10 @@ namespace LBNet
 	{
 		return __mUseSize;
 	}
+
+	template<class TObject>
+	constexpr Size CObjectPool<TObject>::GetObjectSize()
+	{
+		return sizeof(TObject);
+	}
 }

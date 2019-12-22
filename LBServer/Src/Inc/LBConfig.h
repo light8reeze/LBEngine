@@ -45,18 +45,21 @@ namespace LBNet
 		void SetThreadCnt(unsigned pThread);
 		void SetSessionCnt(unsigned pSession);
 		void SetTimerTaskCnt(unsigned pTimerTask);
+		void SetLogBufCnt(unsigned pTimerTask);
 
 		Size GetAddressCnt() const;
 		const SAddressInfo& GetAddress(int pIndex) const;
 		unsigned GetThreadCnt() const;
 		unsigned GetSessionCnt() const;
 		unsigned GetTimerTaskCnt() const;
+		unsigned GetLogBufCnt() const;
 
 	protected:
 		__AddressList	_mAcceptorAddrList;
 		unsigned	_mThreadCnt;
 		unsigned	_mSessionCnt;
 		unsigned	_mTimerTaskCnt;
+		unsigned	_mLogBufCnt;
 	};
 }
 

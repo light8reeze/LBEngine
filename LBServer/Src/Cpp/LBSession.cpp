@@ -3,7 +3,7 @@
 #include "LBFactory.h"
 #include "LBEncryption.h"
 #include "LBTimer.h"
-#include <iostream>
+#include "LBLogger.h"
 
 namespace LBNet
 {
@@ -46,7 +46,7 @@ namespace LBNet
 			++_mSesCnt;
 		}
 
-		std::cout << "On Accept Ses Cnt : " << _mSesCnt << std::endl;
+		CConsoleLog(ELogType::eLogInfo) << "On Accept Ses Cnt : " << _mSesCnt;
 		return Receive();
 	}
 
@@ -217,7 +217,7 @@ namespace LBNet
 			__mBuffer.Clear();
 			--_mSesCnt;
 		}
-		std::cout << "On Close Ses Cnt : " << _mSesCnt << std::endl;
+		CConsoleLog(ELogType::eLogInfo) << "On Close Ses Cnt : " << _mSesCnt;
 
 		return 0;
 	}

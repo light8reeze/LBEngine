@@ -11,8 +11,8 @@
 #include "LBTimer.h"
 #include "LBUdpObject.h"
 #include "LBConfig.h"
+#include "LBLogger.h"
 #include <thread>
-#include <iostream>
 
 namespace LBNet
 {

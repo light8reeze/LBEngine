@@ -9,7 +9,7 @@ namespace LBNet
 	}
 
 	inline CConfig::CConfig() : _mThreadCnt(0), _mSessionCnt(2000),
-		_mTimerTaskCnt(eSzTimerTask)
+		_mTimerTaskCnt(eSzTimerTask), _mLogBufCnt(eSzLogCnt)
 	{
 		_mThreadCnt = std::thread::hardware_concurrency() * 2;
 	}
@@ -32,6 +32,11 @@ namespace LBNet
 	inline void CConfig::SetTimerTaskCnt(unsigned pTimerTask)
 	{
 		_mTimerTaskCnt = pTimerTask;
+	}
+
+	inline void CConfig::SetLogBufCnt(unsigned pLogBufCnt)
+	{
+		_mLogBufCnt = pLogBufCnt;
 	}
 
 	inline Size CConfig::GetAddressCnt() const
@@ -59,5 +64,10 @@ namespace LBNet
 	inline unsigned CConfig::GetTimerTaskCnt() const
 	{
 		return _mTimerTaskCnt;
+	}
+
+	inline unsigned CConfig::GetLogBufCnt() const
+	{
+		return _mLogBufCnt;
 	}
 }

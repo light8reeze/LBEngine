@@ -178,6 +178,8 @@
     <ClInclude Include="Src\Inc\LBBoostConfig.h" />
     <ClInclude Include="Src\Inc\LBError.h" />
     <ClInclude Include="Src\Inc\LBGameServer.h" />
+    <ClInclude Include="Src\Inc\LBLogger.h" />
+    <ClInclude Include="Src\Inc\LBLogProcessor.h" />
     <ClInclude Include="Src\Inc\LBSender.h" />
     <ClInclude Include="Src\Inc\LBSendPool.h" />
     <ClInclude Include="Src\Inc\LBConfig.h" />
@@ -229,6 +231,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Src\Cpp\LBIOContext.cpp" />
+    <ClCompile Include="Src\Cpp\LBLogger.cpp" />
+    <ClCompile Include="Src\Cpp\LBLogProcessor.cpp" />
     <ClCompile Include="Src\Cpp\LBSender.cpp" />
     <ClCompile Include="Src\Cpp\LBSendPool.cpp" />
     <ClCompile Include="Src\Cpp\LBServer.cpp" />
@@ -281,6 +285,12 @@
       <FileType>Document</FileType>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBConfig.Inl">
+      <FileType>Document</FileType>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBLogProcessor.Inl">
+      <FileType>Document</FileType>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBLogger.Inl">
       <FileType>Document</FileType>
     </ClInclude>
     <None Include="Src\Inc\LBSocket.Inl">

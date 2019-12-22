@@ -83,7 +83,7 @@ namespace LBNet
 
 		/**
 			@brief				타이머 시작 함수
-			@param	THandler	설정된 시간에 실행할 함수이다. 함수의 형태는 bool(ErrCode, ...)로 작성해야 한다.
+			@param	THandler	설정된 시간에 실행할 함수이다. 함수의 인자는 (ErrCode, ...)로 작성해야 한다.
 					TArgs		실행할 함수에 들어갈 인자리스트.
 			@warning			다음 함수 사용시 CTimerTask가 설정 시간 이전에 소멸되면 작업이 바로 실행된다.
 								사용자가 CTimerTask를 별도로 보관해야 한다.

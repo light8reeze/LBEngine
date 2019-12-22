@@ -60,9 +60,9 @@ namespace LBNet
 
 	unsigned short CGameObject::GetPort() const
 	{
-		if (!_mSession.expired())
+		auto aShared = _mSession.lock();
+		if (aShared != nullptr)
 		{
-			auto aShared = _mSession.lock();
 			return aShared->GetEndPoint().port();
 		}
 

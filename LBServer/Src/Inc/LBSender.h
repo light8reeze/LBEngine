@@ -12,6 +12,7 @@
 namespace LBNet
 {
 	using SendHeader = CBufferHeader;
+	constexpr Size eSzPacketMin = sizeof(CBufferHeader);		// 한 패킷당 최소 사이즈
 
 	/**
 		@brief	패킷 전송용 메모리 블록
@@ -33,8 +34,6 @@ namespace LBNet
 	*/
 	class LBS_EXPORT CSender
 	{
-		friend class CSendPool; // __mChunk접근 필요하다.
-
 	public:
 		CSender();
 		~CSender();
@@ -45,7 +44,10 @@ namespace LBNet
 		static SharedObject<CSender> Allocate();
 		// pSendSize : 순수 패킷의 크기(헤더 제외)
 		static SharedObject<CSender> Allocate(Size pSendSize);
+		ErrCode		DeAllocate();
 		ErrCode		Encrypt();
+
+		void SetSenderChunk(CSendChunk* pChunk, int pChunkIndex, Size pChunkCnt);
 
 		template<typename TObject>
 		TObject*	GetWritePointer();
@@ -55,7 +57,6 @@ namespace LBNet
 		static Size	GetEncryptHdSize();
 
 	private:
-		ErrCode __DeAllocate();
 
 	private:
 		CSendChunk*		__mChunk;

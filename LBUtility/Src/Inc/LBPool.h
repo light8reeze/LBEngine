@@ -27,7 +27,7 @@ namespace LBNet
 		using Type	= TObject;
 
 	private:
-		using ObjectQueue	= std::queue<TObject*>;
+		using __ObjectQueue	= std::queue<TObject*>;
 		using ObjectList	= std::vector<TObject*>;
 
 	public:
@@ -42,13 +42,14 @@ namespace LBNet
 		TObject*	NewObject();
 		bool		DeleteObject(TObject*& pObject);
 
-		Size GetMaxSize();
-		Size GetUseSize();
+		Size			GetMaxSize();
+		Size			GetUseSize();
+		constexpr Size	GetObjectSize();
 
 	private:
 		bool			__mIsAlloc;
 		ObjectList		__mObjectList;
-		ObjectQueue		__mObjectQueue;
+		__ObjectQueue	__mObjectQueue;
 		Size			__mUseSize;
 		Size			__mPoolSize;
 		CSharedMutex	__mMutex;

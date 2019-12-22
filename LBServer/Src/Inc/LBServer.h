@@ -66,11 +66,10 @@ namespace LBNet
 	constexpr Version LBS_EXPORT GetLBSVersion();
 
 	constexpr Size eSzPacketMax		= 0x3FFF;	// 한 패킷당 최대 사이즈
-	constexpr Size eSzPacketMin		= 4;		// 한 패킷당 최소 사이즈
-	constexpr unsigned int eSzSessionIndexMax = 17;
 	constexpr auto eTimeRetryAccept = 1s;		// Accept실패시 재시도 시간
-	constexpr Size eSzSendChunk		= 1 << 10;	// Send블록의 단위
-	constexpr Size eSzTimerTask		= 2000;		// Send블록의 단위
+	constexpr Size eSzSendChunk		= 1 << 10;	// Send블록의 단위(1KB)
+	constexpr Size eSzTimerTask		= 2000;		// Timer작업 기본 할당 개수
+	constexpr Size eSzLogCnt		= 200;		// 로그버퍼 기본 할당 개수
 
 	template <typename TObject>
 	using SharedObject	= std::shared_ptr<TObject>;

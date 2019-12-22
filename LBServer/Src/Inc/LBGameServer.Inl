@@ -59,6 +59,7 @@ namespace LBNet
 		CFactory::Instance().AddObjectPool<TGameObject>(_mConfig->GetSessionCnt());
 		CFactory::Instance().AddObjectPool<CSession>(_mConfig->GetSessionCnt());
 		CFactory::Instance().AddObjectPool<CTimerTask>(_mConfig->GetTimerTaskCnt());
+		CFactory::Instance().AddObjectPool<CLogBuffer>(_mConfig->GetLogBufCnt());
 		
 		return 0;
 	}
@@ -174,7 +175,7 @@ namespace LBNet
 		{
 			if (pErr.value() != 0)
 			{
-				std::cout << "Accept Fail : " << pErr.value() << std::endl;
+				CConsoleLog(ELogType::eLogInfo) << "Accept Fail : " << pErr.value();
 				aSession->SetDisconnect();
 				__SetAccept(pAcceptor);
 				return;
@@ -183,7 +184,7 @@ namespace LBNet
 			ErrCode aErr = aSession->OnAccept();
 			if (aErr != 0)
 			{
-				std::cout << "On Accept Fail : " << aErr << std::endl;
+				CConsoleLog(ELogType::eLogInfo) << "Accept Fail : " << pErr.value();
 				aSession->SetDisconnect();
 				__SetAccept(pAcceptor);
 

@@ -1,20 +1,21 @@
 namespace LBNet
 {
+	#ifdef _WINDOWS
 	template<typename TObject>
-	CQueue<TObject>::CQueue() : __mSemaphore(NULL), __mQueue(), __mMutex()
+	CWaitableQueue<TObject>::CWaitableQueue() : __mSemaphore(NULL), __mQueue(), __mMutex()
 	{
 		__mSemaphore = ::CreateSemaphore(NULL, 0, 0xFFFFFF, NULL);
 		LB_ASSERT(__mSemaphore != NULL, "Create Semaphore Error!");
 	}
 
 	template<typename TObject>
-	CQueue<TObject>::~CQueue()
+	CWaitableQueue<TObject>::~CWaitableQueue()
 	{
 		::CloseHandle(__mSemaphore);
 	}
 
 	template<typename TObject>
-	bool CQueue<TObject>::Push(TObject& pObject)
+	bool CWaitableQueue<TObject>::Push(TObject& pObject)
 	{
 		{
 			WriteLock aLocker(__mMutex);
@@ -28,7 +29,7 @@ namespace LBNet
 	}
 
 	template<typename TObject>
-	bool CQueue<TObject>::Pop(TObject& pObject, bool pIsWait)
+	bool CWaitableQueue<TObject>::Pop(TObject& pObject, bool pIsWait)
 	{
 		DWORD dwResult = ::WaitForSingleObject(__mSemaphore, (pIsWait)? INFINITE : 0);
 
@@ -50,4 +51,5 @@ namespace LBNet
 
 		return true;
 	}
+	#endif //_WINDOWS
 }
