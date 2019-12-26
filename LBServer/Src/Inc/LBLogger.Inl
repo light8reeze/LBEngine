@@ -54,6 +54,34 @@ namespace LBNet
 		std::move(pData, pData + TSize, aDataBuffer);
 		__mUseSize += (sizeof(TType) * TSize);
 	}
+
+	template <>
+	void CLogBuffer::PushLogData<const char*>(const char*& pData)
+	{
+		LB_ASSERT(__mUseSize < eSzLogMsg, "Error!");
+
+		Size aLength = static_cast<Size>(std::strlen(pData));
+		if (__mUseSize + aLength >= eSzLogMsg)
+			return;
+
+		char* aDataBuffer = reinterpret_cast<char*>(__mBuffer + __mUseSize);
+		std::copy(pData, pData + aLength, aDataBuffer);
+		__mUseSize += aLength;
+	}
+
+	template <>
+	void CLogBuffer::PushLogData<const char*>(const char*&& pData)
+	{
+		LB_ASSERT(__mUseSize < eSzLogMsg, "Error!");
+
+		Size aLength = static_cast<Size>(std::strlen(pData));
+		if (__mUseSize + aLength >= eSzLogMsg)
+			return;
+
+		char* aDataBuffer = reinterpret_cast<char*>(__mBuffer + __mUseSize);
+		std::move(pData, pData + aLength, aDataBuffer);
+		__mUseSize += aLength;
+	}
 #pragma endregion CLogBuffer
 
 #pragma region CLogger
@@ -66,4 +94,29 @@ namespace LBNet
 		return (*this);
 	}
 #pragma endregion CLogger
+
+#pragma region CConsoleLog
+	template<typename TArgs, typename TIsScalar>
+	CConsoleLog& CConsoleLog::operator<<(TArgs&& pData)
+	{
+		return (__PushLogImpl(pData, TIsScalar()));
+	}
+
+	template<typename TArgs>
+	CConsoleLog& CConsoleLog::__PushLogImpl(TArgs&& pData, std::true_type)
+	{
+		std::string aScalarToStr(std::to_string(pData));
+		CLogger::operator<<(aScalarToStr.c_str());
+		
+		return (*this);
+	}
+
+	template<typename TArgs>
+	CConsoleLog& CConsoleLog::__PushLogImpl(TArgs&& pData, std::false_type)
+	{
+		CLogger::operator<<(pData);
+		
+		return (*this);
+	}
+#pragma endregion CConsoleLog
 }

@@ -1,6 +1,9 @@
-//Desc : LBUtillity의 문자열에 필요한 상수, 함수등을 정의해놓은 파일
-//Date : 2019-02-25
-//Auther : light8reeze(light8reeze@gmail.com)
+/**
+	@file	LBCharBase.h
+	@bfief	LBUtillity의 문자열에 필요한 상수, 함수등을 정의해놓은 파일
+	@date	2019-02-25
+	@auther light8reeze(light8reeze@gmail.com)
+*/
 #pragma once
 #include "LBUtility.h"
 #include <string>
@@ -17,7 +20,9 @@ namespace LBNet
 	#error Using CharSet MBCS or Unicode(define _MBCS or _UNICODE)
 	#endif //_UNICODE, _MBCS
 
-	//Desc : Char셋 상수값
+	/**
+		@brief Char셋 정의
+	*/
 	enum class ECharMode
 	{
 		eMBCS = 0,
@@ -25,9 +30,9 @@ namespace LBNet
 		eNone
 	};
 
-	//Desc : 현재 프로젝트에서 지원하는 Char타입을 반환한다.
-	//Warn : 프로젝트 전처리기에 따라 값이 결정된다.
-	//		(_UNICODE, _MBCS 모두 미정의시 컴파일 에러가 발생한다)
+	/**
+		@brief 현재 프로젝트에서 지원하는 Char타입을 반환한다.
+	*/
 	constexpr ECharMode EProjectChar()
 	{
 		#ifdef _UNICODE

@@ -1,6 +1,6 @@
 /**
-	@file LBString.h
-	@bfief LBUtillity의 문자열 클래스 정의
+	@file	LBString.h
+	@bfief	LBUtillity의 문자열 클래스 정의
 	@date	2019-02-27
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -72,6 +72,84 @@ namespace LBNet
 	};
 
 	using CStringT	= CString<TChar>;
+
+	/**
+		@bfief			정적 String클래스(힙 메모리를 사용하지 않는다.)
+		@param TCharSet	문자열 타입(char, wchar_t)
+		@param TSize	문자열 메모리 크기
+		@date			2019-12-26
+		@auther			light8reeze(light8reeze@gmail.com)
+	*/
+	template<typename TCharSet, Size TSize>
+	class CString
+	{
+	public:
+		using Type = TCharSet;
+
+	public:
+		CString();
+		~CString();
+
+		CString&	operator=(const TChar&&* pRvalue);
+		CString&	operator+=(const TChar&&* pRvalue);
+		CString		operator+(const TChar&&* pRvalue);
+
+		void		Assign(const TChar&&* pStr);
+		void		Assign(const TChar&* pStr);
+		void		Append(const TChar&&* pStr);
+		void		Append(const TChar&* pStr);
+
+		TCharSet& operator[](int pIndex);
+
+		const TCharSet*		GetCStr() const;
+
+		int					GetMaxLength() const;
+		int					GetLength() const;
+
+	private:
+		TCharSet	__mStr[TSize];
+		Size		__mUseSize;
+	};
+
+	/**
+		@bfief			메모리 재사용 가능한 스트링 클래스.
+						메모리 버퍼 포인터를 외부에서 받아 사용 가능하다.
+		@param TCharSet	문자열 타입(char, wchar_t)
+		@date			2019-12-26
+		@auther			light8reeze(light8reeze@gmail.com)
+	*/
+	template<typename TCharSet>
+	class CReuseString
+	{
+	public:
+		using Type = TCharSet;
+
+	public:
+		CReuseString();
+		~CReuseString();
+
+		CReuseString&	operator=(const TChar&&* pRvalue);
+		CReuseString&	operator+=(const TChar&&* pRvalue);
+		CReuseString	operator+(const TChar&&* pRvalue);
+
+		void		Alloc(TChar* pPtr, Size pSize);
+		void		Assign(const TChar&&* pStr);
+		void		Assign(const TChar&* pStr);
+		void		Append(const TChar&&* pStr);
+		void		Append(const TChar&* pStr);
+
+		TCharSet& operator[](int pIndex);
+
+		const TCharSet*		GetCStr() const;
+
+		int					GetMaxLength() const;
+		int					GetLength() const;
+
+	private:
+		TCharSet*	__mStr;
+		Size		__mMaxSize;
+		Size		__mUseSize;
+	};
 }
 
 #include "LBString.Inl"

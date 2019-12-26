@@ -6,6 +6,7 @@
 */
 #pragma once
 #include "LBServer.h"
+#include <type_traits>
 
 namespace LBNet
 {
@@ -55,6 +56,7 @@ namespace LBNet
 		void	Clear();
 		void	SetLogType(ELogType&& pLogType);
 		void	SetLogOutput(LogOutputNo&& pOutput);
+
 		template<typename TType>
 		void	PushLogData(TType& pData);
 		template<typename TType>
@@ -63,6 +65,11 @@ namespace LBNet
 		void	PushLogData(TType (&pData)[TSize]);
 		template<typename TType, Size TSize>
 		void	PushLogData(TType (&&pData)[TSize]);
+		template<>
+		void	PushLogData<const char*>(const char*& pData);
+		template<>
+		void	PushLogData<const char*>(const char*&& pData);
+		void	PushLogData(const char*&& pData);
 
 		char*			GetBuffer();
 		LogOutputNo		GetOutput() const;
@@ -153,6 +160,16 @@ namespace LBNet
 	public:
 		CConsoleLog(ELogType&& pLogType);
 		~CConsoleLog();
+
+		template<typename TArgs, typename TIsScalar = typename std::is_scalar<std::remove_reference_t<TArgs>>::type>
+		CConsoleLog& operator<<(TArgs&& pData);
+
+	private:
+		// 스칼라 타입의 경우 string으로 변환후 넣는다.
+		template<typename TArgs>
+		CConsoleLog& __PushLogImpl(TArgs&& pData, std::true_type pTrueType);
+		template<typename TArgs>
+		CConsoleLog& __PushLogImpl(TArgs&& pData, std::false_type pFalseType);
 	};
 }
 
