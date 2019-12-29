@@ -1,6 +1,6 @@
 /**
-	@file LBString.h
-	@bfief LBUtillity의 문자열 클래스 정의
+	@file	LBString.h
+	@bfief	LBUtillity의 문자열 클래스 정의
 	@date	2019-02-27
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -10,70 +10,138 @@
 namespace LBNet
 {
 	/**
-		@bfief			LBUtility의 동적 String클래스
+		@bfief			정적 String클래스(힙 메모리를 사용하지 않는다.)
 		@param TCharSet	문자열 타입(char, wchar_t)
-		@date			2019-02-27
+		@param TSize	문자열 메모리 크기
+		@warning		문자열 대입, 추가의 경우 정해진 크기까지만 들어간다.(TSize - 1)
+		@date			2019-12-26
 		@auther			light8reeze(light8reeze@gmail.com)
-		@warning		1. 사용할 Char셋(TCharSet)과 다른 Char셋과 혼용하여사용 가능하지만 
-						이동, 대입, 복사, 반환 등에서 변환과정이 추가되어 
-						비 효율적이므로 되도록 혼용하여 사용하지 않는다.
-						2. TCharSet에 char, wchar_t타입 이외의 타입으로 설정시
-						컴파일 에러가 발생한다.
-						3. operator <<은 미구현으로 char*를 받아 출력한다.
-						4. 이동 연산은 같은 Char셋, 크기의 타입끼리만 지원된다.(이동연산 추후 구현)
-		@todo			이동연산자 구현, CString 템플릿 특수화 시키기
 	*/
-	template<typename TCharSet = TChar>
-	class CString final
+	template<typename TCharSet, Size TSize>
+	class CString
 	{
 	public:
-		using CBasicString	= std::basic_string<TCharSet>;
+		using Type = TCharSet;
 
 	public:
 		CString();
-		template<typename TRCharSet>
-		CString(const CString<TRCharSet>& pString);
-		template<typename TRCharSet>
-		CString(const TRCharSet pString);
-		CString(const CString<TCharSet>& pString);
-		~CString();
+		template<typename TString>
+		CString(TString&& pRvalue);
+		template<typename TString>
+		CString(const TString& pRvalue);
+		~CString() = default;
 
-		template<typename TRCharSet>
-		CString& operator=(const CString<TRCharSet>& pRvalue);
-		CString& operator=(const char* pRvalue);
-		CString& operator=(const wchar_t* pRvalue);
+		template<typename TString>
+		CString&	operator=(TString&& pRvalue);
+		template<typename TString>
+		CString&	operator+=(TString&& pRvalue);
+		template<typename TString>
+		CString		operator+(TString&& pRvalue);
 
-		template<typename TRCharSet>
-		CString& operator+=(const CString<TRCharSet>& pRvalue);
-		CString& operator+=(const char* pRvalue);
-		CString& operator+=(const wchar_t* pRvalue);
+		void		Assign(TCharSet*&& pStr);
+		void		Assign(const TCharSet*& pStr);
+		template<Size TRSize>
+		void		Assign(CString<TCharSet, TRSize>&& pRvalue);
+		template<Size TRSize>
+		void		Assign(const CString<TCharSet, TRSize>& pRvalue);
+		void		Assign(std::basic_string<TCharSet>&& pRvalue);
+		void		Assign(const std::basic_string<TCharSet>& pRvalue);
+		template<Size TNewSize>
+		void		Assign(TCharSet(&&pRvalue)[TNewSize]);
+		template<Size TNewSize>
+		void		Assign(const TCharSet(&pRvalue)[TNewSize]);
 
-		template<typename TRCharSet>
-		CString operator+(const CString<TRCharSet>& pRvalue);
-		CString operator+(const char* pRvalue);
-		CString operator+(const wchar_t* pRvalue);
+		void		Append(const TCharSet*&& pStr);
+		void		Append(const TCharSet*& pStr);
+		template<Size TRSize>
+		void		Append(CString<TCharSet, TRSize>&& pRvalue);
+		template<Size TRSize>
+		void		Append(const CString<TCharSet, TRSize>& pRvalue);
+		void		Append(std::basic_string<TCharSet>&& pRvalue);
+		void		Append(const std::basic_string<TCharSet>& pRvalue);
+		template<Size TNewSize>
+		void		Append(const TCharSet(&&pRvalue)[TNewSize]);
+		template<Size TNewSize>
+		void		Append(const TCharSet(&pRvalue)[TNewSize]);
 
-		TCharSet& operator[](int pIndex);
+		TCharSet&	operator[](Size pIndex);
 
-		CBasicString&			GetString();
-		const CBasicString&		GetString() const;
-		const TCharSet*			GetCStr() const;
+		const TCharSet*		GetCStr() const;
 
-		std::wstring			GetStringW();
-		const std::wstring		GetStringW() const;
-		std::string				GetStringA();
-		const std::string		GetStringA() const;
+		constexpr Size		GetMaxLength() const;
+		Size				GetLength() const;
 
-		int					GetLength() const;
-		constexpr ECharMode	GetCharMode() const;
-	
 	private:
-		CBasicString	__mStr;
+		TCharSet	__mStr[TSize];
+		Size		__mUseSize;
 	};
 
-	using CStringT	= CString<TChar>;
+	/**
+		@bfief			메모리 재사용 가능한 스트링 클래스.
+						메모리 버퍼 포인터를 외부에서 받아 사용 가능하다.
+		@param TCharSet	문자열 타입(char, wchar_t)
+		@comment		std::string는 복사, 생성 시 힙 메모리를 이용한다.
+						메모리 최적화를 위해 재사용 가능한 메모리를 이용한 string를 구현한다.
+		@warning		String에 사용한 메모리 버퍼는 호출자가 직접 관리한다.
+		@date			2019-12-26
+		@auther			light8reeze(light8reeze@gmail.com)
+	*/
+	template<typename TCharSet>
+	class CBufferedString
+	{
+	public:
+		using Type = TCharSet;
+
+	public:
+		CBufferedString();
+		CBufferedString(CBufferedString&& pRvalue);
+		CBufferedString(const CBufferedString& pRvalue);
+		CBufferedString(TCharSet* pBuf, Size pBufSize);
+		~CBufferedString() = default;
+
+		void		AllocBuffer(TCharSet* pBuf, Size pBufSize);
+
+		template<typename TString>
+		CBufferedString&	operator=(TString&& pRvalue);
+		template<typename TString>
+		CBufferedString&	operator+=(TString&& pRvalue);
+		template<typename TString>
+		CBufferedString		operator+(TString&& pRvalue);
+
+		void		Assign(TCharSet*&& pStr);
+		void		Assign(const TCharSet*& pStr);
+		void		Assign(CBufferedString<TCharSet>&& pRvalue);
+		void		Assign(const CBufferedString<TCharSet>& pRvalue);
+		void		Assign(std::basic_string<TCharSet>&& pRvalue);
+		void		Assign(const std::basic_string<TCharSet>& pRvalue);
+		template<Size TNewSize>
+		void		Assign(TCharSet(&&pRvalue)[TNewSize]);
+		template<Size TNewSize>
+		void		Assign(const TCharSet(&pRvalue)[TNewSize]);
+
+		void		Append(const TCharSet*&& pStr);
+		void		Append(const TCharSet*& pStr);
+		void		Append(CBufferedString<TCharSet>&& pRvalue);
+		void		Append(const CBufferedString<TCharSet>& pRvalue);
+		void		Append(std::basic_string<TCharSet>&& pRvalue);
+		void		Append(const std::basic_string<TCharSet>& pRvalue);
+		template<Size TNewSize>
+		void		Append(const TCharSet(&&pRvalue)[TNewSize]);
+		template<Size TNewSize>
+		void		Append(const TCharSet(&pRvalue)[TNewSize]);
+
+		TCharSet&	operator[](Size pIndex);
+
+		const TCharSet*		GetCStr() const;
+
+		Size				GetMaxLength() const;
+		Size				GetLength() const;
+
+	private:
+		TCharSet*	__mStr;
+		Size		__mMaxSize;
+		Size		__mUseSize;
+	};
 }
 
 #include "LBString.Inl"
-#include "LBStringA.Inl"
-#include "LBStringW.Inl"

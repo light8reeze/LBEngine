@@ -135,7 +135,12 @@
     <ClInclude Include="Src\Inc\LBLogProcessor.h">
       <Filter>Log</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Inc\LBLogProcessor.Inl" />
+    <ClInclude Include="Src\Inc\LBLogProcessor.Inl">
+      <Filter>Log</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBLogger.Inl">
+      <Filter>Log</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Cpp\LBServer.cpp">
@@ -190,9 +195,6 @@
     </None>
     <None Include="Src\Inc\LBSocket.Inl">
       <Filter>Network\Socket</Filter>
-    </None>
-    <None Include="Src\Inc\LBLogger.Inl">
-      <Filter>Log</Filter>
     </None>
   </ItemGroup>
 </Project>

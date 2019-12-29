@@ -17,7 +17,7 @@ namespace LBNet
 		__mOutput = eOutputNone;
 		__mLogType = ELogType::eLogNone;
 		__mUseSize = 0;
-		std::memset(__mBuffer, 0, eSzLogMsg);
+		std::fill(__mBuffer, __mBuffer + eSzLogMsg, 0);
 	}
 
 	void CLogBuffer::SetLogType(ELogType&& pLogType)
@@ -48,6 +48,13 @@ namespace LBNet
 	Size CLogBuffer::GetUseSize() const
 	{
 		return __mUseSize;
+	}
+
+	void CLogBuffer::OnPushed(Size pPushedSize)
+	{
+		LB_ASSERT(__mUseSize + pPushedSize <= eSzLogMsg, "Over Flow!");
+
+		__mUseSize += pPushedSize;
 	}
 #pragma endregion CLogBuffer
 
@@ -94,6 +101,7 @@ namespace LBNet
 
 		if (_mLogBuffer != nullptr)
 		{
+			_mLogBuffer->Clear();
 			_mLogBuffer->SetLogOutput(std::move(pOutput));
 			_mLogBuffer->SetLogType(std::move(pLogType));
 		}
@@ -136,6 +144,8 @@ namespace LBNet
 #pragma region CConsoleLog
 	CConsoleLog::CConsoleLog(ELogType&& pLogType) : CLogger(std::move(pLogType), LogOutputNo(eOutputConsole))
 	{
+		if(_mLogBuffer != nullptr)
+			__mLogString.AllocBuffer(_mLogBuffer->GetBuffer(), eSzLogMsg);
 	}
 
 	CConsoleLog::~CConsoleLog()

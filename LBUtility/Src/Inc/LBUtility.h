@@ -106,20 +106,21 @@ namespace LBNet
 		@param T1		비교할 포인터 타입
 		@param T2		비교할 포인터 타입
 		@warning		혼동을 피하기 위해 두 인자를 모두 포인터타입을 넣어준다.
-						포인터, 일반 변수를 섞어사용할 경우 버그가 발생할 가능성이 높다.
+						1. 포인터, 일반 변수를 섞어사용할 경우 버그가 발생할 가능성이 높다.
 						(ex1 : T1 = int*, T2 = void*) => 포인터비교가 맞게 실행됨
 						(ex2 : T1 = int*, T2 = char)  => 포인터비교가 맞게 실행되지 않음
+						2. const 포인터의 경우 const를 제거하여 인자로 넣어야 한다.
 		@return bool	두 포인터가 같은 주소이면 true 아니면 false
 	*/
 	template<typename T1, typename T2>
 	inline bool IsSameAddress(T1 pT1, T2 pT2)
 	{
 		static_assert(std::is_pointer<T1>::value && std::is_pointer<T2>::value);
+		using Non_cvT1 = std::remove_cv_t<T1>;
+		using Non_cvT2 = std::remove_cv_t<T2>;
 
-		if(std::is_same<T1, T2>::value)
-			return (pT1 == pT2);
-
-		return (pT1 == reinterpret_cast<T1>(pT2));
+		return (reinterpret_cast<void*>(const_cast<Non_cvT1>(pT1))
+			== reinterpret_cast<void*>(const_cast<Non_cvT2>(pT2)));
 	}
 
 	/**

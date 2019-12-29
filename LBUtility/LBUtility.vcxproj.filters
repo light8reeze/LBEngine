@@ -24,9 +24,6 @@
     <Filter Include="CharSet\String">
       <UniqueIdentifier>{a3013509-da28-4471-9fc8-c3826a5e0eda}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CharSet\Char">
-      <UniqueIdentifier>{8822c4c8-345c-4744-98bb-0c3a597c5390}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Time">
       <UniqueIdentifier>{f58efba7-f9c9-43c2-acc7-9cdb5669d7ae}</UniqueIdentifier>
     </Filter>
@@ -48,16 +45,13 @@
     <Filter Include="File">
       <UniqueIdentifier>{205f3e3d-627f-4f09-b96b-4ac0471da3ed}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Memory\DataStructure">
+    <Filter Include="Memory\Container">
       <UniqueIdentifier>{e8a31dc3-052a-4494-bd28-e94f91bd64e7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Inc\LBString.h">
       <Filter>CharSet\String</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Inc\LBChar.h">
-      <Filter>CharSet\Char</Filter>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBCharBase.h">
       <Filter>CharSet</Filter>
@@ -83,33 +77,18 @@
     <ClInclude Include="Src\Inc\LBProbability.h">
       <Filter>Random</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Inc\LBChar.Inl">
-      <Filter>CharSet\Char</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Inc\LBCharA.Inl">
-      <Filter>CharSet\Char</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Inc\LBCharW.Inl">
-      <Filter>CharSet\Char</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Inc\LBEncryption.h">
       <Filter>Encyption</Filter>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBPool.h">
-      <Filter>Memory\DataStructure</Filter>
+      <Filter>Memory\Container</Filter>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBQueue.h">
-      <Filter>Memory\DataStructure</Filter>
+      <Filter>Memory\Container</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Src\Inc\LBString.Inl">
-      <Filter>CharSet\String</Filter>
-    </None>
-    <None Include="Src\Inc\LBStringA.Inl">
-      <Filter>CharSet\String</Filter>
-    </None>
-    <None Include="Src\Inc\LBStringW.Inl">
       <Filter>CharSet\String</Filter>
     </None>
     <None Include="Src\Inc\LBFile.Inl">
@@ -125,10 +104,10 @@
       <Filter>Time</Filter>
     </None>
     <None Include="Src\Inc\LBPool.Inl">
-      <Filter>Memory\DataStructure</Filter>
+      <Filter>Memory\Container</Filter>
     </None>
     <None Include="Src\Inc\LBQueue.Inl">
-      <Filter>Memory\DataStructure</Filter>
+      <Filter>Memory\Container</Filter>
     </None>
   </ItemGroup>
 </Project>
