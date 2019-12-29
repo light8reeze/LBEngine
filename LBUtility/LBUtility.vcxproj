@@ -53,8 +53,6 @@
     <None Include="Src\Inc\LBQueue.Inl" />
     <None Include="Src\Inc\LBRandom.Inl" />
     <None Include="Src\Inc\LBString.Inl" />
-    <None Include="Src\Inc\LBStringA.Inl" />
-    <None Include="Src\Inc\LBStringW.Inl" />
     <None Include="Src\Inc\LBTime.Inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -153,6 +151,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -169,6 +168,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

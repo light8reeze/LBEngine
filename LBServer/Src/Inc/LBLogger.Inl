@@ -60,7 +60,7 @@ namespace LBNet
 	{
 		LB_ASSERT(__mUseSize < eSzLogMsg, "Error!");
 
-		Size aLength = static_cast<Size>(std::strlen(pData));
+		Size aLength = static_cast<Size>(StrLen(pData, eSzLogMsg - __mUseSize));
 		if (__mUseSize + aLength >= eSzLogMsg)
 			return;
 
@@ -74,7 +74,7 @@ namespace LBNet
 	{
 		LB_ASSERT(__mUseSize < eSzLogMsg, "Error!");
 
-		Size aLength = static_cast<Size>(std::strlen(pData));
+		Size aLength = static_cast<Size>(StrLen(pData, eSzLogMsg - __mUseSize));
 		if (__mUseSize + aLength >= eSzLogMsg)
 			return;
 
@@ -105,16 +105,24 @@ namespace LBNet
 	template<typename TArgs>
 	CConsoleLog& CConsoleLog::__PushLogImpl(TArgs&& pData, std::true_type)
 	{
+		if(_mLogBuffer == nullptr)
+			return (*this);
+
 		std::string aScalarToStr(std::to_string(pData));
-		CLogger::operator<<(aScalarToStr.c_str());
-		
+		__mLogString += aScalarToStr.c_str();
+		_mLogBuffer->OnPushed(static_cast<Size>(aScalarToStr.length()));
+
 		return (*this);
 	}
 
 	template<typename TArgs>
 	CConsoleLog& CConsoleLog::__PushLogImpl(TArgs&& pData, std::false_type)
 	{
-		CLogger::operator<<(pData);
+		if (_mLogBuffer == nullptr)
+			return (*this);
+
+		__mLogString += std::forward<TArgs>(pData);
+		_mLogBuffer->OnPushed(StrLen(pData, eSzLogMsg - _mLogBuffer->GetUseSize()));
 		
 		return (*this);
 	}

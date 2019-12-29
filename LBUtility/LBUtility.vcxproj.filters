@@ -45,7 +45,7 @@
     <Filter Include="File">
       <UniqueIdentifier>{205f3e3d-627f-4f09-b96b-4ac0471da3ed}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Memory\DataStructure">
+    <Filter Include="Memory\Container">
       <UniqueIdentifier>{e8a31dc3-052a-4494-bd28-e94f91bd64e7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -81,20 +81,14 @@
       <Filter>Encyption</Filter>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBPool.h">
-      <Filter>Memory\DataStructure</Filter>
+      <Filter>Memory\Container</Filter>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBQueue.h">
-      <Filter>Memory\DataStructure</Filter>
+      <Filter>Memory\Container</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Src\Inc\LBString.Inl">
-      <Filter>CharSet\String</Filter>
-    </None>
-    <None Include="Src\Inc\LBStringA.Inl">
-      <Filter>CharSet\String</Filter>
-    </None>
-    <None Include="Src\Inc\LBStringW.Inl">
       <Filter>CharSet\String</Filter>
     </None>
     <None Include="Src\Inc\LBFile.Inl">
@@ -110,10 +104,10 @@
       <Filter>Time</Filter>
     </None>
     <None Include="Src\Inc\LBPool.Inl">
-      <Filter>Memory\DataStructure</Filter>
+      <Filter>Memory\Container</Filter>
     </None>
     <None Include="Src\Inc\LBQueue.Inl">
-      <Filter>Memory\DataStructure</Filter>
+      <Filter>Memory\Container</Filter>
     </None>
   </ItemGroup>
 </Project>

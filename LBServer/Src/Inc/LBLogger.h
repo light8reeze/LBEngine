@@ -6,6 +6,7 @@
 */
 #pragma once
 #include "LBServer.h"
+#include "LBString.h"
 #include <type_traits>
 
 namespace LBNet
@@ -69,7 +70,8 @@ namespace LBNet
 		void	PushLogData<const char*>(const char*& pData);
 		template<>
 		void	PushLogData<const char*>(const char*&& pData);
-		void	PushLogData(const char*&& pData);
+		void	OnPushed(Size pPushedSize);
+
 
 		char*			GetBuffer();
 		LogOutputNo		GetOutput() const;
@@ -170,6 +172,11 @@ namespace LBNet
 		CConsoleLog& __PushLogImpl(TArgs&& pData, std::true_type pTrueType);
 		template<typename TArgs>
 		CConsoleLog& __PushLogImpl(TArgs&& pData, std::false_type pFalseType);
+
+	private:
+		#pragma warning(disable : 4251)
+		CBufferedString<char> __mLogString;
+		#pragma warning(default : 4251)
 	};
 }
 

@@ -72,7 +72,7 @@ namespace LBNet
 	}
 #endif //_WINDOWS
 
-	inline Size GetStrLength(const char* pChar, Size pMaxSize)
+	inline Size StrLen(const char* pChar, Size pMaxSize)
 	{
 		Size charSize = static_cast<Size>(::strnlen_s(pChar, static_cast<size_t>(pMaxSize)));
 		LB_ASSERT(charSize >= 0, "Invalid Char");
@@ -80,7 +80,7 @@ namespace LBNet
 		return charSize;
 	}
 
-	inline Size GetStrLength(const wchar_t* pChar, Size pMaxSize)
+	inline Size StrLen(const wchar_t* pChar, Size pMaxSize)
 	{
 		Size charSize = static_cast<Size>(::wcsnlen_s(pChar, static_cast<size_t>(pMaxSize)));
 		LB_ASSERT(charSize >= 0, "Invalid Char");

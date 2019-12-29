@@ -49,6 +49,13 @@ namespace LBNet
 	{
 		return __mUseSize;
 	}
+
+	void CLogBuffer::OnPushed(Size pPushedSize)
+	{
+		LB_ASSERT(__mUseSize + pPushedSize <= eSzLogMsg, "Over Flow!");
+
+		__mUseSize += pPushedSize;
+	}
 #pragma endregion CLogBuffer
 
 #pragma region CConsoleLogSystem
@@ -137,6 +144,8 @@ namespace LBNet
 #pragma region CConsoleLog
 	CConsoleLog::CConsoleLog(ELogType&& pLogType) : CLogger(std::move(pLogType), LogOutputNo(eOutputConsole))
 	{
+		if(_mLogBuffer != nullptr)
+			__mLogString.AllocBuffer(_mLogBuffer->GetBuffer(), eSzLogMsg);
 	}
 
 	CConsoleLog::~CConsoleLog()
