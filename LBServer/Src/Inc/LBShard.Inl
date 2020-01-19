@@ -18,9 +18,6 @@ namespace LBNet
 	template<typename TShardObject>
 	ErrCode CShard<TShardObject>::Connect()
 	{
-		if (GetState() == CManagedObject::EState::eReturned)
-			OnConstruct();
-
 		_mSocket.ConnectAsync(__mIp.c_str(), __mPort,
 			[this](const boost::system::error_code& pError)
 		{
@@ -37,6 +34,7 @@ namespace LBNet
 				__OnConnectFail(aErr);
 			}
 
+			_mLastError = 0;
 			aErr = aShardObject->OnConnect();
 			if (aErr != 0)
 			{
@@ -49,14 +47,17 @@ namespace LBNet
 	}
 
 	template<typename TShardObject>
-	ErrCode CShard<TShardObject>::SetDisconnect()
+	ErrCode CShard<TShardObject>::SetDisconnect(ErrCode pError)
 	{
+		LB_ASSERT(_mLastError == 0, "Invalid!");
+
 		WriteLock aLock(_mMutex);
 
 		if (_mState != EState::eDisconnect)
 		{
 			_mSocket.Close();
 			_mState = EState::eDisconnect;
+			_mLastError = pError;
 
 			LB_ASSERT(GetGameObject() != nullptr, "Error!");
 			GetGameObject()->OnDisconnect();

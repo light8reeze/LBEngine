@@ -38,12 +38,12 @@ namespace LBNet
 		return 0;
 	}
 
-	void CGameObject::SetDisconnect()
+	void CGameObject::SetDisconnect(ErrCode pLastErr)
 	{
 		auto aShared = _mSession.lock();
 		if (aShared != nullptr)
 		{
-			aShared->SetDisconnect();
+			aShared->SetDisconnect(pLastErr);
 		}
 	}
 

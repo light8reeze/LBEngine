@@ -63,7 +63,7 @@ namespace LBNet
 		ErrCode Send(void* pBuffer, int pSize);
 		ErrCode Send(SharedObject<CSender> pSender);
 		virtual ErrCode Close();
-		virtual ErrCode SetDisconnect();
+		virtual ErrCode SetDisconnect(ErrCode pError = 0);
 
 		const CTcpSocket::EndPointType& GetEndPoint() const;
 
@@ -88,6 +88,7 @@ namespace LBNet
 		CTcpSocket					_mSocket;
 		CSharedMutex				_mMutex;
 		EState						_mState;
+		ErrCode						_mLastError;
 
 	private:
 		CBuffer						__mBuffer;

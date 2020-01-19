@@ -17,7 +17,7 @@ namespace LBNet
 	}
 
 	CSession::CSession() : _mSocket(), __mBuffer(eSzPacketMax),
-		_mState(EState::eClosed), _mMutex()
+		_mState(EState::eClosed), _mMutex(), _mLastError(0)
 	{
 	}
 
@@ -40,6 +40,7 @@ namespace LBNet
 		_mState = EState::eStable;
 		__mGameObject->OnAccept();
 		_mSocket.SetReuse(true);
+		_mLastError = 0;
 		
 		{
 			WriteLock aLocker(_mMutex);
@@ -65,7 +66,7 @@ namespace LBNet
 		// 버퍼가 가득 찼을때는 접속을 해제한다.
 		if (aSize < eSzPacketMin || __mBuffer.GetBufferSize() < aSize)
 		{
-			SetDisconnect();
+			SetDisconnect(eErrCodeSesBufferFull);
 			return eErrCodeSesBufferFull;
 		}
 
@@ -82,7 +83,7 @@ namespace LBNet
 			ErrCode aErr = OnReceive(static_cast<Size>(pRecvSize));
 			if (aErr != 0)
 			{
-				SetDisconnect();
+				SetDisconnect(aErr);
 				return;
 			}
 
@@ -104,17 +105,12 @@ namespace LBNet
 			return eErrCodeSesDisconnected;
 
 		if (!__mBuffer.OnPush(pSize))
-		{
-			SetDisconnect();
 			return eErrCodeSesBufferFull;
-		}
 
 		Size	aSize = 0;
 		ErrCode aResult = 0;
 		char*	aData = __mBuffer.Front(aSize, aResult);
 		auto	aGameObject = GetGameObject<CGameObject>();
-
-		LB_ASSERT(aSize >= sizeof(CPacketHeader), "Packet Error!");
 
 		while(aData != nullptr && aGameObject != nullptr && aResult == 0)
 		{
@@ -126,24 +122,17 @@ namespace LBNet
 				aResult = CEncryptor::Instance()->Decrypt(aData, aSize);
 
 				if (aResult != 0)
-				{
-					SetDisconnect();
 					return aResult;
-				}
 			}
 
 			CPacketHeader* aHeader = reinterpret_cast<CPacketHeader*>(aData + aEncryptHdSize);
 			aResult = CTcpHandler::Instance().Process(aHeader->mMessage, aHeader, aSize, aGameObject);
 
-			aData		= __mBuffer.Front(aSize, aResult);
-			aGameObject = GetGameObject<CGameObject>();
+			aData	= __mBuffer.Front(aSize, aResult);
 		}
 
 		if (aResult != 0)
-		{
-			SetDisconnect();
 			return aResult;
-		}
 
 		__mBuffer.Pop();
 		return 0;
@@ -217,13 +206,14 @@ namespace LBNet
 			__mBuffer.Clear();
 			--_mSesCnt;
 		}
-		CConsoleLog(ELogType::eLogInfo) << "On Close Ses Cnt : " << _mSesCnt;
+		CConsoleLog(ELogType::eLogInfo) << "On Close Ses Cnt : " << _mSesCnt << " Last Error : " << _mLastError;
 
 		return 0;
 	}
 
-	ErrCode CSession::SetDisconnect()
+	ErrCode CSession::SetDisconnect(ErrCode pError)
 	{
+		LB_ASSERT(_mLastError == 0, "Error!");
 		{
 			WriteLock aLock(_mMutex);
 
@@ -231,7 +221,17 @@ namespace LBNet
 			{
 				_mSocket.Close();
 				_mState = EState::eDisconnect;
+
+				CTimer::Start(1s, [aObserver = std::move(WeakObject<CSession>(__mInstance))](ErrCode pErr)
+				{
+					if (pErr == 0 && !aObserver.expired())
+					{
+						CConsoleLog(ELogType::eLogInfo) << "Dangling!!";
+					}
+				});
+
 				__mInstance = nullptr;
+				_mLastError = pError;
 
 				RemoveObject();
 			}

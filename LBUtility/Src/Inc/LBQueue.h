@@ -14,7 +14,6 @@
 
 namespace LBNet
 {
-#ifdef _WINDOWS
     /**
         @brief	        오브젝트 큐 클래스
 		@details		세마포어를 이용한 큐 클래스.
@@ -36,14 +35,53 @@ namespace LBNet
 		CWaitableQueue& operator=(const CWaitableQueue&) = delete;
 	
 		bool	Push(TObject& pObject);
-		bool	Pop(TObject& pObject, bool pIsWait = false);
+		bool	Pop(TObject& pObject, unsigned long pWaitTime = 0);
 
 	private:
+		#ifdef _WINDOWS
 		HANDLE			__mSemaphore;
+		#endif //_WINDOWS
 		__ObjectQueue	__mQueue;
 		CSharedMutex	__mMutex;
 	};
-#endif //_WINDOWS
+	
+    /**
+        @brief	        원형 큐 클래스
+        @param TObject	사용할 객체의 타입
+		@warning		스레드 안정성은 보장하지 않는다.
+        @date	        2020-01-18
+        @auther         light8reeze(light8reeze@gmail.com)
+    */
+	template<typename TObject>
+	class CCircularQueue
+	{
+	private:
+		using __ObjectQueue = std::queue<TObject>;
+
+	public:
+		CCircularQueue();
+		~CCircularQueue();
+
+		CCircularQueue(const CWaitableQueue&) = delete;
+		CCircularQueue& operator=(const CWaitableQueue&) = delete;
+		
+		void		Initialize(Size pSize);
+		bool		Push(TObject&& pObject);
+		bool		Push(TObject& pObject);
+		TObject&	Front();
+		void		Pop();
+		Size		GetUseSize();
+		Size		GetMaxSize();
+		bool		IsEmpty();
+		bool		IsFull();
+
+	private:
+		TObject*	__mObjectQueue;
+		int			__mPushIndex;
+		int			__mPopIndex;
+		Size		__mUseSize;
+		Size		__mMaxSize;
+	};
 }
 
 #include "LBQueue.Inl"

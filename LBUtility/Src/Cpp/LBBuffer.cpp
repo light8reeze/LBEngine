@@ -35,7 +35,7 @@ namespace LBNet
 
 	char* CBuffer::Front(Size& pSize, ErrCode& pErr)
 	{
-		if (GetUsingSize() - static_cast<Size>(_mReadIndex) < sizeof(CBufferHeader))
+		if (static_cast<int>(GetUsingSize()) - _mReadIndex < static_cast<int>(sizeof(CBufferHeader)))
 			return nullptr;
 
 		pErr = 0;
@@ -44,6 +44,12 @@ namespace LBNet
 		aData += sizeof(CBufferHeader);
 
 		if (pSize > _mMAX_SIZE - sizeof(CBufferHeader))
+		{
+			pErr = 1;
+			return nullptr;
+		}
+
+		if (pSize > _mUseSize)
 			return nullptr;
 
 		_mReadIndex += static_cast<int>(pSize) + sizeof(CBufferHeader);
@@ -52,6 +58,8 @@ namespace LBNet
 
 	void CBuffer::Pop()
 	{
+		LB_ASSERT(_mUseSize >= static_cast<Size>(_mReadIndex), "Error!");
+
 		::memmove_s(_mBuffer, _mMAX_SIZE, _mBuffer + _mReadIndex, _mMAX_SIZE - _mReadIndex);
 		_mWriteIndex	-= _mReadIndex;
 		_mUseSize		-= static_cast<Size>(_mReadIndex);
@@ -75,7 +83,7 @@ namespace LBNet
 
 		_mWriteIndex	+= static_cast<int>(pSize);
 		_mUseSize		+= pSize;
-
+		_mReadIndex		= 0;
 		return true;
 	}
 

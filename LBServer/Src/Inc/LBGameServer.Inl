@@ -133,6 +133,7 @@ namespace LBNet
 		}
 		catch (std::exception& aException)
 		{
+			LB_ASSERT(0, "Except");
 			UNREFERENCED_PARAMETER(aException);
 			// @todo 추후 예외시 덤프기능 구현하기
 		}
@@ -158,7 +159,7 @@ namespace LBNet
 		auto aGameObject = CFactory::Instance().New<TGameObject>();
 		if (aGameObject == nullptr)
 		{
-			aSession->SetDisconnect();
+			aSession->SetDisconnect(eErrCodeNotEnoughRsc);
 			CTimer::Start(eTimeRetryAccept, [this, pAcceptor](ErrCode /*pErr*/)
 			{
 				__SetAccept(pAcceptor);
@@ -176,7 +177,7 @@ namespace LBNet
 			if (pErr.value() != 0)
 			{
 				CConsoleLog(ELogType::eLogInfo) << "Accept Fail : " << pErr.value();
-				aSession->SetDisconnect();
+				aSession->SetDisconnect(pErr.value());
 				__SetAccept(pAcceptor);
 				return;
 			}
@@ -185,7 +186,7 @@ namespace LBNet
 			if (aErr != 0)
 			{
 				CConsoleLog(ELogType::eLogInfo) << "Accept Fail : " << pErr.value();
-				aSession->SetDisconnect();
+				aSession->SetDisconnect(aErr);
 				__SetAccept(pAcceptor);
 
 				return;

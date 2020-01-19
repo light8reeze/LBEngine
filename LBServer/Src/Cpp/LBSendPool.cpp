@@ -121,6 +121,9 @@ namespace LBNet
 			++aFlagIndex;
 		}
 
+		if (aAllocIndex != -1 && aMaxCnt != pCnt)
+			aAllocIndex = -1;
+
 		return aAllocIndex;
 	}
 

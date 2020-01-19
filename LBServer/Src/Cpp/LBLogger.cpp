@@ -62,32 +62,31 @@ namespace LBNet
 	ErrCode CConsoleLogSystem::OnLogging(SharedObject<CLogBuffer>& pBuffer)
 	{
 		LB_ASSERT(pBuffer != nullptr, "Error!");
-
 		CTime aTime;
 
 		//[yyyy-mm-dd hh:mm:ss] LogType : LogMsg 형식으로 출력한다.
 		std::cout << "[" << aTime.GetYear() << "-";
+		std::cout.fill('0');
 		std::cout.width(2);
-		std::cout.fill(0);
-		std::cout << aTime.GetMonth() << "-";
+		std::cout << aTime.GetMonth() + 1 << "-";
 
+		std::cout.fill('0');
 		std::cout.width(2);
-		std::cout.fill(0);
 		std::cout << aTime.GetDay() << " ";
 
+		std::cout.fill('0');
 		std::cout.width(2);
-		std::cout.fill(0);
 		std::cout << aTime.GetHour() << ":";
 
+		std::cout.fill('0');
 		std::cout.width(2);
-		std::cout.fill(0);
 		std::cout << aTime.GetMinute() << ":";
-
+		
+		std::cout.fill('0');
 		std::cout.width(2);
-		std::cout.fill(0);
 		std::cout << aTime.GetSecond() << "]";
 
-		std::cout << " " << CLogger::LogTypeToString(pBuffer->GetLogType()) << ":";
+		std::cout << " " << CLogger::LogTypeToString(pBuffer->GetLogType()) << " : ";
 		std::cout << pBuffer->GetBuffer() << std::endl;
 
 		return 0;

@@ -29,7 +29,7 @@ namespace LBNet
 		void Unlink();
 		virtual void OnAccept() {}
 		virtual void OnDisconnect() {}
-		void SetDisconnect();
+		void SetDisconnect(ErrCode pLastErr = 0);
 		ErrCode Send(void* pBuffer, int pSize);
 		ErrCode Send(SharedObject<CSender>& pSender);
 

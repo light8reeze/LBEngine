@@ -27,7 +27,7 @@ namespace LBNet
 
 		virtual ErrCode Initialize() override;
 		ErrCode			Connect();
-		virtual ErrCode SetDisconnect() override;
+		virtual ErrCode SetDisconnect(ErrCode pError = 0) override;
 
 		void				SetAddress(const char* pIp, unsigned short pPort);
 		void				SetServerNo(unsigned short pServerNo);

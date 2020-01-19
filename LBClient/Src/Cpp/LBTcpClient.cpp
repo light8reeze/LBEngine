@@ -69,11 +69,11 @@ namespace LBNet
 
 		Size	aSize = 0;
 		ErrCode aResult = 0;
-		char*	aData = __mBuffer.Front(aSize, aResult);
+		char*	aData = nullptr;
 
 		LB_ASSERT(aSize >= sizeof(CPacketHeader), "Packet Error!");
 
-		if (aData != nullptr)
+		if ((aData = __mBuffer.Front(aSize, aResult)) != nullptr)
 		{
 			Size aEncryptHdSize = 0;
 			if (CEncryptor::Instance() != nullptr)
@@ -91,15 +91,12 @@ namespace LBNet
 
 			CPacketHeader* aHeader = reinterpret_cast<CPacketHeader*>(aData + aEncryptHdSize);
 			aResult = CClientHandler::Instance().Process(aHeader->mMessage, aHeader, aSize);
+
+			if (aResult != 0)
+				SetDisconnect(aResult);
 		}
 
-		if (aResult != 0)
-		{
-			SetDisconnect(aResult);
-			return aResult;
-		}
-
-		return 0;
+		return aResult;
 	}
 
 	ErrCode CTcpClient::Send(void* pBuffer, int pSize)
