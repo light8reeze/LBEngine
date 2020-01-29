@@ -127,6 +127,8 @@ namespace LBNet
 
 			CPacketHeader* aHeader = reinterpret_cast<CPacketHeader*>(aData + aEncryptHdSize);
 			aResult = CTcpHandler::Instance().Process(aHeader->mMessage, aHeader, aSize, aGameObject);
+			if (aResult != 0)
+				break;
 
 			aData	= __mBuffer.Front(aSize, aResult);
 		}

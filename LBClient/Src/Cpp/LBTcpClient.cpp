@@ -27,8 +27,7 @@ namespace LBNet
 
 	ErrCode CTcpClient::Receive(bool pIsZeroRecv)
 	{
-		Size	aSize		= __mBuffer.GetUsableSize();
-		char*	aWritePtr	= __mBuffer.GetWritePointer();
+		Size	aSize = __mBuffer.GetUsableSize();
 
 		if (aSize < eSzPacketMin || __mBuffer.GetBufferSize() < aSize)
 		{
@@ -40,6 +39,7 @@ namespace LBNet
 			aSize = 0;
 
 		int		aReceived = 0;
+		char*	aWritePtr = __mBuffer.GetWritePointer();
 		ErrCode aErr = __mSocket.Receive(aWritePtr, aSize, aReceived);
 		if (aErr != 0)
 		{
@@ -69,11 +69,9 @@ namespace LBNet
 
 		Size	aSize = 0;
 		ErrCode aResult = 0;
-		char*	aData = nullptr;
+		char*	aData = __mBuffer.Front(aSize, aResult);
 
-		LB_ASSERT(aSize >= sizeof(CPacketHeader), "Packet Error!");
-
-		if ((aData = __mBuffer.Front(aSize, aResult)) != nullptr)
+		while (aData != nullptr && aResult == 0)
 		{
 			Size aEncryptHdSize = 0;
 			if (CEncryptor::Instance() != nullptr)
@@ -91,11 +89,16 @@ namespace LBNet
 
 			CPacketHeader* aHeader = reinterpret_cast<CPacketHeader*>(aData + aEncryptHdSize);
 			aResult = CClientHandler::Instance().Process(aHeader->mMessage, aHeader, aSize);
-
 			if (aResult != 0)
-				SetDisconnect(aResult);
+				break;
+
+			aData = __mBuffer.Front(aSize, aResult);
 		}
 
+		if (aResult != 0)
+			SetDisconnect(aResult);
+
+		__mBuffer.Pop();
 		return aResult;
 	}
 

@@ -78,13 +78,14 @@ namespace LBNet
 
 			CPacketHeader* aHeader = reinterpret_cast<CPacketHeader*>(aData + aEncryptHdSize);
 			aResult = CUdpHandler::Instance().Process(aHeader->mMessage, aHeader, aSize, aUdpObject);
+			if (aResult != 0)
+				break;
+
 			aData = __mBuffer.Front(aSize, aResult);
 		}
 
 		if (aResult != 0)
-		{
 			return aResult;
-		}
 
 		__mBuffer.Pop();
 		return 0;
