@@ -76,19 +76,22 @@ namespace LBNet
 		return aShared;
 	}
 
-	bool CSendPool::DeAllocate(int pIndex)
+	bool CSendPool::DeAllocate(int pIndex, Size pCnt)
 	{
-		if (pIndex >= __mChunkCnt)
-			return false;
+		LB_ASSERT(pCnt <= __mChunkCnt, "Invalid!");
+		LB_ASSERT(pIndex < __mChunkCnt, "Invalid!");
 
 		{
 			WriteLock aWriteLock(__mMutex);
 
-			if (__mUseFlag[pIndex] == false)
-				return false;
+			for (int index = pIndex; index < (pIndex + static_cast<int>(pCnt)); ++index)
+			{
+				if (__mUseFlag[index] == false)
+					return false;
 
-			__mUseFlag[pIndex] = false;
-			__mUseSize -= sizeof(CSendChunk);
+				__mUseFlag[index] = false;
+				__mUseSize -= sizeof(CSendChunk);
+			}
 		}
 
 		return true;

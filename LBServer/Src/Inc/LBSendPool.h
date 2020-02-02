@@ -37,7 +37,7 @@ namespace LBNet
 
 		ErrCode					Initialize(Size pChunkCnt);
 		SharedObject<CSender>	Allocate(Size pSendSize);
-		bool					DeAllocate(int pIndex);
+		bool					DeAllocate(int pIndex, Size pCnt);
 		int						GetAllocIndex(Size pCnt);
 		Size					GetUsableSize();
 

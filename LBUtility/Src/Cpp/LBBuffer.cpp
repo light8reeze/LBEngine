@@ -43,7 +43,7 @@ namespace LBNet
 		pSize = reinterpret_cast<CBufferHeader*>(aData)->mDataSize;
 		aData += sizeof(CBufferHeader);
 
-		// 패킷 버퍼가 가득찬 경우
+		// 잘못된 패킷을 받을 경우 사이즈가 비정상으로 들어온다.
 		// 이러한 경우 연결을 종료한다.
 		if (pSize > _mMAX_SIZE - sizeof(CBufferHeader))
 		{
@@ -51,16 +51,8 @@ namespace LBNet
 			return nullptr;
 		}
 
-		if (pSize > _mUseSize - static_cast<Size>(_mReadIndex) + sizeof(CBufferHeader))
+		if (pSize > _mUseSize - static_cast<Size>(_mReadIndex) - sizeof(CBufferHeader))
 			return nullptr;
-
-		// 잘못된 패킷을 받을 경우 사이즈가 비정상으로 들어온다.
-		// 이러한 경우 연결을 종료한다.
-		if (pSize > _mUseSize)
-		{
-			pErr = 2;
-			return nullptr;
-		}
 
 		_mReadIndex += (static_cast<int>(pSize) + static_cast<int>(sizeof(CBufferHeader)));
 		return aData;
@@ -85,7 +77,6 @@ namespace LBNet
 
 	bool CBuffer::OnPush(Size pSize)
 	{
-		LB_ASSERT(pSize >= sizeof(CBufferHeader),	"Invalid Enqueue!");
 		LB_ASSERT(GetUsableSize() >= pSize,			"Invalid Size!");
 		LB_ASSERT(_mReadIndex == 0,					"Invalid Idx!");
 		

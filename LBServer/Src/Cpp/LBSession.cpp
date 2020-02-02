@@ -118,12 +118,18 @@ namespace LBNet
 			if (CEncryptor::Instance() != nullptr)
 			{
 				aEncryptHdSize = CEncryptor::Instance()->GetHeaderSize();
+				if (aSize < aEncryptHdSize)
+					return eErrCodeInvalidSize;
+
 				aSize -= aEncryptHdSize;
 				aResult = CEncryptor::Instance()->Decrypt(aData, aSize);
 
 				if (aResult != 0)
 					return aResult;
 			}
+
+			if (aSize < sizeof(CPacketHeader))
+				return eErrCodeInvalidSize;
 
 			CPacketHeader* aHeader = reinterpret_cast<CPacketHeader*>(aData + aEncryptHdSize);
 			aResult = CTcpHandler::Instance().Process(aHeader->mMessage, aHeader, aSize, aGameObject);
@@ -207,8 +213,9 @@ namespace LBNet
 			_mState = EState::eClosed;
 			__mBuffer.Clear();
 			--_mSesCnt;
+
+			CConsoleLog(ELogType::eLogInfo) << "On Close Ses Cnt : " << _mSesCnt << " Last Error : " << _mLastError;
 		}
-		CConsoleLog(ELogType::eLogInfo) << "On Close Ses Cnt : " << _mSesCnt << " Last Error : " << _mLastError;
 
 		return 0;
 	}

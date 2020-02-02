@@ -8,6 +8,7 @@
 #include "LBServer.h"
 #include "LBSendPool.h"
 #include "LBBuffer.h"
+#include "LBHandler.h"
 
 namespace LBNet
 {

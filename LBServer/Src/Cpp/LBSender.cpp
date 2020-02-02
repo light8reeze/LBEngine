@@ -20,6 +20,8 @@ namespace LBNet
 
 	SharedObject<CSender> CSender::Allocate(Size pSendSize)
 	{
+		LB_ASSERT(pSendSize >= sizeof(CPacketHeader), "Error");
+
 		auto aShared = __mSendPool.Allocate(pSendSize + GetEncryptHdSize() + sizeof(SendHeader));
 
 		if (aShared == nullptr)
@@ -97,18 +99,18 @@ namespace LBNet
 
 		LB_ASSERT(__mChunkIndex >= 0, "Error!");
 		LB_ASSERT(__mChunkCount > 0, "Error!");
-
-		for (int index = __mChunkIndex; index < (__mChunkIndex + __mChunkCount); ++index)
-		{
-			DEBUG_CODE(bool aResult = )
-			__mSendPool.DeAllocate(index);
-
-			LB_ASSERT(aResult, "Send가 반납되지 못했다.");
-		}
+		
+		int		aChunkIndex = __mChunkIndex;
+		Size	aChunkCount = __mChunkCount;
 
 		__mChunk = nullptr;
 		__mChunkIndex = -1;
 		__mChunkCount = 0;
+
+		DEBUG_CODE(bool aResult = )
+			__mSendPool.DeAllocate(aChunkIndex, aChunkCount);
+
+		LB_ASSERT(aResult, "Send가 반납되지 못했다.");
 
 		return 0;
 	}
