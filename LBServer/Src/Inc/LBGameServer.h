@@ -21,8 +21,7 @@ namespace LBNet
 		@details			게임 서버 메인로직 클래스이다. 
 							1. Game Application구현시 다음 클래스를 상속받아 구현한다.
 							2. 실행 순서는 다음 순서대로 실행한다.
-							(SetParameter -> Initialize -> LazyInitialize -> Run -> Close)
-							3. AddAcceptor은 반드시 SetParameter에서 실행한다.
+							(SetConfig -> Initialize -> LazyInitialize -> Run -> Close)
 		@param TGameObject	게임 서버에서 세션에 사용할 게임 오브젝트 타입.
 		@date				2019-09-22
 		@auther				light8reeze(light8reeze@gmail.com)

@@ -141,6 +141,12 @@
     <ClInclude Include="Src\Inc\LBLogger.Inl">
       <Filter>Log</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Inc\LBTcpHandler.h">
+      <Filter>Network\Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Inc\LBUdpHandler.h">
+      <Filter>Network\Handler</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Cpp\LBServer.cpp">
@@ -184,6 +190,12 @@
     </ClCompile>
     <ClCompile Include="Src\Cpp\LBLogProcessor.cpp">
       <Filter>Log</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Cpp\LBTcpHandler.cpp">
+      <Filter>Network\Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Cpp\LBUdpHandler.cpp">
+      <Filter>Network\Handler</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

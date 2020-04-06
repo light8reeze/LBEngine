@@ -212,7 +212,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Src\Inc\LBTcpHandler.h" />
     <ClInclude Include="Src\Inc\LBTimer.h" />
+    <ClInclude Include="Src\Inc\LBUdpHandler.h" />
     <ClInclude Include="Src\Inc\LBUdpObject.h" />
     <ClInclude Include="Src\Inc\LBUdpSession.h" />
   </ItemGroup>
@@ -248,7 +250,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Src\Cpp\LBTcpHandler.cpp" />
     <ClCompile Include="Src\Cpp\LBTimer.cpp" />
+    <ClCompile Include="Src\Cpp\LBUdpHandler.cpp" />
     <ClCompile Include="Src\Cpp\LBUdpObject.cpp" />
     <ClCompile Include="Src\Cpp\LBUdpSession.cpp" />
   </ItemGroup>

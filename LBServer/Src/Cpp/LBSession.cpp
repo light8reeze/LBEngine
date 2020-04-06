@@ -7,15 +7,6 @@
 
 namespace LBNet
 {
-	int CSession::_mSesCnt = 0;
-
-	CTcpHandler CTcpHandler::__mSingleton;
-
-	CTcpHandler& CTcpHandler::Instance()
-	{
-		return __mSingleton;
-	}
-
 	CSession::CSession() : _mSocket(), __mBuffer(eSzPacketMax),
 		_mState(EState::eClosed), _mMutex(), _mLastError(0)
 	{
@@ -42,12 +33,6 @@ namespace LBNet
 		_mSocket.SetReuse(true);
 		_mLastError = 0;
 		
-		{
-			WriteLock aLocker(_mMutex);
-			++_mSesCnt;
-		}
-
-		CConsoleLog(ELogType::eLogInfo) << "On Accept Ses Cnt : " << _mSesCnt;
 		return Receive();
 	}
 
@@ -212,9 +197,6 @@ namespace LBNet
 			
 			_mState = EState::eClosed;
 			__mBuffer.Clear();
-			--_mSesCnt;
-
-			CConsoleLog(ELogType::eLogInfo) << "On Close Ses Cnt : " << _mSesCnt << " Last Error : " << _mLastError;
 		}
 
 		return 0;
@@ -230,14 +212,6 @@ namespace LBNet
 			{
 				_mSocket.Close();
 				_mState = EState::eDisconnect;
-
-				CTimer::Start(1s, [aObserver = std::move(WeakObject<CSession>(__mInstance))](ErrCode pErr)
-				{
-					if (pErr == 0 && !aObserver.expired())
-					{
-						CConsoleLog(ELogType::eLogInfo) << "Dangling!!";
-					}
-				});
 
 				__mInstance = nullptr;
 				_mLastError = pError;

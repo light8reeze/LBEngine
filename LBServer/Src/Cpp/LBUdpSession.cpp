@@ -4,13 +4,6 @@
 
 namespace LBNet
 {
-	CUdpHandler CUdpHandler::__mSingleton;
-
-	CUdpHandler& CUdpHandler::Instance()
-	{
-		return __mSingleton;
-	}
-
 	CUdpSession CUdpSession::__mSingleton;
 
 	CUdpSession::CUdpSession() : __mSocket(), __mBuffer(eSzPacketMax)

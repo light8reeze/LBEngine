@@ -14,7 +14,7 @@ namespace LBNet
 		@details	서버의 기본 오브젝트로 세션과 1:1연결된다.
 					게임 로직 구현시 다음 오브젝트를 상속받아 
 					게임내의 오브젝트 클래스를 구현한다.
-		@warning	세션과의 연결은 세션 클래스의 함수를 통해서 실행히켜야 한다.
+		@warning	세션과의 연결은 세션 클래스의 함수를 통해서 실행시켜야 한다.
 		@date		2019-09-07
 		@auther		light8reeze(light8reeze@gmail.com)
 	*/

@@ -34,8 +34,8 @@ namespace LBNet
 	*/
 	class CConfig
 	{
-	private:
-		using __AddressList = std::vector<SAddressInfo>;
+	protected:
+		using _AddressList = std::vector<SAddressInfo>;
 
 	public:
 		CConfig();
@@ -55,7 +55,7 @@ namespace LBNet
 		unsigned GetLogBufCnt() const;
 
 	protected:
-		__AddressList	_mAcceptorAddrList;
+		_AddressList	_mAcceptorAddrList;
 		unsigned	_mThreadCnt;
 		unsigned	_mSessionCnt;
 		unsigned	_mTimerTaskCnt;

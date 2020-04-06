@@ -42,6 +42,8 @@ namespace LBNet
 	template<typename TGameObject>
 	ErrCode CGameServer<TGameObject>::Initialize()
 	{
+		LB_ASSERT(_mConfig != nullptr, "Must Initialize Config");
+
 		if (_mConfig == nullptr)
 			return eErrCodeInvalidConfig;
 

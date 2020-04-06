@@ -58,8 +58,6 @@ namespace LBNet
 		static Size	GetEncryptHdSize();
 
 	private:
-
-	private:
 		CSendChunk*		__mChunk;
 		int				__mChunkIndex;
 		Size			__mChunkCount;

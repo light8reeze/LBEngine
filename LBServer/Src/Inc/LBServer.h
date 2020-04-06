@@ -77,6 +77,17 @@ namespace LBNet
 	using WeakObject	= std::weak_ptr<TObject>;
 	template <typename TObject>
 	using UniqueObject	= std::unique_ptr<TObject>;
+
+	/**
+		@brief			weak_ptr이 초기화 되어있는지 확인하는 함수
+		@return bool	weak_ptr의 초기화 여부
+	*/
+	template <typename T>
+	inline bool IsWeakInitialized(std::weak_ptr<T> const& weak)
+	{
+		using wt = std::weak_ptr<T>;
+		return (weak.owner_before(wt{}) || wt{}.owner_before(weak));
+	}
 }
 
 #include "LBError.h"

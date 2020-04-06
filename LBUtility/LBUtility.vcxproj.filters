@@ -14,7 +14,7 @@
       <Filter>Memory</Filter>
     </ClCompile>
     <ClCompile Include="Src\Cpp\LBEncryption.cpp">
-      <Filter>Encyption</Filter>
+      <Filter>Encryption</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -36,9 +36,6 @@
     <Filter Include="Random">
       <UniqueIdentifier>{93faa777-6c30-460c-9437-60e397862136}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Encyption">
-      <UniqueIdentifier>{7ae75800-1014-40c3-8ec2-0518d3313c94}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Core">
       <UniqueIdentifier>{6cc994ac-d803-4f81-9f5a-6f347635d36e}</UniqueIdentifier>
     </Filter>
@@ -47,6 +44,9 @@
     </Filter>
     <Filter Include="Memory\Container">
       <UniqueIdentifier>{e8a31dc3-052a-4494-bd28-e94f91bd64e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Encryption">
+      <UniqueIdentifier>{7ae75800-1014-40c3-8ec2-0518d3313c94}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -78,7 +78,7 @@
       <Filter>Random</Filter>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBEncryption.h">
-      <Filter>Encyption</Filter>
+      <Filter>Encryption</Filter>
     </ClInclude>
     <ClInclude Include="Src\Inc\LBPool.h">
       <Filter>Memory\Container</Filter>
