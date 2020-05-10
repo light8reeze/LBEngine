@@ -228,7 +228,7 @@ namespace LBNet
 		return _mSocket.GetEndPoint();
 	}
 
-	void CSession::SetShared(SharedObject<CSession> pShared)
+	void CSession::SetShared(SharedObject<CSession>& pShared)
 	{
 		__mInstance = pShared;
 	}

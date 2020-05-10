@@ -180,6 +180,7 @@
     <ClInclude Include="Src\Inc\LBGameServer.h" />
     <ClInclude Include="Src\Inc\LBLogger.h" />
     <ClInclude Include="Src\Inc\LBLogProcessor.h" />
+    <ClInclude Include="Src\Inc\LBPacketHeader.h" />
     <ClInclude Include="Src\Inc\LBSender.h" />
     <ClInclude Include="Src\Inc\LBSendPool.h" />
     <ClInclude Include="Src\Inc\LBConfig.h" />

@@ -160,7 +160,7 @@ namespace LBNet
 	class LBS_EXPORT CConsoleLog : public CLogger
 	{
 	public:
-		CConsoleLog(ELogType&& pLogType);
+		CConsoleLog(ELogType&& pLogType = ELogType(ELogType::eLogInfo));
 		~CConsoleLog();
 
 		template<typename TArgs, typename TIsScalar = typename std::is_scalar<std::remove_reference_t<TArgs>>::type>

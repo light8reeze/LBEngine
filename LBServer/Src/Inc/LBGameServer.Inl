@@ -85,9 +85,8 @@ namespace LBNet
 			aAcceptor->Close();
 		}
 
-		CIOContext::Instance().Stop();
-		// CFactory는 마지막에 삭제해야 한다.
 		CFactory::Instance().Close();
+		CIOContext::Instance().Stop();
 		return 0;
 	}
 
@@ -172,29 +171,30 @@ namespace LBNet
 		}
 		aSession->SetGameObject(aGameObject);
 		aGameObject->LinkSession(aSession);
+		auto aSessionPtr = aSession.get();
 
-		pAcceptor->AcceptAsync(*aSession,
-			[this, aSession, pAcceptor](const boost::system::error_code& pErr)
+		pAcceptor->AcceptAsync(*aSessionPtr,
+			[this, aSharedSession = std::move(aSession), pAcceptor](const boost::system::error_code& pErr) mutable
 		{
 			if (pErr.value() != 0)
 			{
 				CConsoleLog(ELogType::eLogInfo) << "Accept Fail : " << pErr.value();
-				aSession->SetDisconnect(pErr.value());
+				aSharedSession->SetDisconnect(pErr.value());
 				__SetAccept(pAcceptor);
 				return;
 			}
 
-			ErrCode aErr = aSession->OnAccept();
+			aSharedSession->SetShared(aSharedSession);
+			ErrCode aErr = aSharedSession->OnAccept();
 			if (aErr != 0)
 			{
 				CConsoleLog(ELogType::eLogInfo) << "Accept Fail : " << pErr.value();
-				aSession->SetDisconnect(aErr);
+				aSharedSession->SetDisconnect(aErr);
 				__SetAccept(pAcceptor);
 
 				return;
 			}
 
-			aSession->SetShared(aSession);
 			__SetAccept(pAcceptor);
 		});
 

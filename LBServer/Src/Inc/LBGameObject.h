@@ -31,7 +31,7 @@ namespace LBNet
 		virtual void OnDisconnect() {}
 		void SetDisconnect(ErrCode pLastErr = 0);
 		ErrCode Send(void* pBuffer, int pSize);
-		ErrCode Send(SharedObject<CSender>& pSender);
+		ErrCode Send(const SharedObject<CSender>& pSender);
 
 		std::string&& GetIPAddress() const;
 		unsigned short GetPort() const;

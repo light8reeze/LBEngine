@@ -51,7 +51,7 @@ namespace LBNet
 
 		template<typename TObject>
 		void SetGameObject(SharedObject<TObject>& pObject);
-		void SetShared(SharedObject<CSession> pShared);
+		void SetShared(SharedObject<CSession>& pShared);
 		void RemoveObject();
 
 		template<typename TObject = CGameObject>

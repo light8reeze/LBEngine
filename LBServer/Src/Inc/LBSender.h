@@ -52,6 +52,8 @@ namespace LBNet
 
 		template<typename TObject>
 		TObject*	GetWritePointer();
+		template<typename TObject>
+		void		SetData(TObject& pObject);
 		void*		GetSendPointer();
 		Size		GetSendSize();
 		Size		GetDataSize();

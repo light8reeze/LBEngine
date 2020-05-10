@@ -28,7 +28,7 @@ namespace LBNet
 	template<typename TObject>
 	SharedObject<TObject> CSession::__GetGameObjectImpl(std::false_type)
 	{
-		SharedObject<TObject> aPtr = std::dynamic_pointer_cast<TObject>(__mGameObject);
+		SharedObject<TObject> aPtr = SharedCast<CGameObject, TObject>(__mGameObject);
 		return std::move(aPtr);
 	}
 }

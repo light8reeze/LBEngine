@@ -88,6 +88,27 @@ namespace LBNet
 		using wt = std::weak_ptr<T>;
 		return (weak.owner_before(wt{}) || wt{}.owner_before(weak));
 	}
+
+	/**
+		@brief				shared_ptr을 캐스팅 후 weak_ptr을 반환하는 함수.
+		@return weak_ptr	반환 결과 weak_ptr
+	*/
+	template <typename TBase, typename TDrived>
+	inline WeakObject<TDrived> CastToWeak(SharedObject<TBase>& pShared)
+	{
+		SharedObject<TDrived> aDrived = std::dynamic_pointer_cast<TDrived>(pShared);
+		return WeakObject<TDrived>(aDrived);
+	}
+
+	/**
+		@brief				shared_ptr을 캐스팅 후 weak_ptr을 반환하는 함수.
+		@return weak_ptr	반환 결과 weak_ptr
+	*/
+	template <typename TBase, typename TDrived>
+	inline SharedObject<TDrived> SharedCast(SharedObject<TBase>& pShared)
+	{
+		return std::dynamic_pointer_cast<TDrived>(pShared);
+	}
 }
 
 #include "LBError.h"

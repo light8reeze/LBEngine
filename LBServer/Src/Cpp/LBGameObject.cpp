@@ -27,7 +27,7 @@ namespace LBNet
 		return 0;
 	}
 
-	ErrCode CGameObject::Send(SharedObject<CSender>& pSender)
+	ErrCode CGameObject::Send(const SharedObject<CSender>& pSender)
 	{
 		auto aShared = _mSession.lock();
 		if (aShared != nullptr)

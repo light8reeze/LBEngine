@@ -6,26 +6,12 @@
 */
 #pragma once
 #include "LBServer.h"
+#include "LBPacketHeader.h"
 #include <functional>
 #include <map>
 
 namespace LBNet
-{
-	using MessageNo = unsigned long;
-
-	/**
-		@brief	패킷 헤더 클래스
-		@date	2019-08-30
-		@auther	light8reeze(light8reeze@gmail.com)
-	*/
-	#pragma pack(push, 1)
-	class CPacketHeader
-	{
-	public:
-		MessageNo mMessage;
-	};
-	#pragma pack(pop)
-	
+{	
 	/**
 		@brief	패킷 처리 클래스
 		@param THandler	패킷 이번트처리 함수타입

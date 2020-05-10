@@ -147,6 +147,9 @@
     <ClInclude Include="Src\Inc\LBUdpHandler.h">
       <Filter>Network\Handler</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Inc\LBPacketHeader.h">
+      <Filter>Network\Handler</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Cpp\LBServer.cpp">
