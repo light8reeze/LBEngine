@@ -14,11 +14,6 @@ namespace LBNet
 	class CSender;
 	class CSendChunk;
 
-	// warning C4251 처리
-	// vector의 경우 인스턴스화 시킨다.<L7>
-	LBS_EXPORT_TEMPLATE(std::vector<bool>);
-	LBS_EXPORT_TEMPLATE(std::vector<CSender>);
-
 	/**
 		@brief	        Send Buffer 풀 클래스
 		@details		Send 메모리 블록을 관리한다.
@@ -27,6 +22,7 @@ namespace LBNet
 	*/
 	class LBS_EXPORT CSendPool
 	{
+		LB_LOCKOBJECT(CSendPool, CSharedMutex);
 	private:
 		using __UseFlag		= std::vector<bool>;
 		using __SenderList	= std::vector<CSender>;
@@ -49,7 +45,6 @@ namespace LBNet
 		#pragma warning(default : 4251)
 		Size					__mChunkCnt;
 		Size					__mUseSize;
-		CSharedMutex			__mMutex;
 	};
 }
 #pragma warning(default : 4251)

@@ -24,6 +24,8 @@ namespace LBNet
 	template<typename TObject>
 	class CWaitableQueue
 	{
+		LB_LOCKOBJECT(CWaitableQueue, LBNet::CSharedMutex);
+
 	private:
 		using __ObjectQueue = std::queue<TObject>;
 
@@ -42,7 +44,6 @@ namespace LBNet
 		HANDLE			__mSemaphore;
 		#endif //_WINDOWS
 		__ObjectQueue	__mQueue;
-		CSharedMutex	__mMutex;
 	};
 	
     /**

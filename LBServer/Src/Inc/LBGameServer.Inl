@@ -136,7 +136,6 @@ namespace LBNet
 		{
 			LB_ASSERT(0, "Except");
 			UNREFERENCED_PARAMETER(aException);
-			// @todo 추후 예외시 덤프기능 구현하기
 		}
 	}
 

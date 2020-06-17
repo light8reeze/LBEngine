@@ -3,8 +3,7 @@ namespace LBNet
 	template<typename TType>
 	static bool CProbability::IsSuccess(TType pPercent)
 	{
-		TType aRandom = CRandom::GetRandom(TType(0), TType(100));
-		return (aRandom < pPercent) ? true : false;
+		return __IsSuccessImpl(pPercent, std::is_integral<std::remove_reference_t<TType>>());
 	}
 
 	template<typename TVector>
@@ -15,9 +14,9 @@ namespace LBNet
 		ProbValue	aSum = static_cast<ProbValue>(0);
 		int			aResult = 0;
 		
-		for(auto aIter : pVector)
+		for(const auto& aIter : pVector)
 		{
-			ProbValue aNowProb = (*aIter);
+			ProbValue& aNowProb = (*aIter);
 
 			if (aRandom < aNowProb + aSum)
 			{
@@ -55,14 +54,14 @@ namespace LBNet
 	template<typename TType>
 	static bool CProbability::__IsSuccessImpl(TType pPercent, std::true_type)
 	{
-		TType aRandom = CRandom::GetRandom(0, 100);
+		TType aRandom = CRandom::GetRandom(TType(0), TType(100));
 		return (aRandom < pPercent) ? true : false;
 	}
 
 	template<typename TType>
 	static bool CProbability::__IsSuccessImpl(TType pPercent, std::false_type)
 	{
-		TType aRandom = CRandom::GetRandom(0.0, 100.0);
+		TType aRandom = CRandom::GetRandom(TType(0.0), TType(100.0));
 		return (aRandom < pPercent) ? true : false;
 	}
 }

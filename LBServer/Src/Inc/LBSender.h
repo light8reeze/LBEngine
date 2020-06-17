@@ -13,7 +13,7 @@
 namespace LBNet
 {
 	using SendHeader = CBufferHeader;
-	constexpr Size eSzPacketMin = sizeof(CBufferHeader);		// 한 패킷당 최소 사이즈
+	constexpr Size eSzPacketMin = sizeof(SendHeader);		// 한 패킷당 최소 사이즈
 
 	/**
 		@brief	패킷 전송용 메모리 블록

@@ -96,7 +96,7 @@ namespace LBNet
 		@return auto	변환된 Enum값
 	*/
 	template<typename TEnum>
-	constexpr auto UnderLying(TEnum e) -> typename std::underlying_type<TEnum>::type
+	constexpr auto UnderLying(TEnum e)
 	{
 		return static_cast<typename std::underlying_type<TEnum>::type>(e);
 	}

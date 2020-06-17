@@ -8,7 +8,7 @@
 namespace LBNet
 {
 	CSession::CSession() : _mSocket(), __mBuffer(eSzPacketMax),
-		_mState(EState::eClosed), _mMutex(), _mLastError(0)
+		_mState(EState::eClosed), _mLastError(0)
 	{
 	}
 
@@ -134,7 +134,7 @@ namespace LBNet
 	ErrCode CSession::Send(void* pBuffer, int pSize)
 	{
 		{
-			ReadLock aLocker(_mMutex);
+			ReadLock aLocker(*this);
 			if (_mState != EState::eStable)
 			{
 				return 0;
@@ -164,7 +164,7 @@ namespace LBNet
 			return eErrCodeNullSender;
 
 		{
-			ReadLock aLocker(_mMutex);
+			ReadLock aLocker(*this);
 			if (_mState == EState::eDisconnect)
 			{
 				return 0;
@@ -186,14 +186,14 @@ namespace LBNet
 	ErrCode CSession::Close()
 	{
 		{
-			ReadLock aLocker(_mMutex);
+			ReadLock aLocker(*this);
 
 			if (_mState == EState::eClosed)
 				return 0;
 		}
 
 		{
-			WriteLock aLocker(_mMutex);
+			WriteLock aLocker(*this);
 			
 			_mState = EState::eClosed;
 			__mBuffer.Clear();
@@ -206,7 +206,7 @@ namespace LBNet
 	{
 		LB_ASSERT(_mLastError == 0, "Error!");
 		{
-			WriteLock aLock(_mMutex);
+			WriteLock aLock(*this);
 
 			if (_mState == EState::eStable)
 			{

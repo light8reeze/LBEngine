@@ -15,4 +15,4 @@ Support multithread
 
 # License
 
-Copyright © 2019 [light8reeze](http://www.github.com/light8reeze).
+Copyright © 2019-2020 [light8reeze](http://www.github.com/light8reeze).

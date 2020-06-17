@@ -4,7 +4,7 @@
 namespace LBNet
 {
 	CSendPool::CSendPool() : __mUseFlag(), __mChunkBuffer(nullptr),
-		__mUseSize(0), __mMutex(), __mSenderList()
+		__mUseSize(0), __mSenderList()
 	{
 	}
 
@@ -28,14 +28,12 @@ namespace LBNet
 			return eErrCodeBadAlloc;
 		}
 
-		__mUseFlag.reserve(pChunkCnt);
-		__mSenderList.reserve(pChunkCnt);
 		__mChunkCnt = pChunkCnt;
 
 		for (Size index = 0; index < pChunkCnt; ++index)
 		{
-			__mUseFlag.emplace_back(std::move(false));
-			__mSenderList.emplace_back(std::move(CSender()));
+			__mUseFlag.emplace_back(false);
+			__mSenderList.emplace_back(CSender());
 		}
 
 		return 0;
@@ -49,7 +47,7 @@ namespace LBNet
 		CSender*	aSender = nullptr;
 
 		{
-			WriteLock aWriteLock(__mMutex);
+			WriteLock aWriteLock(*this);
 			aIndex = GetAllocIndex(aCnt);
 
 			if (aIndex == -1)
@@ -68,12 +66,10 @@ namespace LBNet
 
 		aSender->SetSenderChunk(aSendChunk, aIndex, aCnt);
 
-		auto aShared = SharedObject<CSender>(aSender, [this](CSender* pSender)
+		return SharedObject<CSender>(aSender, [this](CSender* pSender)
 		{
 			pSender->DeAllocate();
 		});
-
-		return aShared;
 	}
 
 	bool CSendPool::DeAllocate(int pIndex, Size pCnt)
@@ -82,7 +78,7 @@ namespace LBNet
 		LB_ASSERT(pIndex < __mChunkCnt, "Invalid!");
 
 		{
-			WriteLock aWriteLock(__mMutex);
+			WriteLock aWriteLock(*this);
 
 			for (int index = pIndex; index < (pIndex + static_cast<int>(pCnt)); ++index)
 			{
@@ -103,7 +99,7 @@ namespace LBNet
 		int aAllocIndex = -1;
 		int aFlagIndex = 0;
 
-		for (auto aFlag : __mUseFlag)
+		for (const auto& aFlag : __mUseFlag)
 		{
 			if (!aFlag)
 			{
@@ -132,7 +128,7 @@ namespace LBNet
 
 	Size CSendPool::GetUsableSize()
 	{
-		ReadLock aLock(__mMutex);
+		ReadLock aLock(*this);
 		return __mUseSize;
 	}
 }

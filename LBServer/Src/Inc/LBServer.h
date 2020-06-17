@@ -65,11 +65,13 @@ namespace LBNet
 	*/
 	constexpr Version LBS_EXPORT GetLBSVersion();
 
+#pragma region Constant
 	constexpr Size eSzPacketMax		= 0x3FFF;	// 한 패킷당 최대 사이즈
 	constexpr auto eTimeRetryAccept = 1s;		// Accept실패시 재시도 시간
 	constexpr Size eSzSendChunk		= 1 << 10;	// Send블록의 단위(1KB)
 	constexpr Size eSzTimerTask		= 2000;		// Timer작업 기본 할당 개수
 	constexpr Size eSzLogCnt		= 200;		// 로그버퍼 기본 할당 개수
+#pragma endregion
 
 	template <typename TObject>
 	using SharedObject	= std::shared_ptr<TObject>;
@@ -86,7 +88,8 @@ namespace LBNet
 	inline bool IsWeakInitialized(std::weak_ptr<T> const& weak)
 	{
 		using wt = std::weak_ptr<T>;
-		return (weak.owner_before(wt{}) || wt{}.owner_before(weak));
+		auto aWt = wt{};
+		return (weak.owner_before(aWt) || aWt.owner_before(weak));
 	}
 
 	/**

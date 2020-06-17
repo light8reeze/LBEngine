@@ -110,9 +110,9 @@ namespace LBNet
 	{
 	public:
 		CConsoleLogSystem() = default;
-		~CConsoleLogSystem() {}
+		virtual ~CConsoleLogSystem() {}
 
-		ErrCode OnLogging(SharedObject<CLogBuffer>& pBuffer) override;
+		virtual ErrCode OnLogging(SharedObject<CLogBuffer>& pBuffer) override;
 	};
 
 	/**
@@ -169,9 +169,9 @@ namespace LBNet
 	private:
 		// 스칼라 타입의 경우 string으로 변환후 넣는다.
 		template<typename TArgs>
-		CConsoleLog& __PushLogImpl(TArgs&& pData, std::true_type pTrueType);
+		CConsoleLog& __PushLogImpl(TArgs&& pData, std::true_type);
 		template<typename TArgs>
-		CConsoleLog& __PushLogImpl(TArgs&& pData, std::false_type pFalseType);
+		CConsoleLog& __PushLogImpl(TArgs&& pData, std::false_type);
 
 	private:
 		#pragma warning(disable : 4251)

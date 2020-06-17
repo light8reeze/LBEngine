@@ -28,6 +28,22 @@ namespace LBNet
 
 #pragma region CTimer
 	template<class Rep, class Period, typename THandler, typename... TArgs>
+	ErrCode CTimer::Start(const std::chrono::duration<Rep, Period>&& pTime,
+		THandler&& pHandler, TArgs... pArgs)
+	{
+		auto aTask = CFactory::Instance().New<CTimerTask>();
+		if (aTask == nullptr)
+			return eErrCodeNotEnoughRsc;
+
+		aTask->SetTime(pTime);
+		aTask->Start([aTask, pHandler, pArgs...](ErrCode pErr)
+		{
+			pHandler(pErr, pArgs...);
+		});
+
+		return 0;
+	}
+	template<class Rep, class Period, typename THandler, typename... TArgs>
 	ErrCode CTimer::Start(const std::chrono::duration<Rep, Period>& pTime,
 		THandler&& pHandler, TArgs... pArgs)
 	{

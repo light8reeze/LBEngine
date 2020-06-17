@@ -75,7 +75,10 @@ namespace LBNet
 			@warning			팩토리에서 CTimerTask자원이 부족할경우 eErrCodeNotEnoughRsc에러가 반환된다.
 		*/
 		template<class Rep, class Period, typename THandler, typename... TArgs>
-		static ErrCode Start(const std::chrono::duration<Rep, Period>& pTime, 
+		static ErrCode Start(const std::chrono::duration<Rep, Period>&& pTime, 
+					THandler&& pHandler, TArgs... pArgs);
+		template<class Rep, class Period, typename THandler, typename... TArgs>
+		static ErrCode Start(const std::chrono::duration<Rep, Period>& pTime,
 					THandler&& pHandler, TArgs... pArgs);
 
 		template<typename THandler, typename... TArgs>

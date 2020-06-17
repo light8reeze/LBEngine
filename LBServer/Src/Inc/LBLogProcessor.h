@@ -27,6 +27,8 @@ namespace LBNet
 		using __LogQueue	= std::deque<SharedObject<CLogBuffer>>;
 		using __Flag		= std::atomic<bool>;
 
+		LB_LOCKOBJECT(CLogProcessor, CSharedMutex);
+
 	private:
 		CLogProcessor();
 
@@ -47,7 +49,6 @@ namespace LBNet
 		__LogSysList		__mLogSystemList;
 		__LogQueue			__mLogQueue;
 		__Flag				__mIsProcess;
-		CSharedMutex		__mMutex;
 		#ifdef _DEBUG
 		std::thread::id		__mProcessID {};
 		#endif //_DEBUG

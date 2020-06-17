@@ -21,8 +21,7 @@ namespace LBNet
 		LB_ASSERT(pLogBuf != nullptr, "Error!");
 
 		{
-			WriteLock aWriteLock(__mMutex);
-
+			WriteLock aWriteLock(*this);
 			__mLogQueue.emplace_back(std::move(pLogBuf));
 		}
 
@@ -37,7 +36,7 @@ namespace LBNet
 				DEBUG_CODE(__mProcessID = std::this_thread::get_id());
 
 				if(pErr == 0)
-					this->ProcessLog();
+					ProcessLog();
 
 				DEBUG_CODE(__mProcessID = std::thread::id());
 				__mIsProcess.store(false);
@@ -56,7 +55,7 @@ namespace LBNet
 		bool					aIsEmpty = true;
 
 		{
-			WriteLock aWriteLock(__mMutex);
+			WriteLock aWriteLock(*this);
 
 			aIsEmpty = __mLogQueue.empty();
 			if (aIsEmpty)
@@ -72,12 +71,12 @@ namespace LBNet
 		{
 			LB_ASSERT(aBuffer != nullptr,	"Error");
 
-			auto aLogOutIter = __mLogSystemList.find(aBuffer->GetOutput());
+			const auto& aLogOutIter = __mLogSystemList.find(aBuffer->GetOutput());
 			if (aLogOutIter != __mLogSystemList.end())
 				aLogOutIter->second->OnLogging(aBuffer);
 
 			{
-				WriteLock aWriteLock(__mMutex);
+				WriteLock aWriteLock(*this);
 
 				aIsEmpty = __mLogQueue.empty();
 				if (!aIsEmpty)

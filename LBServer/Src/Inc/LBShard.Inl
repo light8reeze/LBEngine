@@ -51,7 +51,7 @@ namespace LBNet
 	{
 		LB_ASSERT(_mLastError == 0, "Invalid!");
 
-		WriteLock aLock(_mMutex);
+		WriteLock aLock(*this);
 
 		if (_mState != EState::eDisconnect)
 		{
@@ -71,7 +71,7 @@ namespace LBNet
 	{
 		auto aShardObject = GetGameObject<TShardObject>();
 
-		WriteLock aLocker(_mMutex);
+		WriteLock aLock(*this);
 
 		__mNextConnect = aShardObject->OnConnectFail(pErr);
 

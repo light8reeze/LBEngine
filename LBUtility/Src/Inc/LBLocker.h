@@ -43,6 +43,34 @@ namespace LBNet
 	using CSharedMutex	= std::shared_mutex;
 #endif //_DEBUG
 
-	using ReadLock		= std::shared_lock<CSharedMutex>;
-	using WriteLock		= std::unique_lock<CSharedMutex>;
+	template<typename TLocker>
+	using ReadLock	= std::shared_lock<TLocker>;
+	template<typename TLocker>
+	using WriteLock	= std::unique_lock<TLocker>;
+
+
+	/**
+		@brief		Mutex사용 오브젝트 지정
+		@details	Mutex사용 오브젝트 사용법은 다음과 같다.
+					1. 클래스내에 LB_LOCKOBJECT(클래스명, Mutex타입명)을 넣는다.
+					2. 객체 잠금을 사용할때 {ReadLock 변수명(레퍼런스) or WriteLock 변수명(레퍼런스)}로 사용한다.
+		@warnning	매크로 사용 후에 접근자를 지정한다.(미지정시 매크로 아래로 protected접근자로 인식된다.)
+
+		@param pClass		등록할 오브젝트 클래스 타입
+		@param pLockType	등록할 Mutex클래스 타입
+		@date				2020-05-11
+		@auther				light8reeze(light8reeze@gmail.com)
+	*/
+	#define LB_LOCKOBJECT(pClass, pLockType)		public:\
+													using ReadLock	= LBNet::ReadLock<pClass>;\
+													using WriteLock = LBNet::WriteLock<pClass>;\
+													void lock(){ _mLocker.lock(); }\
+													void unlock(){ _mLocker.unlock(); }\
+													bool try_lock(){ return _mLocker.try_lock(); }\
+													void lock_shared(){ _mLocker.lock_shared(); }\
+													void unlock_shared(){ _mLocker.unlock_shared(); }\
+													bool try_lock_shared(){ return _mLocker.try_lock(); }\
+													const pLockType& GetLocker() const { return _mLocker; }\
+													protected:\
+													pLockType _mLocker;
 }

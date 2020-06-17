@@ -18,12 +18,12 @@ namespace LBNet
 	bool CWaitableQueue<TObject>::Push(TObject& pObject)
 	{
 		{
-			WriteLock aLocker(__mMutex);
+			WriteLock aLocker(_mLocker);
 			__mQueue.push(pObject);
-			BOOL bResult = ::ReleaseSemaphore(__mSemaphore, 1, NULL);
-
-			LB_ASSERT(bResult, "Release Semaphore Error!");
 		}
+
+		BOOL bResult = ::ReleaseSemaphore(__mSemaphore, 1, NULL);
+		LB_ASSERT(bResult, "Release Semaphore Error!");
 
 		return true;
 	}
@@ -44,7 +44,7 @@ namespace LBNet
 		}
 
 		{
-			WriteLock aLocker(__mMutex);
+			WriteLock aLocker(_mLocker);
 			pObject = __mQueue.front();
 			__mQueue.pop();
 		}

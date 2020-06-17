@@ -25,7 +25,6 @@ namespace LBNet
 #pragma endregion 
 
 #pragma region CFactory
-
 	template<typename TObject>
 	bool CFactory::AddObjectPool(int pSize)
 	{

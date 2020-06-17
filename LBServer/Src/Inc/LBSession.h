@@ -25,6 +25,7 @@ namespace LBNet
 	class LBS_EXPORT CSession
 	{
 		friend class CAcceptor; // Acceptor에서 소켓 접근이 필요하다.
+		LB_LOCKOBJECT(CSession, CSharedMutex);
 
 	public:
 		enum class EState
@@ -68,7 +69,6 @@ namespace LBNet
 
 	protected:
 		CTcpSocket					_mSocket;
-		CSharedMutex				_mMutex;
 		EState						_mState;
 		ErrCode						_mLastError;
 

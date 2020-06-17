@@ -51,8 +51,10 @@ namespace LBNet
 		using __PoolPtr			= std::unique_ptr<IObjectPool>;
 		using __PoolContainer	= std::map<std::size_t, __PoolPtr>; //Key : typeid.hashcode(), value : ObjectPool Ptr
 
-	public:
+	private:
 		CFactory();
+
+	public:
 		~CFactory();
 
 		CFactory(const CFactory&) = delete;
