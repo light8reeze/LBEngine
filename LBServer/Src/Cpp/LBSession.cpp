@@ -4,6 +4,8 @@
 #include "LBEncryption.h"
 #include "LBTimer.h"
 #include "LBLogger.h"
+#include "LBTcpHandler.h"
+#include "LBSender.h"
 
 namespace LBNet
 {

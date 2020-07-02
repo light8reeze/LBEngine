@@ -18,8 +18,10 @@ namespace LBNet
 	*/
 	class LBS_EXPORT CIOContext
 	{
-	public:
+	private:
 		CIOContext();
+
+	public:
 		~CIOContext();
 
 		ErrCode Run();

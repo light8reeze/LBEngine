@@ -30,6 +30,7 @@
 */
 #ifdef DEVELOP_MODE
 	#define LBS_EXPORT
+	#define LBS_EXPORT_TEMPLATE
 #else
 	#ifdef LOAD_LBSERVER
 		#define LBS_EXPORT						__declspec(dllimport)
@@ -99,8 +100,7 @@ namespace LBNet
 	template <typename TBase, typename TDrived>
 	inline WeakObject<TDrived> CastToWeak(SharedObject<TBase>& pShared)
 	{
-		SharedObject<TDrived> aDrived = std::dynamic_pointer_cast<TDrived>(pShared);
-		return WeakObject<TDrived>(aDrived);
+		return WeakObject<TDrived>(std::dynamic_pointer_cast<TDrived>(pShared));
 	}
 
 	/**

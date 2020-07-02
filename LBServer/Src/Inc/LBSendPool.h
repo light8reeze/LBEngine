@@ -5,7 +5,6 @@
 	@auther light8reeze(light8reeze@gmail.com)
 */
 #pragma once
-#pragma warning(disable : 4251)
 #include "LBServer.h"
 #include "LBLocker.h"
 
@@ -47,4 +46,3 @@ namespace LBNet
 		Size					__mUseSize;
 	};
 }
-#pragma warning(default : 4251)

@@ -9,11 +9,10 @@
 #include "LBSocket.h"
 #include "LBBuffer.h"
 #include "LBLocker.h"
-#include "LBSender.h"
-#include "LBTcpHandler.h"
 
 namespace LBNet
 {
+	class CSender;
 	class CGameObject;
 
 	/**
