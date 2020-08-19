@@ -40,9 +40,6 @@ namespace LBNet
 		CGameServer();
 		virtual ~CGameServer();
 
-		void AddAcceptor(const char* pIp, unsigned short pPort);
-		void AddAcceptor(unsigned short pPort);
-
 		void SetConfig(CConfig* pConfig);
 		virtual ErrCode Initialize();
 		virtual ErrCode LazyInitialize();
@@ -52,6 +49,9 @@ namespace LBNet
 		unsigned int GetAcceptorCount();
 
 	private:
+		void		__AddAcceptor(const char* pIp, unsigned short pPort);
+		void		__AddAcceptor(unsigned short pPort);
+
 		void		__Main();
 		ErrCode		__SetAccept(CAcceptor* pAcceptor);
 

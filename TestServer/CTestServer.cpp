@@ -30,8 +30,5 @@ LBNet::ErrCode CTestServer::Initialize()
 	LBNet::CSender::Initialize(30000);
 
 	LBNet::CTcpHandler::Instance().Register(1, &Echo);
-	
-	AddAcceptor(54832);
-	AddAcceptor(54831);
 	return 0;
 }

@@ -19,6 +19,11 @@ namespace LBNet
 		_mAcceptorAddrList.emplace_back(pIP, pPort);
 	}
 
+	inline void CConfig::AddAddress(unsigned int pPort)
+	{
+		_mAcceptorAddrList.emplace_back("", pPort);
+	}
+
 	inline void CConfig::SetThreadCnt(unsigned pThread)
 	{
 		_mThreadCnt = pThread;

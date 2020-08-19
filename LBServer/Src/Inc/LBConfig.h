@@ -42,6 +42,7 @@ namespace LBNet
 		virtual ~CConfig() = default;
 
 		void AddAddress(char* pIP, unsigned int pPort);
+		void AddAddress(unsigned int pPort);
 		void SetThreadCnt(unsigned pThread);
 		void SetSessionCnt(unsigned pSession);
 		void SetTimerTaskCnt(unsigned pTimerTask);

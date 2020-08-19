@@ -12,22 +12,6 @@ namespace LBNet
 	}
 
 	template<typename TGameObject>
-	void CGameServer<TGameObject>::AddAcceptor(const char* pIp, unsigned short pPort)
-	{
-		UniqueObject<CAcceptor> aAcceptor = std::make_unique<CAcceptor>();
-		aAcceptor->Bind(pIp, pPort);
-		__mAcceptorList.emplace_back(std::move(aAcceptor));
-	}
-
-	template<typename TGameObject>
-	void CGameServer<TGameObject>::AddAcceptor(unsigned short pPort)
-	{
-		UniqueObject<CAcceptor> aAcceptor = std::make_unique<CAcceptor>();
-		aAcceptor->Bind(pPort);
-		__mAcceptorList.emplace_back(std::move(aAcceptor));
-	}
-
-	template<typename TGameObject>
 	unsigned int CGameServer<TGameObject>::GetAcceptorCount()
 	{
 		return static_cast<unsigned int>(__mAcceptorList.size());
@@ -123,6 +107,22 @@ namespace LBNet
 		}
 
 		return 0;
+	}
+
+	template<typename TGameObject>
+	void CGameServer<TGameObject>::__AddAcceptor(const char* pIp, unsigned short pPort)
+	{
+		UniqueObject<CAcceptor> aAcceptor = std::make_unique<CAcceptor>();
+		aAcceptor->Bind(pIp, pPort);
+		__mAcceptorList.emplace_back(std::move(aAcceptor));
+	}
+
+	template<typename TGameObject>
+	void CGameServer<TGameObject>::__AddAcceptor(unsigned short pPort)
+	{
+		UniqueObject<CAcceptor> aAcceptor = std::make_unique<CAcceptor>();
+		aAcceptor->Bind(pPort);
+		__mAcceptorList.emplace_back(std::move(aAcceptor));
 	}
 
 	template<typename TGameObject>

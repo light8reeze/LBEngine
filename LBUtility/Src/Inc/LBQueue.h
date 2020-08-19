@@ -56,15 +56,12 @@ namespace LBNet
 	template<typename TObject>
 	class CCircularQueue
 	{
-	private:
-		using __ObjectQueue = std::queue<TObject>;
-
 	public:
 		CCircularQueue();
 		~CCircularQueue();
 
-		CCircularQueue(const CWaitableQueue&) = delete;
-		CCircularQueue& operator=(const CWaitableQueue&) = delete;
+		CCircularQueue(const CCircularQueue&) = delete;
+		CCircularQueue& operator=(const CCircularQueue&) = delete;
 		
 		void		Initialize(Size pSize);
 		bool		Push(TObject&& pObject);
