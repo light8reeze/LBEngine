@@ -23,10 +23,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Main.h">
+    <ClInclude Include="CTestServer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="CTestServer.h">
+    <ClInclude Include="AppDefines.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

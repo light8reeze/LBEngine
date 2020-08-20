@@ -56,11 +56,11 @@ namespace LBNet
 		unsigned GetLogBufCnt() const;
 
 	protected:
-		_AddressList	_mAcceptorAddrList;
-		unsigned	_mThreadCnt;
-		unsigned	_mSessionCnt;
-		unsigned	_mTimerTaskCnt;
-		unsigned	_mLogBufCnt;
+		_AddressList	_mAcceptorAddrList;		// Acceptor 개수
+		unsigned	_mThreadCnt;				// 사용 쓰레드 개수
+		unsigned	_mSessionCnt;				// 최대 세션 수
+		unsigned	_mTimerTaskCnt;				// 타이머 자원 최대 개수
+		unsigned	_mLogBufCnt;				// 로그용 버퍼 최대 개수
 	};
 }
 

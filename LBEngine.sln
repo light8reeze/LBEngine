@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{1C487B5D-4CE
 	ProjectSection(SolutionItems) = preProject
 		Doc\Project-Reference.md = Doc\Project-Reference.md
 		Doc\Project-Todo.md = Doc\Project-Todo.md
+		README(en).md = README(en).md
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -23,7 +24,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LBClient", "LBClient\LBClie
 		{69D9DDFA-1926-432C-9250-2B0D869E4F33} = {69D9DDFA-1926-432C-9250-2B0D869E4F33}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EchoServer", "TestServer\TestServer.vcxproj", "{F423E23D-3939-47D5-9910-F68CF018912A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestServer", "TestServer\TestServer.vcxproj", "{F423E23D-3939-47D5-9910-F68CF018912A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{D1EA27BE-DB6F-47F5-84BE-0EB4122299C3} = {D1EA27BE-DB6F-47F5-84BE-0EB4122299C3}
 		{30E01DDD-EAAB-48ED-9171-E451C1A2EE3A} = {30E01DDD-EAAB-48ED-9171-E451C1A2EE3A}

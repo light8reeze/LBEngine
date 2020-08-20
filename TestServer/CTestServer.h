@@ -1,14 +1,24 @@
 #pragma once
-#include "Main.h"
+#include "AppDefines.h"
 #include "LBGameObject.h"
 #include "LBGameServer.h"
+
+class CPacketEcho : public LBNet::CPacketHeader
+{
+public:
+	CPacketEcho() = default;
+	~CPacketEcho() = default;
+
+	int mData;
+};
 
 class CTestObject : public LBNet::CGameObject
 {
 public:
 	CTestObject() = default;
-	~CTestObject() override;
+	~CTestObject() = default;
 
+	void OnAccept() override;
 	void OnDisconnect() override;
 };
 
@@ -19,5 +29,7 @@ public:
 	~CTestServer() override;
 
 	LBNet::ErrCode Initialize() override;
+	LBNet::ErrCode LazyInitialize() override;
+	LBNet::ErrCode Close() override;
 };
 
