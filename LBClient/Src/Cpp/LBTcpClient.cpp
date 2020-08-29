@@ -108,9 +108,7 @@ namespace LBNet
 		ErrCode aResult = __mSocket.Send(pBuffer, pSize, aSendSize);
 
 		if (aResult != 0 || aSendSize == 0)
-		{
 			SetDisconnect(aResult);
-		}
 
 		return aResult;
 	}

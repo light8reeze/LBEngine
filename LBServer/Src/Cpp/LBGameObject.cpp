@@ -47,15 +47,15 @@ namespace LBNet
 		}
 	}
 
-	std::string&& CGameObject::GetIPAddress() const
+	std::string CGameObject::GetIPAddress() const
 	{
 		auto aShared = _mSession.lock();
 		if (aShared != nullptr)
 		{
-			return std::move(aShared->GetEndPoint().address().to_string());
+			return aShared->GetEndPoint().address().to_string();
 		}
 
-		return std::move(std::string(""));
+		return std::string("");
 	}
 
 	unsigned short CGameObject::GetPort() const

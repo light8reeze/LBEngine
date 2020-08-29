@@ -21,7 +21,7 @@ namespace LBNet
 		ErrCode SendTo(void* pBuffer, int pSize);
 		ErrCode SendTo(SharedObject<CSender>& pSender);
 
-		std::string&&	GetIPAddress() const;
+		std::string		GetIPAddress() const;
 		unsigned short	GetPort() const;
 		CUdpSocket::EndPointType& GetEndPoint();
 

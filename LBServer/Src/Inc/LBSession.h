@@ -47,7 +47,7 @@ namespace LBNet
 		virtual ErrCode Close();
 		virtual ErrCode SetDisconnect(ErrCode pError = 0);
 
-		const CTcpSocket::EndPointType& GetEndPoint() const;
+		const CTcpSocket::EndPointType GetEndPoint() const;
 
 		template<typename TObject>
 		void SetGameObject(SharedObject<TObject>& pObject);

@@ -30,9 +30,9 @@ namespace LBNet
 		return CUdpSession::Instance().SendTo(pSender, *this);
 	}
 
-	std::string&& CUdpObject::GetIPAddress() const
+	std::string CUdpObject::GetIPAddress() const
 	{
-		return std::move(__mEndPoint.address().to_string());
+		return __mEndPoint.address().to_string();
 	}
 
 	unsigned short CUdpObject::GetPort() const

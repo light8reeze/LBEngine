@@ -33,7 +33,7 @@ namespace LBNet
 		ErrCode Send(void* pBuffer, int pSize);
 		ErrCode Send(const SharedObject<CSender>& pSender);
 
-		std::string&& GetIPAddress() const;
+		std::string GetIPAddress() const;
 		unsigned short GetPort() const;
 
 	protected:

@@ -225,7 +225,7 @@ namespace LBNet
 		return 0;
 	}
 
-	const CTcpSocket::EndPointType& CSession::GetEndPoint() const
+	const CTcpSocket::EndPointType CSession::GetEndPoint() const
 	{
 		return _mSocket.GetEndPoint();
 	}

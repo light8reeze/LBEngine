@@ -31,7 +31,7 @@ namespace LBNet
 		// 헤더의 크기를 제외한 크기가 들어간다.
 		(reinterpret_cast<SendHeader*>(aShared->__mChunk))->mDataSize = pSendSize;
 
-		return std::move(aShared);
+		return aShared;
 	}
 
 	ErrCode CSender::Encrypt()

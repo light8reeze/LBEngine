@@ -42,7 +42,7 @@ namespace LBNet
 
 		const SocketType&		GetSocket() const;
 		SocketType&				GetSocket();
-		const EndPointType&&	GetEndPoint() const;
+		const EndPointType		GetEndPoint() const;
 
 	private:
 		#pragma warning(disable : 4251)

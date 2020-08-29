@@ -4,23 +4,17 @@ LBEngine는  C++ Boost.Asio 소켓을 이용하여 개발한 게임 서버 엔�
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/480aabb761ba4735a2763dd6dc816467)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=light8reeze/LBEngine&amp;utm_campaign=Badge_Grade)
 
-
-
 ## Feature
 
 게임서버 개발에 쉽게 사용이 가능합니다.
 비동기 방식의 IO
 멀티쓰레드 지원
 
-
-
 ## Environment
 
 Support Windows OS Only
 Visual Studio 2017 or later
 boost Lib 1.70
-
-
 
 ## How To Use
 
@@ -70,3 +64,4 @@ boost Lib 1.70
 ## License
 
 Copyright © 2019-2020 [light8reeze](http://www.github.com/light8reeze).
+

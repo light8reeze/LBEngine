@@ -81,9 +81,9 @@ namespace LBNet
 		return _mSocket;
 	}
 
-	const CTcpSocket::EndPointType&& CTcpSocket::GetEndPoint() const
+	const CTcpSocket::EndPointType CTcpSocket::GetEndPoint() const
 	{
-		return std::move(_mSocket.local_endpoint());
+		return _mSocket.local_endpoint();
 	}
 #pragma endregion CTcpSocket
 
