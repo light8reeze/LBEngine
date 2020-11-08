@@ -5,6 +5,15 @@ project(LBServer)
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release"
     CACHE STRING "Configuration types" FORCE)
 
+set(BOOST_DIRECTORY C:\boost_1_70_0>)
+set(LBENGINE_OUT_DIRECTORY \bin)
+
+if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+	set(FILE_EXTENSION "dll")
+else(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+	set(FILE_EXTENSION "so")
+endif()
+
 add_executable(LBServer
   Src/Cpp/CTestServer.cpp
   Src/Cpp/LBAcceptor.cpp
@@ -44,17 +53,17 @@ add_executable(LBServer
 # Output file name
 set_target_properties(LBServer
   PROPERTIES
-  OUTPUT_NAME_DEBUG LBServerD_x64
-  OUTPUT_NAME_RELEASE LBServer_x64
+  OUTPUT_NAME_DEBUG LBServerD
+  OUTPUT_NAME_RELEASE LBServer
 )
 
 # Additional include directories
 set_property(TARGET LBServer
   APPEND PROPERTY INCLUDE_DIRECTORIES
   $<$<CONFIG:Debug>:
-    C:\boost_1_70_0>
+    BOOST_DIRECTORY
   $<$<CONFIG:Release>:
-    C:\boost_1_70_0>
+    BOOST_DIRECTORY
 )
 
 # Preprocessor definitions

@@ -55,6 +55,9 @@
     <None Include="Src\Inc\LBString.Inl" />
     <None Include="Src\Inc\LBTime.Inl" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeLists.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{30E01DDD-EAAB-48ED-9171-E451C1A2EE3A}</ProjectGuid>

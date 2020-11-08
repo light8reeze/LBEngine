@@ -141,11 +141,8 @@ namespace LBNet
 	{
 		static_assert(std::is_pointer<TType>::value);
 
-		if (pObject)
-		{
-			delete pObject;
-			pObject = nullptr;
-		}
+		delete pObject;
+		pObject = nullptr;
 	}
 	
 	/**
@@ -159,11 +156,8 @@ namespace LBNet
 	{
 		static_assert(std::is_pointer<TType>::value);
 
-		if (pObject)
-		{
-			delete[] pObject;
-			pObject = nullptr;
-		}
+		delete[] pObject;
+		pObject = nullptr;
 	}
 	
 	/**

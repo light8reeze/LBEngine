@@ -37,9 +37,9 @@ namespace LBNet
 			auto aAddrInfo = _mConfig->GetAddress(static_cast<int>(aIndex));
 			
 			if (aAddrInfo.mIp == "")
-				AddAcceptor(aAddrInfo.mPort);
+				__AddAcceptor(aAddrInfo.mPort);
 			else
-				AddAcceptor(aAddrInfo.mIp.c_str(), aAddrInfo.mPort);
+				__AddAcceptor(aAddrInfo.mIp.c_str(), aAddrInfo.mPort);
 		}
 
 		CFactory::Instance().AddObjectPool<TGameObject>(_mConfig->GetSessionCnt());

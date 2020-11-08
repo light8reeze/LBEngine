@@ -1,6 +1,6 @@
 /**
-	@file	LBLogger.h
-	@brief	LBUtillity의 로그관련 헤더
+	@file	LBFile.h
+	@brief	LBUtillity의 파일처리 관련 헤더
 	@date	2019-07-20
 	@auther light8reeze(light8reeze@gmail.com)
 */

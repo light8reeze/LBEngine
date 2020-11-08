@@ -149,7 +149,7 @@ namespace LBNet
 
 	const CUdpSocket::EndPointType&& CUdpSocket::GetEndPoint() const
 	{
-		return std::move(__mSocket.local_endpoint());
+		return __mSocket.local_endpoint();
 	}
 #pragma endregion CTcpSocket
 }

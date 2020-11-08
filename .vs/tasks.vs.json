@@ -1,0 +1,15 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskName": "task-CMakeSettings",
+      "appliesTo": "CMakeSettings.json",
+      "type": "launch"
+    },
+    {
+      "taskName": "task-CMakeSettings",
+      "appliesTo": "CMakeSettings.json",
+      "type": "launch"
+    }
+  ]
+}
