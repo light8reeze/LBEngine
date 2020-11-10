@@ -1,12 +1,12 @@
-cmake_minimum_required(VERSION 3.12.2)
+cmake_minimum_required(VERSION 3.8.2)
 
 project(LBServer)
 
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release"
     CACHE STRING "Configuration types" FORCE)
 
-set(BOOST_DIRECTORY C:\boost_1_70_0>)
-set(LBENGINE_OUT_DIRECTORY \bin)
+set(BOOST_DIRECTORY "C:/boost_1_70_0")
+set(LBENGINE_OUT_DIRECTORY "/bin")
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 	set(FILE_EXTENSION "dll")
@@ -14,56 +14,55 @@ else(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 	set(FILE_EXTENSION "so")
 endif()
 
-add_executable(LBServer
-  Src/Cpp/CTestServer.cpp
+INCLUDE_DIRECTORIES(include Src/Inc)
+INCLUDE_DIRECTORIES(include ../LBUtility/Src/Inc)
+INCLUDE_DIRECTORIES(include BOOST_DIRECTORY)
+
+add_library(LBServer
   Src/Cpp/LBAcceptor.cpp
   Src/Cpp/LBFactory.cpp
   Src/Cpp/LBGameObject.cpp
-  Src/Cpp/LBHandler.cpp
   Src/Cpp/LBIOContext.cpp
-  Src/Cpp/LBManagedObject.cpp
+  Src/Cpp/LBLogger.cpp
+  Src/Cpp/LBLogProcessor.cpp
+  Src/Cpp/LBUdpHandler.cpp
+  Src/Cpp/LBTcpHandler.cpp
   Src/Cpp/LBSender.cpp
   Src/Cpp/LBSendPool.cpp
   Src/Cpp/LBServer.cpp
   Src/Cpp/LBSession.cpp
-  Src/Cpp/LBSessionManager.cpp
   Src/Cpp/LBSocket.cpp
   Src/Cpp/LBTimer.cpp
-  Src/Cpp/main.cpp
-  Src/Inc/CTestServer.h
+  Src/Cpp/LBUdpObject.cpp
+  Src/Cpp/LBUdpSession.cpp
   Src/Inc/LBAcceptor.h
   Src/Inc/LBBoostConfig.h
+  Src/Inc/LBConfig.h
   Src/Inc/LBError.h
   Src/Inc/LBFactory.h
   Src/Inc/LBGameObject.h
   Src/Inc/LBGameServer.h
-  Src/Inc/LBHandler.h
   Src/Inc/LBIOContext.h
-  Src/Inc/LBManagedObject.h
+  Src/Inc/LBLogger.h
+  Src/Inc/LBLogProcessor.h
   Src/Inc/LBSender.h
   Src/Inc/LBSendPool.h
   Src/Inc/LBServer.h
   Src/Inc/LBSession.h
-  Src/Inc/LBSessionManager.h
   Src/Inc/LBShard.h
   Src/Inc/LBShardObject.h
   Src/Inc/LBSocket.h
+  Src/Inc/LBTcpHandler.h
   Src/Inc/LBTimer.h
+  Src/Inc/LBUdpHandler.h
+  Src/Inc/LBUdpObject.h
+  Src/Inc/LBUdpSession.h
 )
 # Output file name
 set_target_properties(LBServer
   PROPERTIES
   OUTPUT_NAME_DEBUG LBServerD
   OUTPUT_NAME_RELEASE LBServer
-)
-
-# Additional include directories
-set_property(TARGET LBServer
-  APPEND PROPERTY INCLUDE_DIRECTORIES
-  $<$<CONFIG:Debug>:
-    BOOST_DIRECTORY
-  $<$<CONFIG:Release>:
-    BOOST_DIRECTORY
 )
 
 # Preprocessor definitions
@@ -73,10 +72,12 @@ target_compile_definitions(LBServer PRIVATE
 )
 
 # SDL check
-target_compile_options(LBServer PRIVATE
-  "$<$<CONFIG:Debug>:/sdl>"
-  "$<$<CONFIG:Release>:/sdl>"
-)
+if (MSVC)
+	target_compile_options(TestServer PRIVATE
+	  "$<$<CONFIG:Debug>:/sdl>"
+	  "$<$<CONFIG:Release>:/sdl>"
+	)
+endif ()
 
 # Minimal rebuild
 if (MSVC)

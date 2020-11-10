@@ -2,6 +2,7 @@
 
 int main()
 {
+	std::cout << "Start!" << std::endl;
 	CTestServer Server;
 	LBNet::CConfig aConfig;
 	LBNet::ErrCode aErrCode;

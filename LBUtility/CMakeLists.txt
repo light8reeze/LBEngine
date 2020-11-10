@@ -10,8 +10,10 @@ INCLUDE_DIRECTORIES(include Src/Inc)
 # Set extend by compiler
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
    set(OUTPUT_EXTEND "so")
+   set(OS_DEFINITION _LINUX)
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
    set(OUTPUT_EXTEND "dll")
+   set(OS_DEFINITION _WINDOWS)
 endif()
 
 if(CMAKE_CONFIGURATION_TYPES STREQUAL "Debug")
@@ -20,7 +22,7 @@ else(CMAKE_CONFIGURATION_TYPES STREQUAL "Release")
    set(CONFIGURATUON_POSTFIX "")
 endif()
 
-set(OUTPUT_FILE_NAME "${CMAKE_PROJECT_NAME}${CONFIGURATUON_POSTFIX}_x64.${OUTPUT_EXTEND}")
+set(OUTPUT_FILE_NAME "LBUtility${CONFIGURATUON_POSTFIX}_x64.${OUTPUT_EXTEND}")
 
 add_library(LBUtility SHARED
   Src/Cpp/LBBuffer.cpp
@@ -50,15 +52,17 @@ set_target_properties(LBUtility
 
 # Preprocessor definitions
 target_compile_definitions(LBUtility PRIVATE
-  $<$<CONFIG:Debug>:_UNICODE;X64;_DEBUG;_CONSOLE>
-  $<$<CONFIG:Release>:_UNICODE;X64;NDEBUG;_CONSOLE>
+  $<$<CONFIG:Debug>:${OS_DEFINITION}_UNICODE;X64;_DEBUG;_CONSOLE>
+  $<$<CONFIG:Release>:${OS_DEFINITION}_UNICODE;X64;NDEBUG;_CONSOLE>
 )
 
 # SDL check
+if (MSVC)
 target_compile_options(LBUtility PRIVATE
   "$<$<CONFIG:Debug>:/sdl>"
   "$<$<CONFIG:Release>:/sdl>"
 )
+endif()
 
 # Minimal rebuild
 if (MSVC)

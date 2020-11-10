@@ -17,8 +17,6 @@
 	@brief		개발할 OS의 매크로, 추후 포팅을 위해 OS에 종속적인 코드는 다음 매크로로 전처리한다.
 	@warning	_WINDOWS, _LINUX 둘다 정의시 컴파일 에러가 발생한다
 */
-#define _WINDOWS
-//#define _LINUX
 #if defined (_WINDOWS) && (_LINUX)
 	#error define OS _WINDOWS or _LINUX only
 #endif //(_WINDOWS) && (_LINUX)
