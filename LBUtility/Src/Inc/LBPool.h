@@ -1,6 +1,6 @@
-/**
+ï»¿/**
 	@file	LBPool.h
-	@brief	LBUtillityÀÇ ¿ÀºêÁ§Æ® Ç®°ü·Ã Çì´õ
+	@brief	LBUtillityì˜ ì˜¤ë¸Œì íŠ¸ í’€ê´€ë ¨ í—¤ë”
 	@date	2019-04-10
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -12,11 +12,11 @@
 namespace LBNet
 {
     /**
-        @brief	        ¿ÀºêÁ§Æ® Ç® Å¬·¡½º
+        @brief	        ì˜¤ë¸Œì íŠ¸ í’€ í´ë˜ìŠ¤
 		@details		thread safe
-        @param TObject	»ç¿ëÇÒ °´Ã¼ÀÇ Å¸ÀÔ
+        @param TObject	ì‚¬ìš©í•  ê°ì²´ì˜ íƒ€ì…
         @date	        2019-04-10
-		@warning		¿ÀºêÁ§Æ®¸¦ ¹ŞÀº ÈÄ ÃÊ±âÈ­´Â caller°¡ Á÷Á¢ ÇÑ´Ù.
+		@warning		ì˜¤ë¸Œì íŠ¸ë¥¼ ë°›ì€ í›„ ì´ˆê¸°í™”ëŠ” callerê°€ ì§ì ‘ í•œë‹¤.
         @auther         light8reeze(light8reeze@gmail.com)
     */
 	template<class TObject>

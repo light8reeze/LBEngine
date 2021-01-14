@@ -1,7 +1,7 @@
-namespace LBNet
+ï»¿namespace LBNet
 {
 	/**
-		@brief		CTimeÀÇ +=¿¬»êÀÚ
+		@brief		CTimeì˜ +=ì—°ì‚°ì
 	*/
 	template<class Rep, class Period>
 	inline CTime& CTime::operator+=(const std::chrono::duration<Rep, Period>& pTime)
@@ -13,7 +13,7 @@ namespace LBNet
 	}
 
 	/**
-		@brief		CTimeÀÇ -=¿¬»êÀÚ
+		@brief		CTimeì˜ -=ì—°ì‚°ì
 	*/
 	template<class Rep, class Period>
 	inline CTime& CTime::operator-=(const std::chrono::duration<Rep, Period>& pTime)
@@ -25,7 +25,7 @@ namespace LBNet
 	}
 
 	/**
-		@brief		CTimeÀÇ +¿¬»êÀÚ
+		@brief		CTimeì˜ +ì—°ì‚°ì
 	*/
 	template< class Rep, class Period>
 	inline CTime CTime::operator+(const std::chrono::duration<Rep, Period>& pTime)
@@ -38,7 +38,7 @@ namespace LBNet
 	}
 
 	/**
-		@brief		CTimeÀÇ -¿¬»êÀÚ
+		@brief		CTimeì˜ -ì—°ì‚°ì
 	*/
 	template<class Rep, class Period>
 	inline CTime CTime::operator-(const std::chrono::duration<Rep, Period>& pTime)

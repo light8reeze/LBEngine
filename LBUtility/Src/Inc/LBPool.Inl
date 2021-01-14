@@ -1,4 +1,4 @@
-namespace LBNet
+﻿namespace LBNet
 {
 	template<class TObject>
 	CObjectPool<TObject>::CObjectPool(Size pSize) : __mIsAlloc(false), __mObjectList(),

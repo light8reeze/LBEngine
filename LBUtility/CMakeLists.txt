@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8.2)
+﻿cmake_minimum_required(VERSION 3.8.2)
 
 project(LBUtility)
 
@@ -7,15 +7,17 @@ set(CMAKE_CONFIGURATION_TYPES "Debug;Release"
 
 INCLUDE_DIRECTORIES(include Src/Inc)
 
+# Compile options
+include(../Build/CMake/CompileOptions.cmake)
+
 # Set extend by compiler
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
    set(OUTPUT_EXTEND "so")
-   set(OS_DEFINITION _LINUX)
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
    set(OUTPUT_EXTEND "dll")
-   set(OS_DEFINITION _WINDOWS)
 endif()
 
+# Set postfix by configuration
 if(CMAKE_CONFIGURATION_TYPES STREQUAL "Debug")
    set(CONFIGURATUON_POSTFIX "D")
 else(CMAKE_CONFIGURATION_TYPES STREQUAL "Release")
@@ -52,8 +54,8 @@ set_target_properties(LBUtility
 
 # Preprocessor definitions
 target_compile_definitions(LBUtility PRIVATE
-  $<$<CONFIG:Debug>:${OS_DEFINITION}_UNICODE;X64;_DEBUG;_CONSOLE>
-  $<$<CONFIG:Release>:${OS_DEFINITION}_UNICODE;X64;NDEBUG;_CONSOLE>
+  $<$<CONFIG:Debug>:_UNICODE;X64;_DEBUG;_CONSOLE>
+  $<$<CONFIG:Release>:_UNICODE;X64;NDEBUG;_CONSOLE>
 )
 
 # SDL check
@@ -69,12 +71,5 @@ if (MSVC)
   target_compile_options(LBUtility PRIVATE
     "$<$<CONFIG:Debug>:/Gm->"
     "$<$<CONFIG:Release>:/Gm->"
-  )
-endif ()
-
-# Precompiled header files
-if (MSVC)
-  target_compile_options(LBUtility PRIVATE
-    ""
   )
 endif ()

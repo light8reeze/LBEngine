@@ -1,4 +1,4 @@
-namespace LBNet
+﻿namespace LBNet
 {
 	CFile::CFile() : __mIStream(), __mOStream()
 	{

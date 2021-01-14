@@ -1,6 +1,6 @@
-/**
+ï»¿/**
 	@file	LBProbability.h
-	@brief	LBUtillityÀÇ È®·ü °è»ê °ü·Ã Çì´õ
+	@brief	LBUtillityì˜ í™•ë¥  ê³„ì‚° ê´€ë ¨ í—¤ë”
 	@date	2019-07-28
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -12,7 +12,7 @@
 namespace LBNet
 {
 	/**
-		@brief		È®·ü °è»ê Å¬·¡½º
+		@brief		í™•ë¥  ê³„ì‚° í´ë˜ìŠ¤
 		@date		2019-07-28
 		@auther		light8reeze(light8reeze@gmail.com)
 	*/

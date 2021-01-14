@@ -1,6 +1,6 @@
-/**
+ï»¿/**
 	@file	LBQueue.h
-	@brief	LBUtillityÀÇ ¿ÀºêÁ§Æ® Å¥ °ü·Ã Çì´õ
+	@brief	LBUtillityì˜ ì˜¤ë¸Œì íŠ¸ í ê´€ë ¨ í—¤ë”
 	@date	2019-04-21
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -8,19 +8,19 @@
 #include "LBUtility.h"
 #include "LBLocker.h"
 
-#ifdef _WINDOWS
+#ifdef _WIN32
 #include <process.h>
-#endif //_WINDOWS
+#endif //_WIN32
 
 namespace LBNet
 {
-    /**
-        @brief	        ¿ÀºêÁ§Æ® Å¥ Å¬·¡½º
-		@details		¼¼¸¶Æ÷¾î¸¦ ÀÌ¿ëÇÑ Å¥ Å¬·¡½º.
-        @param TObject	»ç¿ëÇÒ °´Ã¼ÀÇ Å¸ÀÔ
-        @date	        2019-04-21
-        @auther         light8reeze(light8reeze@gmail.com)
-    */
+	/**
+		@brief	        ì˜¤ë¸Œì íŠ¸ í í´ë˜ìŠ¤
+		@details		ì„¸ë§ˆí¬ì–´ë¥¼ ì´ìš©í•œ í í´ë˜ìŠ¤.
+		@param TObject	ì‚¬ìš©í•  ê°ì²´ì˜ íƒ€ì…
+		@date	        2019-04-21
+		@auther         light8reeze(light8reeze@gmail.com)
+	*/
 	template<typename TObject>
 	class CWaitableQueue
 	{
@@ -40,19 +40,19 @@ namespace LBNet
 		bool	Pop(TObject& pObject, unsigned long pWaitTime = 0);
 
 	private:
-		#ifdef _WINDOWS
+		#ifdef _WIN32
 		HANDLE			__mSemaphore;
-		#endif //_WINDOWS
+		#endif //_WIN32
 		__ObjectQueue	__mQueue;
 	};
-	
-    /**
-        @brief	        ¿øÇü Å¥ Å¬·¡½º
-        @param TObject	»ç¿ëÇÒ °´Ã¼ÀÇ Å¸ÀÔ
-		@warning		½º·¹µå ¾ÈÁ¤¼ºÀº º¸ÀåÇÏÁö ¾Ê´Â´Ù.
-        @date	        2020-01-18
-        @auther         light8reeze(light8reeze@gmail.com)
-    */
+
+	/**
+		@brief	        ì›í˜• í í´ë˜ìŠ¤
+		@param TObject	ì‚¬ìš©í•  ê°ì²´ì˜ íƒ€ì…
+		@warning		ìŠ¤ë ˆë“œ ì•ˆì •ì„±ì€ ë³´ì¥í•˜ì§€ ì•ŠëŠ”ë‹¤.
+		@date	        2020-01-18
+		@auther         light8reeze(light8reeze@gmail.com)
+	*/
 	template<typename TObject>
 	class CCircularQueue
 	{

@@ -1,6 +1,6 @@
-/**
+ï»¿/**
 	@file	LBLocker.h
-	@brief	LBUtillityÀÇ Àá±İ°ü·Ã Çì´õ
+	@brief	LBUtillityì˜ ì ê¸ˆê´€ë ¨ í—¤ë”
 	@date	2019-03-31
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -12,9 +12,9 @@ namespace LBNet
 {
 #ifdef _DEBUG
 	/**
-		@brief		¹ÂÅØ½º Å¬·¡½º
-		@details	std::shared_mutexÀ» ÀÌ¿ëÇÑ Àá±İ Å¬·¡½º(µğ¹ö±× ¸ğµå¿¡¼­¸¸ »ç¿ë)
-		@comments	shared_lock, unique_lock¸¦ ÀÌ¿ëÇÏ¿© Read, Write¶ô ±¸ÇöÀ» À§ÇØ °³¹ß
+		@brief		ë®¤í…ìŠ¤ í´ë˜ìŠ¤
+		@details	std::shared_mutexì„ ì´ìš©í•œ ì ê¸ˆ í´ë˜ìŠ¤(ë””ë²„ê·¸ ëª¨ë“œì—ì„œë§Œ ì‚¬ìš©)
+		@comments	shared_lock, unique_lockë¥¼ ì´ìš©í•˜ì—¬ Read, Writeë½ êµ¬í˜„ì„ ìœ„í•´ ê°œë°œ
 		@date		2019-07-20
 		@auther		light8reeze(light8reeze@gmail.com)
 	*/
@@ -50,14 +50,14 @@ namespace LBNet
 
 
 	/**
-		@brief		Mutex»ç¿ë ¿ÀºêÁ§Æ® ÁöÁ¤
-		@details	Mutex»ç¿ë ¿ÀºêÁ§Æ® »ç¿ë¹ıÀº ´ÙÀ½°ú °°´Ù.
-					1. Å¬·¡½º³»¿¡ LB_LOCKOBJECT(Å¬·¡½º¸í, MutexÅ¸ÀÔ¸í)À» ³Ö´Â´Ù.
-					2. °´Ã¼ Àá±İÀ» »ç¿ëÇÒ¶§ {ReadLock º¯¼ö¸í(·¹ÆÛ·±½º) or WriteLock º¯¼ö¸í(·¹ÆÛ·±½º)}·Î »ç¿ëÇÑ´Ù.
-		@warnning	¸ÅÅ©·Î »ç¿ë ÈÄ¿¡ Á¢±ÙÀÚ¸¦ ÁöÁ¤ÇÑ´Ù.(¹ÌÁöÁ¤½Ã ¸ÅÅ©·Î ¾Æ·¡·Î protectedÁ¢±ÙÀÚ·Î ÀÎ½ÄµÈ´Ù.)
+		@brief		Mutexì‚¬ìš© ì˜¤ë¸Œì íŠ¸ ì§€ì •
+		@details	Mutexì‚¬ìš© ì˜¤ë¸Œì íŠ¸ ì‚¬ìš©ë²•ì€ ë‹¤ìŒê³¼ ê°™ë‹¤.
+					1. í´ë˜ìŠ¤ë‚´ì— LB_LOCKOBJECT(í´ë˜ìŠ¤ëª…, Mutexíƒ€ì…ëª…)ì„ ë„£ëŠ”ë‹¤.
+					2. ê°ì²´ ì ê¸ˆì„ ì‚¬ìš©í• ë•Œ {ReadLock ë³€ìˆ˜ëª…(ë ˆí¼ëŸ°ìŠ¤) or WriteLock ë³€ìˆ˜ëª…(ë ˆí¼ëŸ°ìŠ¤)}ë¡œ ì‚¬ìš©í•œë‹¤.
+		@warnning	ë§¤í¬ë¡œ ì‚¬ìš© í›„ì— ì ‘ê·¼ìë¥¼ ì§€ì •í•œë‹¤.(ë¯¸ì§€ì •ì‹œ ë§¤í¬ë¡œ ì•„ë˜ë¡œ protectedì ‘ê·¼ìë¡œ ì¸ì‹ëœë‹¤.)
 
-		@param pClass		µî·ÏÇÒ ¿ÀºêÁ§Æ® Å¬·¡½º Å¸ÀÔ
-		@param pLockType	µî·ÏÇÒ MutexÅ¬·¡½º Å¸ÀÔ
+		@param pClass		ë“±ë¡í•  ì˜¤ë¸Œì íŠ¸ í´ë˜ìŠ¤ íƒ€ì…
+		@param pLockType	ë“±ë¡í•  Mutexí´ë˜ìŠ¤ íƒ€ì…
 		@date				2020-05-11
 		@auther				light8reeze(light8reeze@gmail.com)
 	*/

@@ -1,6 +1,6 @@
-/**
+ï»¿/**
 	@file	LBEncyption.h
-	@brief	LBUtillityÀÇ ¾ÏÈ£È­ °ü·Ã Çì´õ
+	@brief	LBUtillityì˜ ì•”í˜¸í™” ê´€ë ¨ í—¤ë”
 	@date	2019-04-13
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -10,15 +10,15 @@
 namespace LBNet
 {
     /**
-        @brief	        ¾ÏÈ£È­ ÀÎÅÍÆäÀÌ½º
-		@details		¸ðµç ¾ÏÈ£È­ °ü·Ã Å¬·¡½º´Â ´ÙÀ½ ÀÎÅÍÆäÀÌ½º¸¦ »ó¼Ó¹Þ¾Æ ½Ì±ÛÅæ ±¸Á¶·Î ±¸ÇöÇÑ´Ù.
+        @brief	        ì•”í˜¸í™” ì¸í„°íŽ˜ì´ìŠ¤
+		@details		ëª¨ë“  ì•”í˜¸í™” ê´€ë ¨ í´ëž˜ìŠ¤ëŠ” ë‹¤ìŒ ì¸í„°íŽ˜ì´ìŠ¤ë¥¼ ìƒì†ë°›ì•„ ì‹±ê¸€í†¤ êµ¬ì¡°ë¡œ êµ¬í˜„í•œë‹¤.
         @date	        2019-10-23
-		@warning		1. Áßº¹À¸·Î »ó¼Ó¹Þ¾Æ ±¸Çö ±ÝÁö.
-						2. ½º·¹µå ¾ÈÀü¼ºÀ» º¸ÀåÇÏÁö ¸øÇÑ´Ù.
-						3. ½Ì±ÛÅæ ÀÎ½ºÅÏ½º°¡ nullptr·Î ¼³Á¤µÉ ¼öµµ ÀÖ´Ù.
-						(±¸ÇöµÈ Å¬·¡½º°¡ ¾øÀ»½Ã ½Ì±ÛÅæÀº nullptrÀÌ´Ù)
-						4. ÇÏÀ§ Å¬·¡½º¿¡¼­´Â ¾ÏÈ£È­ Çì´õÀÇ Å©±â¸¦ ¹Ýµå½Ã ¼³Á¤ÇØ¾ß ÇÑ´Ù.(_mHeaderSize)
-						5. ÇÏÀ§ Å¬·¡½º¿¡¼­ ±¸Çö½Ã ¹Ýµå½Ã static·Î »ý¼ºÇØ¾ß ÇÑ´Ù.(ÇÏÀ§¿¡¼­ µ¿Àû ÇÒ´çÀ» ÀÌ¿ëÇÑ »ý¼º ±ÝÁö)
+		@warning		1. ì¤‘ë³µìœ¼ë¡œ ìƒì†ë°›ì•„ êµ¬í˜„ ê¸ˆì§€.
+						2. ìŠ¤ë ˆë“œ ì•ˆì „ì„±ì„ ë³´ìž¥í•˜ì§€ ëª»í•œë‹¤.
+						3. ì‹±ê¸€í†¤ ì¸ìŠ¤í„´ìŠ¤ê°€ nullptrë¡œ ì„¤ì •ë  ìˆ˜ë„ ìžˆë‹¤.
+						(êµ¬í˜„ëœ í´ëž˜ìŠ¤ê°€ ì—†ì„ì‹œ ì‹±ê¸€í†¤ì€ nullptrì´ë‹¤)
+						4. í•˜ìœ„ í´ëž˜ìŠ¤ì—ì„œëŠ” ì•”í˜¸í™” í—¤ë”ì˜ í¬ê¸°ë¥¼ ë°˜ë“œì‹œ ì„¤ì •í•´ì•¼ í•œë‹¤.(_mHeaderSize)
+						5. í•˜ìœ„ í´ëž˜ìŠ¤ì—ì„œ êµ¬í˜„ì‹œ ë°˜ë“œì‹œ staticë¡œ ìƒì„±í•´ì•¼ í•œë‹¤.(í•˜ìœ„ì—ì„œ ë™ì  í• ë‹¹ì„ ì´ìš©í•œ ìƒì„± ê¸ˆì§€)
         @auther         light8reeze(light8reeze@gmail.com)
     */
 	class LBU_EXPORT CEncryptor

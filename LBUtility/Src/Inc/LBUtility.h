@@ -1,6 +1,6 @@
-/**
+ï»¿/**
 	@file	LBUtility.h
-	@brief	LBUtility¸¦ »ç¿ëÇÏ±â À§ÇØ ÇÊ¿äÇÑ ¼³Á¤ Çì´õÆÄÀÏ
+	@brief	LBUtilityë¥¼ ì‚¬ìš©í•˜ê¸° ìœ„í•´ í•„ìš”í•œ ì„¤ì • í—¤ë”íŒŒì¼
 	@date	2019-02-17
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -14,60 +14,57 @@
 #endif //WIN32
 
 /**
-	@brief		°³¹ßÇÒ OSÀÇ ¸ÅÅ©·Î, ÃßÈÄ Æ÷ÆÃÀ» À§ÇØ OS¿¡ Á¾¼ÓÀûÀÎ ÄÚµå´Â ´ÙÀ½ ¸ÅÅ©·Î·Î ÀüÃ³¸®ÇÑ´Ù.
-	@warning	_WINDOWS, _LINUX µÑ´Ù Á¤ÀÇ½Ã ÄÄÆÄÀÏ ¿¡·¯°¡ ¹ß»ıÇÑ´Ù
-*/
-#if defined (_WINDOWS) && (_LINUX)
-	#error define OS _WINDOWS or _LINUX only
-#endif //(_WINDOWS) && (_LINUX)
-
-/**
-	@brief windowsÀÇ min, max¸¦ »ç¿ëÇÏÁö ¾Ê°í stdÀÇ min, max¸¦ »ç¿ëÇÑ´Ù.
+	@brief windowsì˜ min, maxë¥¼ ì‚¬ìš©í•˜ì§€ ì•Šê³  stdì˜ min, maxë¥¼ ì‚¬ìš©í•œë‹¤.
 */
 #ifndef NOMINMAX
 	#define NOMINMAX
 #endif
 
-#ifdef _WINDOWS
+#ifdef _WIN32
 /////////////////////////////////////////////////////////////////////////
-// SDKDDKVer.h¸¦ Æ÷ÇÔÇÏ¸é ÃÖ°í ¼öÁØÀÇ °¡¿ë¼ºÀ» °¡Áø Windows ÇÃ·§ÆûÀÌ Á¤ÀÇµË´Ï´Ù.
-// ÀÌÀü Windows ÇÃ·§Æû¿¡ ´ëÇØ ÀÀ¿ë ÇÁ·Î±×·¥À» ºôµåÇÏ·Á´Â °æ¿ì¿¡´Â SDKDDKVer.h¸¦ Æ÷ÇÔÇÏ±â Àü¿¡
-// WinSDKVer.h¸¦ Æ÷ÇÔÇÏ°í _WIN32_WINNT ¸ÅÅ©·Î¸¦ Áö¿øÇÏ·Á´Â ÇÃ·§ÆûÀ¸·Î ¼³Á¤ÇÏ½Ê½Ã¿À.
+// SDKDDKVer.hë¥¼ í¬í•¨í•˜ë©´ ìµœê³  ìˆ˜ì¤€ì˜ ê°€ìš©ì„±ì„ ê°€ì§„ Windows í”Œë«í¼ì´ ì •ì˜ë©ë‹ˆë‹¤.
+// ì´ì „ Windows í”Œë«í¼ì— ëŒ€í•´ ì‘ìš© í”„ë¡œê·¸ë¨ì„ ë¹Œë“œí•˜ë ¤ëŠ” ê²½ìš°ì—ëŠ” SDKDDKVer.hë¥¼ í¬í•¨í•˜ê¸° ì „ì—
+// WinSDKVer.hë¥¼ í¬í•¨í•˜ê³  _WIN32_WINNT ë§¤í¬ë¡œë¥¼ ì§€ì›í•˜ë ¤ëŠ” í”Œë«í¼ìœ¼ë¡œ ì„¤ì •í•˜ì‹­ì‹œì˜¤.
 #include <SDKDDKVer.h>
 /////////////////////////////////////////////////////////////////////////
-#endif //_WINDOWS
+#endif //_WIN32
 
 #include <stdexcept>
 #include <type_traits>
 
 /**
-	@brief std::chrono_literals »ç¿ë Á¤ÀÇ
+	@brief std::chrono_literals ì‚¬ìš© ì •ì˜
 */
 #include <chrono>
 using namespace std::chrono_literals;
 
 /**
-	@brief		DllExport °ü·Ã ¸ÅÅ©·Î
-	@details	dllÀ» ¹Ş¾Æ ¾îÇÃ¸®ÄÉÀÌ¼ÇÀ» ±¸ÇöÇÒ ¶§¿¡´Â LBUtillity.h¸¦ Á¤ÀÇÇÏ±â Àü¿¡ LOAD_LBUTILL¸ÅÅ©·Î¸¦ Á¤ÀÇÇÑ´Ù.
+	@brief		DllExport ê´€ë ¨ ë§¤í¬ë¡œ
+	@details	dllì„ ë°›ì•„ ì–´í”Œë¦¬ì¼€ì´ì…˜ì„ êµ¬í˜„í•  ë•Œì—ëŠ” LBUtillity.hë¥¼ ì •ì˜í•˜ê¸° ì „ì— LOAD_LBUTILLë§¤í¬ë¡œë¥¼ ì •ì˜í•œë‹¤.
 */
-#ifdef LOAD_LBUTILL
-	#define LBU_EXPORT						__declspec(dllimport)
-	#define LBU_EXPORT_TEMPLATE(pClass)		extern template class LBU_EXPORT pClass
-#else
-	#define LBU_EXPORT						__declspec(dllexport)
-	#define LBU_EXPORT_TEMPLATE(pClass)		template class LBU_EXPORT pClass
-#endif //LOAD_LBUTILL
+#if __linux__
+	#define LBU_EXPORT							__attribute__((visibility("default")))
+	#define LBU_EXPORT_TEMPLATE(pClass)			extern template class LBU_EXPORT pClass
+#elif _WIN32
+	#ifdef LOAD_LBUTILL
+		#define LBU_EXPORT						__declspec(dllimport)
+		#define LBU_EXPORT_TEMPLATE(pClass)		extern template class LBU_EXPORT pClass
+	#else
+		#define LBU_EXPORT						__declspec(dllexport)
+		#define LBU_EXPORT_TEMPLATE(pClass)		template class LBU_EXPORT pClass
+	#endif //LOAD_LBUTILL
+#endif // _WIN32
 
 /**
-	@brief		assert °ü·Ã ¸ÅÅ©·Î
-	@param pExp °ËÁõÇÒ Ç¥Çö½Ä
-	@param pMsg	assert¹ß»ı½Ã Ãâ·ÂÇÒ ¸Ş¼¼Áö
+	@brief		assert ê´€ë ¨ ë§¤í¬ë¡œ
+	@param pExp ê²€ì¦í•  í‘œí˜„ì‹
+	@param pMsg	assertë°œìƒì‹œ ì¶œë ¥í•  ë©”ì„¸ì§€
 */
 #define LB_ASSERT(pExp, pMsg) assert((pExp) && (pMsg))
 
 /**
-	@brief		µğ¹ö±× ¸ğµå¿¡¸¸ ³ÖÀ» ÄÚµå ¸ÅÅ©·Î (Release¸ğµå¿¡¼± Á¦¿Ü)
-	@param pExp µğ¹ö±×¿¡ »ç¿ëÇÒ ÄÚµå
+	@brief		ë””ë²„ê·¸ ëª¨ë“œì—ë§Œ ë„£ì„ ì½”ë“œ ë§¤í¬ë¡œ (Releaseëª¨ë“œì—ì„  ì œì™¸)
+	@param pExp ë””ë²„ê·¸ì— ì‚¬ìš©í•  ì½”ë“œ
 */
 #ifdef _DEBUG
 	#define DEBUG_CODE(pExp) pExp
@@ -78,20 +75,20 @@ using namespace std::chrono_literals;
 namespace LBNet
 {
 	/**
-		@brief	LBEngine¿¡¼­ »ç¿ëÇÏ´Â Å©±â Å¸ÀÔ Á¤ÀÇ
+		@brief	LBEngineì—ì„œ ì‚¬ìš©í•˜ëŠ” í¬ê¸° íƒ€ì… ì •ì˜
 	*/
 	using Size = unsigned short;
 
 	/**
-		@brief	LBEngine¿¡¼­ »ç¿ëÇÏ´Â ±âº» ½Ã°£ ´ÜÀ§ Á¤ÀÇ
+		@brief	LBEngineì—ì„œ ì‚¬ìš©í•˜ëŠ” ê¸°ë³¸ ì‹œê°„ ë‹¨ìœ„ ì •ì˜
 	*/
 	using Tick		= std::chrono::duration<unsigned long long, std::milli>;
 	using TickCount	= Tick::rep;
 
 	/**
-		@brief			EnumÀ» Å¸ÀÔÀÇ °ªÀ¸·Î º¯È¯ÇØÁÖ´Â ÇÔ¼ö
-		@param TEnum	º¯È¯ÇÒ Enum°ª
-		@return auto	º¯È¯µÈ Enum°ª
+		@brief			Enumì„ íƒ€ì…ì˜ ê°’ìœ¼ë¡œ ë³€í™˜í•´ì£¼ëŠ” í•¨ìˆ˜
+		@param TEnum	ë³€í™˜í•  Enumê°’
+		@return auto	ë³€í™˜ëœ Enumê°’
 	*/
 	template<typename TEnum>
 	constexpr auto UnderLying(TEnum e)
@@ -100,15 +97,15 @@ namespace LBNet
 	}
 
 	/**
-		@brief			µÎ Æ÷ÀÎÅÍ°¡ °°Àº ÁÖ¼ÒÀÎÁö °Ë»çÇÏ´Â ÇÔ¼ö
-		@param T1		ºñ±³ÇÒ Æ÷ÀÎÅÍ Å¸ÀÔ
-		@param T2		ºñ±³ÇÒ Æ÷ÀÎÅÍ Å¸ÀÔ
-		@warning		È¥µ¿À» ÇÇÇÏ±â À§ÇØ µÎ ÀÎÀÚ¸¦ ¸ğµÎ Æ÷ÀÎÅÍÅ¸ÀÔÀ» ³Ö¾îÁØ´Ù.
-						1. Æ÷ÀÎÅÍ, ÀÏ¹İ º¯¼ö¸¦ ¼¯¾î»ç¿ëÇÒ °æ¿ì ¹ö±×°¡ ¹ß»ıÇÒ °¡´É¼ºÀÌ ³ô´Ù.
-						(ex1 : T1 = int*, T2 = void*) => Æ÷ÀÎÅÍºñ±³°¡ ¸Â°Ô ½ÇÇàµÊ
-						(ex2 : T1 = int*, T2 = char)  => Æ÷ÀÎÅÍºñ±³°¡ ¸Â°Ô ½ÇÇàµÇÁö ¾ÊÀ½
-						2. const Æ÷ÀÎÅÍÀÇ °æ¿ì const¸¦ Á¦°ÅÇÏ¿© ÀÎÀÚ·Î ³Ö¾î¾ß ÇÑ´Ù.
-		@return bool	µÎ Æ÷ÀÎÅÍ°¡ °°Àº ÁÖ¼ÒÀÌ¸é true ¾Æ´Ï¸é false
+		@brief			ë‘ í¬ì¸í„°ê°€ ê°™ì€ ì£¼ì†Œì¸ì§€ ê²€ì‚¬í•˜ëŠ” í•¨ìˆ˜
+		@param T1		ë¹„êµí•  í¬ì¸í„° íƒ€ì…
+		@param T2		ë¹„êµí•  í¬ì¸í„° íƒ€ì…
+		@warning		í˜¼ë™ì„ í”¼í•˜ê¸° ìœ„í•´ ë‘ ì¸ìë¥¼ ëª¨ë‘ í¬ì¸í„°íƒ€ì…ì„ ë„£ì–´ì¤€ë‹¤.
+						1. í¬ì¸í„°, ì¼ë°˜ ë³€ìˆ˜ë¥¼ ì„ì–´ì‚¬ìš©í•  ê²½ìš° ë²„ê·¸ê°€ ë°œìƒí•  ê°€ëŠ¥ì„±ì´ ë†’ë‹¤.
+						(ex1 : T1 = int*, T2 = void*) => í¬ì¸í„°ë¹„êµê°€ ë§ê²Œ ì‹¤í–‰ë¨
+						(ex2 : T1 = int*, T2 = char)  => í¬ì¸í„°ë¹„êµê°€ ë§ê²Œ ì‹¤í–‰ë˜ì§€ ì•ŠìŒ
+						2. const í¬ì¸í„°ì˜ ê²½ìš° constë¥¼ ì œê±°í•˜ì—¬ ì¸ìë¡œ ë„£ì–´ì•¼ í•œë‹¤.
+		@return bool	ë‘ í¬ì¸í„°ê°€ ê°™ì€ ì£¼ì†Œì´ë©´ true ì•„ë‹ˆë©´ false
 	*/
 	template<typename T1, typename T2>
 	inline bool IsSameAddress(T1 pT1, T2 pT2)
@@ -122,17 +119,17 @@ namespace LBNet
 	}
 
 	/**
-		@brief			LBUtillityÀÇ ¹öÀüÀ» ¹Ş´Â ÇÔ¼ö
-		@return Version	LBUtillityÀÇ ¹öÀü
+		@brief			LBUtillityì˜ ë²„ì „ì„ ë°›ëŠ” í•¨ìˆ˜
+		@return Version	LBUtillityì˜ ë²„ì „
 	*/
 	using Version = unsigned int;
 	constexpr Version LBU_EXPORT GetLBUVersion();
 	
 	/**
-		@brief			Æ¯Á¤ Æ÷ÀÎÅÍ¸¦ ÇÒ´ç ÇØÁ¦ÇÏ´Â ÇÔ¼ö
-		@param TType	»èÁ¦ÇÒ Æ÷ÀÎÅÍ ÀÚ·áÇü
-		@param TType&	»èÁ¦ÇÒ Æ÷ÀÎÅÍ
-		@warning		TType´Â ¹İµå½Ã Æ÷ÀÎÅÍ¿©¾ß ÇÑ´Ù.
+		@brief			íŠ¹ì • í¬ì¸í„°ë¥¼ í• ë‹¹ í•´ì œí•˜ëŠ” í•¨ìˆ˜
+		@param TType	ì‚­ì œí•  í¬ì¸í„° ìë£Œí˜•
+		@param TType&	ì‚­ì œí•  í¬ì¸í„°
+		@warning		TTypeëŠ” ë°˜ë“œì‹œ í¬ì¸í„°ì—¬ì•¼ í•œë‹¤.
 	*/
 	template<typename TType>
 	inline void SafeDelete(TType& pObject)
@@ -144,10 +141,10 @@ namespace LBNet
 	}
 	
 	/**
-		@brief			Æ¯Á¤ Æ÷ÀÎÅÍ¸¦ ÇÒ´ç ÇØÁ¦ÇÏ´Â ÇÔ¼ö(¹è¿­)
-		@param TType	»èÁ¦ÇÒ Æ÷ÀÎÅÍ ÀÚ·áÇü
-		@param TType&	»èÁ¦ÇÒ Æ÷ÀÎÅÍ
-		@warning		TType´Â ¹İµå½Ã Æ÷ÀÎÅÍ¿©¾ß ÇÑ´Ù.
+		@brief			íŠ¹ì • í¬ì¸í„°ë¥¼ í• ë‹¹ í•´ì œí•˜ëŠ” í•¨ìˆ˜(ë°°ì—´)
+		@param TType	ì‚­ì œí•  í¬ì¸í„° ìë£Œí˜•
+		@param TType&	ì‚­ì œí•  í¬ì¸í„°
+		@warning		TTypeëŠ” ë°˜ë“œì‹œ í¬ì¸í„°ì—¬ì•¼ í•œë‹¤.
 	*/
 	template<typename TType>
 	inline void SafeArrayDelete(TType& pObject)
@@ -159,13 +156,13 @@ namespace LBNet
 	}
 	
 	/**
-		@brief ¿¡·¯ÄÚµå Å¸ÀÔ
+		@brief ì—ëŸ¬ì½”ë“œ íƒ€ì…
 	*/
 	using ErrCode = std::size_t;
 }
 
 /**
-	@brief		¿¡·¯ÄÚµå µî·Ï ¸ÅÅ©·Î
-	@comment	pErr¿¡ »ç¿ëÇÒ º¯¼ö¸íÀ» ³Ö´Â´Ù.
+	@brief		ì—ëŸ¬ì½”ë“œ ë“±ë¡ ë§¤í¬ë¡œ
+	@comment	pErrì— ì‚¬ìš©í•  ë³€ìˆ˜ëª…ì„ ë„£ëŠ”ë‹¤.
 */
 #define LB_ERRCODE(pErr) const LBNet::ErrCode pErr = std::hash<std::string>{}(#pErr)

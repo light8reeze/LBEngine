@@ -1,4 +1,4 @@
-namespace LBNet
+﻿namespace LBNet
 {
 	template<typename TType>
 	inline TType CRandom::GetRandom(TType pMin, TType pMax)

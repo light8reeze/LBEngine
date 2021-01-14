@@ -1,6 +1,6 @@
-/**
+ï»¿/**
 	@file	LBTime.h
-	@brief	LBUtillityÀÇ ½Ã°£°ü·Ã Çì´õ
+	@brief	LBUtillityì˜ ì‹œê°„ê´€ë ¨ í—¤ë”
 	@date	2019-03-16
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -9,21 +9,19 @@
 #include <ctime>
 
 /**
-	@brief ºôµåÇÏ´Â OS¿¡ ¸ÂÃç localtimeÇÔ¼ö¸¦ Á¤ÀÇÇÑ´Ù.
+	@brief ë¹Œë“œí•˜ëŠ” OSì— ë§ì¶° localtimeí•¨ìˆ˜ë¥¼ ì •ì˜í•œë‹¤.
 */
-#ifdef _WINDOWS
+#ifdef _WIN32
 	#define LOCALTIME(TM, time) localtime_s((TM), (time))
-#elif _LINUX
+#elif __linux__
 	#define LOCALTIME(TM, time) localtime_r((time), (TM))
-#else
-	#error "Define _WINDOWS or _LINUX"
-#endif //_WINDOWS
+#endif //_WIN32
 
 namespace LBNet
 {
 	/**
-		@brief		¿äÀÏ EnumÁ¤ÀÇ
-		@warning	struct tmÀÇ tm_wday°ª°ú ¸ÂÃç¾ß ÇÑ´Ù.(0:ÀÏ¿äÀÏ ~ 6:Åä¿äÀÏ)
+		@brief		ìš”ì¼ Enumì •ì˜
+		@warning	struct tmì˜ tm_wdayê°’ê³¼ ë§ì¶°ì•¼ í•œë‹¤.(0:ì¼ìš”ì¼ ~ 6:í† ìš”ì¼)
 	*/
 	enum class EWeekday
 	{
@@ -37,8 +35,8 @@ namespace LBNet
 	};
 
 	/**
-		@brief		LBUtillityÀÇ ½Ã°£ Å¬·¡½º
-		@details	Æ¯Á¤ ½Ã°£À» Ç¥ÇöÇÏ´Â Å¬·¡½º, std::chrono¸¦ ±â¹İÀ¸·Î ±¸Çö Get, SetÀº struct tmÀ» Áõ°¨Àº TimePoint¸¦ ÀÌ¿ëÇÑ´Ù
+		@brief		LBUtillityì˜ ì‹œê°„ í´ë˜ìŠ¤
+		@details	íŠ¹ì • ì‹œê°„ì„ í‘œí˜„í•˜ëŠ” í´ë˜ìŠ¤, std::chronoë¥¼ ê¸°ë°˜ìœ¼ë¡œ êµ¬í˜„ Get, Setì€ struct tmì„ ì¦ê°ì€ TimePointë¥¼ ì´ìš©í•œë‹¤
 		@date		2019-03-16
 		@auther		light8reeze(light8reeze@gmail.com)
 	*/

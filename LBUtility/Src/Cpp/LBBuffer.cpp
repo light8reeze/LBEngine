@@ -1,9 +1,9 @@
-#include "LBBuffer.h"
+ï»¿#include "LBBuffer.h"
 
 namespace LBNet
 {
 	/**
-		@brief CBufferÀÇ »ý¼ºÀÚ
+		@brief CBufferï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	*/
 	CBuffer::CBuffer(Size pSize) : _mMAX_SIZE(pSize), _mUseSize(0), 
 		_mReadIndex(0), _mWriteIndex(0), _mBuffer(nullptr)
@@ -43,8 +43,8 @@ namespace LBNet
 		pSize = reinterpret_cast<CBufferHeader*>(aData)->mDataSize;
 		aData += sizeof(CBufferHeader);
 
-		// Àß¸øµÈ ÆÐÅ¶À» ¹ÞÀ» °æ¿ì »çÀÌÁî°¡ ºñÁ¤»óÀ¸·Î µé¾î¿Â´Ù.
-		// ÀÌ·¯ÇÑ °æ¿ì ¿¬°áÀ» Á¾·áÇÑ´Ù.
+		// ï¿½ß¸ï¿½ï¿½ï¿½ ï¿½ï¿½Å¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½î°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â´ï¿½.
+		// ï¿½Ì·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 		if (pSize > _mMAX_SIZE - sizeof(CBufferHeader))
 		{
 			pErr = 1;

@@ -1,6 +1,6 @@
-namespace LBNet
+﻿namespace LBNet
 {
-	#ifdef _WINDOWS
+	#ifdef _WIN32
 	template<typename TObject>
 	CWaitableQueue<TObject>::CWaitableQueue() : __mSemaphore(NULL), __mQueue(), __mMutex()
 	{
@@ -51,7 +51,7 @@ namespace LBNet
 
 		return true;
 	}
-	#endif //_WINDOWS
+	#endif //_WIN32
 
 	template<typename TObject>
 	CCircularQueue<TObject>::CCircularQueue() : __mObjectQueue(nullptr), __mPushIndex(0),

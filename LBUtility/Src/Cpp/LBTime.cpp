@@ -1,12 +1,12 @@
-#include "LBTime.h"
+ï»¿#include "LBTime.h"
 
 namespace LBNet
 {
 	const CTime CTime::__mStartTime;
 
 	/**
-		@brief		CTimeÀÇ »ý¼ºÀÚ
-		@details	½Ã°£À» ÇöÀç ½Ã°£À¸·Î ¼³Á¤ÇÑ´Ù.
+		@brief		CTimeï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		@details	ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 	*/
 	CTime::CTime() : __mTimePoint(), __mLocalTime()
 	{
@@ -14,7 +14,7 @@ namespace LBNet
 	}
 
 	/**
-		@brief		CTimeÀÇ +=¿¬»êÀÚ
+		@brief		CTimeï¿½ï¿½ +=ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	*/
 	CTime& CTime::operator+=(const CTime& pTime)
 	{
@@ -25,7 +25,7 @@ namespace LBNet
 	}
 
 	/**
-		@brief		CTimeÀÇ -=¿¬»êÀÚ
+		@brief		CTimeï¿½ï¿½ -=ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	*/
 	CTime& CTime::operator-=(const CTime& pTime)
 	{
@@ -36,7 +36,7 @@ namespace LBNet
 	}
 
 	/**
-		@brief		CTimeÀÇ +¿¬»êÀÚ
+		@brief		CTimeï¿½ï¿½ +ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	*/
 	CTime CTime::operator+(const CTime& pTime)
 	{
@@ -48,7 +48,7 @@ namespace LBNet
 	}
 
 	/**
-		@brief		CTimeÀÇ -¿¬»êÀÚ
+		@brief		CTimeï¿½ï¿½ -ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	*/
 	CTime CTime::operator-(const CTime& pTime)
 	{
@@ -60,7 +60,7 @@ namespace LBNet
 	}
 
 	/**
-		@brief ½Ã°£À» ÇöÀç ½Ã°£À¸·Î ¼³Á¤ÇÏ´Â ÇÔ¼ö
+		@brief ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
 	*/
 	void CTime::SetNow()
 	{
@@ -73,8 +73,8 @@ namespace LBNet
 	}
 
 	/**
-		@brief ¿¬µµ¸¦ ¼³Á¤ÇÏ´Â ÇÔ¼ö
-		@param int pYear ¼³Á¤ÇÒ ¿¬µµ
+		@brief ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
+		@param int pYear ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	*/
 	void CTime::SetYear(int pYear)
 	{
@@ -83,8 +83,8 @@ namespace LBNet
 	}
 
 	/**
-		@brief ¿ùÀ» ¼³Á¤ÇÏ´Â ÇÔ¼ö
-		@param int pMonth ¼³Á¤ÇÒ ¿ù
+		@brief ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
+		@param int pMonth ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 	*/
 	void CTime::SetMonth(int pMonth)
 	{
@@ -95,8 +95,8 @@ namespace LBNet
 	}
 
 	/**
-		@brief ÀÏÀ» ¼³Á¤ÇÏ´Â ÇÔ¼ö
-		@param int pDay ¼³Á¤ÇÒ ÀÏ
+		@brief ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
+		@param int pDay ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 	*/
 	void CTime::SetDay(int pDay)
 	{
@@ -107,8 +107,8 @@ namespace LBNet
 	}
 
 	/**
-		@brief ½Ã°£À» ¼³Á¤ÇÏ´Â ÇÔ¼ö
-		@param int pHour ¼³Á¤ÇÒ ½Ã°£
+		@brief ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
+		@param int pHour ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
 	*/
 	void CTime::SetHour(int pHour)
 	{
@@ -119,8 +119,8 @@ namespace LBNet
 	}
 
 	/**
-		@brief ºÐÀ» ¼³Á¤ÇÏ´Â ÇÔ¼ö
-		@param int pMoinute ¼³Á¤ÇÒ ºÐ
+		@brief ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
+		@param int pMoinute ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 	*/
 	void CTime::SetMinute(int pMinute)
 	{
@@ -131,8 +131,8 @@ namespace LBNet
 	}
 
 	/**
-		@brief ÃÊ¸¦ ¼³Á¤ÇÏ´Â ÇÔ¼ö
-		@param int pSecond ¼³Á¤ÇÒ ÃÊ
+		@brief ï¿½Ê¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
+		@param int pSecond ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 	*/
 	void CTime::SetSecond(int pSecond)
 	{
@@ -143,8 +143,8 @@ namespace LBNet
 	}
 
 	/**
-		@brief TimePoint¸¦ ¼³Á¤ÇÏ´Â ÇÔ¼ö
-		@param TimePoint pTimePoint ¼³Á¤ÇÒ TimePoint
+		@brief TimePointï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
+		@param TimePoint pTimePoint ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ TimePoint
 	*/
 	void CTime::SetTimePoint(TimePoint pTimePoint)
 	{
@@ -153,7 +153,7 @@ namespace LBNet
 	}
 
 	/**
-		@brief TimePoint¸¦ ¹ÝÈ¯ÇÏ´Â ÇÔ¼ö
+		@brief TimePointï¿½ï¿½ ï¿½ï¿½È¯ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
 	*/
 	CTime::TimePoint CTime::GetTimePoint() const
 	{
@@ -161,9 +161,9 @@ namespace LBNet
 	}
 
 	/**
-		@brief			¼­¹öÀÇ ½Ã°£ Æ½À» ±¸ÇÏ´Â ÇÔ¼ö
-		@details		¼­¹öÀÇ Æ½Àº ½Ã°£À» ms´ÜÀ§·Î ¹ÝÈ¯ÇÑ´Ù.
-		@return	Tick	¼­¹öÀÇ ½Ã°£ Æ½duration(ms)
+		@brief			ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ Æ½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
+		@details		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Æ½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ msï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½Ñ´ï¿½.
+		@return	Tick	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ Æ½duration(ms)
 	*/
 	Tick CTime::ToTick() const
 	{
@@ -171,9 +171,9 @@ namespace LBNet
 	}
 
 	/**
-		@brief			¼­¹öÀÇ ½Ã°£ Æ½À» ±¸ÇÏ´Â ÇÔ¼ö
-		@details		¼­¹öÀÇ Æ½Àº °æ°úÇÑ ½Ã°£À» ms´ÜÀ§·Î ¹ÝÈ¯ÇÑ´Ù.
-		@return	Tick	¼­¹öÀÇ ½Ã°£ Æ½TickCount(ms)
+		@brief			ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ Æ½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
+		@details		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Æ½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ msï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½Ñ´ï¿½.
+		@return	Tick	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ Æ½TickCount(ms)
 	*/
 	TickCount CTime::ToTickCount() const
 	{
@@ -181,8 +181,8 @@ namespace LBNet
 	}
 
 	/**
-		@brief	¿¬µµ¸¦ ¹ÝÈ¯´Â ÇÔ¼ö
-		@return ¿¬µµ°ª
+		@brief	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ ï¿½Ô¼ï¿½
+		@return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	*/
 	int CTime::GetYear() const
 	{
@@ -190,8 +190,8 @@ namespace LBNet
 	}
 
 	/**
-		@brief ¿ùÀ» ¹ÝÈ¯ÇÏ´Â ÇÔ¼ö
-		@return ¿ù
+		@brief ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
+		@return ï¿½ï¿½
 	*/
 	int CTime::GetMonth() const
 	{
@@ -199,8 +199,8 @@ namespace LBNet
 	}
 
 	/**
-		@brief ÀÏÀ» ¹ÝÈ¯ÇÏ´Â ÇÔ¼ö
-		@return ÀÏ
+		@brief ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
+		@return ï¿½ï¿½
 	*/
 	int CTime::GetDay() const
 	{
@@ -208,8 +208,8 @@ namespace LBNet
 	}
 
 	/**
-		@brief	½Ã°£À» ¹ÝÈ¯ÇÏ´Â ÇÔ¼ö
-		@return ½Ã°£
+		@brief	ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
+		@return ï¿½Ã°ï¿½
 	*/
 	int CTime::GetHour() const
 	{
@@ -217,8 +217,8 @@ namespace LBNet
 	}
 
 	/**
-		@brief	ºÐÀ» ¹ÝÈ¯ÇÏ´Â ÇÔ¼ö
-		@return ºÐ
+		@brief	ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
+		@return ï¿½ï¿½
 	*/
 	int CTime::GetMinute() const
 	{
@@ -226,8 +226,8 @@ namespace LBNet
 	}
 
 	/**
-		@brief	ÃÊ¸¦ ¹ÝÈ¯ÇÏ´Â ÇÔ¼ö
-		@return ÃÊ
+		@brief	ï¿½Ê¸ï¿½ ï¿½ï¿½È¯ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
+		@return ï¿½ï¿½
 	*/
 	int CTime::GetSecond() const
 	{
@@ -235,9 +235,9 @@ namespace LBNet
 	}
 
 	/**
-		@brief		¿äÀÏÀ» ¹ÝÈ¯ÇÏ´Â ÇÔ¼ö
-		@details	¹üÀ§´Â ÀÏ¿äÀÏ(0) ~ Åä¿äÀÏ(6)ÀÌ´Ù
-		@return		¿äÀÏ
+		@brief		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
+		@details	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¿ï¿½ï¿½ï¿½(0) ~ ï¿½ï¿½ï¿½ï¿½ï¿½(6)ï¿½Ì´ï¿½
+		@return		ï¿½ï¿½ï¿½ï¿½
 	*/
 	EWeekday CTime::GetWeekday() const
 	{
@@ -246,8 +246,8 @@ namespace LBNet
 	}
 
 	/**
-		@brief ¼­¹öÀÇ ½ÃÀÛ½Ã°£À» ¹Þ´Â ÇÔ¼ö
-		@return const CTime& ¼­¹öÀÇ ½ÃÀÛ½Ã°£
+		@brief ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Û½Ã°ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ ï¿½Ô¼ï¿½
+		@return const CTime& ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Û½Ã°ï¿½
 	*/
 	const CTime& CTime::GetStartTime()
 	{
@@ -275,7 +275,7 @@ namespace LBNet
 	}
 
 	/**
-		@brief TimePoint¸¦ ÀÌ¿ëÇÏ¿© ÇöÀç ¼³Á¤µÈ ½Ã°£À¸·Î ¾÷µ¥ÀÌÆ®ÇÏ´Â ÇÔ¼ö
+		@brief TimePointï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
 	*/
 	void CTime::__UpdateFromTimePoint()
 	{
@@ -287,7 +287,7 @@ namespace LBNet
 	}
 
 	/**
-		@brief LocalTimeÀ» ÀÌ¿ëÇÏ¿© ÇöÀç ¼³Á¤µÈ ½Ã°£À¸·Î ¾÷µ¥ÀÌÆ®ÇÏ´Â ÇÔ¼ö
+		@brief LocalTimeï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
 	*/
 	void CTime::__UpdateFromLocalTime()
 	{

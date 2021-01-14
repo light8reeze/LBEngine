@@ -1,6 +1,6 @@
-/**
+ï»¿/**
 	@file	LBFile.h
-	@brief	LBUtillityÀÇ ÆÄÀÏÃ³¸® °ü·Ã Çì´õ
+	@brief	LBUtillityì˜ íŒŒì¼ì²˜ë¦¬ ê´€ë ¨ í—¤ë”
 	@date	2019-07-20
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -15,8 +15,8 @@
 namespace LBNet
 {
 	/**
-		@brief		ÆÄÀÏIO Å¬·¡½º
-		@warnning	¸ÖÆ¼¹ÙÀÌÆ® ÄÚµå 
+		@brief		íŒŒì¼IO í´ë˜ìŠ¤
+		@warnning	ë©€í‹°ë°”ì´íŠ¸ ì½”ë“œ 
 		@date		2019-07-20
 		@auther		light8reeze(light8reeze@gmail.com)
 	*/

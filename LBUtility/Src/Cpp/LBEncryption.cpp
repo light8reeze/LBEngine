@@ -1,4 +1,4 @@
-#include "LBEncryption.h"
+﻿#include "LBEncryption.h"
 
 namespace LBNet
 {

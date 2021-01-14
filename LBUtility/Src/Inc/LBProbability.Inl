@@ -1,4 +1,4 @@
-namespace LBNet
+﻿namespace LBNet
 {
 	template<typename TType>
 	static bool CProbability::IsSuccess(TType pPercent)

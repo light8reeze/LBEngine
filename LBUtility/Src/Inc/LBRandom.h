@@ -1,6 +1,6 @@
-/**
+ï»¿/**
 	@file	LBRandom.h
-	@brief	LBUtillityÀÇ ³­¼ö ¹ß»ı °ü·Ã Çì´õ
+	@brief	LBUtillityì˜ ë‚œìˆ˜ ë°œìƒ ê´€ë ¨ í—¤ë”
 	@date	2019-07-28
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -17,8 +17,8 @@ namespace LBNet
 #endif //X86
 
 	/**
-		@brief		·£´ı Å¬·¡½º
-		@comment	C++11ÀÇ ¸Ş¸£¼¾ Æ®À§½ºÅÍ ¿£ÁøÀ» »ç¿ëÇÏ¿© ±¸Çö
+		@brief		ëœë¤ í´ë˜ìŠ¤
+		@comment	C++11ì˜ ë©”ë¥´ì„¼ íŠ¸ìœ„ìŠ¤í„° ì—”ì§„ì„ ì‚¬ìš©í•˜ì—¬ êµ¬í˜„
 		@date		2019-07-28
 		@auther		light8reeze(light8reeze@gmail.com)
 	*/

@@ -1,14 +1,16 @@
-/**
+ï»¿/**
 	@file	LBCharBase.h
-	@bfief	LBUtillityÀÇ ¹®ÀÚ¿­¿¡ ÇÊ¿äÇÑ »ó¼ö, ÇÔ¼öµîÀ» Á¤ÀÇÇØ³õÀº ÆÄÀÏ
+	@bfief	LBUtillityì˜ ë¬¸ìì—´ì— í•„ìš”í•œ ìƒìˆ˜, í•¨ìˆ˜ë“±ì„ ì •ì˜í•´ë†“ì€ íŒŒì¼
 	@date	2019-02-25
 	@auther light8reeze(light8reeze@gmail.com)
 */
 #pragma once
 #include "LBUtility.h"
 #include <string>
+#ifdef _WIN32
 #include <tchar.h>
 #include <atlstr.h>
+#endif //_WIN32
 
 namespace LBNet
 {
@@ -21,7 +23,7 @@ namespace LBNet
 	#endif //_UNICODE, _MBCS
 
 	/**
-		@brief Char¼Â Á¤ÀÇ
+		@brief Charì…‹ ì •ì˜
 	*/
 	enum class ECharMode
 	{
@@ -31,7 +33,7 @@ namespace LBNet
 	};
 
 	/**
-		@brief ÇöÀç ÇÁ·ÎÁ§Æ®¿¡¼­ Áö¿øÇÏ´Â CharÅ¸ÀÔÀ» ¹İÈ¯ÇÑ´Ù.
+		@brief í˜„ì¬ í”„ë¡œì íŠ¸ì—ì„œ ì§€ì›í•˜ëŠ” Charíƒ€ì…ì„ ë°˜í™˜í•œë‹¤.
 	*/
 	constexpr ECharMode EProjectChar()
 	{
@@ -44,7 +46,7 @@ namespace LBNet
 		#endif //_UNICODE, _MBCS
 	}
 
-#if defined(_WINDOWS)
+#ifdef _WIN32
 	inline std::string WStrToStr(const wchar_t* pPStr, int pNLength)
 	{
 		std::string resultStr;
@@ -70,7 +72,7 @@ namespace LBNet
 	{
 		return std::move(StrToWStr(pStr.c_str(), static_cast<int>(pStr.length())));
 	}
-#endif //_WINDOWS
+#endif //_WIN32
 
 	inline Size StrLen(const char* pChar, Size pMaxSize)
 	{

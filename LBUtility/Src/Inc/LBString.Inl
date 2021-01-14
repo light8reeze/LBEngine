@@ -1,4 +1,4 @@
-namespace LBNet
+﻿namespace LBNet
 {
 #pragma region CString
 	template<typename TCharSet, Size TSize>
