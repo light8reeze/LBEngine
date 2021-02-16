@@ -1,21 +1,28 @@
 ﻿cmake_minimum_required(VERSION 3.8.2)
 
 project(LBUtility)
+set(TARGET LBUtility)
 
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release"
     CACHE STRING "Configuration types" FORCE)
+    
+set(LBENGINE_OUT_DIRECTORY "/bin")
 
-INCLUDE_DIRECTORIES(include Src/Inc)
+INCLUDE_DIRECTORIES(Src/Inc)
 
 # Compile options
 include(../Build/CMake/CompileOptions.cmake)
 
-# Set extend by compiler
-if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-   set(OUTPUT_EXTEND "so")
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-   set(OUTPUT_EXTEND "dll")
-endif()
+# Source
+file(GLOB_RECURSE HEADERS
+    ${CMAKE_CURRENT_SOURCE_DIR}/Src/Inc/*.h)
+
+file(GLOB_RECURSE SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/Src/Cpp/*.cpp)
+    
+add_library(LBUtility SHARED
+    ${SOURCES}
+)
 
 # Set postfix by configuration
 if(CMAKE_CONFIGURATION_TYPES STREQUAL "Debug")
@@ -24,27 +31,8 @@ else(CMAKE_CONFIGURATION_TYPES STREQUAL "Release")
    set(CONFIGURATUON_POSTFIX "")
 endif()
 
-set(OUTPUT_FILE_NAME "LBUtility${CONFIGURATUON_POSTFIX}_x64.${OUTPUT_EXTEND}")
+set(OUTPUT_FILE_NAME "LBUtility${CONFIGURATUON_POSTFIX}_x64")
 
-add_library(LBUtility SHARED
-  Src/Cpp/LBBuffer.cpp
-  Src/Cpp/LBLocker.cpp
-  Src/Cpp/LBTime.cpp
-  Src/Cpp/LBUtility.cpp
-  Src/Cpp/LBEncryption.cpp
-  Src/Inc/LBBuffer.h
-  Src/Inc/LBCharBase.h
-  Src/Inc/LBEncryption.h
-  Src/Inc/LBFile.h
-  Src/Inc/LBLocker.h
-  Src/Inc/LBPool.h
-  Src/Inc/LBProbability.h
-  Src/Inc/LBQueue.h
-  Src/Inc/LBRandom.h
-  Src/Inc/LBString.h
-  Src/Inc/LBTime.h
-  Src/Inc/LBUtility.h
-)
 # Output file name
 set_target_properties(LBUtility
   PROPERTIES

@@ -1,69 +1,38 @@
-cmake_minimum_required(VERSION 3.8.2)
+﻿cmake_minimum_required(VERSION 3.8.2)
 
 project(LBServer)
 
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release"
     CACHE STRING "Configuration types" FORCE)
 
-set(BOOST_DIRECTORY "C:/boost_1_70_0")
 set(LBENGINE_OUT_DIRECTORY "/bin")
 
-if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-	set(FILE_EXTENSION "dll")
-else(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-	set(FILE_EXTENSION "so")
+# Compile options
+include(../Build/CMake/CompileOptions.cmake)
+
+INCLUDE_DIRECTORIES(Src/Inc)
+INCLUDE_DIRECTORIES(../LBUtility/Src/Inc)
+INCLUDE_DIRECTORIES(BOOST_DIRECTORY)
+
+# Source
+file(GLOB_RECURSE HEADERS
+    ${CMAKE_CURRENT_SOURCE_DIR}/Src/Inc/*.h)
+
+file(GLOB_RECURSE SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/Src/Cpp/*.cpp)
+
+add_library(LBServer SHARED
+    ${SOURCES}
+)
+
+# Set postfix by configuration
+if(CMAKE_CONFIGURATION_TYPES STREQUAL "Debug")
+   set(CONFIGURATUON_POSTFIX "D")
+else(CMAKE_CONFIGURATION_TYPES STREQUAL "Release")
+   set(CONFIGURATUON_POSTFIX "")
 endif()
 
-INCLUDE_DIRECTORIES(include Src/Inc)
-INCLUDE_DIRECTORIES(include ../LBUtility/Src/Inc)
-INCLUDE_DIRECTORIES(include BOOST_DIRECTORY)
-
-add_library(LBServer
-  Src/Cpp/LBAcceptor.cpp
-  Src/Cpp/LBFactory.cpp
-  Src/Cpp/LBGameObject.cpp
-  Src/Cpp/LBIOContext.cpp
-  Src/Cpp/LBLogger.cpp
-  Src/Cpp/LBLogProcessor.cpp
-  Src/Cpp/LBUdpHandler.cpp
-  Src/Cpp/LBTcpHandler.cpp
-  Src/Cpp/LBSender.cpp
-  Src/Cpp/LBSendPool.cpp
-  Src/Cpp/LBServer.cpp
-  Src/Cpp/LBSession.cpp
-  Src/Cpp/LBSocket.cpp
-  Src/Cpp/LBTimer.cpp
-  Src/Cpp/LBUdpObject.cpp
-  Src/Cpp/LBUdpSession.cpp
-  Src/Inc/LBAcceptor.h
-  Src/Inc/LBBoostConfig.h
-  Src/Inc/LBConfig.h
-  Src/Inc/LBError.h
-  Src/Inc/LBFactory.h
-  Src/Inc/LBGameObject.h
-  Src/Inc/LBGameServer.h
-  Src/Inc/LBIOContext.h
-  Src/Inc/LBLogger.h
-  Src/Inc/LBLogProcessor.h
-  Src/Inc/LBSender.h
-  Src/Inc/LBSendPool.h
-  Src/Inc/LBServer.h
-  Src/Inc/LBSession.h
-  Src/Inc/LBShard.h
-  Src/Inc/LBShardObject.h
-  Src/Inc/LBSocket.h
-  Src/Inc/LBTcpHandler.h
-  Src/Inc/LBTimer.h
-  Src/Inc/LBUdpHandler.h
-  Src/Inc/LBUdpObject.h
-  Src/Inc/LBUdpSession.h
-)
-# Output file name
-set_target_properties(LBServer
-  PROPERTIES
-  OUTPUT_NAME_DEBUG LBServerD
-  OUTPUT_NAME_RELEASE LBServer
-)
+set(OUTPUT_FILE_NAME "LBServer${CONFIGURATUON_POSTFIX}_x64")
 
 # Preprocessor definitions
 target_compile_definitions(LBServer PRIVATE
