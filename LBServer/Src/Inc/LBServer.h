@@ -99,7 +99,7 @@ namespace LBNet
 	template <typename TBase, typename TDrived>
 	inline WeakObject<TDrived> CastToWeak(SharedObject<TBase>& pShared)
 	{
-		return WeakObject<TDrived>(std::dynamic_pointer_cast<TDrived>(pShared));
+		return WeakObject<TDrived>(std::static_pointer_cast<TDrived>(pShared));
 	}
 
 	/**
@@ -109,7 +109,7 @@ namespace LBNet
 	template <typename TBase, typename TDrived>
 	inline SharedObject<TDrived> SharedCast(SharedObject<TBase>& pShared)
 	{
-		return std::dynamic_pointer_cast<TDrived>(pShared);
+		return std::static_pointer_cast<TDrived>(pShared);
 	}
 }
 
