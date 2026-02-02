@@ -14,8 +14,6 @@
 *.o
 *.obj
 *.lik
-*.pdb
-*.exp
 
 # Precompiled Headers
 *.gch
@@ -24,7 +22,6 @@
 # Compiled Dynamic libraries
 *.so
 *.dylib
-*.dll
 
 # Fortran module files
 *.mod
