@@ -6,7 +6,7 @@ LBNet::ErrCode Echo(LBNet::CPacketHeader* pHeader, LBNet::Size pSize, LBNet::Sha
 	auto aEchoPacket = reinterpret_cast<CPacketEcho*>(pHeader);
 	LBNet::CConsoleLog(LBNet::ELogType::eLogInfo) << "Echo Data : " << aEchoPacket->mData;
 
-	// ÆĞÅ¶ Send¸¦ À§ÇØ Send¿¡¼­ ¸Ş¸ğ¸® ¹öÆÛ¸¦ ¹Ş¾Æ »ç¿ëÇÑ´Ù.
+	// íŒ¨í‚· Sendë¥¼ ìœ„í•´ Sendì—ì„œ ë©”ëª¨ë¦¬ ë²„í¼ë¥¼ ë°›ì•„ ì‚¬ìš©í•œë‹¤.
 	auto aSender = LBNet::CSender::Allocate<CPacketEcho>();
 	auto aPacket = aSender->GetWritePointer<CPacketEcho>();
 	aPacket->mMessage	= 1;
@@ -37,7 +37,7 @@ LBNet::ErrCode CTestServer::Initialize()
 
 	LBNet::CSender::Initialize(30000);
 
-	// ÆĞÅ¶ ÀÌº¥Æ® Ãß°¡
+	// íŒ¨í‚· ì´ë²¤íŠ¸ ì¶”ê°€
 	aErrCode = LBNet::CTcpHandler::Instance().Register(1, &Echo);
 	if (aErrCode != 0)
 		return aErrCode;

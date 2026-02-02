@@ -50,7 +50,7 @@ namespace LBNet
 			return eErrCodeSesDisconnected;
 		}
 
-		// ¹öÆÛ°¡ °¡µæ Ã¡À»¶§´Â Á¢¼ÓÀ» ÇØÁ¦ÇÑ´Ù.
+		// ë²„í¼ê°€ ê°€ë“ ì°¼ì„ë•ŒëŠ” ì ‘ì†ì„ í•´ì œí•œë‹¤.
 		if (aSize < eSzPacketMin || __mBuffer.GetBufferSize() < aSize)
 		{
 			SetDisconnect(eErrCodeSesBufferFull);

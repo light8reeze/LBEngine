@@ -1,6 +1,6 @@
 ï»¿/**
 	@file	LBSendPool.h
-	@brief	LBServerÀÇ ÆĞÅ¶ Àü¼Û ¸Ş¸ğ¸® °ü·Ã Çì´õÆÄÀÏ
+	@brief	LBServerì˜ íŒ¨í‚· ì „ì†¡ ë©”ëª¨ë¦¬ ê´€ë ¨ í—¤ë”íŒŒì¼
 	@date	2019-10-17
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -14,8 +14,8 @@ namespace LBNet
 	class CSendChunk;
 
 	/**
-		@brief	        Send Buffer Ç® Å¬·¡½º
-		@details		Send ¸Ş¸ğ¸® ºí·ÏÀ» °ü¸®ÇÑ´Ù.
+		@brief	        Send Buffer í’€ í´ë˜ìŠ¤
+		@details		Send ë©”ëª¨ë¦¬ ë¸”ë¡ì„ ê´€ë¦¬í•œë‹¤.
 		@date	        2019-10-17
 		@auther         light8reeze(light8reeze@gmail.com)
 	*/

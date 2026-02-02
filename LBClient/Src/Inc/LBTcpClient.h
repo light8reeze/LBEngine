@@ -1,6 +1,6 @@
 ï»¿/**
 	@file	LBTcpClient.h
-	@brief	LBClientÀÇ TCP Å¬¶óÀÌ¾ğÆ® ¼¼¼Ç °ü·Ã Çì´õÆÄÀÏ
+	@brief	LBClientì˜ TCP í´ë¼ì´ì–¸íŠ¸ ì„¸ì…˜ ê´€ë ¨ í—¤ë”íŒŒì¼
 	@date	2019-11-24
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -14,9 +14,9 @@
 namespace LBNet
 {
 	/**
-		@brief		TCP Å¬¶óÀÌ¾ğÆ® Å¬·¡½º
-		@details	Blocking ¹æ½ÄÀ¸·Î Network IO¸¦ ½ÇÇàÇÑ´Ù.
-		@warnning	½º·¹µå ¾ÈÀü¼ºÀ» º¸ÀåÇÏÁö ¾Ê´Â´Ù.
+		@brief		TCP í´ë¼ì´ì–¸íŠ¸ í´ë˜ìŠ¤
+		@details	Blocking ë°©ì‹ìœ¼ë¡œ Network IOë¥¼ ì‹¤í–‰í•œë‹¤.
+		@warnning	ìŠ¤ë ˆë“œ ì•ˆì „ì„±ì„ ë³´ì¥í•˜ì§€ ì•ŠëŠ”ë‹¤.
 		@date		2019-11-24
 		@auther		light8reeze(light8reeze@gmail.com)
 	*/

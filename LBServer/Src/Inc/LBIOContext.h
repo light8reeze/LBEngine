@@ -1,6 +1,6 @@
 ï»¿/**
 	@file	LBIOContext.h
-	@brief	LBServerÀÇ IOContext °ü·Ã Çì´õ
+	@brief	LBServerì˜ IOContext ê´€ë ¨ í—¤ë”
 	@date	2019-08-15
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -12,7 +12,7 @@ namespace LBNet
 	using namespace boost;
 
 	/**
-		@brief		IOContext Å¬·¡½º
+		@brief		IOContext í´ë˜ìŠ¤
 		@date		2019-08-15
 		@auther		light8reeze(light8reeze@gmail.com)
 	*/

@@ -1,6 +1,6 @@
 ï»¿/**
 	@file	LBShardObject.h
-	@brief	LBServerÀÇ »þµå ¿ÀºêÁ§Æ® °ü·Ã Çì´õ
+	@brief	LBServerì˜ ìƒ¤ë“œ ì˜¤ë¸Œì íŠ¸ ê´€ë ¨ í—¤ë”
 	@date	2019-10-05
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -11,11 +11,11 @@
 namespace LBNet
 {
 	/**
-		@brief		ºÐ»ê ¼­¹ö¿¡ »ç¿ëµÇ´Â ¼­¹ö ±âº» ¿ÀºêÁ§Æ® Å¬·¡½º
-		@details	ºÐ»ê ¼­¹öÀÇ ±âº» ¿ÀºêÁ§Æ®·Î »þµå¿Í 1:1¿¬°áµÈ´Ù.
-					ºÐ»ê ¼­¹ö ·ÎÁ÷ ±¸Çö½Ã ´ÙÀ½ ¿ÀºêÁ§Æ®¸¦ »ó¼Ó¹Þ¾Æ
-					°ÔÀÓ³»ÀÇ ¿ÀºêÁ§Æ® Å¬·¡½º¸¦ ±¸ÇöÇÑ´Ù.
-		@warning	»þµå ¿ÀºêÁ§Æ®´Â Àý´ë ¿¬°á ÇØÁ¦ÇÏÁö ¾Ê´Â´Ù.
+		@brief		ë¶„ì‚° ì„œë²„ì— ì‚¬ìš©ë˜ëŠ” ì„œë²„ ê¸°ë³¸ ì˜¤ë¸Œì íŠ¸ í´ëž˜ìŠ¤
+		@details	ë¶„ì‚° ì„œë²„ì˜ ê¸°ë³¸ ì˜¤ë¸Œì íŠ¸ë¡œ ìƒ¤ë“œì™€ 1:1ì—°ê²°ëœë‹¤.
+					ë¶„ì‚° ì„œë²„ ë¡œì§ êµ¬í˜„ì‹œ ë‹¤ìŒ ì˜¤ë¸Œì íŠ¸ë¥¼ ìƒì†ë°›ì•„
+					ê²Œìž„ë‚´ì˜ ì˜¤ë¸Œì íŠ¸ í´ëž˜ìŠ¤ë¥¼ êµ¬í˜„í•œë‹¤.
+		@warning	ìƒ¤ë“œ ì˜¤ë¸Œì íŠ¸ëŠ” ì ˆëŒ€ ì—°ê²° í•´ì œí•˜ì§€ ì•ŠëŠ”ë‹¤.
 		@date		2019-10-05
 		@auther		light8reeze(light8reeze@gmail.com)
 	*/

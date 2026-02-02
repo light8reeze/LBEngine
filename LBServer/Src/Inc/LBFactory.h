@@ -1,6 +1,6 @@
 ï»¿/**
 	@file	LBFactory.h
-	@brief	LBServerÀÇ ÆÑÅä¸® °ü·Ã Çì´õÆÄÀÏ
+	@brief	LBServerì˜ íŒ©í† ë¦¬ ê´€ë ¨ í—¤ë”íŒŒì¼
 	@date	2019-07-30
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -22,8 +22,8 @@ namespace LBNet
 	};
 
 	/**
-		@brief	        ¿ÀºêÁ§Æ® Ç® È®Àå Å¬·¡½º
-		@details		ÆÑÅä¸®¿¡¼­ °ü¸®¸¦ À§ÇØ CObjectPoolÅ¬·¡½º¸¦ È®ÀåÇÑ´Ù.	
+		@brief	        ì˜¤ë¸Œì íŠ¸ í’€ í™•ì¥ í´ë˜ìŠ¤
+		@details		íŒ©í† ë¦¬ì—ì„œ ê´€ë¦¬ë¥¼ ìœ„í•´ CObjectPoolí´ë˜ìŠ¤ë¥¼ í™•ì¥í•œë‹¤.	
 		@date	        2019-08-03
 		@auther         light8reeze(light8reeze@gmail.com)
 	*/
@@ -39,10 +39,10 @@ namespace LBNet
 	};
 
     /**
-        @brief	        ¿ÀºêÁ§Æ® ÆÑÅä¸®
+        @brief	        ì˜¤ë¸Œì íŠ¸ íŒ©í† ë¦¬
         @date	        2019-08-02
-		@warning		1. ¿ÀºêÁ§Æ®¸¦ ¹ŞÀº ÈÄ ÃÊ±âÈ­´Â caller°¡ Á÷Á¢ ÇÑ´Ù.
-						2. ±âº»ÀûÀ¸·Î ¿ÀºêÁ§Æ® ¹İ³³Àº ½º¸¶Æ® Æ÷ÀÎÅÍ¿¡ ÀÇÇØ ÀÚµ¿À¸·Î ¹İ³³ÇÑ´Ù.
+		@warning		1. ì˜¤ë¸Œì íŠ¸ë¥¼ ë°›ì€ í›„ ì´ˆê¸°í™”ëŠ” callerê°€ ì§ì ‘ í•œë‹¤.
+						2. ê¸°ë³¸ì ìœ¼ë¡œ ì˜¤ë¸Œì íŠ¸ ë°˜ë‚©ì€ ìŠ¤ë§ˆíŠ¸ í¬ì¸í„°ì— ì˜í•´ ìë™ìœ¼ë¡œ ë°˜ë‚©í•œë‹¤.
         @auther         light8reeze(light8reeze@gmail.com)
     */
 	class LBS_EXPORT CFactory

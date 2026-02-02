@@ -1,6 +1,6 @@
 ï»¿/**
 	@file	LBSender.h
-	@brief	LBServerÀÇ ÆĞÅ¶ Àü¼Û ¸Ş¸ğ¸® °ü·Ã Çì´õÆÄÀÏ
+	@brief	LBServerì˜ íŒ¨í‚· ì „ì†¡ ë©”ëª¨ë¦¬ ê´€ë ¨ í—¤ë”íŒŒì¼
 	@date	2019-10-17
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -13,10 +13,10 @@
 namespace LBNet
 {
 	using SendHeader = CBufferHeader;
-	constexpr Size eSzPacketMin = sizeof(SendHeader);		// ÇÑ ÆĞÅ¶´ç ÃÖ¼Ò »çÀÌÁî
+	constexpr Size eSzPacketMin = sizeof(SendHeader);		// í•œ íŒ¨í‚·ë‹¹ ìµœì†Œ ì‚¬ì´ì¦ˆ
 
 	/**
-		@brief	ÆĞÅ¶ Àü¼Û¿ë ¸Ş¸ğ¸® ºí·Ï
+		@brief	íŒ¨í‚· ì „ì†¡ìš© ë©”ëª¨ë¦¬ ë¸”ë¡
 		@date	2019-10-17
 		@auther	light8reeze(light8reeze@gmail.com)
 	*/
@@ -27,9 +27,9 @@ namespace LBNet
 	};
 
 	/**
-		@brief		ÆĞÅ¶ Àü¼Û¿ë ¸Ş¸ğ¸® ´ÜÀ§
-		@comment	»ç¿ë ¹æ¹ıÀº Allocate -> GetWritePointer¸¦ ÅëÇØ µ¥ÀÌÅÍ¸¦ ³ÖÀºÈÄ -> CSession::Send¸¦ È£ÃâÇÑ´Ù.
-		@wranning	Àü¼Û½Ã ÇÒ´ç¹Ş´Â ¹öÆÛÀÇ Å©±â´Â (Çì´õÀÇ Å©±â(Size) + ÆĞÅ¶ÀÇ Å©±â)ÀÌ´Ù.
+		@brief		íŒ¨í‚· ì „ì†¡ìš© ë©”ëª¨ë¦¬ ë‹¨ìœ„
+		@comment	ì‚¬ìš© ë°©ë²•ì€ Allocate -> GetWritePointerë¥¼ í†µí•´ ë°ì´í„°ë¥¼ ë„£ì€í›„ -> CSession::Sendë¥¼ í˜¸ì¶œí•œë‹¤.
+		@wranning	ì „ì†¡ì‹œ í• ë‹¹ë°›ëŠ” ë²„í¼ì˜ í¬ê¸°ëŠ” (í—¤ë”ì˜ í¬ê¸°(Size) + íŒ¨í‚·ì˜ í¬ê¸°)ì´ë‹¤.
 		@date		2019-10-17
 		@auther		light8reeze(light8reeze@gmail.com)
 	*/
@@ -43,7 +43,7 @@ namespace LBNet
 
 		template<typename TObject>
 		static SharedObject<CSender> Allocate();
-		// pSendSize : ¼ø¼ö ÆĞÅ¶ÀÇ Å©±â(Çì´õ Á¦¿Ü)
+		// pSendSize : ìˆœìˆ˜ íŒ¨í‚·ì˜ í¬ê¸°(í—¤ë” ì œì™¸)
 		static SharedObject<CSender> Allocate(Size pSendSize);
 		ErrCode		DeAllocate();
 		ErrCode		Encrypt();

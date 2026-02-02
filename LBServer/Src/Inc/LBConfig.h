@@ -1,6 +1,6 @@
 ï»¿/**
 	@file	LBConfig.h
-	@brief	LBServerÀÇ ¼­¹ö ¼³Á¤ °ü·Ã Çì´õÆÄÀÏ
+	@brief	LBServerì˜ ì„œë²„ ì„¤ì • ê´€ë ¨ í—¤ë”íŒŒì¼
 	@date	2019-12-15
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -11,8 +11,8 @@
 namespace LBNet
 {
 	/**
-		@brief		SAddressInfo ±¸Á¶Ã¼
-		@details	Address¼³Á¤°ªÀ» º¸°üÇÏ´Â ±¸Á¶Ã¼
+		@brief		SAddressInfo êµ¬ì¡°ì²´
+		@details	Addressì„¤ì •ê°’ì„ ë³´ê´€í•˜ëŠ” êµ¬ì¡°ì²´
 		@date		2019-12-15
 		@auther		light8reeze(light8reeze@gmail.com)
 	*/
@@ -26,9 +26,9 @@ namespace LBNet
 	};
 
 	/**
-		@brief		CConfig Å¬·¡½º
-		@details	¼­¹ö ¼³Á¤°ªÀ» ÀúÀåÇÑ Å¬·¡½ºÀÌ´Ù.
-					ÇÏÀ§´Ü(°ÔÀÓ¼­¹öApp)¿¡¼­ ÇÊ¿ä½Ã ÀÌ Å¬·¡½º¸¦ »ó¼Ó¹Ş¾Æ ±¸ÇöÇÑ´Ù.
+		@brief		CConfig í´ë˜ìŠ¤
+		@details	ì„œë²„ ì„¤ì •ê°’ì„ ì €ì¥í•œ í´ë˜ìŠ¤ì´ë‹¤.
+					í•˜ìœ„ë‹¨(ê²Œì„ì„œë²„App)ì—ì„œ í•„ìš”ì‹œ ì´ í´ë˜ìŠ¤ë¥¼ ìƒì†ë°›ì•„ êµ¬í˜„í•œë‹¤.
 		@date		2019-12-15
 		@auther		light8reeze(light8reeze@gmail.com)
 	*/
@@ -56,11 +56,11 @@ namespace LBNet
 		unsigned GetLogBufCnt() const;
 
 	protected:
-		_AddressList	_mAcceptorAddrList;		// Acceptor °³¼ö
-		unsigned	_mThreadCnt;				// »ç¿ë ¾²·¹µå °³¼ö
-		unsigned	_mSessionCnt;				// ÃÖ´ë ¼¼¼Ç ¼ö
-		unsigned	_mTimerTaskCnt;				// Å¸ÀÌ¸Ó ÀÚ¿ø ÃÖ´ë °³¼ö
-		unsigned	_mLogBufCnt;				// ·Î±×¿ë ¹öÆÛ ÃÖ´ë °³¼ö
+		_AddressList	_mAcceptorAddrList;		// Acceptor ê°œìˆ˜
+		unsigned	_mThreadCnt;				// ì‚¬ìš© ì“°ë ˆë“œ ê°œìˆ˜
+		unsigned	_mSessionCnt;				// ìµœëŒ€ ì„¸ì…˜ ìˆ˜
+		unsigned	_mTimerTaskCnt;				// íƒ€ì´ë¨¸ ìì› ìµœëŒ€ ê°œìˆ˜
+		unsigned	_mLogBufCnt;				// ë¡œê·¸ìš© ë²„í¼ ìµœëŒ€ ê°œìˆ˜
 	};
 }
 

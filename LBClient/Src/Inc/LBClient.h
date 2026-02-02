@@ -1,6 +1,6 @@
 ï»¿/**
 	@file	LBClient.h
-	@brief	LBClient¸¦ »ç¿ëÇÏ±â À§ÇØ ÇÊ¿äÇÑ ¼³Á¤ Çì´õÆÄÀÏ
+	@brief	LBClientë¥¼ ì‚¬ìš©í•˜ê¸° ìœ„í•´ í•„ìš”í•œ ì„¤ì • í—¤ë”íŒŒì¼
 	@date	2019-11-24
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -10,8 +10,8 @@
 #include "LBServer.h"
 
 /**
-	@brief		DllExport °ü·Ã ¸ÅÅ©·Î
-	@details	dllÀ» ¹Ş¾Æ ¾îÇÃ¸®ÄÉÀÌ¼ÇÀ» ±¸ÇöÇÒ ¶§¿¡´Â LBClient.h¸¦ Á¤ÀÇÇÏ±â Àü¿¡ LOAD_LBCLIENT¸ÅÅ©·Î¸¦ Á¤ÀÇÇÑ´Ù.
+	@brief		DllExport ê´€ë ¨ ë§¤í¬ë¡œ
+	@details	dllì„ ë°›ì•„ ì–´í”Œë¦¬ì¼€ì´ì…˜ì„ êµ¬í˜„í•  ë•Œì—ëŠ” LBClient.hë¥¼ ì •ì˜í•˜ê¸° ì „ì— LOAD_LBCLIENTë§¤í¬ë¡œë¥¼ ì •ì˜í•œë‹¤.
 */
 //#define DEVELOP_MODE
 #ifdef DEVELOP_MODE
@@ -27,7 +27,7 @@
 #endif //DEVELOP_MODE
 
 /**
-	@brief		LBServer ¶óÀÌºê·¯¸® »ç¿ë ¼³Á¤
+	@brief		LBServer ë¼ì´ë¸ŒëŸ¬ë¦¬ ì‚¬ìš© ì„¤ì •
 */
 #ifdef _DEBUG
 	#ifdef X64
@@ -46,8 +46,8 @@
 namespace LBNet
 {
 	/**
-		@brief			LBClientÀÇ ¹öÀüÀ» ¹Ş´Â ÇÔ¼ö
-		@return Version	LBClientÀÇ ¹öÀü
+		@brief			LBClientì˜ ë²„ì „ì„ ë°›ëŠ” í•¨ìˆ˜
+		@return Version	LBClientì˜ ë²„ì „
 	*/
 	constexpr Version LBC_EXPORT GetLBCVersion();
 }

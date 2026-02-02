@@ -1,6 +1,6 @@
 ï»¿/**
 	@file	LBPacketHeader.h
-	@brief	LBServerÀÇ ³×Æ®¿öÅ© ÆĞÅ¶ °ü·Ã Çì´õ
+	@brief	LBServerì˜ ë„¤íŠ¸ì›Œí¬ íŒ¨í‚· ê´€ë ¨ í—¤ë”
 	@date	2020-04-17
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -11,7 +11,7 @@ namespace LBNet
 	using MessageNo = unsigned long;
 
 	/**
-		@brief	ÆĞÅ¶ Çì´õ Å¬·¡½º
+		@brief	íŒ¨í‚· í—¤ë” í´ë˜ìŠ¤
 		@date	2019-08-30
 		@auther	light8reeze(light8reeze@gmail.com)
 	*/

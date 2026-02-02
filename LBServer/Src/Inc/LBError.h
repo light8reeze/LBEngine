@@ -1,6 +1,6 @@
 ï»¿/**
 	@file	LBError.h
-	@brief	LBServerÀÇ ¿¡·¯ÄÚµå °ü·Ã Çì´õÆÄÀÏ
+	@brief	LBServerì˜ ì—ëŸ¬ì½”ë“œ ê´€ë ¨ í—¤ë”íŒŒì¼
 	@date	2019-10-22
 	@auther light8reeze(light8reeze@gmail.com)
 */

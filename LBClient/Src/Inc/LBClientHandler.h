@@ -1,6 +1,6 @@
 ï»¿/**
 	@file	LBClientHandler.h
-	@brief	LBClientÀÇ Å¬¶óÀÌ¾ğÆ® ÆĞÅ¶Ã³¸® °ü·Ã Çì´õÆÄÀÏ
+	@brief	LBClientì˜ í´ë¼ì´ì–¸íŠ¸ íŒ¨í‚·ì²˜ë¦¬ ê´€ë ¨ í—¤ë”íŒŒì¼
 	@date	2019-11-24
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -11,7 +11,7 @@
 namespace LBNet
 {
 	/**
-		@brief	Å¬¶óÀÌ¾ğÆ® ÆĞÅ¶ Ã³¸® Å¬·¡½º Å¸ÀÔ Á¤ÀÇ
+		@brief	í´ë¼ì´ì–¸íŠ¸ íŒ¨í‚· ì²˜ë¦¬ í´ë˜ìŠ¤ íƒ€ì… ì •ì˜
 	*/
 	using PacketHandle	= std::function<ErrCode(CPacketHeader*, Size)>;
 	

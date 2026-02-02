@@ -9,7 +9,7 @@ namespace LBNet
 	class CUdpObject;
 
 	/**
-		@brief		UDP ¼¼¼Ç Å¬·¡½º
+		@brief		UDP ì„¸ì…˜ í´ë˜ìŠ¤
 		@date		2019-11-10
 		@auther		light8reeze(light8reeze@gmail.com)
 	*/

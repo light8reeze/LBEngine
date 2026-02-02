@@ -1,6 +1,6 @@
 ï»¿/**
 	@file	LBShard.h
-	@brief	LBServerÀÇ »şµå °ü·Ã Çì´õ
+	@brief	LBServerì˜ ìƒ¤ë“œ ê´€ë ¨ í—¤ë”
 	@date	2019-09-22
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -10,11 +10,11 @@
 namespace LBNet
 {
 	/**
-		@brief		TCP »şµå Å¬·¡½º
-		@details	ºĞ»ê¼­¹ö ¿¬°á¿¡ »ç¿ëµÈ´Ù.
-		@warning	1.Connect¿¡ µî·ÏµÇ´Â ÇÚµé·¯¿¡´Â GameObject¿¬°á ÄÚµå°¡ ¹İµå½Ã µé¾î°¡¾ß ÇÑ´Ù.
-					CSession::SetGameObject¸¦ ¹İµå½Ã È£ÃâÇØ¾ß ÇÑ´Ù.
-					2.Connect¿¡ µî·ÏµÇ´Â ÇÚµé·¯´Â ErrCode(void) ÇüÀÇ ÇÔ¼öÀÌ´Ù.
+		@brief		TCP ìƒ¤ë“œ í´ë˜ìŠ¤
+		@details	ë¶„ì‚°ì„œë²„ ì—°ê²°ì— ì‚¬ìš©ëœë‹¤.
+		@warning	1.Connectì— ë“±ë¡ë˜ëŠ” í•¸ë“¤ëŸ¬ì—ëŠ” GameObjectì—°ê²° ì½”ë“œê°€ ë°˜ë“œì‹œ ë“¤ì–´ê°€ì•¼ í•œë‹¤.
+					CSession::SetGameObjectë¥¼ ë°˜ë“œì‹œ í˜¸ì¶œí•´ì•¼ í•œë‹¤.
+					2.Connectì— ë“±ë¡ë˜ëŠ” í•¸ë“¤ëŸ¬ëŠ” ErrCode(void) í˜•ì˜ í•¨ìˆ˜ì´ë‹¤.
 		@date		2019-09-22
 		@auther		light8reeze(light8reeze@gmail.com)
 	*/

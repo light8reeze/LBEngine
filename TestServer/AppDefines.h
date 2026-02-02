@@ -2,7 +2,7 @@
 #include "LBServer.h"
 
 /**
-	@brief		LBServer ¶óÀÌºê·¯¸® »ç¿ë ¼³Á¤
+	@brief		LBServer ë¼ì´ë¸ŒëŸ¬ë¦¬ ì‚¬ìš© ì„¤ì •
 */
 #ifdef _DEBUG
 	#ifdef X64

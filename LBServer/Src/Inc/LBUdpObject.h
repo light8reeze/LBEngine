@@ -5,7 +5,7 @@
 namespace LBNet
 {
 	/**
-		@brief		UDP¼¼¼Ç¿¡¼­ »ç¿ëÇÏ´Â ¿ÀºêÁ§Æ® Å¬·¡½º
+		@brief		UDPì„¸ì…˜ì—ì„œ ì‚¬ìš©í•˜ëŠ” ì˜¤ë¸Œì íŠ¸ í´ë˜ìŠ¤
 		@date		2019-11-10
 		@auther		light8reeze(light8reeze@gmail.com)
 	*/
