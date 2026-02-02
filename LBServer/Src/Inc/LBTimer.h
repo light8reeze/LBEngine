@@ -1,12 +1,13 @@
-/**
+ï»¿/**
 	@file	LBTimer.h
-	@brief	LBServerÀÇ Å¸ÀÌ¸Ó °ü·Ã Çì´õ
+	@brief	LBServerì˜ íƒ€ì´ë¨¸ ê´€ë ¨ ëª¨ë“ˆ
 	@date	2019-10-06
 	@auther light8reeze(light8reeze@gmail.com)
 */
 #pragma once
 #include "LBServer.h"
 #include "LBFactory.h"
+#include "LBIOContext.h"
 #include <boost/asio/steady_timer.hpp>
 
 namespace LBNet
@@ -16,8 +17,8 @@ namespace LBNet
 	using SystemTimer = boost::asio::system_timer;
 
 	/**
-		@brief	        Å¸ÀÌ¸Ó ÅÂ½ºÅ© Å¬·¡½º
-		@details		Æ¯Á¤ ½Ã°£ ÈÄ ½ÇÇàÇÒ ¸í·ÉÀ» ÀúÀåÇÏ´Â Å¬·¡½º
+		@brief	        íƒ€ì´ë¨¸ íƒœìŠ¤í¬ í´ë˜ìŠ¤
+		@details		íŠ¹ì • ì‹œê°„ í›„ ì›í•˜ëŠ” ë™ì‘ì„ ìˆ˜í–‰í•˜ëŠ” í´ë˜ìŠ¤
 		@date	        2019-10-06
 		@auther         light8reeze(light8reeze@gmail.com)
 	*/
@@ -41,9 +42,9 @@ namespace LBNet
 		void SetTime(const std::chrono::duration<Rep, Period>& pTime);
 
 		/**
-			@brief				Å¸ÀÌ¸Ó ½ÃÀÛ ÇÔ¼ö
-			@param	THandler	¼³Á¤µÈ ½Ã°£¿¡ ½ÇÇàÇÒ ÇÔ¼öÀÌ´Ù. ÇÔ¼öÀÇ ÀÎÀÚ ÇüÅÂ´Â (ErrCode, ...)·Î ÀÛ¼ºÇØ¾ß ÇÑ´Ù.
-					TArgs		½ÇÇàÇÒ ÇÔ¼ö¿¡ µé¾î°¥ ÀÎÀÚ¸®½ºÆ®.
+			@brief				íƒ€ì´ë¨¸ ì‹œì‘ í•¨ìˆ˜
+			@param	THandler	ì„¤ì •ëœ ì‹œê°„ì— ë™ì‘í•  í•¨ìˆ˜ì´ë‹¤. í•¨ìˆ˜ì˜ ì²«ë²ˆì§¸ ì¸ìëŠ” (ErrCode, ...)ë¡œ ì‘ì„±í•´ì•¼ í•œë‹¤.
+					TArgs		ë™ì‘í•  í•¨ìˆ˜ì˜ ë’¤ ì¸ìë¦¬ìŠ¤íŠ¸.
 		*/
 		template<typename THandler, typename... TArgs>
 		void Start(THandler&& pHandler, TArgs... pArgs);
@@ -55,8 +56,8 @@ namespace LBNet
 	};
 
 	/**
-		@brief	        Å¸ÀÌ¸Ó Å¬·¡½º
-		@details		Å¸ÀÌ¸Ó ÀÛ¾÷ Ã³¸® Å¬·¡½º
+		@brief	        íƒ€ì´ë¨¸ í´ë˜ìŠ¤
+		@details		íƒ€ì´ë¨¸ ì‘ì—… ì²˜ë¦¬ í´ë˜ìŠ¤
 		@date	        2019-12-15
 		@auther         light8reeze(light8reeze@gmail.com)
 	*/
@@ -69,10 +70,10 @@ namespace LBNet
 		~CTimer() = default;
 
 		/**
-			@brief				Å¸ÀÌ¸Ó ½ÃÀÛ ÇÔ¼ö
-			@param	THandler	¼³Á¤µÈ ½Ã°£¿¡ ½ÇÇàÇÒ ÇÔ¼öÀÌ´Ù. ÇÔ¼öÀÇ ÇüÅÂ´Â bool(ErrCode, ...)·Î ÀÛ¼ºÇØ¾ß ÇÑ´Ù.
-					TArgs		½ÇÇàÇÒ ÇÔ¼ö¿¡ µé¾î°¥ ÀÎÀÚ¸®½ºÆ®.
-			@warning			ÆÑÅä¸®¿¡¼­ CTimerTaskÀÚ¿øÀÌ ºÎÁ·ÇÒ°æ¿ì eErrCodeNotEnoughRsc¿¡·¯°¡ ¹İÈ¯µÈ´Ù.
+			@brief				íƒ€ì´ë¨¸ ì‹œì‘ í•¨ìˆ˜
+			@param	THandler	ì„¤ì •ëœ ì‹œê°„ì— ë™ì‘í•  í•¨ìˆ˜ì´ë‹¤. í•¨ìˆ˜ì˜ í˜•íƒœëŠ” bool(ErrCode, ...)ë¡œ ì‘ì„±í•´ì•¼ í•œë‹¤.
+					TArgs		ë™ì‘í•  í•¨ìˆ˜ì˜ ë’¤ ì¸ìë¦¬ìŠ¤íŠ¸.
+			@warning			íŒ©í† ë¦¬ì—ì„œ CTimerTaskìì›ì„ í• ë‹¹ëª»í• ê²½ìš° eErrCodeNotEnoughRscì—ëŸ¬ê°€ ë°˜í™˜ëœë‹¤.
 		*/
 		template<class Rep, class Period, typename THandler, typename... TArgs>
 		static ErrCode Start(const std::chrono::duration<Rep, Period>&& pTime, 
@@ -85,11 +86,11 @@ namespace LBNet
 		static ErrCode Start(const CTime& pTime, THandler&& pHandler, TArgs... pArgs);
 
 		/**
-			@brief				Å¸ÀÌ¸Ó ½ÃÀÛ ÇÔ¼ö
-			@param	THandler	¼³Á¤µÈ ½Ã°£¿¡ ½ÇÇàÇÒ ÇÔ¼öÀÌ´Ù. ÇÔ¼öÀÇ ÀÎÀÚ´Â (ErrCode, ...)·Î ÀÛ¼ºÇØ¾ß ÇÑ´Ù.
-					TArgs		½ÇÇàÇÒ ÇÔ¼ö¿¡ µé¾î°¥ ÀÎÀÚ¸®½ºÆ®.
-			@warning			´ÙÀ½ ÇÔ¼ö »ç¿ë½Ã CTimerTask°¡ ¼³Á¤ ½Ã°£ ÀÌÀü¿¡ ¼Ò¸êµÇ¸é ÀÛ¾÷ÀÌ ¹Ù·Î ½ÇÇàµÈ´Ù.
-								»ç¿ëÀÚ°¡ CTimerTask¸¦ º°µµ·Î º¸°üÇØ¾ß ÇÑ´Ù.
+			@brief				íƒ€ì´ë¨¸ ì‹œì‘ í•¨ìˆ˜
+			@param	THandler	ì„¤ì •ëœ ì‹œê°„ì— ë™ì‘í•  í•¨ìˆ˜ì´ë‹¤. í•¨ìˆ˜ì˜ ì¸ìëŠ” (ErrCode, ...)ë¡œ ì‘ì„±í•´ì•¼ í•œë‹¤.
+					TArgs		ë™ì‘í•  í•¨ìˆ˜ì˜ ë’¤ ì¸ìë¦¬ìŠ¤íŠ¸.
+			@warning			í•´ë‹¹ í•¨ìˆ˜ ì‚¬ìš©ì‹œ CTimerTaskê°€ ì„¤ì • ì‹œê°„ ì´ì „ì— ì†Œë©¸ë˜ë©´ ì‘ì—…ì´ ë°”ë¡œ ì¢…ë£Œëœë‹¤.
+								ì‚¬ìš©ìê°€ CTimerTaskì˜ ìƒëª…ì„ ê´€ë¦¬í•´ì•¼ í•œë‹¤.
 		*/
 		template<typename THandler, typename... TArgs>
 		static ErrCode Start(CTimerTask& pTimer, THandler&& pHandler, TArgs... pArgs);

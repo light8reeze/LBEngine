@@ -1,6 +1,6 @@
-/**
+ï»¿/**
 	@file	LBGameObject.h
-	@brief	LBServerÀÇ ±âº» ¿ÀºêÁ§Æ® °ü·Ã Çì´õ
+	@brief	LBServerì˜ ê¸°ë³¸ ì˜¤ë¸Œì íŠ¸ ê´€ë ¨ ëª¨ë“ˆ
 	@date	2019-09-07
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -10,11 +10,11 @@
 namespace LBNet
 {
 	/**
-		@brief		¼¼¼Ç°ú ¿¬°áµÇ´Â ¼­¹ö ±âº» ¿ÀºêÁ§Æ® Å¬·¡½º
-		@details	¼­¹öÀÇ ±âº» ¿ÀºêÁ§Æ®·Î ¼¼¼Ç°ú 1:1¿¬°áµÈ´Ù.
-					°ÔÀÓ ·ÎÁ÷ ±¸Çö½Ã ´ÙÀ½ ¿ÀºêÁ§Æ®¸¦ »ó¼Ó¹Þ¾Æ 
-					°ÔÀÓ³»ÀÇ ¿ÀºêÁ§Æ® Å¬·¡½º¸¦ ±¸ÇöÇÑ´Ù.
-		@warning	¼¼¼Ç°úÀÇ ¿¬°áÀº ¼¼¼Ç Å¬·¡½ºÀÇ ÇÔ¼ö¸¦ ÅëÇØ¼­ ½ÇÇà½ÃÄÑ¾ß ÇÑ´Ù.
+		@brief		ì„¸ì…˜ê³¼ ì—°ê²°ë˜ëŠ” ê²Œìž„ ê¸°ë³¸ ì˜¤ë¸Œì íŠ¸ í´ëž˜ìŠ¤
+		@details	ê²Œìž„ì˜ ê¸°ë³¸ ì˜¤ë¸Œì íŠ¸ë¡œ ì„¸ì…˜ê³¼ 1:1ì—°ê²°ëœë‹¤.
+					ì„œë²„ ê°œë°œ ì‹œì—ëŠ” í•´ë‹¹ ì˜¤ë¸Œì íŠ¸ë¥¼ ìƒì†ë°›ì•„ 
+					ê²Œìž„ë‚´ë¶€ ì˜¤ë¸Œì íŠ¸ í´ëž˜ìŠ¤ë¥¼ êµ¬í˜„í•œë‹¤.
+		@warning	ì„¸ì…˜ê³¼ì˜ ì—°ê²°ì€ í•´ë‹¹ í´ëž˜ìŠ¤ì˜ í•¨ìˆ˜ë¥¼ í†µí•´ì„œ ìˆ˜í–‰í•´ì•¼ í•œë‹¤.
 		@date		2019-09-07
 		@auther		light8reeze(light8reeze@gmail.com)
 	*/

@@ -1,4 +1,4 @@
-#include "LBTcpClient.h"
+﻿#include "LBTcpClient.h"
 #include "LBEncryption.h"
 
 namespace LBNet

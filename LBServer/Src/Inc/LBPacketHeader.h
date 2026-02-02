@@ -1,4 +1,4 @@
-/**
+癤�/**
 	@file	LBPacketHeader.h
 	@brief	LBServer의 네트워크 패킷 관련 헤더
 	@date	2020-04-17

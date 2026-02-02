@@ -1,4 +1,4 @@
-#include "LBClient.h"
+﻿#include "LBClient.h"
 
 namespace LBNet
 {

@@ -1,4 +1,4 @@
-#include "LBLogger.h"
+ï»¿#include "LBLogger.h"
 #include "LBFactory.h"
 #include "LBLogProcessor.h"
 #include "LBTime.h"
@@ -17,7 +17,7 @@ namespace LBNet
 		__mOutput = eOutputNone;
 		__mLogType = ELogType::eLogNone;
 		__mUseSize = 0;
-		std::fill(__mBuffer, __mBuffer + eSzLogMsg, 0);
+		std::fill(__mBuffer, __mBuffer + eSzLogMsg, '\0');
 	}
 
 	void CLogBuffer::SetLogType(ELogType&& pLogType)
@@ -64,7 +64,7 @@ namespace LBNet
 		LB_ASSERT(pBuffer != nullptr, "Error!");
 		CTime aTime;
 
-		//[yyyy-mm-dd hh:mm:ss] LogType : LogMsg Çü½ÄÀ¸·Î Ãâ·ÂÇÑ´Ù.
+		//[yyyy-mm-dd hh:mm:ss] LogType : LogMsg í˜•ì‹ìœ¼ë¡œ ì¶œë ¥í•œë‹¤.
 		std::cout << "[" << aTime.GetYear() << "-";
 		std::cout.fill('0');
 		std::cout.width(2);

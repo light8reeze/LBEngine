@@ -1,4 +1,4 @@
-/**
+ï»¿/**
 	@file	LBShard.h
 	@brief	LBServerÀÇ »þµå °ü·Ã Çì´õ
 	@date	2019-09-22

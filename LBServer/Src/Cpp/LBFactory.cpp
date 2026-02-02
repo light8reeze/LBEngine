@@ -1,4 +1,4 @@
-#include "LBFactory.h"
+﻿#include "LBFactory.h"
 
 namespace LBNet
 {

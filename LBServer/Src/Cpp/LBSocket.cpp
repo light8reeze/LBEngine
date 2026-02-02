@@ -1,4 +1,4 @@
-#include "LBSocket.h"
+﻿#include "LBSocket.h"
 #include "LBIOContext.h"
 
 namespace LBNet
@@ -147,7 +147,7 @@ namespace LBNet
 		return __mSocket;
 	}
 
-	const CUdpSocket::EndPointType&& CUdpSocket::GetEndPoint() const
+	CUdpSocket::EndPointType CUdpSocket::GetEndPoint() const
 	{
 		return __mSocket.local_endpoint();
 	}

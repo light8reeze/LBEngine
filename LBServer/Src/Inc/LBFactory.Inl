@@ -1,4 +1,4 @@
-namespace LBNet
+﻿namespace LBNet
 {
 #pragma region CObjectPoolEx
 	template<typename TObject>

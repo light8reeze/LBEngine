@@ -1,6 +1,6 @@
-/**
+ï»¿/**
 	@file	LBAcceptor.h
-	@brief	LBServerÀÇ ³×Æ®¿öÅ© Acceptor °ü·Ã Çì´õ
+	@brief	LBServerì˜ ë„¤íŠ¸ì›Œí¬ Acceptor ê´€ë ¨ ëª¨ë“ˆ
 	@date	2019-08-19
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -11,8 +11,8 @@
 namespace LBNet
 {
 	/**
-		@brief		TCP Acceptor Å¬·¡½º
-		@warnning	ÇöÀç´Â IPv4¸¸ Áö¿øÇÑ´Ù.(v6 Áö¿øÃßÈÄ ±¸Çö)
+		@brief		TCP Acceptor í´ë˜ìŠ¤
+		@warnning	í˜„ì¬ëŠ” IPv4ë§Œ ì§€ì›í•œë‹¤.(v6 ì§€ì›ì˜ˆì • ì—†ìŒ)
 		@date		2019-08-19
 		@auther		light8reeze(light8reeze@gmail.com)
 	*/

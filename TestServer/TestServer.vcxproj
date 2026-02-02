@@ -29,26 +29,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -75,28 +75,28 @@
     <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\</IntDir>
     <TargetName>$(ProjectName)D_$(PlatformTarget)</TargetName>
     <IncludePath>$(SolutionDir)LBUtility\Src\Inc;$(SolutionDir)LBServer\Src\Inc;$(SolutionDir)LBClient\Src\Inc;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\boost_1_70_0\stage\lib;$(SolutionDir)Bin;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\local\boost_1_70_0\stage\lib;$(SolutionDir)Bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)Bin\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\</IntDir>
     <TargetName>$(ProjectName)_$(PlatformTarget)</TargetName>
     <IncludePath>$(SolutionDir)LBUtility\Src\Inc;$(SolutionDir)LBServer\Src\Inc;$(SolutionDir)LBClient\Src\Inc;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\boost_1_70_0\stage\lib;$(SolutionDir)Bin;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\local\boost_1_70_0\stage\lib;$(SolutionDir)Bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Bin\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\</IntDir>
     <TargetName>$(ProjectName)D_$(PlatformTarget)</TargetName>
     <IncludePath>$(SolutionDir)LBUtility\Src\Inc;$(SolutionDir)LBServer\Src\Inc;$(SolutionDir)LBClient\Src\Inc;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\boost_1_70_0\stage\lib;$(SolutionDir)Bin;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\local\boost_1_70_0\stage\lib;$(SolutionDir)Bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Bin\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\</IntDir>
     <TargetName>$(ProjectName)_$(PlatformTarget)</TargetName>
     <IncludePath>$(SolutionDir)LBUtility\Src\Inc;$(SolutionDir)LBServer\Src\Inc;$(SolutionDir)LBClient\Src\Inc;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\boost_1_70_0\stage\lib;$(SolutionDir)Bin;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\local\boost_1_70_0\stage\lib;$(SolutionDir)Bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -104,7 +104,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\boost_1_70_0;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\local\boost_1_70_0;</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>X64;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
@@ -116,7 +116,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\boost_1_70_0;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\local\boost_1_70_0;</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
@@ -130,7 +130,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\boost_1_70_0;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\local\boost_1_70_0;</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>X86;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -147,7 +147,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\boost_1_70_0;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\local\boost_1_70_0;</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>X64;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>

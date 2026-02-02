@@ -1,4 +1,4 @@
-namespace LBNet
+﻿namespace LBNet
 {
 	template<typename TGameObject>
 	CGameServer<TGameObject>::CGameServer() : _mConfig(nullptr)

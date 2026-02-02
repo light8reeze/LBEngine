@@ -1,4 +1,4 @@
-/**
+癤�/**
 	@file	LBShardObject.h
 	@brief	LBServer의 샤드 오브젝트 관련 헤더
 	@date	2019-10-05

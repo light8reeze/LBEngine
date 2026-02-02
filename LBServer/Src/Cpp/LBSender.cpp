@@ -1,4 +1,4 @@
-#include "LBSender.h"
+ï»¿#include "LBSender.h"
 #include "LBEncryption.h"
 
 namespace LBNet
@@ -27,8 +27,8 @@ namespace LBNet
 		if (aShared == nullptr)
 			return nullptr;
 
-		// Àü¼ÛÇÒ ÆÐÅ¶ÀÇ Å©±â¸¦ ¹Ì¸® ³Ö¾îÁØ´Ù.
-		// Çì´õÀÇ Å©±â¸¦ Á¦¿ÜÇÑ Å©±â°¡ µé¾î°£´Ù.
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¶ï¿½ï¿½ Å©ï¿½â¸¦ ï¿½Ì¸ï¿½ ï¿½Ö¾ï¿½ï¿½Ø´ï¿½.
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½â¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½â°¡ ï¿½ï¿½î°£ï¿½ï¿½.
 		(reinterpret_cast<SendHeader*>(aShared->__mChunk))->mDataSize = pSendSize;
 
 		return aShared;
@@ -110,7 +110,7 @@ namespace LBNet
 		DEBUG_CODE(bool aResult = )
 		__mSendPool.DeAllocate(aChunkIndex, aChunkCount);
 
-		LB_ASSERT(aResult, "Send ¹Ý³³ ½ÇÆÐ.");
+		LB_ASSERT(aResult, "Send dealloc failed.");
 
 		return 0;
 	}

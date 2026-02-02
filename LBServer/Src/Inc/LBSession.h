@@ -1,6 +1,6 @@
-/**
+ï»¿/**
 	@file	LBSession.h
-	@brief	LBServerÀÇ ³×Æ®¿öÅ© ¼¼¼Ç °ü·Ã Çì´õ
+	@brief	LBServerì˜ ë„¤íŠ¸ì›Œí¬ ì„¸ì…˜ ê´€ë ¨ ëª¨ë“ˆ
 	@date	2019-08-19
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -16,14 +16,14 @@ namespace LBNet
 	class CGameObject;
 
 	/**
-		@brief		TCP ¼¼¼Ç Å¬·¡½º
-		@warning	1. ¿¬°áµÈ ¼¼¼Ç, °ÔÀÓ ¿ÀºêÁ§Æ®´Â ¹İµå½Ã 1:1¿¬°áÀ» ÇØ¾ßÇÑ´Ù.
+		@brief		TCP ì„¸ì…˜ í´ë˜ìŠ¤
+		@warning	1. ì„¸ì…˜ê³¼ ì†Œì¼“, ê²Œì„ ì˜¤ë¸Œì íŠ¸ëŠ” ë°˜ë“œì‹œ 1:1ê´€ê³„ë¡œ í•´ì•¼í•œë‹¤.
 		@date		2019-08-19
 		@auther		light8reeze(light8reeze@gmail.com)
 	*/
 	class LBS_EXPORT CSession
 	{
-		friend class CAcceptor; // Acceptor¿¡¼­ ¼ÒÄÏ Á¢±ÙÀÌ ÇÊ¿äÇÏ´Ù.
+		friend class CAcceptor; // Acceptorì—ì„œ ì†Œì¼“ ì ‘ê·¼ì´ í•„ìš”í•˜ë‹¤.
 		LB_LOCKOBJECT(CSession, CSharedMutex);
 
 	public:

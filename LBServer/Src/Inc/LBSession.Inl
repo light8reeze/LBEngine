@@ -1,4 +1,4 @@
-namespace LBNet
+﻿namespace LBNet
 {
 	template<typename TObject>
 	void CSession::SetGameObject(SharedObject<TObject>& pObject)

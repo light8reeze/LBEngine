@@ -1,4 +1,4 @@
-namespace LBNet
+﻿namespace LBNet
 {
 	inline SAddressInfo::SAddressInfo(char* pIp, unsigned int pPort) : mIp(pIp), mPort(pPort)
 	{

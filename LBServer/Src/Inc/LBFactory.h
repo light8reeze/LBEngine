@@ -1,4 +1,4 @@
-/**
+癤�/**
 	@file	LBFactory.h
 	@brief	LBServer의 팩토리 관련 헤더파일
 	@date	2019-07-30

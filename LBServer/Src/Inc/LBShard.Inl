@@ -1,4 +1,4 @@
-namespace LBNet
+﻿namespace LBNet
 {
 	template<typename TShardObject>
 	inline CShard<TShardObject>::CShard() : CSession(), __mServerNo(0),

@@ -1,6 +1,6 @@
-/**
+ï»¿/**
 	@file	LBHandler.h
-	@brief	LBServerÀÇ ³×Æ®¿öÅ© ÀÌº¥Æ® Ã³¸® °ü·Ã Çì´õ
+	@brief	LBServerì˜ ë„¤íŠ¸ì›Œí¬ ì´ë²¤íŠ¸ ì²˜ë¦¬ ê´€ë ¨ ëª¨ë“ˆ
 	@date	2019-08-30
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -13,8 +13,8 @@
 namespace LBNet
 {	
 	/**
-		@brief	ÆĞÅ¶ Ã³¸® Å¬·¡½º
-		@param THandler	ÆĞÅ¶ ÀÌ¹øÆ®Ã³¸® ÇÔ¼öÅ¸ÀÔ
+		@brief	íŒ¨í‚· ì²˜ë¦¬ í´ë˜ìŠ¤
+		@param THandler	íŒ¨í‚· ì´ë²¤íŠ¸ì²˜ë¦¬ í•¨ìˆ˜íƒ€ì…
 		@date	2019-08-30
 		@auther	light8reeze(light8reeze@gmail.com)
 	*/

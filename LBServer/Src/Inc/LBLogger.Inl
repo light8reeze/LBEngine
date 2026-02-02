@@ -1,4 +1,4 @@
-namespace LBNet
+﻿namespace LBNet
 {
 #pragma region CLogBuffer
 	template<typename TType>
@@ -56,7 +56,7 @@ namespace LBNet
 	}
 
 	template <>
-	void CLogBuffer::PushLogData<const char*>(const char*& pData)
+	inline void CLogBuffer::PushLogData<const char*>(const char*& pData)
 	{
 		LB_ASSERT(__mUseSize < eSzLogMsg, "Error!");
 
@@ -70,7 +70,7 @@ namespace LBNet
 	}
 
 	template <>
-	void CLogBuffer::PushLogData<const char*>(const char*&& pData)
+	inline void CLogBuffer::PushLogData<const char*>(const char*&& pData)
 	{
 		LB_ASSERT(__mUseSize < eSzLogMsg, "Error!");
 

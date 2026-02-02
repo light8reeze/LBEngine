@@ -1,4 +1,4 @@
-namespace LBNet
+﻿namespace LBNet
 {
 	template<typename THandler>
 	ErrCode CMessageHandler<THandler>::Register(MessageNo pNumber, THandler&& pHandler)

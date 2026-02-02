@@ -1,6 +1,6 @@
-/**
+ï»¿/**
 	@file	LBGameServer.h
-	@brief	LBServerÀÇ °ÔÀÓ¼­¹ö °ü·Ã Çì´õ
+	@brief	LBServerì˜ ê²Œì„ì„œë²„ ê´€ë ¨ ëª¨ë“ˆ
 	@date	2019-09-22
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -17,12 +17,12 @@
 namespace LBNet
 {
 	/**
-		@brief				°ÔÀÓ¼­¹ö Å¬·¡½º
-		@details			°ÔÀÓ ¼­¹ö ¸ŞÀÎ·ÎÁ÷ Å¬·¡½ºÀÌ´Ù. 
-							1. Game Application±¸Çö½Ã ´ÙÀ½ Å¬·¡½º¸¦ »ó¼Ó¹Ş¾Æ ±¸ÇöÇÑ´Ù.
-							2. ½ÇÇà ¼ø¼­´Â ´ÙÀ½ ¼ø¼­´ë·Î ½ÇÇàÇÑ´Ù.
+		@brief				ê²Œì„ì„œë²„ í´ë˜ìŠ¤
+		@details			ì„œë²„ ê´€ë ¨ ë©”ì¸ë¡œì§ í´ë˜ìŠ¤ì´ë‹¤. 
+							1. Game Applicationì—ì„œëŠ” í•´ë‹¹ í´ë˜ìŠ¤ë¥¼ ìƒì†ë°›ì•„ êµ¬í˜„í•œë‹¤.
+							2. ì„œë²„ ì‹¤í–‰ì€ ì•„ë˜ ìˆœì„œëŒ€ë¡œ ìˆ˜í–‰í•œë‹¤.
 							(SetConfig -> Initialize -> LazyInitialize -> Run -> Close)
-		@param TGameObject	°ÔÀÓ ¼­¹ö¿¡¼­ ¼¼¼Ç¿¡ »ç¿ëÇÒ °ÔÀÓ ¿ÀºêÁ§Æ® Å¸ÀÔ.
+		@param TGameObject	ì„œë²„ ë‚´ë¶€ì—ì„œ ì„¸ì…˜ì— ì—°ê²°ëœ ê²Œì„ ì˜¤ë¸Œì íŠ¸ íƒ€ì….
 		@date				2019-09-22
 		@auther				light8reeze(light8reeze@gmail.com)
 	*/

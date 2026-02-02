@@ -1,4 +1,4 @@
-#include "LBLogProcessor.h"
+﻿#include "LBLogProcessor.h"
 #include "LBTimer.h"
 
 namespace LBNet

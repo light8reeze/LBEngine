@@ -1,4 +1,4 @@
-/**
+癤�/**
 	@file	LBClient.h
 	@brief	LBClient를 사용하기 위해 필요한 설정 헤더파일
 	@date	2019-11-24

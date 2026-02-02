@@ -1,4 +1,4 @@
-namespace LBNet
+﻿namespace LBNet
 {
 	template<typename THandler>
 	auto CIOContext::BindExecuter(THandler&& pHandler)

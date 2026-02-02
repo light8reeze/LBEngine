@@ -1,4 +1,4 @@
-#include "LBSendPool.h"
+﻿#include "LBSendPool.h"
 #include "LBSender.h"
 
 namespace LBNet

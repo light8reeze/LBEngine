@@ -1,4 +1,4 @@
-/**
+癤�/**
 	@file	LBConfig.h
 	@brief	LBServer의 서버 설정 관련 헤더파일
 	@date	2019-12-15

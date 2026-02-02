@@ -42,6 +42,8 @@
 *.app
 
 # Visual Studio
-/.vs/LBEngine/v15
-/Bin
+/.vs
 /Intermediate
+
+# AI
+/.pi

@@ -1,6 +1,6 @@
-/**
+ï»¿/**
 	@file	LBLogger.h
-	@brief	LBServerÀÇ ·Î±× Ãâ·Â °ü·Ã Çì´õÆÄÀÏ
+	@brief	LBServerì˜ ë¡œê·¸ ëª¨ë“ˆ ê´€ë ¨ í—¤ë”íŒŒì¼
 	@date	2019-12-19
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -12,39 +12,39 @@
 namespace LBNet
 {
 	/**
-		@brief		·Î±× Å¸ÀÔ enum
-		@details	·Î±× Á¤º¸ÀÇ Å¸ÀÔ¿¡ ¸Â°Ô CLogger¿¡ ³Ö´Â´Ù.
+		@brief		ë¡œê·¸ íƒ€ì… enum
+		@details	ë¡œê·¸ ì‘ì„±ì‹œ íƒ€ì…ì— ë§ê²Œ CLoggerì— ë„£ëŠ”ë‹¤.
 	*/
 	enum class ELogType : unsigned int
 	{
 		eLogNone,
-		eLogInfo,		// ÀÏ¹İ Á¤º¸ ·Î±×
-		eLogWarnning,	// °æ°í ·Î±×
-		eLogError,		// ¿¡·¯ ·Î±×
-		eLogDebug,		// µğ¹ö±×¿ë ·Î±×
-		eLogCritical,	// Ä¡¸íÀûÀÎ »óÈ²¿¡ ³²±æ ·Î±×
+		eLogInfo,		// ì¼ë°˜ ì •ë³´ ë¡œê·¸
+		eLogWarnning,	// ê²½ê³  ë¡œê·¸
+		eLogError,		// ì—ëŸ¬ ë¡œê·¸
+		eLogDebug,		// ë””ë²„ê·¸ìš© ë¡œê·¸
+		eLogCritical,	// ì¹˜ëª…ì ì¸ ìƒí™©ì— ëŒ€í•œ ë¡œê·¸
 		eLogTypeCnt,
 	};
 
 	/**
-		@brief		·Î±× Ãâ·Â ½Ã½ºÅÛ ¹øÈ£
+		@brief		ë¡œê·¸ ì¶œë ¥ ì‹œìŠ¤í…œ ë²ˆí˜¸
 	*/
 	using LogOutputNo = unsigned short;
 	constexpr LogOutputNo eOutputNone		= 0;
-	constexpr LogOutputNo eOutputConsole	= 1; // ÄÜ¼Ö ·Î±×Ãâ·Â ¹øÈ£
+	constexpr LogOutputNo eOutputConsole	= 1; // ì½˜ì†” ë¡œê·¸ì¶œë ¥ ë²ˆí˜¸
 
 	/**
-		@brief		·Î±× ¸Ş¼¼Áö ÃÖ´ë ±ÛÀÚ¼ö(+ '\0' ±ÛÀÚ¼ö 1)
+		@brief		ë¡œê·¸ ë©”ì„¸ì§€ ìµœëŒ€ ë¬¸ììˆ˜(+ '\0' ë¬¸ììˆ˜ 1)
 	*/
 	constexpr Size eSzLogMsg = 200 + 1;
 
 	/**
-		@brief		·Î±× ¸Ş¼¼Áö ¹öÆÛ ÇÒ´ç °³¼ö
+		@brief		ë¡œê·¸ ë©”ì„¸ì§€ ë²„í¼ í• ë‹¹ ê°œìˆ˜
 	*/
 	constexpr Size eSzLogBufCnt = 20;
 
 	/**
-		@brief		·Î±× ¹öÆÛ Å¬·¡½º
+		@brief		ë¡œê·¸ ë²„í¼ í´ë˜ìŠ¤
         @date	    2019-12-21
         @auther     light8reeze(light8reeze@gmail.com)
 	*/
@@ -86,9 +86,9 @@ namespace LBNet
 	};
 
 	/**
-		@brief		·Î±× ½Ã½ºÅÛ ÀÎÅÍÆäÀÌ½º
-		@details	»ç¿ëÇÒ ·Î±× ½Ã½ºÅÛÀ» ILogSystemÀ» »ó¼Ó¹Ş¾Æ 
-					OnLogging ÇÔ¼ö¸¦ ±¸ÇöÇÑ´Ù.
+		@brief		ë¡œê·¸ ì‹œìŠ¤í…œ ì¸í„°í˜ì´ìŠ¤
+		@details	ì‚¬ìš©ì ë¡œê·¸ ì‹œìŠ¤í…œì€ ILogSystemì„ ìƒì†ë°›ì•„ 
+					OnLogging í•¨ìˆ˜ë¥¼ êµ¬í˜„í•œë‹¤.
         @date	    2019-12-21
         @auther     light8reeze(light8reeze@gmail.com)
 	*/
@@ -102,7 +102,7 @@ namespace LBNet
 	};
 
 	/**
-		@brief		ÄÜ¼Ö ·Î±×Ãâ·Â ½Ã½ºÅÛ
+		@brief		ì½˜ì†” ë¡œê·¸ì¶œë ¥ ì‹œìŠ¤í…œ
 		@date	    2019-12-21
 		@auther     light8reeze(light8reeze@gmail.com)
 	*/
@@ -116,17 +116,17 @@ namespace LBNet
 	};
 
 	/**
-		@brief		·Î±× Å¬·¡½º
-		@details	1. CLogBuffer¸¦ ¹Ş¾Æ »ç¿ëÇÒ ·Î±× ½Ã½ºÅÛ Çü½Ä¿¡ ¸Â°Ô ÀúÀåÇÑ´Ù.
-					2. ·Î±× Ãâ·ÂÀº Timer¸¦ ÀÌ¿ëÇØ ºñµ¿±â·Î µ¿ÀÛÇÑ´Ù.
+		@brief		ë¡œê·¸ í´ë˜ìŠ¤
+		@details	1. CLogBufferë¥¼ ë°›ì•„ ì‚¬ìš©ì ë¡œê·¸ ì‹œìŠ¤í…œ ë°©ì‹ì— ë§ê²Œ ìˆ˜í–‰í•œë‹¤.
+					2. ë¡œê·¸ ìˆ˜í–‰ì€ Timerë¥¼ ì´ìš©í•´ ë¹„ë™ê¸°ë¡œ ìˆ˜í–‰í•œë‹¤.
 		
-		@warning	1. ÇÏÀ§ Å¬·¡½º¿¡¼­ »ç¿ëÇÒ ·Î±×¿¡ ¸Â°Ô CLogBuffer¸¦ Á÷Á¢ Ã¤¿î´Ù.
-					2. µ¥ÀÌÅÍ¸¦ ·Î±× ¹öÆÛ¿¡ ÀúÀåÇÒ¶§ Å©±â¿¡ ÁÖÀÇÇÑ´Ù.
-					(eSzLogMsgÅ©±â°¡ ³ÑÄ¡¸é µÚÀÇ µ¥ÀÌÅÍ´Â ÀÚµ¿À¸·Î ¹ö·ÁÁø´Ù.)
-					3. ·Î±× Àü¼ÛÀº ÇØ´ç °´Ã¼°¡ ¼Ò¸êµÉ¶§ Àü¼ÛÇÑ´Ù.
-					4. ·Î±× ¹öÆÛÇ®¿¡¼­ ·Î±× ¹öÆÛ°³¼ö°¡ ºÎÁ·ÇÏ¸é ·Î±×°¡ ¼Ò¸êµÈ´Ù.
-					(·Î±× ¹öÆÛ ºÎÁ·½Ã Ã³¸® ÃßÈÄ Ãß°¡ ¿¹Á¤
-					·Î±×¸¦ ³¯¸±°ÍÀÌ³Ä? ¾Æ´Ï¸é ¹Ù·Î Ãâ·Â½ÃÅ³°ÍÀÌ³Ä?)
+		@warning	1. í•˜ìœ„ í´ë˜ìŠ¤ì—ì„œëŠ” ì‚¬ìš©í•  ë¡œê·¸ì— ë§ê²Œ CLogBufferì— ê°’ì„ ì±„ìš´ë‹¤.
+					2. ë°ì´í„°ë¥¼ ë¡œê·¸ ë²„í¼ì— ì‚½ì…í• ë•Œ í¬ê¸°ì— ìœ ì˜í•œë‹¤.
+					(eSzLogMsgí¬ê¸°ê°€ ì´ˆê³¼í•  ê²½ìš° ë°ì´í„°ëŠ” ìë™ìœ¼ë¡œ ì œê±°ëœë‹¤.)
+					3. ë¡œê·¸ ìˆ˜í–‰ì€ í•´ë‹¹ ê°ì²´ê°€ ì†Œë©¸ë ë•Œ ìˆ˜í–‰í•œë‹¤.
+					4. ë¡œê·¸ ë²„í¼í’€ì—ì„œ ë¡œê·¸ ë²„í¼ê°€ì ¸ì˜¤ê¸° ì‹¤íŒ¨í•˜ë©´ ë¡œê·¸ê°€ ì†Œë©¸ëœë‹¤.
+					(ë¡œê·¸ ë²„í¼ ë¶€ì¡±ì‹œ ì²˜ë¦¬ ë°©ì‹ ì¶”ê°€ ì˜ˆì •
+					ë¡œê·¸ë¥¼ ë¬´ì‹œí•˜ëŠ”ê°€? ì•„ë‹ˆë©´ ë°”ë¡œ ì¶œë ¥ì‹œí‚¤ëŠ”ê°€?)
 		@date	    2019-12-21
 		@auther     light8reeze(light8reeze@gmail.com)
 	*/
@@ -151,9 +151,9 @@ namespace LBNet
 	};
 
 	/**
-		@brief		ÄÜ¼Ö ·Î±× Å¬·¡½º
-		@details	ÄÜ¼Ö ·Î±×Ãâ·Â½Ã »ç¿ëÇÏ´Â Å¬·¡½ºÀÌ´Ù.
-					std::endlÀº ÀÚµ¿À¸·Î µé¾î°£´Ù.
+		@brief		ì½˜ì†” ë¡œê·¸ í´ë˜ìŠ¤
+		@details	ì½˜ì†” ë¡œê·¸ì¶œë ¥ì‹œ ì‚¬ìš©í•˜ëŠ” í´ë˜ìŠ¤ì´ë‹¤.
+					std::endlì€ ìë™ìœ¼ë¡œ ì ìš©.
 		@date	    2019-12-22
 		@auther     light8reeze(light8reeze@gmail.com)
 	*/
@@ -167,7 +167,7 @@ namespace LBNet
 		CConsoleLog& operator<<(TArgs&& pData);
 
 	private:
-		// ½ºÄ®¶ó Å¸ÀÔÀÇ °æ¿ì stringÀ¸·Î º¯È¯ÈÄ ³Ö´Â´Ù.
+		// ìŠ¤ì¹¼ë¼ íƒ€ì…ì¸ ê²½ìš° stringìœ¼ë¡œ ë³€í™˜í•´ ë„£ëŠ”ë‹¤.
 		template<typename TArgs>
 		CConsoleLog& __PushLogImpl(TArgs&& pData, std::true_type);
 		template<typename TArgs>

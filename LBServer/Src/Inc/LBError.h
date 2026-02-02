@@ -1,4 +1,4 @@
-/**
+癤�/**
 	@file	LBError.h
 	@brief	LBServer의 에러코드 관련 헤더파일
 	@date	2019-10-22

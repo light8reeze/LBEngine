@@ -1,4 +1,4 @@
-/**
+癤�/**
 	@file	LBLogProcessor.h
 	@brief	LBServer의 로그 처리 관련 헤더파일
 	@date	2019-12-22

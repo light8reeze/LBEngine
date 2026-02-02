@@ -259,7 +259,7 @@
 		__mMaxSize = pBufSize;
 		__mUseSize = 0;
 
-		std::fill(__mStr, __mStr + __mMaxSize, 0);
+		std::fill(__mStr, __mStr + __mMaxSize, TCharSet{});
 	}
 
 	template<typename TCharSet>

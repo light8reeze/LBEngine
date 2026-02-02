@@ -13,7 +13,7 @@ LBEngine는  C++ Boost.Asio 소켓을 이용하여 개발한 게임 서버 엔�
 ## Environment
 
 Support Windows OS Only
-Visual Studio 2017 or later
+Visual Studio 2022 or later
 boost Lib 1.70
 
 ## How To Use
@@ -56,8 +56,8 @@ boost Lib 1.70
 
 ## Document
 
-[Project Reference](Doc/Project-Reference.md)
-[Project Todo List](Doc/Project-Todo.md)
+- [Project Reference](Doc/Project-Reference.md)
+- [Project Todo List](Doc/Project-Todo.md)
 
 
 

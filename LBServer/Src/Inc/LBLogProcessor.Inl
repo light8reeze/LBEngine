@@ -1,4 +1,4 @@
-namespace LBNet
+﻿namespace LBNet
 {
 	template<typename TLogSystem>
 	void CLogProcessor::AddLogSystem(LogOutputNo&& pOutput)

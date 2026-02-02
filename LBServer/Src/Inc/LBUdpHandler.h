@@ -1,6 +1,6 @@
-/**
+ï»¿/**
 	@file	LBUdpHandler.h
-	@brief	LBServerÀÇ UDP ³×Æ®¿öÅ© ÀÌº¥Æ® Ã³¸® °ü·Ã Çì´õ
+	@brief	LBServerì˜ UDP ë„¤íŠ¸ì›Œí¬ ì´ë²¤íŠ¸ ì²˜ë¦¬ ê´€ë ¨ ëª¨ë“ˆ
 	@date	2020-04-06
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -12,7 +12,7 @@ namespace LBNet
 	class CUdpObject;
 
 	/**
-		@brief		UDP ÆĞÅ¶ ÀÌº¥Æ® Å¸ÀÔ Á¤ÀÇ
+		@brief		UDP íŒ¨í‚· ì´ë²¤íŠ¸ íƒ€ì… ì •ì˜
 	*/
 	using UDPHandleType = std::function<ErrCode(CPacketHeader*, Size, CUdpObject&)>;
 	

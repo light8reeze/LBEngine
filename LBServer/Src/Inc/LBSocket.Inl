@@ -1,4 +1,4 @@
-namespace LBNet
+﻿namespace LBNet
 {
 #pragma region CTcpSocket
 	template<typename THandler>

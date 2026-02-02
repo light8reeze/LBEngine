@@ -1,6 +1,6 @@
-/**
+ï»¿/**
 	@file	LBSocket.h
-	@brief	LBServerÀÇ ³×Æ®¿öÅ© ¼ÒÄÏ °ü·Ã Çì´õ
+	@brief	LBServerì˜ ë„¤íŠ¸ì›Œí¬ ì†Œì¼“ ê´€ë ¨ ëª¨ë“ˆ
 	@date	2019-08-15
 	@auther light8reeze(light8reeze@gmail.com)
 */
@@ -11,8 +11,8 @@
 namespace LBNet
 {
 	/**
-		@brief		TCP ¼ÒÄÏ Å¬·¡½º
-		@warnning	accept´Â acceptorÀ» ÀÌ¿ëÇÑ´Ù.
+		@brief		TCP ì†Œì¼“ í´ë˜ìŠ¤
+		@warnning	acceptëŠ” acceptorë¥¼ ì´ìš©í•œë‹¤.
 		@date		2019-08-15
 		@auther		light8reeze(light8reeze@gmail.com)
 	*/
@@ -51,7 +51,7 @@ namespace LBNet
 	};
 
 	/**
-		@brief		UDP ¼ÒÄÏ Å¬·¡½º
+		@brief		UDP ì†Œì¼“ í´ë˜ìŠ¤
 		@date		2019-11-10
 		@auther		light8reeze(light8reeze@gmail.com)
 	*/
@@ -78,7 +78,7 @@ namespace LBNet
 
 		const SocketType&		GetSocket() const;
 		SocketType&				GetSocket();
-		const EndPointType&&	GetEndPoint() const;
+		EndPointType	GetEndPoint() const;
 
 	private:
 		#pragma warning(disable : 4251)

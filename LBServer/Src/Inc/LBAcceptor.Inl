@@ -1,4 +1,4 @@
-namespace LBNet
+﻿namespace LBNet
 {
 	template<typename THandler>
 	void CAcceptor::AcceptAsync(CSession& pSession, THandler&& pHandler)

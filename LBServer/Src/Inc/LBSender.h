@@ -1,4 +1,4 @@
-/**
+癤�/**
 	@file	LBSender.h
 	@brief	LBServer의 패킷 전송 메모리 관련 헤더파일
 	@date	2019-10-17
